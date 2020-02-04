@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="SketchCanvas"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="msvc8"/>
+		<Option virtualFolders="CMake Files\;CMake Files\libs\;CMake Files\libs\tucanow\;CMake Files\libs\tucanow\win32-libs\;CMake Files\libs\tucanow\cmake\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\Qt\;CMake Files\..\..\..\..\Qt\5.12.5\;CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\;CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\;CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\;CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5\;CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Core\;CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\;CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Widgets\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Canvas">
+				<Option output="C:/Users/srdcp/Documents/sketchreconstruction2/build/Canvas.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/build"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/build"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/build/Canvas_autogen/include"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/include"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/include"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/eigen3"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs"/>
+					<Add directory="C:/Qt/5.12.5/msvc2017_64/include"/>
+					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtCore"/>
+					<Add directory="C:/Qt/5.12.5/msvc2017_64/./mkspecs/win32-msvc"/>
+					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtGui"/>
+					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtANGLE"/>
+					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtWidgets"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 Canvas"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Canvas/fast">
+				<Option output="C:/Users/srdcp/Documents/sketchreconstruction2/build/Canvas.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/build"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/build"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/build/Canvas_autogen/include"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/include"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/include"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/eigen3"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs"/>
+					<Add directory="C:/Qt/5.12.5/msvc2017_64/include"/>
+					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtCore"/>
+					<Add directory="C:/Qt/5.12.5/msvc2017_64/./mkspecs/win32-msvc"/>
+					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtGui"/>
+					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtANGLE"/>
+					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtWidgets"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 Canvas/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Canvas_autogen">
+				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 Canvas_autogen"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tucanow">
+				<Option output="C:/Users/srdcp/Documents/sketchreconstruction2/build/tucanow.dll" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/build/libs/tucanow"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/build/libs/tucanow"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/build/libs/tucanow/tucanow_autogen/include"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/include"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/src"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/eigen3"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/glew-2.1.0/include"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/src/tucano"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\libs\tucanow\Makefile VERBOSE=1 tucanow"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\libs\tucanow\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\libs\tucanow\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\libs\tucanow\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tucanow/fast">
+				<Option output="C:/Users/srdcp/Documents/sketchreconstruction2/build/tucanow.dll" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/build/libs/tucanow"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/build/libs/tucanow"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/build/libs/tucanow/tucanow_autogen/include"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/include"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/src"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/eigen3"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/glew-2.1.0/include"/>
+					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/src/tucano"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\libs\tucanow\Makefile VERBOSE=1 tucanow/fast"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\libs\tucanow\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\libs\tucanow\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\libs\tucanow\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="tucanow_autogen">
+				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/build/libs/tucanow"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\libs\tucanow\Makefile VERBOSE=1 tucanow_autogen"/>
+					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\libs\tucanow\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\libs\tucanow\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\build\libs\tucanow\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/build/Canvas_autogen/EWIEGA46WW/qrc_resources.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/build/Canvas_autogen/EWIEGA46WW/qrc_resources.cpp.rule">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/build/Canvas_autogen/mocs_compilation.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/build/libs/tucanow/tucanow_autogen/mocs_compilation.cpp">
+			<Option target="tucanow"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/src/gui.cpp">
+			<Option target="tucanow"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/src/misc.cpp">
+			<Option target="tucanow"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/src/scene.cpp">
+			<Option target="tucanow"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/resources.qrc">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/canvas.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/canvas2.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/canvasmediator.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/halfedge.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/input_sketch.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/input_sketch2.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/layers.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/main.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/main_window.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/openglcanvas.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/openglmediator.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/scene.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/scene2.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/sketch_library.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/sketch_utilities.cpp">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/src/sketch_utilities.h">
+			<Option target="Canvas"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/resources.qrc">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\libs\tucanow\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\libs\tucanow\win32-libs\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/get_eigen-3.3.7_win32.cmake">
+			<Option virtualFolder="CMake Files\libs\tucanow\win32-libs\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/get_glew-2.1.0_win32.cmake">
+			<Option virtualFolder="CMake Files\libs\tucanow\win32-libs\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/cmake/BuildDocumentation.cmake">
+			<Option virtualFolder="CMake Files\libs\tucanow\cmake\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5/Qt5Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5/Qt5ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5/Qt5ModuleLocation.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Core/Qt5CoreMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5GuiConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QICNSPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QTgaPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QTiffPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWbmpPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWebpPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWindowsDirect2DIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QWindowsIntegrationPlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Gui/Qt5Gui_QXdgDesktopPortalThemePlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="C:/Users/srdcp/Documents/sketchreconstruction2/../../../../Qt/5.12.5/msvc2017_64/lib/cmake/Qt5Widgets/Qt5Widgets_QWindowsVistaStylePlugin.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\Qt\5.12.5\msvc2017_64\lib\cmake\Qt5Widgets\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

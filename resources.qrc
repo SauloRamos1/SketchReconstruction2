@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/edit.svg</file>
+        <file>icons/cross.svg</file>
+        <file>icons/eraser.svg</file>
+        <file>icons/pencil.svg</file>
+		<file>icons/palette.svg</file>
+        <file>icons/windowicon.png</file>
+        <file>icons/move.svg</file>
+        <file>icons/arrow_down.svg</file>
+        <file>icons/arrow_up.svg</file>
+        <file>qss/AMOLED.qss</file>
+        <file>qss/Aqua.qss</file>
+        <file>qss/ConsoleStyle.qss</file>
+        <file>qss/ElegantDark.qss</file>
+        <file>qss/LICENSE</file>
+        <file>qss/MaterialDark.qss</file>
+        <file>qss/README.md</file>
+        <file>qss/Ubuntu.qss</file>
+        <file>qss/darkorange.qss</file>
+        <file>qss/coffee.qss</file>
+        <file>qss/pagefold.qss</file>
+        <file>icons/exit.ico</file>
+        <file>icons/svgicon.png</file>
+        <file>icons/image.png</file>
+        <file>icons/newfile.png</file>
+        <file>icons/palette.svg</file>
+    </qresource>
+    <qresource prefix="/qss"/>
+    <qresource prefix="/../qss"/>
+</RCC>
