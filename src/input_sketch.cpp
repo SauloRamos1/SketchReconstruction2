@@ -482,6 +482,10 @@ QRectF InputSketch::boundingRect() const
     return curve.boundingRect();
 }
 
+void InputSketch::chooseDefaultInteraction(){
+    statusSketch = Interaction::DEFAULT;
+}
+
 void InputSketch::chooseCrossSelection(){
     statusSketch = Interaction::CROSS_SELECTION;
     
@@ -1360,6 +1364,8 @@ QPainterPath InputSketch::smoothPath(QPainterPath &path){
     
     return path;
 }
+
+
 
 
 

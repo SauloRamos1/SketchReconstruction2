@@ -31,6 +31,8 @@ public:
     int number_subpaths();
     void smooth();
 
+    void chooseDefaultInteraction();
+
     void chooseMoveZoom_Interaction();
 
     void chooseOpenContour_Interaction();

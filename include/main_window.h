@@ -21,6 +21,8 @@
 
 #include "layers.h"
 
+
+
 class MainWindow: public QMainWindow
 {
 
@@ -52,7 +54,10 @@ class MainWindow: public QMainWindow
 
     private:
 
+        bool checked = false;
         //MainWindow
+
+        void openContourButtonClicked();
 
         QDockWidget* dw_sketch; //Coloca o Sketch canvas dentro do QDockWidget.
         QDockWidget* seg_sketch;
@@ -63,12 +68,14 @@ class MainWindow: public QMainWindow
 
         std::shared_ptr< Canvas > canvas;
 
-        QToolBar* canvas1_toolbar;
+        //QToolBar* canvas1_toolbar;
 
 //        std::shared_ptr< QAction > ac_movezoom;
 //        std::shared_ptr< QAction > ac_selectCross_Selection;
 //        std::shared_ptr< QAction > ac_selectCrop_Selection;
 //        std::shared_ptr< QAction > ac_selectErase_Selection;
+
+        QFrame *toolbox;
 
 
         QMenu *fileMenu;
@@ -84,7 +91,7 @@ class MainWindow: public QMainWindow
 
         QButtonGroup *selectContour_Group;
 
-        QRadioButton *openContour_button;
+        QPushButton *openContour_button;
         QRadioButton *closedContour_button;
         QRadioButton *stripe_button;
 

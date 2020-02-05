@@ -17,6 +17,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Find the Qt5 library
 
 #set (CMAKE_PREFIX_PATH "C:\\Qt\\5.12.3\\msvc2017_64")
+#set (CMAKE_PREFIX_PATH "C:\\Qt\\5.12.5\\msvc2017_64")
 #set(Qt5_DIR "C:\\Qt\\5.12.5\\mingw73_64\\lib\\cmake\\Qt5" CACHE PATH "Initial cache" FORCE)
 find_package(Qt5 COMPONENTS Core Gui Widgets CONFIG REQUIRED)
 

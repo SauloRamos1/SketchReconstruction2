@@ -30,6 +30,15 @@ Scene::Scene()
 
 }
 
+void Scene::chooseDefaultInteraction(){
+    status = Interaction::DEFAULT;
+    sketch.interactionString = "Default";
+    sketch.chooseDefaultInteraction();
+
+    // qDebug () << "Move / Zoom Interaction";
+    update();
+}
+
 void Scene::chooseMoveZoom_Interaction(){
     status = Interaction::MOVE_ZOOM;
     sketch.interactionString = "Move/Zoom Interaction";
@@ -505,6 +514,10 @@ int Scene::getInteraction(){
 
     if (status == Interaction::OPENCONTOUR){
         return 1;
+    }
+
+    if (status == Interaction::CLOSEDCONTOUR){
+        return 2;
     }
     if  (status == Interaction::STRIPES){
         return 3;

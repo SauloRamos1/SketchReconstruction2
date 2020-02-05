@@ -87,6 +87,12 @@ void Canvas::moveZoomInteraction(){
 }
 
 void Canvas::setOpenContourInteraction(){
+    if (scene->getInteraction() == 1){
+        scene->chooseDefaultInteraction();
+
+        return;
+    }
+
     scene->chooseOpenContour_Interaction();
 }
 void Canvas::setClosedContourInteraction(){

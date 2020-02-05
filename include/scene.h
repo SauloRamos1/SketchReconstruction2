@@ -41,6 +41,8 @@ public:
     void loadSVG (const std::string& str);
     void loadIMG (const QString& fileName);
 
+
+    void chooseDefaultInteraction();
     void chooseMoveZoom_Interaction();
 
     void chooseOpenContour_Interaction();

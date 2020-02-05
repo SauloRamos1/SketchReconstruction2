@@ -4,7 +4,7 @@
         <file>icons/cross.svg</file>
         <file>icons/eraser.svg</file>
         <file>icons/pencil.svg</file>
-		<file>icons/palette.svg</file>
+        <file>icons/palette.svg</file>
         <file>icons/windowicon.png</file>
         <file>icons/move.svg</file>
         <file>icons/arrow_down.svg</file>
@@ -25,6 +25,9 @@
         <file>icons/image.png</file>
         <file>icons/newfile.png</file>
         <file>icons/palette.svg</file>
+        <file>icons/file.png</file>
+        <file>icons/move_white.svg</file>
+        <file>icons/file_white.png</file>
     </qresource>
     <qresource prefix="/qss"/>
     <qresource prefix="/../qss"/>

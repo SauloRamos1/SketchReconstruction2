@@ -9,8 +9,8 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
     QFile file(":/qss/darkorange.qss");
     file.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(file.readAll());
-    //setStyleSheet(styleSheet);
-    //ensurePolished();
+    setStyleSheet(styleSheet);
+    ensurePolished();
 
     setWindowIcon(QIcon(":/icons/windowicon.png"));
 
@@ -132,6 +132,13 @@ void MainWindow::createCanvas1Toolbar () {
 
     //canvas1_Menu = new QMenuBar (canvas1_toolbar) ;
 
+    toolbox = new QFrame(canvas.get());
+    toolbox->setObjectName(QString::fromUtf8("toolbox"));
+    toolbox->resize(100, qApp->screens()[0]->size().height());
+    toolbox->setFrameShape(QFrame::StyledPanel);
+    toolbox->setFrameShadow(QFrame::Raised);
+
+
     ac_newFile = std::make_shared< QAction >( "New File", this );
     ac_newFile->setIcon(QIcon(":/icons/newfile.png"));
     ac_loadSVG = std::make_shared< QAction >( "Load SVG", this );
@@ -149,19 +156,24 @@ void MainWindow::createCanvas1Toolbar () {
     fileMenu->addSeparator();
     fileMenu->addAction(QIcon(":/icons/exit.ico"), tr("E&xit"), qApp, &QApplication::closeAllWindows);
 
-    fileMenuButton = new QPushButton( "File" , canvas.get());
+    fileMenuButton = new QPushButton( canvas.get());
     fileMenuButton->setToolTip("File");
-    fileMenuButton->setGeometry(40, 20, 100, 30);
+    fileMenuButton->setIcon(QIcon(":/icons/file_white.png"));
+    fileMenuButton->setGeometry(QRect(15, 10, 70, 70));
+    fileMenuButton->setIconSize(fileMenuButton->size()*0.85);
+
     fileMenuButton->setMenu(fileMenu);
 
-    movezoom_button = new QPushButton( "Move/Scale" , canvas.get());
+    movezoom_button = new QPushButton( canvas.get());
     movezoom_button->setToolTip("Move / Zoom");
-    movezoom_button->setGeometry(150, 20, 100, 30);
-    movezoom_button->setIcon(QIcon(":/icons/move.svg"));
+    movezoom_button->setGeometry(QRect(15, 90, 70, 70));
+    movezoom_button->setIcon(QIcon(":/icons/move_white.svg"));
+    movezoom_button->setIconSize(movezoom_button->size()*0.8);
 
-    openContour_button = new QRadioButton( "Open Contour" , canvas.get());
+    openContour_button = new QPushButton( "Open Contour" , canvas.get());
     openContour_button->setToolTip("Open Contour");
-    openContour_button->setGeometry(260, 5, 130, 20);
+    openContour_button->setGeometry(QRect(15, 170, 70, 70));
+    openContour_button->setCheckable(true);
 
     closedContour_button = new QRadioButton( "Closed Contour" , canvas.get());
     closedContour_button->setToolTip("Closed Contour");
@@ -264,7 +276,8 @@ void MainWindow::createCanvas1Actions (){
     //    connect( ac_loadSVG.get(), &QAction::triggered, canvas.get(), SLOT(loadFile("SVG(*.svg") ));
     //    connect( ac_loadIMG.get(), &QAction::triggered, canvas.get(), SLOT(loadFile("JPEG (*.jpg *.jpeg);;PNG (*.png);; BMP (*.bmp)") ));
 
-    connect( openContour_button, SIGNAL(pressed()), canvas.get(), SLOT(setOpenContourInteraction() ));
+    connect( openContour_button, SIGNAL(clicked(bool)), this, SLOT(openContourButtonClicked()));
+
     connect( closedContour_button, SIGNAL(pressed()), canvas.get(), SLOT(setClosedContourInteraction() ));
     connect( stripe_button, SIGNAL(pressed()), canvas.get(), SLOT(setStripesInteraction() ));
 
@@ -286,6 +299,17 @@ void MainWindow::createCanvas1Actions (){
     //    connect( ac_selectCrop_Selection.get(), &QAction::triggered, canvas.get(), &Canvas::cropSelection );
     //    connect( ac_selectErase_Selection.get(), &QAction::triggered, canvas.get(), &Canvas::eraseSelection );
 
+}
+
+void MainWindow::openContourButtonClicked(){
+
+    canvas.get()->setOpenContourInteraction();
+    checked = !checked;
+    if (checked){
+        openContour_button->setChecked(true);
+    } else {
+        openContour_button->setChecked(false);
+    }
 }
 
 void MainWindow::createCanvas2Toolbar(){
