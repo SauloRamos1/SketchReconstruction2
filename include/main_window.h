@@ -26,7 +26,7 @@
 class MainWindow: public QMainWindow
 {
 
-    Q_OBJECT
+        Q_OBJECT
 
     public:
 
@@ -51,13 +51,10 @@ class MainWindow: public QMainWindow
 
         void createLayersDockActions();
 
-
     private:
 
-        bool checked = false;
-        //MainWindow
 
-        void openContourButtonClicked();
+        //MainWindow
 
         QDockWidget* dw_sketch; //Coloca o Sketch canvas dentro do QDockWidget.
         QDockWidget* seg_sketch;
@@ -70,10 +67,10 @@ class MainWindow: public QMainWindow
 
         //QToolBar* canvas1_toolbar;
 
-//        std::shared_ptr< QAction > ac_movezoom;
-//        std::shared_ptr< QAction > ac_selectCross_Selection;
-//        std::shared_ptr< QAction > ac_selectCrop_Selection;
-//        std::shared_ptr< QAction > ac_selectErase_Selection;
+        //        std::shared_ptr< QAction > ac_movezoom;
+        //        std::shared_ptr< QAction > ac_selectCross_Selection;
+        //        std::shared_ptr< QAction > ac_selectCrop_Selection;
+        //        std::shared_ptr< QAction > ac_selectErase_Selection;
 
         QFrame *toolbox;
 
@@ -89,11 +86,11 @@ class MainWindow: public QMainWindow
 
         QPushButton *movezoom_button;
 
-        QButtonGroup *selectContour_Group;
+//        QButtonGroup *selectContour_Group;
 
         QPushButton *openContour_button;
-        QRadioButton *closedContour_button;
-        QRadioButton *stripe_button;
+        QPushButton *closedContour_button;
+        QPushButton *stripe_button;
 
 
         QMenu *openContourEffect_Menu;
@@ -161,15 +158,15 @@ class MainWindow: public QMainWindow
 
         std::shared_ptr < Layers > layers;
 
-//        std::shared_ptr< QAction > ac_layerup;
-//        std::shared_ptr< QAction > ac_layerdown;
+        //        std::shared_ptr< QAction > ac_layerup;
+        //        std::shared_ptr< QAction > ac_layerdown;
 
 
         QPushButton *layerUp_button;
         QPushButton *layerDown_button;
 
-//        QMenuBar* layers_Menu;
-//        QToolBar* layers_toolbar;
+        //        QMenuBar* layers_Menu;
+        //        QToolBar* layers_toolbar;
 
         // OpenGL Mediator
 
@@ -180,6 +177,9 @@ class MainWindow: public QMainWindow
 
         std::shared_ptr< OpenGLCanvas> glcanvas;
 
-};
 
-#endif // MAINWINDOW_H
+
+
+    };
+
+    #endif // MAINWINDOW_H

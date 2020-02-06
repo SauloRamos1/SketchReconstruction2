@@ -19,13 +19,15 @@
 
 Scene::Scene()
 {
-    setSceneRect(QRect (0,0,500,500));
+    setSceneRect(QRect (-50,0,750,750));
 
-    setBackgroundBrush(QColor(255,230,204));
+    //setBackgroundBrush(QColor(255,230,204));
+    setBackgroundBrush(QColor(179,179,179));
 
-    //addEllipse( 0, 0, 10, 10 );
+    //addEllipse( 0, 0, 10,0 10 );
 
-    addRect(QRect(0,0,500,500), QPen(QColor(179,179,179),1,Qt::SolidLine), Qt::white);
+   // addRect(0,0,750,750, QPen(QColor(179,179,179),1,Qt::SolidLine), Qt::white);
+     addRect(0,0,750,750, QPen(QColor(179,179,179),1,Qt::SolidLine), Qt::white);
     addItem ( &sketch );
 
 }
