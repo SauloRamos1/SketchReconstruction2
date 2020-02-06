@@ -54,7 +54,7 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
     canvas_window->setParent(dw_sketch);
 
     dw_sketch->setWidget(canvas.get());
-    dw_sketch->setMinimumSize( qApp->screens()[0]->size().width()/2-80, 1000);
+    dw_sketch->setMinimumSize( qApp->screens()[0]->size().width()/2-60, 1000);
     ///
 
 
@@ -305,6 +305,14 @@ void MainWindow::createCanvas1Toolbar () {
     //canvas1_toolbar->setFixedSize(canvas->width()-1, 50);
     //canvas1_toolbar->addWidget(canvas1_Menu);
 
+    depth =  new QLabel ("  Depth Between Layers: ",canvas.get());
+    depth->setGeometry(QRect(730, 900, 120, 30));
+
+    layeringDepth = new QSpinBox(canvas.get());
+    layeringDepth->setGeometry(QRect(850, 900, 40, 30));
+    layeringDepth->setValue(10);
+    layeringDepth->setSingleStep(10);
+
 }
 
 
@@ -336,6 +344,8 @@ void MainWindow::createCanvas1Actions (){
     connect( selectCross_button, SIGNAL(pressed()), canvas.get(), SLOT(crossSelection() ));
     connect( selectCrop_button, SIGNAL(pressed()), canvas.get(), SLOT(cropSelection() ));
     connect( selectErase_button, SIGNAL(pressed()), canvas.get(), SLOT(eraseSelection() ));
+
+    connect( layeringDepth, SIGNAL(valueChanged(const int &)), canvas.get(),  SLOT(changeLayerDifference(const int &)));
 
     //    connect( ac_selectCross_Selection.get(), &QAction::triggered, canvas.get(), &Canvas::crossSelection );
     //    connect( ac_selectCrop_Selection.get(), &QAction::triggered, canvas.get(), &Canvas::cropSelection );

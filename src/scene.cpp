@@ -21,8 +21,8 @@ Scene::Scene()
 {
     setSceneRect(QRect (-50,0,750,750));
 
-    //setBackgroundBrush(QColor(255,230,204));
-    setBackgroundBrush(QColor(179,179,179));
+    setBackgroundBrush(QColor(255,230,204));
+    //setBackgroundBrush(QColor(179,179,179));
 
     //addEllipse( 0, 0, 10,0 10 );
 

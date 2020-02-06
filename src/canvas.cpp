@@ -153,5 +153,10 @@ void Canvas::viewOverlapping3D(){
     }
 }
 
+void Canvas::changeLayerDifference(const int &difference)
+{
+    qDebug () << difference;
+}
+
 
 #include "moc_canvas.cpp"

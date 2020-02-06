@@ -66,6 +66,8 @@ protected:
 
 
         void viewOverlapping3D();
+
+        void changeLayerDifference(const int &difference);
 protected:
 
         std::shared_ptr< Scene > scene;

@@ -152,6 +152,8 @@ class MainWindow: public QMainWindow
 
         std::shared_ptr< QAction > ac_exportFiles; //Export npts, off and ply files
 
+        QSpinBox * layeringDepth;
+        QLabel *depth;
 
 
         //Layers Dock
