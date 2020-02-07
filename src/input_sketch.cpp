@@ -15,6 +15,58 @@ InputSketch::InputSketch()
     updateColorMap();
 }
 
+
+
+//************************************************************************************************
+/// ........................................ INTERACTIONS ..........................................
+//************************************************************************************************
+
+
+void InputSketch::chooseDefaultInteraction(){
+    statusSketch = Interaction::DEFAULT;
+}
+
+void InputSketch::chooseCrossSelection(){
+    statusSketch = Interaction::CROSS_SELECTION;
+
+}
+
+void InputSketch::chooseCropSelection(){
+    statusSketch = Interaction::CROP_SELECTION;
+
+}
+
+void InputSketch::chooseEraseSelection(){
+    statusSketch = Interaction::ERASE_SELECTION;
+
+}
+
+void InputSketch::chooseMoveZoom_Interaction(){
+    statusSketch = Interaction::MOVE_ZOOM;
+
+}
+
+void InputSketch::chooseOpenContour_Interaction()
+{
+    statusSketch = Interaction::OPENCONTOUR;
+
+}
+
+void InputSketch::chooseClosedContour_Interaction()
+{
+    statusSketch = Interaction::CLOSEDCONTOUR;
+
+}
+
+void InputSketch::chooseStripes_Interaction()
+{
+    statusSketch = Interaction::STRIPES;
+
+}
+
+//************************************************************************************************
+/// ................................... OPEN CONTOURS ..........................................
+//************************************************************************************************
 void InputSketch::createOpenContour (const QPointF& pos){
     
     prepareGeometryChange();
@@ -22,6 +74,82 @@ void InputSketch::createOpenContour (const QPointF& pos){
     update();
     
 }
+
+void InputSketch::addOpenContour (const QPointF& pos){
+
+    prepareGeometryChange();
+    openContour.lineTo(pos);
+    update();
+
+}
+
+void InputSketch::saveOpenContour (){
+
+    if (openContour.length() < 2) return; //Testa se ha linha desenhada
+
+    smoothPath(openContour);
+    smoothPath(openContour);
+    smoothPath(openContour);
+
+    QPainterPath3D curve3D;
+    curve3D.contour = openContour;
+    curve3D.level = lineLevel;
+
+    sameOpenContourList.append( curve3D );
+    openContourList.append( sameOpenContourList );
+    sameOpenContourList.clear();
+    openContour = QPainterPath();
+    update();
+}
+
+void InputSketch::increaseOpenContourLevelWhileDrawing(){
+
+    if (openContour.length() < 2) return; //Testa se ha linha desenhada
+
+    smoothPath(openContour);
+    smoothPath(openContour);
+    smoothPath(openContour);
+
+
+    QPainterPath3D curve3D;
+    curve3D.contour = openContour;
+    curve3D.level = lineLevel;
+
+    sameOpenContourList.append(curve3D);
+    openContour = QPainterPath();
+
+    openContour.moveTo(curve3D.contour.pointAtPercent(1));
+
+    lineLevel +=1;
+    update();
+}
+
+void InputSketch::decreaseOpenContourLevelWhileDrawing(){
+
+
+    if (openContour.length() < 2) return; //Testa se ha linha desenhada
+
+    smoothPath(openContour);
+    smoothPath(openContour);
+    smoothPath(openContour);
+
+    QPainterPath3D curve3D;
+    curve3D.contour = openContour;
+    curve3D.level = lineLevel;
+
+    sameOpenContourList.append(curve3D);
+    openContour = QPainterPath();
+    openContour.moveTo(curve3D.contour.pointAtPercent(1));
+
+    lineLevel -=1;
+    update();
+
+}
+
+
+//************************************************************************************************
+/// ................................... CLOSED CONTOURS ..........................................
+//************************************************************************************************
 
 void InputSketch::createClosedContour (const QPointF& pos){
     
@@ -31,44 +159,29 @@ void InputSketch::createClosedContour (const QPointF& pos){
     
 }
 
-void InputSketch::createStripeContour (const QPointF& pos){
-    
-    prepareGeometryChange();
-    stripeContour.moveTo(pos);
-    update();
-}
-
-void InputSketch::addOpenContour (const QPointF& pos){
-    
-    prepareGeometryChange();
-    openContour.lineTo(pos);
-    update();
-    
-}
-
 void InputSketch::addClosedContour (const QPointF& pos){
-    
+
     prepareGeometryChange();
     closedContour.lineTo(pos);
-    
+
     for (int i = 0 ; i < closedContourList.size() ; i++){
-        
+
         if (closedContourList[i].contour.intersects(closedContour) && closedContourList[i].level == lineLevel){
-            
+
             linesToPolygon.clear();
-            
+
             curvePolygon = closedContour.toFillPolygon();
-            
+
             pathPolygon = pathPolygon.united(closedContourList[i].contour.toFillPolygon().intersected(curvePolygon));
-            
+
             if (closedContourList[i].contour.contains(closedContour.pointAtPercent(1))){
-                
+
                 QPainterPath poly;
-                
+
                 currentPolySugestion = closedContourList[i].contour.toFillPolygon();
-                
+
                 for (int j = 0; j < currentPolySugestion.size()-1; ++j) {
-                    
+
                     poly = QPainterPath();
                     poly.moveTo(closedContour.pointAtPercent(1));
                     poly.lineTo(currentPolySugestion[j]);
@@ -78,62 +191,100 @@ void InputSketch::addClosedContour (const QPointF& pos){
             }
         }
     }
-    
+
     curvePolygon = QPolygonF();
     pathPolygon = QPolygonF();
     currentPolySugestion = QPolygonF();
+
+    update();
+}
+
+void InputSketch::saveClosedContour (){
+
+    if (closedContour.length() < 2) return; //Testa se ha linha desenhada
+
+    smoothPath(closedContour);
+    smoothPath(closedContour);
+    smoothPath(closedContour);
+
+
+    QPainterPath3D curve3D;
+    curve3D.contour = closedContour;
+    curve3D.level = lineLevel;
+
+    closedContourList.append(curve3D);
+    closedContour = QPainterPath();
+
+}
+
+QPainterPath InputSketch::getClosedContour()
+{
+
+    return closedContourList.last().contour;
+
+}
+
+int InputSketch::getClosedContourLevel()
+{
+
+    return closedContourList.last().level;
+
+}
+
+//************************************************************************************************
+/// ....................................... STRIPES ..........................................
+//************************************************************************************************
+
+void InputSketch::createStripeContour (const QPointF& pos){
     
+    prepareGeometryChange();
+    stripeContour.moveTo(pos);
     update();
 }
 
 void InputSketch::addStripeContour (const QPointF& pos){
-    
+
     prepareGeometryChange();
     stripeContour.lineTo(pos);
     update();
 }
 
-void InputSketch::mouseOverPoint(const QPointF& pos){
-    
-    mousePointer = pos;
-    
-}
 
 void InputSketch::finishBand (){//Finish
-    
-    
+
+
     if (sameStripeContourList.isEmpty()){
         return;
     }
-    
+
     //stripeContourList.append(sameStripeContourList);
-    
-    
+
+
     QPainterPath joinedLeftLine, joinedRightLine;
-    
+
     //QVector<int> newLevelList;
-    
+
     joinedLeftLine = sameStripeContourList.begin()->leftLine;
     joinedRightLine = sameStripeContourList.begin()->rightLine;
-    
+
     //newLevelList.append(levelList[0]);
-    
+
     if (sameStripeContourList.size() > 1){
 
         for (int i = 0; i < sameStripeContourList.size()-1; ++i) {
-            
+
             if (sameStripeContourList[i].level == sameStripeContourList[i+1].level) {
-                
+
                 sameStripeContourList[i].contour.connectPath(sameStripeContourList[i+1].contour);
-                
+
                 sameStripeContourList[i].leftLine.connectPath(sameStripeContourList[i+1].leftLine);
                 sameStripeContourList[i].rightLine.connectPath(sameStripeContourList[i+1].rightLine);
-                
+
                 sameStripeContourList.removeAt(i+1);
                 i--;
-                
+
             } else {
-                
+
                 //            finalSecondBandLineListLeft.append(secondbandLineListLeft[i]);
                 //            finalSecondBandLineListRight.append(secondbandLineListRight[i]);
                 //            newLevelList.append(levelList[i]);
@@ -141,15 +292,15 @@ void InputSketch::finishBand (){//Finish
         }
     }
     //    secondbandLineListLeft.clear();
-    
-    
+
+
     //    secondbandLineListRight.clear();
-    
+
     //    if (finalSecondBandLineListLeft.isEmpty() || finalSecondBandLineListRight.isEmpty())
     //        return;
-    
+
     prepareGeometryChange();
-    
+
     for (int i = 0; i < sameStripeContourList.size(); i++){
         for (int j = 0; j < 10; j++){
             smoothPath(sameStripeContourList[i].leftLine);
@@ -158,87 +309,223 @@ void InputSketch::finishBand (){//Finish
     }
 
     stripeContourList.append(sameStripeContourList);
-    
+
     qDebug ()<< stripeContourList.size();
 }
 
-QPainterPath InputSketch::getClosedContour()
-{
-    
-    return closedContourList.last().contour;
-    
+
+void InputSketch::saveStripeContour (){
+
+    if (stripeContour.length() < 2) return; //Testa se ha linha desenhada
+
+    smoothPath(stripeContour);
+    smoothPath(stripeContour);
+    smoothPath(stripeContour);
+
+    Stripe3D stripe;
+    stripe.contour = QPainterPath ();
+    stripe.contour = stripeContour;
+
+    stripe.leftLine = QPainterPath();
+    stripe.rightLine = QPainterPath();
+    stripe.level = lineLevel;
+
+    QPainterPath leftBandLine, rightBandLine;
+
+    QLineF stripeLeftLine, stripeRightLine;
+
+    stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
+    stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
+    stripeRightLine.setLength(twistingThickness);
+    stripeLeftLine.setLength(twistingThickness);
+
+    stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))-90);
+    stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))+90);
+
+    leftBandLine.moveTo(stripeLeftLine.p2());
+    rightBandLine.moveTo(stripeRightLine.p2());
+
+    for (double i = 0; i < stripeContour.length(); i = i+0.5) {
+
+        stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
+        stripeRightLine.setLength(twistingThickness);
+
+        stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
+        stripeLeftLine.setLength(twistingThickness);
+
+        stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(i))+90);
+        stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(i))-90);
+
+        leftBandLine.lineTo(stripeRightLine.p2());
+        rightBandLine.lineTo(stripeLeftLine.p2());
+
+    }
+
+    if (front) {
+
+        stripe.leftLine = leftBandLine;
+        stripe.rightLine = rightBandLine;
+        sameStripeContourList.append(stripe);
+
+    }
+    else {
+
+        stripe.leftLine = rightBandLine;
+        stripe.rightLine = leftBandLine;
+        sameStripeContourList.append(stripe);
+    }
+
+    stripeContour = QPainterPath ();
+
+    //Invert Band
+    front = !front ;
+
 }
 
-int InputSketch::getClosedContourLevel()
-{
-    
-    return closedContourList.last().level;
-    
-}
 
+void InputSketch::increaseStripeContourLevelWhileDrawing(){
 
-void InputSketch::saveOpenContour (){
-    
-    if (openContour.length() < 2) return; //Testa se ha linha desenhada
-    
-    smoothPath(openContour);
-    smoothPath(openContour);
-    smoothPath(openContour);
-    
-    QPainterPath3D curve3D;
-    curve3D.contour = openContour;
-    curve3D.level = lineLevel;
-    
-    sameOpenContourList.append( curve3D );
-    openContourList.append( sameOpenContourList );
-    sameOpenContourList.clear();
-    openContour = QPainterPath();
-    update();
-}
+    if (stripeContour.length() < 2) return; //Testa se ha linha desenhada
 
-void InputSketch::increaseOpenContourLevelWhileDrawing(){
-    
-    if (openContour.length() < 2) return; //Testa se ha linha desenhada
-    
-    smoothPath(openContour);
-    smoothPath(openContour);
-    smoothPath(openContour);
-    
-    
-    QPainterPath3D curve3D;
-    curve3D.contour = openContour;
-    curve3D.level = lineLevel;
-    
-    sameOpenContourList.append(curve3D);
-    openContour = QPainterPath();
-    
-    openContour.moveTo(curve3D.contour.pointAtPercent(1));
-    
     lineLevel +=1;
-    update();
+
+    // smoothPath(stripeContour);
+    // smoothPath(stripeContour);
+    // smoothPath(stripeContour);
+
+    Stripe3D stripe;
+    stripe.contour = QPainterPath ();
+    stripe.contour = stripeContour;
+
+    stripe.leftLine = QPainterPath();
+    stripe.rightLine = QPainterPath();
+
+    QPainterPath leftBandLine, rightBandLine;
+
+    QLineF stripeLeftLine, stripeRightLine;
+
+    stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
+    stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
+    stripeRightLine.setLength(twistingThickness);
+    stripeLeftLine.setLength(twistingThickness);
+
+    stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))+90);
+    stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))-90);
+
+    leftBandLine.moveTo(stripeLeftLine.p2());
+    rightBandLine.moveTo(stripeRightLine.p2());
+
+    for (double i = 0; i < stripeContour.length(); i = i+0.5) {
+
+        stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
+        stripeRightLine.setLength(twistingThickness);
+
+        stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
+        stripeLeftLine.setLength(twistingThickness);
+
+        stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(i))+90);
+        stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(i))-90);
+
+        leftBandLine.lineTo(stripeRightLine.p2());
+        rightBandLine.lineTo(stripeLeftLine.p2());
+
+    }
+
+    stripe.level = lineLevel;
+
+
+    if (front) {
+
+        stripe.leftLine = leftBandLine;
+        stripe.rightLine = rightBandLine;
+        sameStripeContourList.append(stripe);
+
+    }
+    else {
+
+        stripe.leftLine = rightBandLine;
+        stripe.rightLine = leftBandLine;
+        sameStripeContourList.append(stripe);
+    }
+
+    stripeContour = QPainterPath ();
 }
 
-void InputSketch::decreaseOpenContourLevelWhileDrawing(){
-    
-    
-    if (openContour.length() < 2) return; //Testa se ha linha desenhada
-    
-    smoothPath(openContour);
-    smoothPath(openContour);
-    smoothPath(openContour);
-    
-    QPainterPath3D curve3D;
-    curve3D.contour = openContour;
-    curve3D.level = lineLevel;
-    
-    sameOpenContourList.append(curve3D);
-    openContour = QPainterPath();
-    openContour.moveTo(curve3D.contour.pointAtPercent(1));
-    
+
+void InputSketch::decreaseStripeContourLevelWhileDrawing(){
+
+    if (stripeContour.length() < 2) return; //Testa se ha linha desenhada
+
     lineLevel -=1;
-    update();
-    
+
+    //  smoothPath(stripeContour);
+    //  smoothPath(stripeContour);
+    //  smoothPath(stripeContour);
+
+    Stripe3D stripe;
+    stripe.contour = QPainterPath ();
+    stripe.contour = stripeContour;
+
+    stripe.leftLine = QPainterPath();
+    stripe.rightLine = QPainterPath();
+
+    QPainterPath leftBandLine, rightBandLine;
+
+    QLineF stripeLeftLine, stripeRightLine;
+
+    stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
+    stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
+    stripeRightLine.setLength(twistingThickness);
+    stripeLeftLine.setLength(twistingThickness);
+
+    stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))+90);
+    stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))-90);
+
+    leftBandLine.moveTo(stripeLeftLine.p2());
+    rightBandLine.moveTo(stripeRightLine.p2());
+
+    for (double i = 0; i < stripeContour.length(); i = i+0.5) {
+
+        stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
+        stripeRightLine.setLength(twistingThickness);
+
+        stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
+        stripeLeftLine.setLength(twistingThickness);
+
+        stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(i))+90);
+        stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(i))-90);
+
+        leftBandLine.lineTo(stripeRightLine.p2());
+        rightBandLine.lineTo(stripeLeftLine.p2());
+
+    }
+
+    stripe.level = lineLevel;
+
+
+    if (front) {
+
+        stripe.leftLine = leftBandLine;
+        stripe.rightLine = rightBandLine;
+        sameStripeContourList.append(stripe);
+
+    }
+    else {
+
+        stripe.leftLine = rightBandLine;
+        stripe.rightLine = leftBandLine;
+        sameStripeContourList.append(stripe);
+    }
+
+    stripeContour = QPainterPath ();
 }
+
+
+
+//************************************************************************************************
+/// ....................................... LAYERING ..........................................
+//************************************************************************************************
+
 
 void InputSketch::increaseLevel(){
     lineLevel +=1;
@@ -248,402 +535,42 @@ void InputSketch::decreaseLevel(){
     lineLevel-=1;
 }
 
-void InputSketch::saveClosedContour (){
-    
-    if (closedContour.length() < 2) return; //Testa se ha linha desenhada
-    
-    smoothPath(closedContour);
-    smoothPath(closedContour);
-    smoothPath(closedContour);
-    
-    
-    QPainterPath3D curve3D;
-    curve3D.contour = closedContour;
-    curve3D.level = lineLevel;
-    
-    closedContourList.append(curve3D);
-    closedContour = QPainterPath();
-    
-}
 
-void InputSketch::increaseStripeContourLevelWhileDrawing(){
-    
-    if (stripeContour.length() < 2) return; //Testa se ha linha desenhada
-    
-    lineLevel +=1;
-    
-    // smoothPath(stripeContour);
-    // smoothPath(stripeContour);
-    // smoothPath(stripeContour);
-    
-    Stripe3D stripe;
-    stripe.contour = QPainterPath ();
-    stripe.contour = stripeContour;
-    
-    stripe.leftLine = QPainterPath();
-    stripe.rightLine = QPainterPath();
-    
-    QPainterPath leftBandLine, rightBandLine;
-    
-    QLineF stripeLeftLine, stripeRightLine;
-    
-    stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
-    stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
-    stripeRightLine.setLength(twistingThickness);
-    stripeLeftLine.setLength(twistingThickness);
-    
-    stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))+90);
-    stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))-90);
-    
-    leftBandLine.moveTo(stripeLeftLine.p2());
-    rightBandLine.moveTo(stripeRightLine.p2());
-    
-    for (double i = 0; i < stripeContour.length(); i = i+0.5) {
-        
-        stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
-        stripeRightLine.setLength(twistingThickness);
-        
-        stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
-        stripeLeftLine.setLength(twistingThickness);
-        
-        stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(i))+90);
-        stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(i))-90);
-        
-        leftBandLine.lineTo(stripeRightLine.p2());
-        rightBandLine.lineTo(stripeLeftLine.p2());
-        
-    }
-    
-    stripe.level = lineLevel;
-    
-    
-    if (front) {
-        
-        stripe.leftLine = leftBandLine;
-        stripe.rightLine = rightBandLine;
-        sameStripeContourList.append(stripe);
-        
-    }
-    else {
-        
-        stripe.leftLine = rightBandLine;
-        stripe.rightLine = leftBandLine;
-        sameStripeContourList.append(stripe);
-    }
-    
-    stripeContour = QPainterPath ();
-}
-
-void InputSketch::decreaseStripeContourLevelWhileDrawing(){
-    
-    if (stripeContour.length() < 2) return; //Testa se ha linha desenhada
-    
-    lineLevel -=1;
-    
-    //  smoothPath(stripeContour);
-    //  smoothPath(stripeContour);
-    //  smoothPath(stripeContour);
-    
-    Stripe3D stripe;
-    stripe.contour = QPainterPath ();
-    stripe.contour = stripeContour;
-    
-    stripe.leftLine = QPainterPath();
-    stripe.rightLine = QPainterPath();
-    
-    QPainterPath leftBandLine, rightBandLine;
-    
-    QLineF stripeLeftLine, stripeRightLine;
-    
-    stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
-    stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
-    stripeRightLine.setLength(twistingThickness);
-    stripeLeftLine.setLength(twistingThickness);
-    
-    stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))+90);
-    stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))-90);
-    
-    leftBandLine.moveTo(stripeLeftLine.p2());
-    rightBandLine.moveTo(stripeRightLine.p2());
-    
-    for (double i = 0; i < stripeContour.length(); i = i+0.5) {
-        
-        stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
-        stripeRightLine.setLength(twistingThickness);
-        
-        stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
-        stripeLeftLine.setLength(twistingThickness);
-        
-        stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(i))+90);
-        stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(i))-90);
-        
-        leftBandLine.lineTo(stripeRightLine.p2());
-        rightBandLine.lineTo(stripeLeftLine.p2());
-        
-    }
-    
-    stripe.level = lineLevel;
-    
-    
-    if (front) {
-        
-        stripe.leftLine = leftBandLine;
-        stripe.rightLine = rightBandLine;
-        sameStripeContourList.append(stripe);
-        
-    }
-    else {
-        
-        stripe.leftLine = rightBandLine;
-        stripe.rightLine = leftBandLine;
-        sameStripeContourList.append(stripe);
-    }
-    
-    stripeContour = QPainterPath ();
-}
-
-void InputSketch::saveStripeContour (){
-    
-    if (stripeContour.length() < 2) return; //Testa se ha linha desenhada
-    
-    smoothPath(stripeContour);
-    smoothPath(stripeContour);
-    smoothPath(stripeContour);
-    
-    Stripe3D stripe;
-    stripe.contour = QPainterPath ();
-    stripe.contour = stripeContour;
-    
-    stripe.leftLine = QPainterPath();
-    stripe.rightLine = QPainterPath();
-    stripe.level = lineLevel;
-    
-    QPainterPath leftBandLine, rightBandLine;
-    
-    QLineF stripeLeftLine, stripeRightLine;
-    
-    stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
-    stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
-    stripeRightLine.setLength(twistingThickness);
-    stripeLeftLine.setLength(twistingThickness);
-    
-    stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))-90);
-    stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))+90);
-    
-    leftBandLine.moveTo(stripeLeftLine.p2());
-    rightBandLine.moveTo(stripeRightLine.p2());
-    
-    for (double i = 0; i < stripeContour.length(); i = i+0.5) {
-        
-        stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
-        stripeRightLine.setLength(twistingThickness);
-        
-        stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
-        stripeLeftLine.setLength(twistingThickness);
-        
-        stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(i))+90);
-        stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(i))-90);
-        
-        leftBandLine.lineTo(stripeRightLine.p2());
-        rightBandLine.lineTo(stripeLeftLine.p2());
-        
-    }
-    
-    if (front) {
-        
-        stripe.leftLine = leftBandLine;
-        stripe.rightLine = rightBandLine;
-        sameStripeContourList.append(stripe);
-        
-    }
-    else {
-        
-        stripe.leftLine = rightBandLine;
-        stripe.rightLine = leftBandLine;
-        sameStripeContourList.append(stripe);
-    }
-    
-    stripeContour = QPainterPath ();
-    
-    //Invert Band
-    front = !front ;
-    
-}
-
-
-void InputSketch::drawPaths(const QVector<QPainterPath>& readsvgPaths){
-    
-    svgPaths = readsvgPaths;
-    
-}
-
-QRectF InputSketch::boundingRect() const
-{
-    return curve.boundingRect();
-}
-
-void InputSketch::chooseDefaultInteraction(){
-    statusSketch = Interaction::DEFAULT;
-}
-
-void InputSketch::chooseCrossSelection(){
-    statusSketch = Interaction::CROSS_SELECTION;
-    
-}
-
-void InputSketch::chooseCropSelection(){
-    statusSketch = Interaction::CROP_SELECTION;
-    
-}
-
-void InputSketch::chooseEraseSelection(){
-    statusSketch = Interaction::ERASE_SELECTION;
-    
-}
-
-void InputSketch::chooseMoveZoom_Interaction(){
-    statusSketch = Interaction::MOVE_ZOOM;
-    
-}
-
-void InputSketch::chooseOpenContour_Interaction()
-{
-    statusSketch = Interaction::OPENCONTOUR;
-    
-    
-}
-
-void InputSketch::chooseClosedContour_Interaction()
-{
-    statusSketch = Interaction::CLOSEDCONTOUR;
-    
-}
-
-void InputSketch::chooseStripes_Interaction()
-{
-    statusSketch = Interaction::STRIPES;
-    
-}
-
-void InputSketch::crossSelection(){
-    
-    selectedPathOnCrossSelection = QPainterPath();
-    
-    ///Interaction -- Cross the Path
-    ///
-    ///
-    if (svgPaths.size() > 0){
-        
-        for (int i = 0 ; i < svgPaths.size(); i++ ) {
-            
-            if (svgPaths.at(i).intersects(curve)) {
-                selectedPathOnCrossSelection = svgPaths[i];
-                svgPaths[i]  = QPainterPath();
-                if(levelList.size() > 0){
-                    selectedLineLevel = levelList[i];
-                    //levelList.removeAt(i);
-                }
-                
-                selectedPathsList.append(selectedPathOnCrossSelection);
-                break;
-            }
-        }
-    }
-    
-    curve = QPainterPath();
-}
-
-void InputSketch::cropSelection(){
-    
-    selectedPathsOnCropSelection.clear();
-    /// Interaction -- Brush Selection
-    /// For each curve point create a circle/radius and if intersects to a segment, this segment compose the new path
-    ///
-    /// Organize direction of the curve while selecting (on interaction)
-    ///
-    
-    if (svgPaths.size() < 1) return;
-    
-    
-    //double sampleRate = curve.length() / 5;
-    
-    for (double i = 0 ; i < curve.length(); i = i + 5) {
-        
-        QPointF pos = curve.pointAtPercent(curve.percentAtLength(i));
-        
-        QRectF brushRectSelect(pos.x()-3,pos.y()-3,6,6);
-        
-        rectList.append(brushRectSelect);
-        
-        for (int j = 0 ; j < svgPaths.size(); j++ ) {
-            if ( brushRectSelect.contains(svgPaths[j].pointAtPercent(0))) {
-                selectedPathsOnCropSelection.append(svgPaths[j]);
-                svgPaths[j] = QPainterPath();
-            } else if (brushRectSelect.contains(svgPaths[j].pointAtPercent(1))) {
-                selectedPathsOnCropSelection.append(svgPaths[j].toReversed());
-                svgPaths[j] = QPainterPath();
-            }
-        }
-    }
-    
-    selectedPathsList.append(selectedPathsOnCropSelection);
-    
-    curve = QPainterPath();
-}
-
-void InputSketch::eraseSelection(){
-    
-    /// Interaction -- Erase Paths
-    ///
-    ///
-    if (svgPaths.size() > 0){
-        
-        for (int i = 0 ; i < svgPaths.size(); i++ ) {
-            
-            if (svgPaths[i].intersects(curve)) {
-                svgPaths[i] = QPainterPath();
-            }
-        }
-    }
-    
-    curve = QPainterPath();
-    
-}
 
 void InputSketch::updateColorMap(){
-    
+
     //  Update number of Layers
-    
-    
+
+
     if (lineLevel > numberOfLayers){
         numberOfLayers = lineLevel;
     }
-    
+
     lineColorMap.clear();
-    
+
     int     startRedVal = 0,
             endRedValue = 255,
             startGreenVal = 0,
             endGreenValue = 255,
             startBlueVal = 0,
             endBlueValue = 255;
-    
+
     float ratio;
-    
+
     for (int i = 0; i < numberOfLayers ; i++){
-        
+
         if (numberOfLayers == 1){
             ratio = 0;
         } else {
             ratio = (  static_cast<float>(i) /static_cast<float>((numberOfLayers - 1)));
         }
-        
+
         ratio = 1 - ratio;
-        
+
         // qDebug () << "ratio: " << ratio;
-        
+
         //ratio should go from 0 to 1?
-        
+
         float red = (ratio*startRedVal + (1-ratio)*endRedValue);
         float green = (ratio*startGreenVal + (1-ratio)*endGreenValue);
         float blue = (ratio*startBlueVal + (1-ratio)*endBlueValue);
@@ -695,8 +622,342 @@ void InputSketch::updateColorMap(){
     }
 
 
-    
+
 }
+
+
+//************************************************************************************************
+/// ......................................... SVG ..........................................
+//************************************************************************************************
+
+void InputSketch::drawPaths(const QVector<QPainterPath>& readsvgPaths){
+
+    svgPaths = readsvgPaths;
+
+}
+
+
+void InputSketch::crossSelection(){
+
+    selectedPathOnCrossSelection = QPainterPath();
+
+    ///Interaction -- Cross the Path
+    ///
+    ///
+    if (svgPaths.size() > 0){
+
+        for (int i = 0 ; i < svgPaths.size(); i++ ) {
+
+            if (svgPaths.at(i).intersects(curve)) {
+                selectedPathOnCrossSelection = svgPaths[i];
+                svgPaths[i]  = QPainterPath();
+                if(levelList.size() > 0){
+                    selectedLineLevel = levelList[i];
+                    //levelList.removeAt(i);
+                }
+
+                selectedPathsList.append(selectedPathOnCrossSelection);
+                break;
+            }
+        }
+    }
+
+    curve = QPainterPath();
+}
+
+void InputSketch::cropSelection(){
+
+    selectedPathsOnCropSelection.clear();
+    /// Interaction -- Brush Selection
+    /// For each curve point create a circle/radius and if intersects to a segment, this segment compose the new path
+    ///
+    /// Organize direction of the curve while selecting (on interaction)
+    ///
+
+    if (svgPaths.size() < 1) return;
+
+
+    //double sampleRate = curve.length() / 5;
+
+    for (double i = 0 ; i < curve.length(); i = i + 5) {
+
+        QPointF pos = curve.pointAtPercent(curve.percentAtLength(i));
+
+        QRectF brushRectSelect(pos.x()-3,pos.y()-3,6,6);
+
+        rectList.append(brushRectSelect);
+
+        for (int j = 0 ; j < svgPaths.size(); j++ ) {
+            if ( brushRectSelect.contains(svgPaths[j].pointAtPercent(0))) {
+                selectedPathsOnCropSelection.append(svgPaths[j]);
+                svgPaths[j] = QPainterPath();
+            } else if (brushRectSelect.contains(svgPaths[j].pointAtPercent(1))) {
+                selectedPathsOnCropSelection.append(svgPaths[j].toReversed());
+                svgPaths[j] = QPainterPath();
+            }
+        }
+    }
+
+    selectedPathsList.append(selectedPathsOnCropSelection);
+
+    curve = QPainterPath();
+}
+
+void InputSketch::eraseSelection(){
+
+    /// Interaction -- Erase Paths
+    ///
+    ///
+    if (svgPaths.size() > 0){
+
+        for (int i = 0 ; i < svgPaths.size(); i++ ) {
+
+            if (svgPaths[i].intersects(curve)) {
+                svgPaths[i] = QPainterPath();
+            }
+        }
+    }
+
+    curve = QPainterPath();
+
+}
+
+
+//************************************************************************************************
+/// ..................................... CURVE EDITION ..........................................
+//************************************************************************************************
+
+
+QPolygonF InputSketch::getCurve() const
+{
+    if( curve.isEmpty() ) return QPolygonF();
+
+    QPolygonF current_sketch  = curve.toSubpathPolygons().at( 0 );
+    return current_sketch;
+}
+
+bool InputSketch::joinPaths()
+{
+
+    if( pathsList.size() < 2 ){
+        return false;
+    }
+
+    prepareGeometryChange();
+    QPolygonF current_sketch  = pathsList[pathsList.size()-2].toSubpathPolygons().at(0);
+    QPolygonF new_sketch = pathsList.last().toSubpathPolygons().at(0);
+
+    bool changed = SketchLibrary::overSketch( current_sketch, new_sketch );
+    //Means that an oversketch happened
+    if ( changed )
+    {
+
+        pathsList[pathsList.size()-2] = QPainterPath();
+        pathsList[pathsList.size()-2].addPolygon(current_sketch);
+        pathsList.removeLast();
+
+    }
+    return changed;
+}
+
+void InputSketch::smooth()
+{
+
+    if( curve.isEmpty() == true )
+        return;
+
+    prepareGeometryChange();
+
+    // polygon_list is a QList<QPolygonF> object
+    auto polygon_list = curve.toSubpathPolygons();
+    curve = QPainterPath();
+
+    for( int i = 0; i < polygon_list.size(); ++i )
+    {
+        // polygon_curve is a QPolygonF
+        auto polygon_curve = SketchLibrary::smooth( polygon_list.at(i) );
+        curve.addPolygon(polygon_curve);
+
+    }
+
+    update();
+}
+
+QPainterPath InputSketch::smoothPath(QPainterPath &path){
+
+    auto polygon_list = path.toSubpathPolygons();
+    path = QPainterPath();
+
+    for( int i = 0; i < polygon_list.size(); ++i )
+    {
+        // polygon_curve is a QPolygonF
+        auto polygon_curve = SketchLibrary::smooth( polygon_list.at(i) );
+        path.addPolygon(polygon_curve);
+
+    }
+
+    return path;
+}
+
+
+
+
+//************************************************************************************************
+/// ..................................... 3D Rendering ..........................................
+//************************************************************************************************
+
+
+QVector<QVector3D> InputSketch::getOpenContoursPoints() {
+
+    QVector<QVector3D> pointsFor3D, stripeContour3DPoints;
+
+    if (!openContourList.isEmpty()) { //Somente os contornos abertos, primeiro caso
+
+        int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference OPEN CONTOURS", "Layering difference in depth OPEN CONTOURS");
+
+        for (int i = 0; i < openContourList.size(); i++) {
+
+            QVector<QVector3D> openContour3DPoints;
+
+            for (int j = 0; j < openContourList[i].size(); j++) {
+
+                for (double k = 0; k < openContourList[i][j].contour.length(); k = k + 0.5) {
+
+                    QVector3D p(openContourList[i][j].contour.pointAtPercent(openContourList[i][j].contour.percentAtLength(k)).x(),openContourList[i][j].contour.pointAtPercent(openContourList[i][j].contour.percentAtLength(k)).y(), depthdiff*openContourList[i][j].level);
+
+                    openContour3DPoints.append(p);
+
+                }
+
+            }
+            for (int i = 0; i < depthdiff * 10; i++){ // i < 200
+                chaikinOnZ (openContour3DPoints);
+            }
+
+            pointsFor3D.append(openContour3DPoints);
+        }
+
+        //Smooth points 3D
+        //Chaikin
+
+
+    }
+
+    return pointsFor3D;
+
+}
+
+
+//QVector<QVector3D> InputSketch::getClosedContoursPoints() {
+
+//    QVector<QVector3D> pointsFor3D, stripeContour3DPoints;
+
+//    if (!closedContourList.isEmpty()) {
+
+//        int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference CLOSED CONTOURS", "Layering difference in depth CLOSED CONTOURS");
+//        QVector<QVector3D> closedContour3DPoints;
+//        for (int i = 0; i < closedContourList.size(); i++){
+//            for (double k = 0; k < closedContourList[i].contour.length(); k = k + 0.5) {
+
+//                QVector3D p(closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)).x(),closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)).y(), depthdiff*closedContourList[i].level);
+
+//                closedContour3DPoints.append(p);
+
+//            }
+//        }
+//        pointsFor3D.append(closedContour3DPoints);
+//    }
+
+
+//    return pointsFor3D;
+//}
+
+QVector<QVector3D> InputSketch::getStripesPoints () {
+
+
+    QVector<QVector3D> pointsFor3D, stripeContour3DPoints;
+    if (!stripeContourList.isEmpty()) {
+
+        QPolygonF quad;
+        QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
+        QVector<QVector3D> quadMesh;
+
+        int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference STRIPE", "Layering difference in depth STRIPE");
+
+        for (int i = 0 ; i <  stripeContourList.size(); i++) {
+
+            for (int j = 0 ; j <  stripeContourList[i].size(); j++) {
+
+                float aspectratio = stripeContourList[i][j].rightLine.length() / stripeContourList[i][j].leftLine.length();
+
+                for (int k = 0; k < stripeContourList[i][j].leftLine.length(); k++){
+                    QVector3D p(stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).x(), stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).y(), stripeContourList[i][j].level*depthdiff);
+
+                    pointsfor3Dleft.append(p);
+                }
+
+                for (float k = 0; k < stripeContourList[i][j].rightLine.length(); k = k + aspectratio){
+                    QVector3D p(stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).x(), stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).y(), stripeContourList[i][j].level*depthdiff);
+
+                    pointsfor3Dright.append(p);
+                }
+            }
+        }
+
+        for (int i = 0; i < depthdiff * 10; i++){ // i < 200
+            chaikinOnZ (pointsfor3Dleft);
+        }
+
+        for (int i = 0; i < depthdiff * 10; i++){ // i < 200
+            chaikinOnZ (pointsfor3Dright);
+        }
+
+        pointsFor3D.append(pointsfor3Dleft);
+        pointsFor3D.append(pointsfor3Dright);
+
+
+    }
+
+    return pointsFor3D;
+}
+
+bool InputSketch::chaikinOnZ(QVector<QVector3D> &pointsFor3D){
+
+    //Chaikin
+    for (int i = 1; i < pointsFor3D.size()-2; ++i) {
+        pointsFor3D[i].setZ(-0.25*pointsFor3D[i-1].z() + 0.75*pointsFor3D[i].z() + 0.75*pointsFor3D[i+1].z() - 0.25*pointsFor3D[i+2].z());
+    }
+
+    //meanFilter
+
+    for (int i = 1; i < pointsFor3D.size()-1; ++i) {
+        pointsFor3D[i].setZ((pointsFor3D[i-1].z() + (pointsFor3D[i].z() *3) + pointsFor3D[i+1].z()) /5.0);
+    }
+
+    for (int i = 1; i < pointsFor3D.size()-1; ++i) {
+        pointsFor3D[i].setZ((pointsFor3D[i-1].z() + (pointsFor3D[i].z() *3) + pointsFor3D[i+1].z()) /5.0);
+    }
+
+    return true;
+}
+
+
+//************************************************************************************************
+/// ........................................ PAINTER ..........................................
+//************************************************************************************************
+
+void InputSketch::mouseOverPoint(const QPointF& pos){
+
+    mousePointer = pos;
+
+}
+
+
+QRectF InputSketch::boundingRect() const
+{
+    return curve.boundingRect();
+}
+
 
 void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) {
     
@@ -1103,60 +1364,11 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 }
 
 
-QPolygonF InputSketch::getCurve() const
-{
-    if( curve.isEmpty() ) return QPolygonF();
-    
-    QPolygonF current_sketch  = curve.toSubpathPolygons().at( 0 );
-    return current_sketch;
-}
 
-bool InputSketch::joinPaths()
-{
-    
-    if( pathsList.size() < 2 ){
-        return false;
-    }
-    
-    prepareGeometryChange();
-    QPolygonF current_sketch  = pathsList[pathsList.size()-2].toSubpathPolygons().at(0);
-    QPolygonF new_sketch = pathsList.last().toSubpathPolygons().at(0);
-    
-    bool changed = SketchLibrary::overSketch( current_sketch, new_sketch );
-    //Means that an oversketch happened
-    if ( changed )
-    {
-        
-        pathsList[pathsList.size()-2] = QPainterPath();
-        pathsList[pathsList.size()-2].addPolygon(current_sketch);
-        pathsList.removeLast();
-        
-    }
-    return changed;
-}
+//************************************************************************************************
+/// ..................................... FILE MANAGER ..........................................
+//************************************************************************************************
 
-void InputSketch::smooth()
-{
-    
-    if( curve.isEmpty() == true )
-        return;
-    
-    prepareGeometryChange();
-    
-    // polygon_list is a QList<QPolygonF> object
-    auto polygon_list = curve.toSubpathPolygons();
-    curve = QPainterPath();
-    
-    for( int i = 0; i < polygon_list.size(); ++i )
-    {
-        // polygon_curve is a QPolygonF
-        auto polygon_curve = SketchLibrary::smooth( polygon_list.at(i) );
-        curve.addPolygon(polygon_curve);
-        
-    }
-    
-    update();
-}
 
 
 void InputSketch::clear()
@@ -1194,12 +1406,12 @@ void InputSketch::clear()
 }
 
 
-int InputSketch::number_subpaths()
-{
-    QList< QPolygonF > subpaths =  curve.toSubpathPolygons();
-    std::cout << "Number of subpaths: " << subpaths.size() << std::endl << std::flush;
-    return subpaths.size();
-}
+
+
+
+//************************************************************************************************
+/// ..................................... GETTERS ..........................................
+//************************************************************************************************
 
 QPainterPath InputSketch::getCrossSelectionPath() const
 {
@@ -1215,158 +1427,17 @@ QVector<QPainterPath> InputSketch::getCropSelectionPaths() const
     return selectedPathsOnCropSelection;
 }
 
-QVector<QVector3D> InputSketch::getOpenContoursPoints() {
-
-    QVector<QVector3D> pointsFor3D, stripeContour3DPoints;
-
-    if (!openContourList.isEmpty()) { //Somente os contornos abertos, primeiro caso
-
-        int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference OPEN CONTOURS", "Layering difference in depth OPEN CONTOURS");
-
-        for (int i = 0; i < openContourList.size(); i++) {
-
-            QVector<QVector3D> openContour3DPoints;
-
-            for (int j = 0; j < openContourList[i].size(); j++) {
-
-                for (double k = 0; k < openContourList[i][j].contour.length(); k = k + 0.5) {
-
-                    QVector3D p(openContourList[i][j].contour.pointAtPercent(openContourList[i][j].contour.percentAtLength(k)).x(),openContourList[i][j].contour.pointAtPercent(openContourList[i][j].contour.percentAtLength(k)).y(), depthdiff*openContourList[i][j].level);
-
-                    openContour3DPoints.append(p);
-
-                }
-
-            }
-            for (int i = 0; i < depthdiff * 10; i++){ // i < 200
-                chaikinOnZ (openContour3DPoints);
-            }
-
-            pointsFor3D.append(openContour3DPoints);
-        }
-
-        //Smooth points 3D
-        //Chaikin
+//************************************************************************************************
+/// ..................................... OTHERS ..........................................
+//************************************************************************************************
 
 
-    }
-
-    return pointsFor3D;
-
+int InputSketch::number_subpaths()
+{
+    QList< QPolygonF > subpaths =  curve.toSubpathPolygons();
+    std::cout << "Number of subpaths: " << subpaths.size() << std::endl << std::flush;
+    return subpaths.size();
 }
-
-
-//QVector<QVector3D> InputSketch::getClosedContoursPoints() {
-
-//    QVector<QVector3D> pointsFor3D, stripeContour3DPoints;
-
-//    if (!closedContourList.isEmpty()) {
-
-//        int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference CLOSED CONTOURS", "Layering difference in depth CLOSED CONTOURS");
-//        QVector<QVector3D> closedContour3DPoints;
-//        for (int i = 0; i < closedContourList.size(); i++){
-//            for (double k = 0; k < closedContourList[i].contour.length(); k = k + 0.5) {
-
-//                QVector3D p(closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)).x(),closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)).y(), depthdiff*closedContourList[i].level);
-
-//                closedContour3DPoints.append(p);
-
-//            }
-//        }
-//        pointsFor3D.append(closedContour3DPoints);
-//    }
-
-
-//    return pointsFor3D;
-//}
-
-QVector<QVector3D> InputSketch::getStripesPoints () {
-
-
-    QVector<QVector3D> pointsFor3D, stripeContour3DPoints;
-    if (!stripeContourList.isEmpty()) {
-        
-        QPolygonF quad;
-        QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
-        QVector<QVector3D> quadMesh;
-        
-        int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference STRIPE", "Layering difference in depth STRIPE");
-        
-        for (int i = 0 ; i <  stripeContourList.size(); i++) {
-            
-            for (int j = 0 ; j <  stripeContourList[i].size(); j++) {
-                
-                float aspectratio = stripeContourList[i][j].rightLine.length() / stripeContourList[i][j].leftLine.length();
-                
-                for (int k = 0; k < stripeContourList[i][j].leftLine.length(); k++){
-                    QVector3D p(stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).x(), stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).y(), stripeContourList[i][j].level*depthdiff);
-                    
-                    pointsfor3Dleft.append(p);
-                }
-                
-                for (float k = 0; k < stripeContourList[i][j].rightLine.length(); k = k + aspectratio){
-                    QVector3D p(stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).x(), stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).y(), stripeContourList[i][j].level*depthdiff);
-                    
-                    pointsfor3Dright.append(p);
-                }
-            }
-        }
-        
-        for (int i = 0; i < depthdiff * 10; i++){ // i < 200
-            chaikinOnZ (pointsfor3Dleft);
-        }
-        
-        for (int i = 0; i < depthdiff * 10; i++){ // i < 200
-            chaikinOnZ (pointsfor3Dright);
-        }
-        
-        pointsFor3D.append(pointsfor3Dleft);
-        pointsFor3D.append(pointsfor3Dright);
-        
-        
-    }
-    
-    return pointsFor3D;
-}
-
-bool InputSketch::chaikinOnZ(QVector<QVector3D> &pointsFor3D){
-    
-    //Chaikin
-    for (int i = 1; i < pointsFor3D.size()-2; ++i) {
-        pointsFor3D[i].setZ(-0.25*pointsFor3D[i-1].z() + 0.75*pointsFor3D[i].z() + 0.75*pointsFor3D[i+1].z() - 0.25*pointsFor3D[i+2].z());
-    }
-    
-    //meanFilter
-    
-    for (int i = 1; i < pointsFor3D.size()-1; ++i) {
-        pointsFor3D[i].setZ((pointsFor3D[i-1].z() + (pointsFor3D[i].z() *3) + pointsFor3D[i+1].z()) /5.0);
-    }
-    
-    for (int i = 1; i < pointsFor3D.size()-1; ++i) {
-        pointsFor3D[i].setZ((pointsFor3D[i-1].z() + (pointsFor3D[i].z() *3) + pointsFor3D[i+1].z()) /5.0);
-    }
-    
-    return true;
-}
-
-QPainterPath InputSketch::smoothPath(QPainterPath &path){
-    
-    auto polygon_list = path.toSubpathPolygons();
-    path = QPainterPath();
-    
-    for( int i = 0; i < polygon_list.size(); ++i )
-    {
-        // polygon_curve is a QPolygonF
-        auto polygon_curve = SketchLibrary::smooth( polygon_list.at(i) );
-        path.addPolygon(polygon_curve);
-        
-    }
-    
-    return path;
-}
-
-
-
 
 
 
