@@ -152,13 +152,12 @@ void Canvas::viewOverlapping3D(){
 
     if (scene->getInteraction() == 1){
           glmediator->viewOpenContours3D(scene->getOpenContoursPoints());
-          //glmediator->render();
-
 
     } else if (scene->getInteraction() == 3){
         glmediator->viewStripes3D(scene->getStripes());
         //glmediator->render();
     }
+    glmediator->render();
 }
 
 void Canvas::changeLayerDifference(const int &difference)

@@ -38,6 +38,9 @@ public:
     QVector<QVector3D> createCylinder(int steps, QVector3D base, QVector3D top);
     void exportMesh();
 
+    int nvertices = 0;
+
+    void render();
 protected:
 
     std::shared_ptr< Canvas > canvas = nullptr;
@@ -66,7 +69,7 @@ private:
     std::vector< float > Svertices, Snormals;
     std::vector< unsigned int > Sfaces;
 
-    void render();
+
 
 
     bool getMesh(std::vector<float> &vertex_coordinates,

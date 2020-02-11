@@ -911,9 +911,9 @@ void InputSketch::changeLayerDifference(const int &difference)
     layerDifference = difference;
 
 }
-QList<QVector<QVector3D>> InputSketch::getOpenContoursPoints() {
+QList<QVector<QVector3D> > InputSketch::getOpenContoursPoints() {
 
-    QList<QVector<QVector3D>> pointsFor3D;
+    QList<QVector<QVector3D> > pointsFor3D;
 
     if (!openContourList.isEmpty()) { //Somente os contornos abertos, primeiro caso
 
@@ -930,27 +930,25 @@ QList<QVector<QVector3D>> InputSketch::getOpenContoursPoints() {
 
                     QVector3D p(openContourList[i][j].contour.pointAtPercent(openContourList[i][j].contour.percentAtLength(k)).x(),openContourList[i][j].contour.pointAtPercent(openContourList[i][j].contour.percentAtLength(k)).y(), depthdiff*openContourList[i][j].level);
 
-                    openContour3DPoints.push_back(p);
+                    openContour3DPoints.append(p);
 
                 }
-
-                for (int l = 0; l < depthdiff * 10; l++){ // i < 200
-                    chaikinOnZ (openContour3DPoints);
-                }
-
-                pointsFor3D.push_back(openContour3DPoints);
-
             }
 
+            for (int l = 0; l < depthdiff * 10; l++){ // i < 200
+                chaikinOnZ (openContour3DPoints);
+            }
 
+            pointsFor3D.append(openContour3DPoints);
 
         }
 
-        //Smooth points 3D
-        //Chaikin
 
 
     }
+
+    //Smooth points 3D
+    //Chaikin
 
     return pointsFor3D;
 

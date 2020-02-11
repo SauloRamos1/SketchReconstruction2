@@ -215,8 +215,7 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
     ///TODO SALVAR VERTICES DIRETAMENTE
     ///
     int steps = 8;
-
-    int nvertices = 0;
+    nvertices = 0;
 
     for (int h = 0 ; h < points3D.size(); h++){
 
@@ -296,7 +295,7 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
     }
 
 
-    render () ;
+    // render () ;
     //glcanvas->createTube(vertices, faces, normals);
 
 
@@ -332,16 +331,16 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
 
         QVector<QVector3D> diskVertices = createCylinder(steps, points3D[i], points3D[i] + normals3D[i]);
 
-        CCvertices.push_back(points3D[i].x());
-        CCvertices.push_back(points3D[i].y());
-        CCvertices.push_back(points3D[i].z());
+        vertices.push_back(points3D[i].x());
+        vertices.push_back(points3D[i].y());
+        vertices.push_back(points3D[i].z());
 
         QVector3D normal = normals3D[i];
 
         normal.normalize();
-        CCnormals.push_back(normal.x());
-        CCnormals.push_back(normal.y());
-        CCnormals.push_back(normal.z());
+        normals.push_back(normal.x());
+        normals.push_back(normal.y());
+        normals.push_back(normal.z());
 
         //  qDebug () << points3D[i];
 
@@ -350,36 +349,38 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
             QVector3D normal = normals3D[i];
 
             normal.normalize();
-            CCnormals.push_back(normal.x());
-            CCnormals.push_back(normal.y());
-            CCnormals.push_back(normal.z());
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
 
             //nvertices ++;
 
-            CCvertices.push_back(diskVertices[j].x());
-            CCvertices.push_back(diskVertices[j].y());
-            CCvertices.push_back(diskVertices[j].z());
+            vertices.push_back(diskVertices[j].x());
+            vertices.push_back(diskVertices[j].y());
+            vertices.push_back(diskVertices[j].z());
 
         }
 
 
         for (int k = 1; k < diskVertices.size(); k++) {
 
-            CCfaces.push_back(centerVertexNumber);
-            CCfaces.push_back(centerVertexNumber+k);
-            CCfaces.push_back(centerVertexNumber+k+1);
+            faces.push_back(centerVertexNumber+nvertices);
+            faces.push_back(centerVertexNumber+k+nvertices);
+            faces.push_back(centerVertexNumber+k+1+nvertices);
 
 
         }
 
 
-        CCfaces.push_back(centerVertexNumber);
-        CCfaces.push_back(centerVertexNumber+diskVertices.size());
-        CCfaces.push_back(centerVertexNumber+1);
+        faces.push_back(centerVertexNumber+nvertices);
+        faces.push_back(centerVertexNumber+diskVertices.size()+nvertices);
+        faces.push_back(centerVertexNumber+1+nvertices);
 
 
 
         centerVertexNumber += diskVertices.size()+1;
+
+        nvertices = vertices.size()/3;
 
     }
 
@@ -772,56 +773,7 @@ QPainterPath OpenGLMediator::resizePath(QPainterPath &path){
 
 void OpenGLMediator::render()
 {
-
-    //    vertices.clear();
-    //    normals.clear();
-    //    faces.clear();
-
-    //    std::copy(OCvertices.begin(), OCvertices.end(), std::back_inserter(vertices));
-    //    std::copy(OCnormals.begin(), OCnormals.end(), std::back_inserter(normals));
-    //    std::copy(OCfaces.begin(), OCfaces.end(), std::back_inserter(faces));
-
-    //    OCvertices.clear();
-    //    OCnormals.clear();
-    //    OCfaces.clear();
-
-
-    unsigned int lastIndex = 0;
-    foreach (unsigned int indice, faces) {
-        if (indice > lastIndex) {
-            lastIndex = indice;
-        }
-    }
-
-    lastIndex++;
-    std::copy(CCvertices.begin(), CCvertices.end(), std::back_inserter(vertices));
-    std::copy(CCnormals.begin(), CCnormals.end(), std::back_inserter(normals));
-
-    //unsigned int facessize = faces.size()-1;
-    foreach (unsigned int indice, CCfaces) {
-        faces.push_back(indice+lastIndex);
-    }
-
-    lastIndex = 0;
-    foreach (unsigned int indice, faces) {
-        if (indice > lastIndex) {
-            lastIndex = indice;
-        }
-    }
-
-    lastIndex++;
-
-    std::copy(Svertices.begin(), Svertices.end(), std::back_inserter(vertices));
-    std::copy(Snormals.begin(), Snormals.end(), std::back_inserter(normals));
-
-    foreach (unsigned int indice, Sfaces) {
-        faces.push_back(indice+lastIndex);
-    }
-
-
-    //  glcanvas->createTube(vertices, faces, normals);
-
-
+    glcanvas->createTube(vertices, faces, normals);
 }
 
 bool OpenGLMediator::getMeshPath(std::vector<float> &vertex_coordinates, std::vector<unsigned int> &triangle_list, std::vector<float> &normal_list){
