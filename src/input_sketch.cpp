@@ -67,6 +67,7 @@ void InputSketch::chooseStripes_Interaction()
 //************************************************************************************************
 /// ................................... OPEN CONTOURS ..........................................
 //************************************************************************************************
+
 void InputSketch::createOpenContour (const QPointF& pos){
     
     prepareGeometryChange();
@@ -207,9 +208,8 @@ void InputSketch::saveClosedContour (){
     smoothPath(closedContour);
     smoothPath(closedContour);
 
-
     QPainterPath3D curve3D;
-    curve3D.contour = closedContour;
+    curve3D.contour = closePath(closedContour);
     curve3D.level = lineLevel;
 
     closedContourList.append(curve3D);
@@ -217,19 +217,117 @@ void InputSketch::saveClosedContour (){
 
 }
 
-QPainterPath InputSketch::getClosedContour()
-{
+//USE IT FOR SVG and SKETCHING
+QPainterPath InputSketch::closePath (QPainterPath pathToBeClosed){
 
-    return closedContourList.last().contour;
+    if ( almostEqual( pathToBeClosed.pointAtPercent(0),pathToBeClosed.pointAtPercent(1) ) ){
+
+        return pathToBeClosed;
+
+    } else {
+
+        ///Close path with one segment
+        ///
+        ///
+        ///
+
+        int npoints = pathToBeClosed.elementCount();
+
+        //NPoints means P0,P1,P2,P3 = 4 points
+
+        QPainterPath finalClosedContour;
+        QPainterPath pathThatClosesContour;
+
+        finalClosedContour.addPath(pathToBeClosed);
+
+        pathThatClosesContour.moveTo(pathToBeClosed.elementAt(npoints-1));
+
+        QPointF ControlPointP1, ControlPointP2;
+
+        // S is the new Bezier Curve
+        // S0 = P3
+        // S1 = P3 + (P3-P2)
+        // S2 = Q0 + (Q0 - Q1)
+        // S3 = Q0
+
+        ControlPointP1 = pathToBeClosed.elementAt(npoints - 1) + (( pathToBeClosed.elementAt(npoints - 1) - pathToBeClosed.elementAt(npoints - 2) ));
+        ControlPointP2 = pathToBeClosed.elementAt(0) + (( pathToBeClosed.elementAt(0) - pathToBeClosed.elementAt(1) ));
+
+        pathThatClosesContour.cubicTo(ControlPointP1,ControlPointP2,pathToBeClosed.elementAt(0));
+
+        finalClosedContour.addPath(pathThatClosesContour);
+
+        return finalClosedContour;
+
+    }
 
 }
 
-int InputSketch::getClosedContourLevel()
-{
 
-    return closedContourList.last().level;
+QPainterPath InputSketch::closeSVGSegments(const QVector<QPainterPath>& pathsToClose){
+
+    // Fechar os Paths combinando pontos 0-0 / 0-3 / 3-0 / 3-3
+    //
+
+    QVector<QPainterPath> pathsSegmentsList = pathsToClose;
+
+    QPainterPath closedPath;
+
+
+
+    //NPoints means P0,P1,P2,P3 = 4 points
+
+    for (int i = 0; i < pathsSegmentsList.size()-1 ; i++ ) {
+
+        closedPath.addPath(pathsSegmentsList[i]);
+
+        int npoints = pathsSegmentsList[i].elementCount();
+
+        closedPath.moveTo(pathsSegmentsList[i].elementAt( npoints-1 ));
+
+        QPointF ControlPointP1, ControlPointP2;
+
+        // S is the new Bezier Curve
+        // S0 = P3
+        // S1 = P3 + (P3-P2)
+        // S2 = Q0 + (Q0 - Q1)
+        // S3 = Q0
+
+        ControlPointP1 = pathsSegmentsList[i].elementAt( npoints - 1 ) + (( pathsSegmentsList[i].elementAt( npoints -1 ) - pathsSegmentsList[i].elementAt( npoints - 2 ) ));
+        ControlPointP2 = pathsSegmentsList[i+1].elementAt( 0 ) + (( pathsSegmentsList[i+1].elementAt( 0 ) - pathsSegmentsList[ i+1 ].elementAt( 1 ) ));
+
+        closedPath.cubicTo(ControlPointP1,ControlPointP2,pathsSegmentsList[i+1].elementAt(0));
+
+    }
+
+    closedPath.addPath(pathsSegmentsList[pathsSegmentsList.size()-1]);
+
+    int npoints = pathsSegmentsList[pathsSegmentsList.size()-1].elementCount();
+
+    closedPath.moveTo(pathsSegmentsList[pathsSegmentsList.size()-1].elementAt( npoints-1 ));
+
+    QPointF ControlPointP1, ControlPointP2;
+
+    // S is the new Bezier Curve
+    // S0 = P3
+    // S1 = P3 + (P3-P2)
+    // S2 = Q0 + (Q0 - Q1)
+    // S3 = Q0
+
+    ControlPointP1 = pathsSegmentsList[pathsSegmentsList.size()-1].elementAt( npoints - 1 ) + (( pathsSegmentsList[pathsSegmentsList.size()-1].elementAt( npoints -1 ) - pathsSegmentsList[pathsSegmentsList.size()-1].elementAt( npoints - 2 ) ));
+    ControlPointP2 = pathsSegmentsList[0].elementAt( 0 ) + (( pathsSegmentsList[0].elementAt( 0 ) - pathsSegmentsList[ 0 ].elementAt( 1 ) ));
+
+    closedPath.cubicTo(ControlPointP1,ControlPointP2,pathsSegmentsList[0].elementAt(0));
+
+    return closedPath;
+
+    //    canvas2->setCurvesSelection( closedPath );
+    //    layers->receivePaths( closedPath );
 
 }
+
+
+
 
 //************************************************************************************************
 /// ....................................... STRIPES ..........................................
@@ -807,13 +905,20 @@ QPainterPath InputSketch::smoothPath(QPainterPath &path){
 //************************************************************************************************
 
 
-QVector<QVector3D> InputSketch::getOpenContoursPoints() {
+void InputSketch::changeLayerDifference(const int &difference)
+{
 
-    QVector<QVector3D> pointsFor3D, stripeContour3DPoints;
+    layerDifference = difference;
+
+}
+QList<QVector<QVector3D>> InputSketch::getOpenContoursPoints() {
+
+    QList<QVector<QVector3D>> pointsFor3D;
 
     if (!openContourList.isEmpty()) { //Somente os contornos abertos, primeiro caso
 
-        int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference OPEN CONTOURS", "Layering difference in depth OPEN CONTOURS");
+        //int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference OPEN CONTOURS", "Layering difference in depth OPEN CONTOURS");
+        int depthdiff = layerDifference;
 
         for (int i = 0; i < openContourList.size(); i++) {
 
@@ -825,16 +930,20 @@ QVector<QVector3D> InputSketch::getOpenContoursPoints() {
 
                     QVector3D p(openContourList[i][j].contour.pointAtPercent(openContourList[i][j].contour.percentAtLength(k)).x(),openContourList[i][j].contour.pointAtPercent(openContourList[i][j].contour.percentAtLength(k)).y(), depthdiff*openContourList[i][j].level);
 
-                    openContour3DPoints.append(p);
+                    openContour3DPoints.push_back(p);
 
                 }
 
-            }
-            for (int i = 0; i < depthdiff * 10; i++){ // i < 200
-                chaikinOnZ (openContour3DPoints);
+                for (int l = 0; l < depthdiff * 10; l++){ // i < 200
+                    chaikinOnZ (openContour3DPoints);
+                }
+
+                pointsFor3D.push_back(openContour3DPoints);
+
             }
 
-            pointsFor3D.append(openContour3DPoints);
+
+
         }
 
         //Smooth points 3D
@@ -920,6 +1029,8 @@ QVector<QVector3D> InputSketch::getStripesPoints () {
 
     return pointsFor3D;
 }
+
+
 
 bool InputSketch::chaikinOnZ(QVector<QVector3D> &pointsFor3D){
 
@@ -1440,4 +1551,22 @@ int InputSketch::number_subpaths()
 }
 
 
+bool InputSketch::almostEqual(QPointF a, QPointF b)
+{
+    //return fabs(a - b) <= FLT_EPSILON;
+    return fabs(a.x() - b.x()) <= 2 && fabs(a.y() - b.y()) <=2 ;
+}
 
+QPainterPath InputSketch::getClosedContour()
+{
+
+    return closedContourList.last().contour;
+
+}
+
+int InputSketch::getClosedContourLevel()
+{
+
+    return closedContourList.last().level;
+
+}

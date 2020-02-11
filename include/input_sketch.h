@@ -74,6 +74,7 @@ public:
 
     bool contour = true, halo = false, color = false, hatching = false;
     int lineLevel = 1;
+    int layerDifference = 10;
 
     void createOpenContour(const QPointF &pos);
     void createClosedContour(const QPointF &pos);
@@ -96,14 +97,18 @@ public:
     void increaseStripeContourLevelWhileDrawing();
     void decreaseStripeContourLevelWhileDrawing();
 
+    QPainterPath closePath(QPainterPath pathToBeClosed);
+    QPainterPath closeSVGSegments(const QVector<QPainterPath> &pathsToClose);
 
-    QVector<QVector3D> getOpenContoursPoints();
+    QList<QVector<QVector3D>> getOpenContoursPoints();
 
     QVector<QVector3D> getStripesPoints();
 
+    void changeLayerDifference(const int &difference);
     QPainterPath getClosedContour();
     int getClosedContourLevel();
     void updateColorMap();
+
 protected:
 
     void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) override;
@@ -219,6 +224,7 @@ private:
 
     int stripeNumber = 0;
 
+    bool almostEqual (QPointF a, QPointF b);
 
 };
 

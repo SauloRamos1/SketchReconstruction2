@@ -58,7 +58,7 @@ public:
 
     void setBackgroundImage( const QString& url );
 
-    QVector<QVector3D> getOpenContoursPoints ();
+    QList<QVector<QVector3D>> getOpenContoursPoints ();
    // QVector<QVector3D> getClosedContoursPoints ();
     QVector<QVector3D> getStripes ();
 
@@ -70,6 +70,7 @@ public:
     Interaction status = Interaction::DEFAULT;
 
     int getInteraction();
+    void changeLayerDifference(const int &difference);
 private:
 
 
@@ -93,9 +94,15 @@ private:
 
 signals:
 
+    //void openContourDone();
+    void closedContourDone();
+    void stripeContourDone();
+
+   // void closedContourDone();
+
     void crossSelectionDone();
     void cropSelectionDone();
-    void closedContourDone();
+
 
 protected:
 

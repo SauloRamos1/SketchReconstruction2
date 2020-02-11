@@ -67,6 +67,9 @@ protected:
 
         void viewOverlapping3D();
 
+
+        //void viewOpenContour3D();
+
         void changeLayerDifference(const int &difference);
 protected:
 

@@ -21,8 +21,8 @@ Scene::Scene()
 {
     setSceneRect(QRect (-50,0,750,750));
 
-    setBackgroundBrush(QColor(255,230,204));
-    //setBackgroundBrush(QColor(179,179,179));
+    //setBackgroundBrush(QColor(255,230,204));
+    setBackgroundBrush(QColor(179,179,179));
 
     //addEllipse( 0, 0, 10,0 10 );
 
@@ -316,24 +316,27 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     if (event->button() & Qt::LeftButton && status == Interaction::OPENCONTOUR){
         sketch.saveOpenContour();
         leftButtonIsPressed = false;
+        //emit openContourDone();
         QGraphicsScene::mouseReleaseEvent(event);
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::CLOSEDCONTOUR){
         sketch.saveClosedContour();
         leftButtonIsPressed = false;
-        emit closedContourDone();
+        //emit closedContourDone();
         QGraphicsScene::mouseReleaseEvent(event);
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::STRIPES){
         sketch.saveStripeContour();
+        //emit stripeContourDone();
         QGraphicsScene::mouseReleaseEvent(event);
     }
 
     if (event->button() & Qt::RightButton && status == Interaction::STRIPES){
 
         sketch.finishBand();
+        //emit stripeContourDone();
         QGraphicsScene::mouseReleaseEvent(event);
     }
 
@@ -484,8 +487,13 @@ void Scene::keyPressEvent(QKeyEvent *event){
     sketch.updateColorMap();
 }
 
+void Scene::changeLayerDifference (const int &difference){
 
-QVector<QVector3D> Scene::getOpenContoursPoints()
+    sketch.changeLayerDifference(difference);
+
+}
+
+QList<QVector<QVector3D>> Scene::getOpenContoursPoints()
 {
     return sketch.getOpenContoursPoints();
 }

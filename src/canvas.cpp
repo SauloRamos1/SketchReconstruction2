@@ -28,7 +28,8 @@ void Canvas::createActions()
 {
     connect( scene.get(), &Scene::crossSelectionDone, this, &Canvas::sendCrossSelectionCurves );
     connect( scene.get(), &Scene::cropSelectionDone, this, &Canvas::sendCropSelectionCurves );
-    connect( scene.get(), &Scene::closedContourDone, this, &Canvas::sendClosedContours);
+//    connect( scene.get(), &Scene::openContourDone, this, &Canvas::viewOpenContour3D );
+    // connect( scene.get(), &Scene::closedContourDone, this, &Canvas::sendClosedContours);
 }
 
 void Canvas::newFile()
@@ -138,6 +139,13 @@ void Canvas::sendCropSelectionCurves(){
     mediator->closeAndSendPaths( scene->cropSelection(), scene->SelectionLineLevel() );
 }
 
+
+//void Canvas::viewOpenContour3D(){
+
+//     glmediator->viewOpenContours3D(scene->getOpenContoursPoints());
+
+//}
+
 void Canvas::viewOverlapping3D(){
 
     if (glmediator == nullptr) return;
@@ -155,7 +163,7 @@ void Canvas::viewOverlapping3D(){
 
 void Canvas::changeLayerDifference(const int &difference)
 {
-    qDebug () << difference;
+    scene->changeLayerDifference (difference);
 }
 
 

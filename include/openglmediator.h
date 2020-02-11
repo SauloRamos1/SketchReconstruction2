@@ -31,7 +31,7 @@ public:
 
 
    // void viewStripe();
-    void viewOpenContours3D(const QVector<QVector3D> points3D);
+    void viewOpenContours3D(const QList<QVector<QVector3D>> points3D);
     void viewClosedContours3D(const QVector<QVector3D> points3D,  const QVector<QVector3D> normals3D);
     void viewStripes3D(const QVector<QVector3D> points3D);
 
