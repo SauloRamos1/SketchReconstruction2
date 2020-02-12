@@ -153,6 +153,12 @@ void Canvas::viewOverlapping3D(){
     if (scene->getInteraction() == 1){
           glmediator->viewOpenContours3D(scene->getOpenContoursPoints());
 
+    } else if (scene->getInteraction() == 2){
+
+        scene->estimateShapes();
+        glmediator->viewClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
+        //glmediator->render();
+
     } else if (scene->getInteraction() == 3){
         glmediator->viewStripes3D(scene->getStripes());
         //glmediator->render();

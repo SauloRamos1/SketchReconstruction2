@@ -493,15 +493,25 @@ void Scene::changeLayerDifference (const int &difference){
 
 }
 
+void Scene::estimateShapes()
+{
+    sketch.estimateShapes();
+}
+
 QList<QVector<QVector3D>> Scene::getOpenContoursPoints()
 {
     return sketch.getOpenContoursPoints();
 }
 
-//QVector<QVector3D> Scene::getClosedContoursPoints()
-//{
-//    return sketch.getClosedContoursPoints();
-//}
+QVector<QVector3D> Scene::getClosedContoursPoints()
+{
+    return sketch.getClosedContoursPoints();
+}
+
+QVector<QVector3D> Scene::getClosedContoursNormals()
+{
+    return sketch.getClosedContoursNormals();
+}
 
 QVector<QVector3D> Scene::getStripes()
 {
@@ -522,16 +532,15 @@ int Scene::getClosedContourLevel()
 
 int Scene::getInteraction(){
 
-    if (status == Interaction::OPENCONTOUR){
+    if (status == Interaction::OPENCONTOUR)
         return 1;
-    }
 
-    if (status == Interaction::CLOSEDCONTOUR){
+    if (status == Interaction::CLOSEDCONTOUR)
         return 2;
-    }
-    if  (status == Interaction::STRIPES){
+
+    if  (status == Interaction::STRIPES)
         return 3;
-    }
+
     return 0;
 }
 

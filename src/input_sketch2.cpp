@@ -23,8 +23,6 @@ InputSketch2::InputSketch2()
     setPath (curve);
     setPath (oversketchingCurve);
 
-
-
 }
 
 void InputSketch2::create (const QPointF& pos){
@@ -131,6 +129,7 @@ bool InputSketch2::joinPaths(){
 }
 
 
+//--------------- MOVED TO INPUTSKETCH1
 void InputSketch2::receiveSelectedPath (const QVector<QPainterPath>& pathList, const QVector<QString>& namePathList, const QVector<int>& lineLevels) {
 
     paths.clear();
@@ -217,6 +216,7 @@ void InputSketch2::receiveSelectedPath (const QVector<QPainterPath>& pathList, c
     update();
 
 }
+//--------------- MOVED TO INPUTSKETCH1
 
 void InputSketch2::findSymmetricalMedialAxis (QPainterPath contour, QVector<QVector3D> &temp_ql, QVector<QVector3D> &temp_qr){
 
@@ -270,8 +270,7 @@ void InputSketch2::findSymmetricalMedialAxis (QPainterPath contour, QVector<QVec
 
 
 void InputSketch2::samplePointsForRotationalBlendingSurface(QPainterPath &selectedCurve){
-
-
+    //USED IN SMOOTHING AND OVERSKETCHING
 
     QVector<QPointF> sampledPointsOnCurve;
 
@@ -385,6 +384,7 @@ void InputSketch2::defCrossSecToEdit(int direction){
 }
 
 
+//--------------- MOVED TO INPUTSKETCH1
 void InputSketch2::estimateShape(){
 
 
@@ -415,6 +415,10 @@ void InputSketch2::estimateShape(){
     update();
 
 }
+
+//--------------- MOVED TO INPUTSKETCH1
+
+// ----MOVED TO INPUTSKETCH1
 
 void InputSketch2::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr){
 
@@ -608,10 +612,9 @@ void InputSketch2::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVe
     totalPoints.clear();
     totalNormals.clear();
 
-
-
 }
 
+// ----MOVED TO INPUTSKETCH1
 void InputSketch2::RotationalBlendingSurface(const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr){
 
     //Normal Plane
@@ -696,6 +699,7 @@ void InputSketch2::RotationalBlendingSurface(const int shapeNumber, QPainterPath
     }
 
 }
+// ----MOVED TO INPUTSKETCH1
 
 void InputSketch2::CrossSectionalBlendingSurface(QPainterPath &tu, QVector<QVector3D> &ql, QVector<QVector3D> &qr){
 

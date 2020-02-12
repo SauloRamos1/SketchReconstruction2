@@ -59,7 +59,9 @@ public:
     void setBackgroundImage( const QString& url );
 
     QList<QVector<QVector3D>> getOpenContoursPoints ();
-   // QVector<QVector3D> getClosedContoursPoints ();
+    QVector<QVector3D> getClosedContoursPoints ();
+    QVector<QVector3D> getClosedContoursNormals ();
+
     QVector<QVector3D> getStripes ();
 
     QPainterPath getClosedContour();
@@ -71,6 +73,8 @@ public:
 
     int getInteraction();
     void changeLayerDifference(const int &difference);
+
+    void estimateShapes();
 private:
 
 

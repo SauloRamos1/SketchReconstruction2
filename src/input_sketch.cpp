@@ -2,6 +2,8 @@
 
 #include <QPainter>
 #include <QDebug>
+#include <QMatrix4x4>
+
 
 #include "include/input_sketch.h"
 
@@ -95,6 +97,9 @@ void InputSketch::saveOpenContour (){
     QPainterPath3D curve3D;
     curve3D.contour = openContour;
     curve3D.level = lineLevel;
+    QString name = "Open ";
+    name.append(openContourList.size());
+    curve3D.name = name;
 
     sameOpenContourList.append( curve3D );
     openContourList.append( sameOpenContourList );
@@ -210,7 +215,14 @@ void InputSketch::saveClosedContour (){
 
     QPainterPath3D curve3D;
     curve3D.contour = closePath(closedContour);
+    smoothPath(curve3D.contour);
     curve3D.level = lineLevel;
+
+    QString name = "Closed ";
+    name.append(closedContourList.size());
+    curve3D.name = name;
+
+    receiveSelectedPath(curve3D.contour, curve3D.name, curve3D.level);
 
     closedContourList.append(curve3D);
     closedContour = QPainterPath();
@@ -328,6 +340,385 @@ QPainterPath InputSketch::closeSVGSegments(const QVector<QPainterPath>& pathsToC
 
 
 
+/// ................................... InputSketch 2 ..........................................
+
+void InputSketch::receiveSelectedPath (const QPainterPath &path, const QString &name, const int &lineLevel) {
+
+    QVector<QPointF> sampledPointsOnCurve;
+    QVector<qreal> angleAtSampledPoint;
+
+    allSampledPoints t = allSampledPoints();
+    float contourSamplingStep = 5.0f;
+    //float contourSamplingStep = 0.5f;
+
+
+    for (qreal j = 0; j < path.length(); j = j + contourSamplingStep) {
+
+        sampledPointsOnCurve.push_back(path.pointAtPercent(path.percentAtLength(j)));
+        angleAtSampledPoint.push_back(path.angleAtPercent(path.percentAtLength(j)));
+
+    }
+
+
+    for (int j = 0; j < sampledPointsOnCurve.size()/2 ; j++) {
+
+        QVector3D temp_ql(sampledPointsOnCurve[j].x(),sampledPointsOnCurve[j].y(), (lineLevel*layerDifference));
+        qreal temp_angleql(angleAtSampledPoint[j]);
+
+        QVector3D temp_qr(sampledPointsOnCurve[sampledPointsOnCurve.size()-1-j].x(),sampledPointsOnCurve[sampledPointsOnCurve.size()-1-j].y(), (lineLevel*layerDifference));
+        qreal temp_angleqr(angleAtSampledPoint[angleAtSampledPoint.size()-1-j]);
+
+        t.ql.push_back(temp_ql);
+        t.anglesql.push_back(temp_angleql);
+        t.qr.push_back(temp_qr);
+        t.anglesqr.push_back(temp_angleqr);
+
+    }
+
+    for (int j = 0; j < t.ql.size(); ++j) {
+
+        if (j == 0){
+            lastmidPointsPath.moveTo(((t.ql[j] + t.qr[j]) / 2).x(), ((t.ql[j] + t.qr[j]) / 2).y());
+        } else {
+            lastmidPointsPath.lineTo(((t.ql[j] + t.qr[j]) / 2).x(), ((t.ql[j] + t.qr[j]) / 2).y());
+        }
+    }
+
+    //findSymmetricalMedialAxis(pathList[i], t.ql, t.qr);
+
+    QPainterPath midPointsPath;
+    for (int j = 0; j < t.ql.size(); ++j) {
+
+        t.midPoints.push_back((t.ql[j] + t.qr[j]) / 2);
+
+        if (j == 0){
+            midPointsPath.moveTo(t.midPoints[0].x(), t.midPoints[0].y());
+        } else {
+            midPointsPath.lineTo(t.midPoints[j].x(), t.midPoints[j].y());
+        }
+    }
+
+    t.midPointsPath = midPointsPath;
+    t.name = name;
+    t.contour = QPainterPath();
+    t.contour = path;
+
+
+    allShapesSampledPoints.push_back(t);
+
+
+    //RotationalBlendingSurface(i, paths[i], t.ql, t.qr);
+    //update();
+
+}
+
+void InputSketch::estimateShapes(){
+
+   // int lineLeveldiff = layerDifference;
+
+    //lineLeveldiff = QInputDialog::getInt(nullptr, "Depth Difference", "Layering difference in depth");
+    //lineLeveldiff*=-1;
+
+    for (int i = 0; i < allShapesSampledPoints.size(); ++i) {
+
+        int reconstType = 0;
+
+        while (reconstType < 1 || reconstType > 2){
+            reconstType = QInputDialog::getInt(nullptr, "Select Reconstruction Type for " + allShapesSampledPoints[i].name, "Select Reconstruction Type for: " + allShapesSampledPoints[i].name + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function");
+        }
+        if (reconstType == 1) {
+            RotationalBlendingSurface(i, allShapesSampledPoints[i].contour, allShapesSampledPoints[i].ql,allShapesSampledPoints[i].qr);
+
+        } else {
+            DataForHRBF (i, allShapesSampledPoints[i].contour, allShapesSampledPoints[i].ql,allShapesSampledPoints[i].qr);
+        }
+    }
+
+    update();
+
+}
+
+
+void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr){
+
+    //Normal Plane
+
+    for (int i = 0; i < ql.size(); ++i) {
+        ql[i].setZ(ql[i].z()*layerDifference);
+        qr[i].setZ(qr[i].z()*layerDifference);
+    }
+
+    QVector3D n;
+    QVector3D pl, pr;
+    int u = 0, u_step = 1;
+
+    allShapesSampledPoints[shapeNumber].shapePoints.clear();
+
+    QVector3D bottomLeft (contour.boundingRect().bottomLeft().x(), contour.boundingRect().bottomLeft().y() , ql[0].z());
+
+    QVector3D topLeft (contour.boundingRect().topLeft().x(), contour.boundingRect().topLeft().y() , ql[0].z());
+    QVector3D bottomRight (contour.boundingRect().bottomRight().x(), contour.boundingRect().bottomRight().y() , ql[0].z());
+
+    n = QVector3D::crossProduct(topLeft - bottomLeft , bottomRight - bottomLeft);
+
+    int nvertex = 0;
+
+    QVector3D center = (ql[ql.size()/2] + qr[qr.size()/2]) / 2;
+
+    while (u < ql.size()) {
+
+        int v = 0, v_step = 5;
+
+        QVector<Vertex> vPoints;
+
+        while (v < 360) {
+
+            QVector3D s0 = (ql[u] + qr[u]) / 2;
+
+            QVector3D s1 = (qr[u] - ql[u]);
+            float norm = s1.length();
+
+            s1 = norm * n;
+
+            QMatrix4x4 m1;
+            m1.setToIdentity();
+            m1.translate(s0);
+            m1.rotate(v, QVector3D::crossProduct( s1 - s0, ql[u] - s0));
+            m1.translate(-s0);
+
+            pl = m1 * ql[u];
+
+            QMatrix4x4 m2;
+
+            m2.setToIdentity();
+            m2.translate(s0);
+            m2.rotate(-v, QVector3D::crossProduct( s1 - s0, qr[u] - s0));
+            m2.translate(-s0);
+
+            pr = m2 * qr[u];
+
+            float t = v/360;
+
+            QVector3D p = ( 1 - t ) * pl + t * pr;
+
+            pointsFor3Ddisks.push_back(p);
+            normalsFor3Ddisks.push_back((p - center).normalized());
+
+            Vertex vertex;
+            vertex.point3D = p;
+            vertex.vertexNumber = nvertex;
+            vPoints.push_back(vertex);
+
+
+            v += v_step;
+            nvertex+=1;
+
+        }
+
+        allShapesSampledPoints[shapeNumber].shapePoints.push_back(vPoints);
+
+
+        u += u_step;
+
+    }
+
+}
+
+
+void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr){
+
+    QVector <QVector3D> knownPoints;
+    QVector <QVector3D> knownNormals;
+    //QVector <QVector3D> totalPoints;
+    //QVector <QVector3D> totalNormals;
+
+    QList<QPolygonF> pathPolygons = contour.toSubpathPolygons();
+
+    QPolygonF pathPolygon;
+
+    foreach (QPolygonF poly, pathPolygons){
+
+        pathPolygon.append(poly);
+    }
+
+    QLineF angleLine;
+    QPointF point2D;
+    QVector3D point3D;
+
+    QVector3D normalVector;
+    normalVector.setZ(0);
+
+
+    ///TODO FIND POINTS ON PATH TO RETRIVE ANGLE
+
+
+    // Create normals for contour / stroke
+
+    double contoursamplingvalue = 5.0; // ADJUSTABLE in Pixels
+    double percent;
+
+    double pathLength = contour.length();
+
+    float angulopranormal;
+    if (getPathArea(contour, 10) < 0 ){
+        angulopranormal = 90;
+    } else {
+        angulopranormal = -90;
+    }
+
+    for (double var = pathLength; var > 0 ; var = var - contoursamplingvalue){
+
+        percent = var / pathLength;
+        /* Set the origin: */
+
+        point2D = static_cast<QPointF>( contour.pointAtPercent(percent));
+        angleLine.setP1(point2D);
+        point3D.setX(static_cast<float>(point2D.x()));
+        point3D.setY(static_cast<float>(point2D.y()));
+        point3D.setZ(0);
+        //pointsView.push_back(point3D);
+
+        knownPoints.push_back(point3D);
+        totalPoints.push_back(point3D);
+
+        /* Set the angle and length: */
+
+        angleLine.setAngle (contour.angleAtPercent(percent)+angulopranormal);
+        angleLine.setLength(1);
+        normalVector.setX(static_cast<float>(angleLine.x2())-static_cast<float>(angleLine.x1()));
+        normalVector.setY(static_cast<float>(angleLine.y2())-static_cast<float>(angleLine.y1()));
+
+        angleLine.setLength(10);
+        normalsContour.append(angleLine);
+
+        knownNormals.push_back(normalVector); //PROBLEM ?? normalize
+        totalNormals.push_back(normalVector.normalized());
+
+    }
+
+    //Estimate Normals
+
+    QRectF pathBox = contour.boundingRect();
+    double xmin = pathBox.left();
+    double xmax = pathBox.right();
+    double ymin = pathBox.top();
+    double ymax = pathBox.bottom();
+
+    double spacing = 5.0; // ADJUSTABLE in Pixels
+
+    //Calculate Grid
+    for(double x = xmin; x < xmax; x = x + spacing){
+        for(double y = ymin; y < ymax; y = y + spacing){
+
+            QPointF gridPoint (x,y);
+
+            if (pathPolygon.containsPoint(gridPoint, Qt::WindingFill)){
+
+                QVector3D p(static_cast<float>(x),static_cast<float>(y),0);
+                //Calculate Weight for point based on distance
+
+                double weight = 0;
+
+                for (QVector3D pi:knownPoints){
+
+                    weight += 1.0/static_cast<double>(((p-pi).lengthSquared()));
+                }
+
+                //Calculate Normal
+                QVector3D n(0,0,0);
+
+                for(int i = 0; i <knownNormals.size(); i++){
+
+                    QVector3D pi = knownPoints.at(i);
+                    QVector3D ui = knownNormals.at(i);
+                    n += (ui / (p-pi).lengthSquared());
+                }
+
+                n = n / static_cast<float>(weight);
+
+                n.setZ(sqrt(1 - n.x()*n.x() - n.y()*n.y()));
+
+
+
+                if (n.z() < 0.5f){
+                    p.setZ(n.z()*(static_cast<float>(pathBox.width())/5)); //Adjustable
+                    //p.setZ(p.z() + lineLeveldiff * ql[0].z());
+
+                    totalPoints.push_back(p);
+                    totalNormals.push_back(n);
+
+                    //pointsView.push_back(p);
+                    p.setZ(p.z() * -1); //Adjustable
+                    //p.setZ(p.z() + lineLeveldiff * ql[0].z());
+
+                    totalPoints.push_back(p);
+                    //pointsView.push_back(p);
+                    n.setZ(n.z()*-1);
+                    totalNormals.push_back(n);
+                }
+            }
+
+        }
+    }
+
+    std::ofstream fOut;
+
+    std::string outFile = "exportData";
+    outFile.append(std::to_string(shapeNumber));
+    outFile.append(".data");
+    fOut.open(outFile.c_str());
+    fOut << "3" <<std::endl;
+    fOut << knownPoints.size() <<std::endl;
+    for(QVector3D p:knownPoints)
+    {
+        p.setZ(p.z() + (layerDifference * ql[0].z()));
+        fOut << p.x() <<" " << p.y()<< " " << p.z()<< std::endl;
+        pointsFor3Ddisks.push_back(p);
+    }
+
+    for(QVector3D n:knownNormals){
+        normalsFor3Ddisks.push_back(n);
+    }
+
+    fOut << totalNormals.size() << std::endl;
+
+    for(int k = 0; k < totalNormals.size(); k++)
+    {
+
+        QVector3D p = totalPoints.at(k);
+        QVector3D n = totalNormals.at(k);
+
+        fOut << n.x() <<" " << n.y()<< " " << n.z()<< std::endl;
+        p.setZ(p.z() + (layerDifference * ql[0].z()));
+        fOut << p.x() <<" " << p.y()<< " " << p.z()<< std::endl;
+        pointsFor3Ddisks.push_back(p);
+        normalsFor3Ddisks.push_back(n);
+
+        totalPoints[k] = p;
+    }
+    fOut << "0" << std::endl;
+    fOut.close();
+
+
+    std::ofstream fOut2;
+
+    std::string outFile2 = "exportDataVIPSS";
+    outFile2.append(std::to_string(shapeNumber));
+    outFile2.append(".xyz");
+    fOut2.open(outFile2.c_str());
+
+    foreach (QVector3D p, totalPoints) {
+
+        fOut2 << p.x() <<" " << p.y()<< " " << p.z()<< std::endl;
+    }
+
+    fOut2.close();
+
+    totalPoints.clear();
+    totalNormals.clear();
+
+}
+
 
 //************************************************************************************************
 /// ....................................... STRIPES ..........................................
@@ -427,6 +818,10 @@ void InputSketch::saveStripeContour (){
     stripe.leftLine = QPainterPath();
     stripe.rightLine = QPainterPath();
     stripe.level = lineLevel;
+
+    QString name = "Stripe ";
+    name.append(stripeContourList.size());
+    stripe.name = name;
 
     QPainterPath leftBandLine, rightBandLine;
 
@@ -955,29 +1350,17 @@ QList<QVector<QVector3D> > InputSketch::getOpenContoursPoints() {
 }
 
 
-//QVector<QVector3D> InputSketch::getClosedContoursPoints() {
+QVector<QVector3D> InputSketch::getClosedContoursPoints() {
 
-//    QVector<QVector3D> pointsFor3D, stripeContour3DPoints;
-
-//    if (!closedContourList.isEmpty()) {
-
-//        int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference CLOSED CONTOURS", "Layering difference in depth CLOSED CONTOURS");
-//        QVector<QVector3D> closedContour3DPoints;
-//        for (int i = 0; i < closedContourList.size(); i++){
-//            for (double k = 0; k < closedContourList[i].contour.length(); k = k + 0.5) {
-
-//                QVector3D p(closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)).x(),closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)).y(), depthdiff*closedContourList[i].level);
-
-//                closedContour3DPoints.append(p);
-
-//            }
-//        }
-//        pointsFor3D.append(closedContour3DPoints);
-//    }
+    return pointsFor3Ddisks;
+}
 
 
-//    return pointsFor3D;
-//}
+
+QVector<QVector3D> InputSketch::getClosedContoursNormals() {
+
+    return normalsFor3Ddisks;
+}
 
 QVector<QVector3D> InputSketch::getStripesPoints () {
 
@@ -1210,7 +1593,13 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 painter->drawPath(closedContourList[i].contour);
             }
         }
-        
+
+        painter->setPen(QPen(Qt::darkRed, 2,Qt::SolidLine));
+
+        for (int i = 0; i < allShapesSampledPoints.size(); ++i) {
+            painter->drawPath(allShapesSampledPoints[i].midPointsPath);
+        }
+
     }
     
     
@@ -1536,6 +1925,19 @@ QVector<QPainterPath> InputSketch::getCropSelectionPaths() const
     return selectedPathsOnCropSelection;
 }
 
+QPainterPath InputSketch::getClosedContour()
+{
+
+    return closedContourList.last().contour;
+
+}
+
+int InputSketch::getClosedContourLevel()
+{
+
+    return closedContourList.last().level;
+
+}
 //************************************************************************************************
 /// ..................................... OTHERS ..........................................
 //************************************************************************************************
@@ -1555,16 +1957,19 @@ bool InputSketch::almostEqual(QPointF a, QPointF b)
     return fabs(a.x() - b.x()) <= 2 && fabs(a.y() - b.y()) <=2 ;
 }
 
-QPainterPath InputSketch::getClosedContour()
+
+float InputSketch::getPathArea(QPainterPath p, float step)
 {
-
-    return closedContourList.last().contour;
-
+    QPointF a,b;
+    float len;
+    float area=0;
+    for(len=0; len<p.length(); len+=step)
+    {
+        a=p.pointAtPercent(p.percentAtLength(len));
+        b=p.pointAtPercent(p.percentAtLength(len+step>p.length()?p.length():len+step));
+        area+=(b.x() - a.x())*(a.y()+b.y());
+    }
+    return area/float(2);
 }
 
-int InputSketch::getClosedContourLevel()
-{
 
-    return closedContourList.last().level;
-
-}

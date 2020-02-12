@@ -62,7 +62,6 @@ set(SOURCES
     src/sketch_library.cpp
     src/openglmediator.cpp
 
-
     )
 
 # Populate a cmake variable with the project's headers
@@ -80,7 +79,6 @@ set(HEADERS
     include/layers.h
     include/sketch_library.h
     include/openglmediator.h
-
 
 )
 

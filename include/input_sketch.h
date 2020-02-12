@@ -101,6 +101,7 @@ public:
     QPainterPath closeSVGSegments(const QVector<QPainterPath> &pathsToClose);
 
     QList<QVector<QVector3D>> getOpenContoursPoints();
+    QVector<QVector3D> getClosedContoursPoints();
 
     QVector<QVector3D> getStripesPoints();
 
@@ -109,6 +110,9 @@ public:
     int getClosedContourLevel();
     void updateColorMap();
 
+    QVector<QVector3D> getClosedContoursNormals();
+
+    void estimateShapes();
 protected:
 
     void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) override;
@@ -123,11 +127,13 @@ private:
     struct QPainterPath3D {
         QPainterPath contour;
         int level;
+        QString name;
     };
 
     struct Stripe3D {
         QPainterPath contour, leftLine, rightLine;
         int level;
+        QString name;
     };
 
     QList<QList<QPainterPath3D>> openContourList;
@@ -225,6 +231,51 @@ private:
     int stripeNumber = 0;
 
     bool almostEqual (QPointF a, QPointF b);
+
+
+
+    //************************************************************************************************
+    /// ................................... InputSketch 2 ..........................................
+    //************************************************************************************************
+    struct Vertex{
+        QVector3D point3D;
+        int vertexNumber;
+    };
+
+    struct allSampledPoints{
+
+        QVector<QVector3D> midPoints, ql, qr;
+        QVector<double> anglesql, anglesqr;
+        QPainterPath midPointsPath;
+        QPainterPath crossSectionalRotationalPath;
+        QVector<QVector<Vertex>> shapePoints; // Matrix (u,v) points
+        //Incluir Paths and Names nesta Struct!! Mais facil organizacao
+        QString name;
+        QPainterPath contour; //Path, contour, curve
+    };
+
+    QVector<allSampledPoints> allShapesSampledPoints;
+
+    QPainterPath lastmidPointsPath;
+
+    void receiveSelectedPath (const QPainterPath &path, const QString &name, const int &lineLevel) ;
+
+
+    void RotationalBlendingSurface (const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr);
+
+    QVector <QVector3D> pointsFor3Ddisks;
+    QVector <QVector3D> normalsFor3Ddisks;
+
+    void DataForHRBF (const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr);
+
+    QVector <QVector3D> totalPoints;
+    QVector <QVector3D> totalNormals;
+
+    QVector <QLineF> normalsContour;
+
+    float getPathArea(QPainterPath p, float step);
+
+
 
 };
 
