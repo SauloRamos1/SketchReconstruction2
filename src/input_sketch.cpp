@@ -98,7 +98,7 @@ void InputSketch::saveOpenContour (){
     curve3D.contour = openContour;
     curve3D.level = lineLevel;
     QString name = "Open ";
-    name.append(openContourList.size());
+    name.append(QString::number(openContourList.size()));
     curve3D.name = name;
 
     sameOpenContourList.append( curve3D );
@@ -120,6 +120,9 @@ void InputSketch::increaseOpenContourLevelWhileDrawing(){
     QPainterPath3D curve3D;
     curve3D.contour = openContour;
     curve3D.level = lineLevel;
+    QString name = "Open ";
+    name.append(QString::number(sameOpenContourList.size()));
+    curve3D.name = name;
 
     sameOpenContourList.append(curve3D);
     openContour = QPainterPath();
@@ -142,6 +145,9 @@ void InputSketch::decreaseOpenContourLevelWhileDrawing(){
     QPainterPath3D curve3D;
     curve3D.contour = openContour;
     curve3D.level = lineLevel;
+    QString name = "Open ";
+    name.append(QString::number(sameOpenContourList.size()));
+    curve3D.name = name;
 
     sameOpenContourList.append(curve3D);
     openContour = QPainterPath();
@@ -219,7 +225,7 @@ void InputSketch::saveClosedContour (){
     curve3D.level = lineLevel;
 
     QString name = "Closed ";
-    name.append(closedContourList.size());
+    name.append(QString::number(closedContourList.size()));
     curve3D.name = name;
 
     receiveSelectedPath(curve3D.contour, curve3D.name, curve3D.level);
@@ -823,7 +829,7 @@ void InputSketch::saveStripeContour (){
     stripe.level = lineLevel;
 
     QString name = "Stripe ";
-    name.append(stripeContourList.size());
+    name.append(QString::number(stripeContourList.size()));
     stripe.name = name;
 
     QPainterPath leftBandLine, rightBandLine;
@@ -1466,27 +1472,31 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
     
     painter->setFont(font);
     painter->drawText(2, 15, interactionString);
+
+    font.setPointSize ( 8 );
+    painter->setFont(font);
     
-
-
-
     if (svgPaths.size() > 0 && statusSketch == Interaction::DEFAULT){
+
         foreach (QPainterPath path, svgPaths){
             painter->drawPath(path);
         }
+
     }
     
-    
     if (selectedPathsList.size() > 0){
+
         painter->setPen(QPen(QColor(Qt::gray),1,Qt::SolidLine));
         painter->setOpacity(0.5);
+
         foreach (QPainterPath path, selectedPathsList){
             painter->drawPath(path);
         }
+
     }
+
     painter->setOpacity(1);
-    
-    
+
     Qt::PenStyle penStyle = Qt::SolidLine;
     
     QConicalGradient conicalGradient;
@@ -1497,12 +1507,9 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
     ///
     ///
 
-
     if (statusSketch == Interaction::OPENCONTOUR){
 
         for (int i = 0; i < sameOpenContourList.size(); ++i) {
-
-
 
             if (halo){
                 painter->setOpacity(0.5);
@@ -1511,18 +1518,17 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 painter->setOpacity(1);
                 painter->setPen(QPen(QColor(Qt::white),sameOpenContourList[i].level+9,penStyle, Qt::FlatCap, Qt::RoundJoin));
                 painter->drawPath(sameOpenContourList[i].contour);
+
             }
 
             if (contour){
+
                 painter->setPen(QPen(QColor(Qt::black),sameOpenContourList[i].level+1.5,penStyle, Qt::FlatCap, Qt::RoundJoin));
                 painter->drawPath(sameOpenContourList[i].contour);
-
-
                 painter->setPen(QPen( QColor(lineColorMap[sameOpenContourList[i].level-1].x(), lineColorMap[sameOpenContourList[i].level-1].y(), lineColorMap[sameOpenContourList[i].level-1].z()),sameOpenContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
-
-
                 //painter->setPen(QPen( QColor(Qt::white),sameOpenContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
                 painter->drawPath(sameOpenContourList[i].contour);
+                painter->drawText(sameOpenContourList[i].contour.elementAt(0).x + 10, sameOpenContourList[i].contour.elementAt(0).y, sameOpenContourList[i].name);
             }
         }
 
@@ -1543,9 +1549,12 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                     painter->drawPath(openContourList[i][j].contour);
                     painter->setPen(QPen(QColor(lineColorMap[openContourList[i][j].level-1].x(), lineColorMap[openContourList[i][j].level-1].y(), lineColorMap[openContourList[i][j].level-1].z()),openContourList[i][j].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
                     painter->drawPath(openContourList[i][j].contour);
+                    painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                    painter->drawText(openContourList[i][j].contour.elementAt(0).x + 10, openContourList[i][j].contour.elementAt(0).y, openContourList[i][j].name);
                 }
             }
         }
+
     } else {
         //Show Contours with water mark
         for (int i = 0; i < openContourList.size(); ++i) {
@@ -1554,6 +1563,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 painter->setOpacity(0.5);
                 painter->setPen(QPen(QColor(Qt::gray),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
                 painter->drawPath(openContourList[i][j].contour);
+                painter->drawText(openContourList[i][j].contour.elementAt(0).x + 10, openContourList[i][j].contour.elementAt(0).y, openContourList[i][j].name);
                 painter->setOpacity(1);
             }
         }
@@ -1563,13 +1573,11 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
     if (statusSketch == Interaction::CLOSEDCONTOUR){
 
-
         painter->setBrush( Qt::NoBrush );
 
         if (color){
 
             for (int i = 0 ; i < closedContourList.size(); i++) {
-
 
                 // painter->setOpacity( 1 /static_cast<qreal>(closedContourList.size()));
 
@@ -1609,6 +1617,8 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
                 //painter->setPen(QPen(QColor(Qt::red), closedContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
                 painter->drawPath(closedContourList[i].contour);
+                painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
             }
         }
 
@@ -1625,6 +1635,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
             painter->setPen(QPen(QColor(Qt::gray),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
             painter->drawPath(closedContourList[i].contour);
+            painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
 
         }
         painter->setOpacity(1);
@@ -1657,7 +1668,6 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
         }
 
-
         for (int i = 0 ; i < stripeContourList.size() ; i++){
 
             for (int j = 0; j < stripeContourList[i].size() ; j++) {
@@ -1666,10 +1676,10 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 painter->drawPath(stripeContourList[i][j].leftLine);
                 painter->setPen(QPen(QColor(Qt::red),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
                 painter->drawPath(stripeContourList[i][j].rightLine);
+                painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                painter->drawText(stripeContourList[i][j].leftLine.elementAt(0).x + 10, stripeContourList[i][j].leftLine.elementAt(0).y, stripeContourList[i][j].name);
             }
         }
-
-
 
         painter->setBrush(Qt::NoBrush);
         painter->setOpacity(0.5);
@@ -1756,6 +1766,9 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 painter->drawPath(stripeContourList[i][j].leftLine);
                 painter->setPen(QPen(QColor(Qt::gray),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
                 painter->drawPath(stripeContourList[i][j].rightLine);
+                painter->setPen(QPen(QColor(Qt::gray),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                painter->drawText(stripeContourList[i][j].leftLine.elementAt(0).x + 10, stripeContourList[i][j].leftLine.elementAt(0).y, stripeContourList[i][j].name);
+
             }
         }
 
