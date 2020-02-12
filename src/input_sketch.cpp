@@ -362,10 +362,10 @@ void InputSketch::receiveSelectedPath (const QPainterPath &path, const QString &
 
     for (int j = 0; j < sampledPointsOnCurve.size()/2 ; j++) {
 
-        QVector3D temp_ql(sampledPointsOnCurve[j].x(),sampledPointsOnCurve[j].y(), (lineLevel*layerDifference));
+        QVector3D temp_ql(sampledPointsOnCurve[j].x(),sampledPointsOnCurve[j].y(), (lineLevel));
         qreal temp_angleql(angleAtSampledPoint[j]);
 
-        QVector3D temp_qr(sampledPointsOnCurve[sampledPointsOnCurve.size()-1-j].x(),sampledPointsOnCurve[sampledPointsOnCurve.size()-1-j].y(), (lineLevel*layerDifference));
+        QVector3D temp_qr(sampledPointsOnCurve[sampledPointsOnCurve.size()-1-j].x(),sampledPointsOnCurve[sampledPointsOnCurve.size()-1-j].y(), (lineLevel));
         qreal temp_angleqr(angleAtSampledPoint[angleAtSampledPoint.size()-1-j]);
 
         t.ql.push_back(temp_ql);
@@ -414,10 +414,10 @@ void InputSketch::receiveSelectedPath (const QPainterPath &path, const QString &
 
 void InputSketch::estimateShapes(){
 
-   // int lineLeveldiff = layerDifference;
+//    int lineLeveldiff = layerDifference;
 
-    //lineLeveldiff = QInputDialog::getInt(nullptr, "Depth Difference", "Layering difference in depth");
-    //lineLeveldiff*=-1;
+//    lineLeveldiff = QInputDialog::getInt(nullptr, "Depth Difference", "Layering difference in depth");
+//    lineLeveldiff*=-1;
 
     for (int i = 0; i < allShapesSampledPoints.size(); ++i) {
 
@@ -529,8 +529,8 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
 
     QVector <QVector3D> knownPoints;
     QVector <QVector3D> knownNormals;
-    //QVector <QVector3D> totalPoints;
-    //QVector <QVector3D> totalNormals;
+    QVector <QVector3D> totalPoints;
+    QVector <QVector3D> totalNormals;
 
     QList<QPolygonF> pathPolygons = contour.toSubpathPolygons();
 
@@ -648,10 +648,11 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
                     totalNormals.push_back(n);
 
                     //pointsView.push_back(p);
-                    p.setZ(p.z() * -1); //Adjustable
+                    p.setZ(p.z() * -1);//Adjustable
                     //p.setZ(p.z() + lineLeveldiff * ql[0].z());
 
                     totalPoints.push_back(p);
+
                     //pointsView.push_back(p);
                     n.setZ(n.z()*-1);
                     totalNormals.push_back(n);
@@ -672,12 +673,13 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
     for(QVector3D p:knownPoints)
     {
         p.setZ(p.z() + (layerDifference * ql[0].z()));
+ //       p.setZ(p.z() + (ql[0].z()));
         fOut << p.x() <<" " << p.y()<< " " << p.z()<< std::endl;
-        pointsFor3Ddisks.push_back(p);
+        pointsFor3Ddisks.append(p);
     }
 
     for(QVector3D n:knownNormals){
-        normalsFor3Ddisks.push_back(n);
+        normalsFor3Ddisks.append(n);
     }
 
     fOut << totalNormals.size() << std::endl;
@@ -690,9 +692,10 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
 
         fOut << n.x() <<" " << n.y()<< " " << n.z()<< std::endl;
         p.setZ(p.z() + (layerDifference * ql[0].z()));
+        //p.setZ(p.z() + (ql[0].z()));
         fOut << p.x() <<" " << p.y()<< " " << p.z()<< std::endl;
-        pointsFor3Ddisks.push_back(p);
-        normalsFor3Ddisks.push_back(n);
+        pointsFor3Ddisks.append(p);
+        normalsFor3Ddisks.append(n);
 
         totalPoints[k] = p;
     }

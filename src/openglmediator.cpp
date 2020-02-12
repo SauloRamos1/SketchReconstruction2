@@ -215,7 +215,7 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
     ///TODO SALVAR VERTICES DIRETAMENTE
     ///
     int steps = 8;
-    nvertices = 0;
+
 
     for (int h = 0 ; h < points3D.size(); h++){
 
@@ -380,9 +380,11 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
 
         centerVertexNumber += diskVertices.size()+1;
 
-        nvertices = vertices.size()/3;
 
     }
+
+
+    nvertices = vertices.size()/3;
 
 
     //setShape(points3D);

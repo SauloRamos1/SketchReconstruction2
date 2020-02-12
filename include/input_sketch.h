@@ -268,8 +268,8 @@ private:
 
     void DataForHRBF (const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr);
 
-    QVector <QVector3D> totalPoints;
-    QVector <QVector3D> totalNormals;
+//    QVector <QVector3D> totalPoints;
+//    QVector <QVector3D> totalNormals;
 
     QVector <QLineF> normalsContour;
 
