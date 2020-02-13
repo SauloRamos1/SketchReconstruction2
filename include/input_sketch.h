@@ -10,6 +10,7 @@
 
 #include "sketch_library.h"
 #include "halfedge.h"
+
 //#include "canvasmediator.h"
 
 
@@ -48,7 +49,7 @@ public:
     void eraseSelection();
 
     QVector <HalfEdge*> cyclesList;
-    QString interactionString = "Defaulf Mode";
+    QString interactionString = "Default Mode";
 
 
     QPainterPath getCrossSelectionPath() const;
@@ -113,6 +114,9 @@ public:
     QVector<QVector3D> getClosedContoursNormals();
 
     void estimateShapes();
+
+    QString getPathNames();
+
 protected:
 
     void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) override;
@@ -136,10 +140,10 @@ private:
         QString name;
     };
 
-    QList<QList<QPainterPath3D>> openContourList;
-    QList<QPainterPath3D> sameOpenContourList;
-
     QPainterPath openContour;
+    QList<QPainterPath3D> sameOpenContourList;
+    QList<QList<QPainterPath3D>> openContourList;
+
 
     /// --------
     /// Closed Contour
@@ -167,6 +171,8 @@ private:
     QVector <int> levelList;
 
     /// --------
+    ///
+    QList<QString> names;
 
     QPainterPath curve;
 

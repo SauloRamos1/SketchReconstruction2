@@ -16,7 +16,6 @@
 
 #include "canvas2.h"
 
-#include "canvasmediator.h"
 #include "openglmediator.h"
 
 #include "layers.h"
@@ -42,13 +41,8 @@ class MainWindow: public QMainWindow
     protected:
 
         void createCanvas1Toolbar();
-        void createCanvas2Toolbar();
-
         void createLayersDockToolbar();
-
         void createCanvas1Actions();
-        void createCanvas2Actions();
-
         void createLayersDockActions();
 
     private:
@@ -93,6 +87,8 @@ class MainWindow: public QMainWindow
         QPushButton *stripe_button;
 
 
+
+
         QMenu *openContourEffect_Menu;
         QPushButton* openContourEffect_MenuButton;
 
@@ -117,10 +113,10 @@ class MainWindow: public QMainWindow
         QPushButton *selectCrop_button;
         QPushButton *selectErase_button;
 
-
         // Canvas Mediator
 
-        CanvasMediator mediator;
+        Layers canvasLayerPointer;
+        Canvas layerCanvasPointer;
 
         //Canvas 2
 
@@ -154,7 +150,6 @@ class MainWindow: public QMainWindow
 
         QSpinBox * layeringDepth;
         QLabel *depth;
-
 
         //Layers Dock
 

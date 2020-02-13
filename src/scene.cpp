@@ -26,8 +26,8 @@ Scene::Scene()
 
     //addEllipse( 0, 0, 10,0 10 );
 
-   // addRect(0,0,750,750, QPen(QColor(179,179,179),1,Qt::SolidLine), Qt::white);
-     addRect(0,0,750,750, QPen(QColor(179,179,179),1,Qt::SolidLine), Qt::white);
+    // addRect(0,0,750,750, QPen(QColor(179,179,179),1,Qt::SolidLine), Qt::white);
+    addRect(0,0,750,750, QPen(QColor(179,179,179),1,Qt::SolidLine), Qt::white);
     addItem ( &sketch );
 
 }
@@ -257,13 +257,15 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event){
     }
 
     if ( event->buttons() == Qt::LeftButton && status == Interaction::MOVE_ZOOM && imageItem->isUnderMouse()){
-
-        imageItem->setSelected(true);
-        startMovePos = pos;
+        if (imageItem->isVisible()){
+            imageItem->setSelected(true);
+            startMovePos = pos;
+        }
 
     } else if ( event->buttons() == Qt::LeftButton && status == Interaction::MOVE_ZOOM && !(imageItem->isUnderMouse())){
-
-        imageItem->setSelected(false);
+        if (imageItem->isVisible()){
+            imageItem->setSelected(false);
+        }
     }
 
     update();
@@ -291,11 +293,12 @@ void Scene::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
         QGraphicsScene::mouseMoveEvent(event);
     }
     if (event->buttons() == Qt::LeftButton && status == Interaction::MOVE_ZOOM && imageItem->isSelected()){
-
-        imageItem->moveBy(pos.x() - startMovePos.x(), pos.y() - startMovePos.y() );
-        startMovePos = pos;
-        update();
-        QGraphicsScene::mouseMoveEvent(event);
+        if(imageItem->isVisible()){
+            imageItem->moveBy(pos.x() - startMovePos.x(), pos.y() - startMovePos.y() );
+            startMovePos = pos;
+            update();
+            QGraphicsScene::mouseMoveEvent(event);
+        }
     }
 
     sketch.mouseOverPoint(pos);
@@ -312,25 +315,31 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     if (status == Interaction::DEFAULT){
         return;
     }
+    if (status == Interaction::MOVE_ZOOM){
+        return;
+    }
 
     if (event->button() & Qt::LeftButton && status == Interaction::OPENCONTOUR){
         sketch.saveOpenContour();
         leftButtonIsPressed = false;
-        //emit openContourDone();
+
         QGraphicsScene::mouseReleaseEvent(event);
+        emit openContourDone();
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::CLOSEDCONTOUR){
         sketch.saveClosedContour();
         leftButtonIsPressed = false;
-        //emit closedContourDone();
+
         QGraphicsScene::mouseReleaseEvent(event);
+        emit closedContourDone();
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::STRIPES){
         sketch.saveStripeContour();
-        //emit stripeContourDone();
+
         QGraphicsScene::mouseReleaseEvent(event);
+        emit stripeContourDone();
     }
 
     if (event->button() & Qt::RightButton && status == Interaction::STRIPES){
@@ -338,6 +347,7 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
         sketch.finishBand();
         //emit stripeContourDone();
         QGraphicsScene::mouseReleaseEvent(event);
+        emit stripeContourDone();
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::CROSS_SELECTION){
@@ -518,8 +528,6 @@ QVector<QVector3D> Scene::getStripes()
     return sketch.getStripesPoints();
 }
 
-
-
 QPainterPath Scene::getClosedContour()
 {
     return sketch.getClosedContour();
@@ -544,8 +552,15 @@ int Scene::getInteraction(){
     return 0;
 }
 
+/// === NEW LAYER IMPLEMENTATION
+///
+///
 
+QString Scene::getPathNames(){
 
+    return sketch.getPathNames();
+
+}
 
 
 

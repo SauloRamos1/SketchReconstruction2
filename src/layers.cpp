@@ -1,10 +1,10 @@
-#include "include/layers.h"
+#include "layers.h"
 
 
 #include <QMessageBox>
 
 
-#include "canvasmediator.h"
+#include "canvas.h"
 
 Layers::Layers(){
 
@@ -14,9 +14,20 @@ Layers::Layers(){
 
 }
 
-void Layers::setMediator( CanvasMediator* med )
-{
-    mediator = med;
+void Layers::linkCanvasDock( Canvas* canvasPointer ){
+
+    layerCanvasPointer = canvasPointer;
+
+}
+
+void Layers::receivePathNames(const QString& name){
+
+    QListWidgetItem *item = new QListWidgetItem();
+    item->setText(name);
+    item->setFlags (item->flags () | Qt::ItemIsEditable);
+    listWidget->addItem(item);
+
+    qDebug () << listWidget->count();
 }
 
 void Layers::receiveNamePaths(const QString& namePath){
@@ -99,12 +110,12 @@ void Layers::renameItem(QListWidgetItem *item){
 
 void Layers::sendRenamedItem(QListWidgetItem *item){
 
-    mediator->renamePath(listWidget->row(item),item->text());
+    //    mediator->renamePath(listWidget->row(item),item->text());
 }
 
 void Layers::selectItem(QListWidgetItem *item){
 
-    mediator->selectPath(listWidget->row(item));
+    //    mediator->selectPath(listWidget->row(item));
     selectedItem = item;
 }
 

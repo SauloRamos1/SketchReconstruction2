@@ -1,5 +1,5 @@
 #include "include/canvas.h"
-#include "include/canvasmediator.h"
+
 
 Canvas::Canvas()
 {
@@ -13,9 +13,9 @@ Canvas::Canvas()
     createActions();
 }
 
-void Canvas::setMediator( CanvasMediator *med ){
+void Canvas::linkLayersDock( Layers* layerPointer ){
 
-    mediator = med;
+    canvasLayerPointer = layerPointer;
 }
 
 void Canvas::setOpenGlMediator (OpenGLMediator *glmed){
@@ -28,8 +28,10 @@ void Canvas::createActions()
 {
     connect( scene.get(), &Scene::crossSelectionDone, this, &Canvas::sendCrossSelectionCurves );
     connect( scene.get(), &Scene::cropSelectionDone, this, &Canvas::sendCropSelectionCurves );
-//    connect( scene.get(), &Scene::openContourDone, this, &Canvas::viewOpenContour3D );
-    // connect( scene.get(), &Scene::closedContourDone, this, &Canvas::sendClosedContours);
+
+    connect( scene.get(), &Scene::openContourDone, this, &Canvas::sendPathNames );
+    connect( scene.get(), &Scene::closedContourDone, this, &Canvas::sendPathNames);
+    connect( scene.get(), &Scene::stripeContourDone, this, &Canvas::sendPathNames);
 }
 
 void Canvas::newFile()
@@ -96,9 +98,11 @@ void Canvas::setOpenContourInteraction(){
 
     scene->chooseOpenContour_Interaction();
 }
+
 void Canvas::setClosedContourInteraction(){
     scene->chooseClosedContour_Interaction();
 }
+
 void Canvas::setStripesInteraction(){
     scene->chooseStripes_Interaction();
 }
@@ -118,25 +122,28 @@ void Canvas::eraseSelection(){
     scene->chooseErase_Selection();
 }
 
-void Canvas::sendClosedContours(){
-    mediator->sendClosedPaths(scene->getClosedContour(), scene->getClosedContourLevel());
+void Canvas::sendPathNames(){
+
+   canvasLayerPointer->receivePathNames(scene->getPathNames());
+
 }
+
 
 void Canvas::sendCrossSelectionCurves()
 {
-    if ( mediator == nullptr ) return;
-    if ( scene->crossSelection().isEmpty()) return;
+//    if ( mediator == nullptr ) return;
+//    if ( scene->crossSelection().isEmpty()) return;
 
-    mediator->sendClosedPaths( scene->crossSelection(), scene->SelectionLineLevel() );
+//    mediator->sendClosedPaths( scene->crossSelection(), scene->SelectionLineLevel() );
 
 }
 
 void Canvas::sendCropSelectionCurves(){
 
-    if ( mediator == nullptr ) return;
-    if ( scene->cropSelection().isEmpty()) return;
+//    if ( mediator == nullptr ) return;
+//    if ( scene->cropSelection().isEmpty()) return;
 
-    mediator->closeAndSendPaths( scene->cropSelection(), scene->SelectionLineLevel() );
+//    mediator->closeAndSendPaths( scene->cropSelection(), scene->SelectionLineLevel() );
 }
 
 

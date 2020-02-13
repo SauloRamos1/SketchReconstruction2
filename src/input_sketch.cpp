@@ -100,12 +100,16 @@ void InputSketch::saveOpenContour (){
     QString name = "Open ";
     name.append(QString::number(openContourList.size()));
     curve3D.name = name;
+    names.append(name);
 
     sameOpenContourList.append( curve3D );
     openContourList.append( sameOpenContourList );
     sameOpenContourList.clear();
     openContour = QPainterPath();
+
+
     update();
+
 }
 
 void InputSketch::increaseOpenContourLevelWhileDrawing(){
@@ -123,6 +127,7 @@ void InputSketch::increaseOpenContourLevelWhileDrawing(){
     QString name = "Open ";
     name.append(QString::number(sameOpenContourList.size()));
     curve3D.name = name;
+    names.append(name);
 
     sameOpenContourList.append(curve3D);
     openContour = QPainterPath();
@@ -148,6 +153,7 @@ void InputSketch::decreaseOpenContourLevelWhileDrawing(){
     QString name = "Open ";
     name.append(QString::number(sameOpenContourList.size()));
     curve3D.name = name;
+    names.append(name);
 
     sameOpenContourList.append(curve3D);
     openContour = QPainterPath();
@@ -227,6 +233,7 @@ void InputSketch::saveClosedContour (){
     QString name = "Closed ";
     name.append(QString::number(closedContourList.size()));
     curve3D.name = name;
+    names.append(name);
 
     receiveSelectedPath(curve3D.contour, curve3D.name, curve3D.level);
 
@@ -443,6 +450,7 @@ void InputSketch::estimateShapes(){
     update();
 
 }
+
 
 
 void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr){
@@ -831,6 +839,7 @@ void InputSketch::saveStripeContour (){
     QString name = "Stripe ";
     name.append(QString::number(stripeContourList.size()));
     stripe.name = name;
+    names.append(name);
 
     QPainterPath leftBandLine, rightBandLine;
 
@@ -1506,6 +1515,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
     ///
     ///
     ///
+    names.clear();
 
     if (statusSketch == Interaction::OPENCONTOUR){
 
@@ -1988,6 +1998,12 @@ int InputSketch::getClosedContourLevel()
     return closedContourList.last().level;
 
 }
+
+QString InputSketch::getPathNames()
+{
+    return names.first();
+}
+
 //************************************************************************************************
 /// ..................................... OTHERS ..........................................
 //************************************************************************************************

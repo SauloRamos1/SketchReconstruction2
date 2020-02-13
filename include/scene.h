@@ -75,6 +75,10 @@ public:
     void changeLayerDifference(const int &difference);
 
     void estimateShapes();
+
+    ///NEW LAYER IMPLEMENTATION
+    QString getPathNames();
+
 private:
 
 
@@ -98,11 +102,9 @@ private:
 
 signals:
 
-    //void openContourDone();
+    void openContourDone();
     void closedContourDone();
     void stripeContourDone();
-
-   // void closedContourDone();
 
     void crossSelectionDone();
     void cropSelectionDone();
