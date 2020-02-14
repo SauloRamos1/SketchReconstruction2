@@ -26,11 +26,6 @@ void OpenGLMediator::setCanvas(const std::shared_ptr<Canvas> &cv)
     canvas = cv;
 }
 
-void OpenGLMediator::setCanvas2(const std::shared_ptr<Canvas2> &cv2)
-{
-    canvas2 = cv2;
-}
-
 void OpenGLMediator::setGlCanvas(const std::shared_ptr< OpenGLCanvas >& gl)
 {
     glcanvas = gl;

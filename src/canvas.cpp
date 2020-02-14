@@ -174,6 +174,12 @@ void Canvas::viewOverlapping3D(){
     glmediator->render();
 }
 
+void Canvas::exportMesh(){
+
+    glmediator->exportMesh();
+
+}
+
 void Canvas::changeLayerDifference(const int &difference)
 {
     scene->changeLayerDifference (difference);

@@ -9,7 +9,6 @@
 
 
 class Canvas;
-class Canvas2;
 class OpenGLCanvas;
 
 class OpenGLMediator
@@ -23,7 +22,7 @@ public:
     ~OpenGLMediator() = default;
 
     void setCanvas( const std::shared_ptr< Canvas >& cv );
-    void setCanvas2( const std::shared_ptr< Canvas2 >& cv2 );
+//    void setCanvas2( const std::shared_ptr< Canvas2 >& cv2 );
     void setGlCanvas( const std::shared_ptr< OpenGLCanvas >& glcanvas);
 
 //    void viewSketch3D(const QVector<QVector3D> points3D, const QVector<QString> pathNames);
@@ -41,11 +40,13 @@ public:
     int nvertices = 0;
 
     void render();
+
 protected:
 
     std::shared_ptr< Canvas > canvas = nullptr;
-    std::shared_ptr< Canvas2 > canvas2 = nullptr;
+    //std::shared_ptr< Canvas2 > canvas2 = nullptr;
     std::shared_ptr< OpenGLCanvas > glcanvas = nullptr;
+
 
 
 private:

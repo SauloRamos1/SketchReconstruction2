@@ -1,44 +1,28 @@
 #include "canvasmediator.h"
-#include "input_sketch2.h"
+//#include "input_sketch2.h"
 
-#include "include/canvas2.h"
+//#include "include/canvas2.h"
 #include "include/layers.h"
 
 CanvasMediator::CanvasMediator(){
 
 }
 
-void CanvasMediator::sendClosedPaths( const QPainterPath pathToCanvas2, const int& lineLevel){
-
-
-    if( canvas2 == nullptr || layers == nullptr ) return;
-
-}
-
-
-void CanvasMediator::closeAndSendPaths( const QVector<QPainterPath>& pathsToReconstruct, const int& lineLevel){
-
-}
-
-
-
-void CanvasMediator::setCanvas2(const std::shared_ptr<Canvas2> &cv2)
+void CanvasMediator::setCanvas(const std::shared_ptr<Canvas> &cv)
 {
-    canvas2 = cv2;
+    canvas = cv;
 }
+
 
 void CanvasMediator::setLayers(const std::shared_ptr<Layers> &ly)
 {
     layers = ly;
 }
 
-void CanvasMediator::selectPath ( const int pathIndex ){
-
-    canvas2->selectPath(pathIndex);
-}
 
 void CanvasMediator::sendNames(QString name){
 
+    if( canvas == nullptr || layers == nullptr ) return;
     layers->receiveNamePaths( name );
 
     qDebug () << name;
@@ -46,10 +30,16 @@ void CanvasMediator::sendNames(QString name){
 }
 
 
+void CanvasMediator::selectPath ( const int pathIndex ){
+
+    //canvas2->selectPath(pathIndex);
+}
+
+
 void CanvasMediator::sendPathsAndNames(QPainterPath path, int lineLevel){
 
     pathList.clear();
-    pathList = canvas2->getPaths();
+    //pathList = canvas2->getPaths();
     lineLevels.append(lineLevel);
 
     QString namePath = QString();
@@ -59,7 +49,7 @@ void CanvasMediator::sendPathsAndNames(QPainterPath path, int lineLevel){
     namePathList.append(namePath);
     pathList.append(path);
 
-    canvas2->setCurvesSelection( pathList, namePathList, lineLevels );
+    //canvas2->setCurvesSelection( pathList, namePathList, lineLevels );
     layers->receiveNamePaths( namePath );
 
 }
@@ -70,7 +60,7 @@ void CanvasMediator::renamePath(int pathIndex, QString name){
     namePathList[pathIndex] = QString();
     namePathList[pathIndex] = name;
 
-    canvas2->setCurvesSelection( pathList, namePathList, lineLevels );
+    //canvas2->setCurvesSelection( pathList, namePathList, lineLevels );
 
 }
 

@@ -54,9 +54,9 @@ set(SOURCES
     src/input_sketch.cpp
     src/halfedge.cpp
     src/openglcanvas.cpp
-    src/canvas2.cpp
-    src/scene2.cpp
-    src/input_sketch2.cpp
+#    src/canvas2.cpp
+#    src/scene2.cpp
+#    src/input_sketch2.cpp
     src/layers.cpp
     src/sketch_utilities.cpp
     src/sketch_library.cpp
@@ -73,9 +73,9 @@ set(HEADERS
     include/input_sketch.h
     include/halfedge.h
     include/openglcanvas.h
-    include/canvas2.h
-    include/scene2.h
-    include/input_sketch2.h
+#    include/canvas2.h
+#    include/scene2.h
+#    include/input_sketch2.h
     include/layers.h
     include/sketch_library.h
     include/openglmediator.h

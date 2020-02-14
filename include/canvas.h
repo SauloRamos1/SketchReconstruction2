@@ -29,7 +29,6 @@ public:
 
         void setOpenGlMediator(OpenGLMediator *glmed);
 
-
 protected:
 
         void createActions();
@@ -62,6 +61,9 @@ protected:
         void sendPathNames();
 
         void viewOverlapping3D();
+
+
+        void exportMesh();
 
 
         //void viewOpenContour3D();
