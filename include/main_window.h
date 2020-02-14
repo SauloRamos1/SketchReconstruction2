@@ -16,6 +16,8 @@
 
 #include "canvas2.h"
 
+
+#include "canvasmediator.h"
 #include "openglmediator.h"
 
 #include "layers.h"
@@ -115,8 +117,7 @@ class MainWindow: public QMainWindow
 
         // Canvas Mediator
 
-        Layers canvasLayerPointer;
-        Canvas layerCanvasPointer;
+        CanvasMediator mediator;
 
         //Canvas 2
 

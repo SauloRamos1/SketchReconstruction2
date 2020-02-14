@@ -37,6 +37,13 @@ void CanvasMediator::selectPath ( const int pathIndex ){
     canvas2->selectPath(pathIndex);
 }
 
+void CanvasMediator::sendNames(QString name){
+
+    layers->receiveNamePaths( name );
+
+}
+
+
 void CanvasMediator::sendPathsAndNames(QPainterPath path, int lineLevel){
 
     pathList.clear();
@@ -54,6 +61,7 @@ void CanvasMediator::sendPathsAndNames(QPainterPath path, int lineLevel){
     layers->receiveNamePaths( namePath );
 
 }
+
 
 void CanvasMediator::renamePath(int pathIndex, QString name){
 

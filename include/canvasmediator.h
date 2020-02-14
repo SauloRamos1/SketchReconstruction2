@@ -24,6 +24,7 @@ public:
 
     void sendPathsAndNames (QPainterPath path, int LineLevel);
 
+
     QVector <QString> namePathList;
     QVector <QPainterPath> pathList;
     QVector <int> lineLevels;
@@ -32,6 +33,8 @@ public:
 
 public slots:
 
+
+    void sendNames (QString name);
     void sendSketchedPaths(const QVector<QPainterPath> pathsToCanvas2);
     void sendClosedPaths( const QPainterPath pathsToReconstruct, const int& lineLevel);
     void closeAndSendPaths( const QVector<QPainterPath>& pathsToReconstruct, const int& lineLevel);

@@ -6,9 +6,11 @@
 
 #include <QGraphicsView>
 #include <QListWidget>
+#include <QListWidgetItem>
 
 
-class Canvas;
+
+class CanvasMediator;
 
 class Layers: public QWidget  {
 
@@ -20,12 +22,10 @@ public:
 
     ~Layers() = default;
 
-    void linkCanvasDock( Canvas* canvasPointer );
+    void setMediator( CanvasMediator* med );
 
     QListWidget *listWidget = new QListWidget(this);
     QListWidgetItem *selectedItem = nullptr;
-
-    void receivePathNames(const QString& name);
 
 public slots:
 
@@ -39,12 +39,9 @@ public slots:
     void sendRenamedItem (QListWidgetItem *item);
 
 
-    ///NEW
-
-
 protected:
 
-    Canvas* layerCanvasPointer = nullptr;
+    CanvasMediator* mediator = nullptr;
 
 private:
 
@@ -57,13 +54,3 @@ private:
 
 
 #endif // LAYERS_H
-
-
-
-
-
-
-
-
-
-

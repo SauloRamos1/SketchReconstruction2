@@ -1,5 +1,5 @@
 #include "include/canvas.h"
-
+#include "include/canvasmediator.h"
 
 Canvas::Canvas()
 {
@@ -13,10 +13,11 @@ Canvas::Canvas()
     createActions();
 }
 
-void Canvas::linkLayersDock( Layers* layerPointer ){
+void Canvas::setMediator( CanvasMediator *med ){
 
-    canvasLayerPointer = layerPointer;
+    mediator = med;
 }
+
 
 void Canvas::setOpenGlMediator (OpenGLMediator *glmed){
 
@@ -124,7 +125,7 @@ void Canvas::eraseSelection(){
 
 void Canvas::sendPathNames(){
 
-   canvasLayerPointer->receivePathNames(scene->getPathNames());
+   mediator->sendNames(scene->getPathNames());
 
 }
 

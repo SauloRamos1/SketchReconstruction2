@@ -1,10 +1,12 @@
-#include "layers.h"
+#include "include/layers.h"
 
 
 #include <QMessageBox>
+#include <QListWidget>
+#include <QListWidgetItem>
 
 
-#include "canvas.h"
+#include "canvasmediator.h"
 
 Layers::Layers(){
 
@@ -14,23 +16,13 @@ Layers::Layers(){
 
 }
 
-void Layers::linkCanvasDock( Canvas* canvasPointer ){
-
-    layerCanvasPointer = canvasPointer;
-
-}
-
-void Layers::receivePathNames(const QString& name){
-
-    QListWidgetItem *item = new QListWidgetItem();
-    item->setText(name);
-    item->setFlags (item->flags () | Qt::ItemIsEditable);
-    listWidget->addItem(item);
-
-    qDebug () << listWidget->count();
+void Layers::setMediator( CanvasMediator* med )
+{
+    mediator = med;
 }
 
 void Layers::receiveNamePaths(const QString& namePath){
+
 
     QListWidgetItem *item = new QListWidgetItem(listWidget);
 
@@ -110,14 +102,13 @@ void Layers::renameItem(QListWidgetItem *item){
 
 void Layers::sendRenamedItem(QListWidgetItem *item){
 
-    //    mediator->renamePath(listWidget->row(item),item->text());
+    mediator->renamePath(listWidget->row(item),item->text());
 }
 
 void Layers::selectItem(QListWidgetItem *item){
 
-    //    mediator->selectPath(listWidget->row(item));
+    mediator->selectPath(listWidget->row(item));
     selectedItem = item;
 }
 
 #include "moc_layers.cpp"
-
