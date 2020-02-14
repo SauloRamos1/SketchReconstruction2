@@ -10,9 +10,13 @@
 
 Layers::Layers(){
 
+
+    listWidget = new QListWidget(this);
+
+
     connect (listWidget, SIGNAL (itemClicked(QListWidgetItem*)), this, SLOT (selectItem(QListWidgetItem *)));
     connect (listWidget, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (renameItem(QListWidgetItem *)));
-    connect (listWidget, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (sendRenamedItem(QListWidgetItem *)));
+ //   connect (listWidget, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (sendRenamedItem(QListWidgetItem *)));
 
 }
 
@@ -21,13 +25,10 @@ void Layers::setMediator( CanvasMediator* med )
     mediator = med;
 }
 
-void Layers::receiveNamePaths(const QString& namePath){
+void Layers::receiveNamePaths(const QString& name){
 
-
-    QListWidgetItem *item = new QListWidgetItem(listWidget);
-
-    item->setText(namePath);
-    item->setFlags (item->flags () | Qt::ItemIsEditable);
+    QListWidgetItem *item = new QListWidgetItem(name, listWidget);
+    item->setFlags(item->flags() | Qt::ItemIsEditable);
 
 }
 
@@ -107,7 +108,7 @@ void Layers::sendRenamedItem(QListWidgetItem *item){
 
 void Layers::selectItem(QListWidgetItem *item){
 
-    mediator->selectPath(listWidget->row(item));
+    //mediator->selectPath(listWidget->row(item));
     selectedItem = item;
 }
 

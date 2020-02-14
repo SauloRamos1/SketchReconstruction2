@@ -322,32 +322,34 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     if (event->button() & Qt::LeftButton && status == Interaction::OPENCONTOUR){
         sketch.saveOpenContour();
         leftButtonIsPressed = false;
-
-        QGraphicsScene::mouseReleaseEvent(event);
         emit openContourDone();
+        QGraphicsScene::mouseReleaseEvent(event);
+
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::CLOSEDCONTOUR){
         sketch.saveClosedContour();
         leftButtonIsPressed = false;
-
-        QGraphicsScene::mouseReleaseEvent(event);
         emit closedContourDone();
+        QGraphicsScene::mouseReleaseEvent(event);
+
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::STRIPES){
         sketch.saveStripeContour();
+        emit stripeContourDone();
 
         QGraphicsScene::mouseReleaseEvent(event);
-        emit stripeContourDone();
+
     }
 
     if (event->button() & Qt::RightButton && status == Interaction::STRIPES){
 
         sketch.finishBand();
         //emit stripeContourDone();
-        QGraphicsScene::mouseReleaseEvent(event);
         emit stripeContourDone();
+        QGraphicsScene::mouseReleaseEvent(event);
+
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::CROSS_SELECTION){

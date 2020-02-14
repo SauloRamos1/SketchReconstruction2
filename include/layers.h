@@ -24,12 +24,12 @@ public:
 
     void setMediator( CanvasMediator* med );
 
-    QListWidget *listWidget = new QListWidget(this);
+    QListWidget *listWidget;
     QListWidgetItem *selectedItem = nullptr;
 
 public slots:
 
-    void receiveNamePaths (const QString& namePath);
+    void receiveNamePaths (const QString& name);
 
     void layerUpSelectedCurve();
     void layerDownSelectedCurve();

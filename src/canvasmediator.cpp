@@ -41,6 +41,8 @@ void CanvasMediator::sendNames(QString name){
 
     layers->receiveNamePaths( name );
 
+    qDebug () << name;
+
 }
 
 

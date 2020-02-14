@@ -2001,7 +2001,7 @@ int InputSketch::getClosedContourLevel()
 
 QString InputSketch::getPathNames()
 {
-    return names.first();
+    return names.last();
 }
 
 //************************************************************************************************
