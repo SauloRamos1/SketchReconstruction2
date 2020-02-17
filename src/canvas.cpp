@@ -1,5 +1,4 @@
 #include "include/canvas.h"
-#include "include/canvasmediator.h"
 
 Canvas::Canvas()
 {
@@ -13,9 +12,9 @@ Canvas::Canvas()
     createActions();
 }
 
-void Canvas::setMediator( CanvasMediator *med ){
+void Canvas::setLayers( Layers *ly ){
 
-    mediator = med;
+    layers = ly;
 }
 
 
@@ -125,7 +124,7 @@ void Canvas::eraseSelection(){
 
 void Canvas::sendPathNames(){
 
-   mediator->sendNames(scene->getPathNames());
+   layers->receiveNamePaths(scene->getPathNames());
 
 }
 

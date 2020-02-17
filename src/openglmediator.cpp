@@ -33,6 +33,15 @@ void OpenGLMediator::setGlCanvas(const std::shared_ptr< OpenGLCanvas >& gl)
 
 void OpenGLMediator::exportMesh(){
 
+    if (vertices.size() == 0 ) {
+
+        QMessageBox msgBox;
+        msgBox.setText("No mesh to export.");
+        msgBox.setInformativeText("No mesh to export.");
+        msgBox.exec();
+        return;
+        
+    }
     //Export OFF
     std::string outFile = "mesh.off";
     //outFile.append("mesh.off");

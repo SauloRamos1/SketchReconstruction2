@@ -18,7 +18,7 @@
 //#include "canvas2.h"
 
 
-#include "canvasmediator.h"
+//#include "canvasmediator.h"
 #include "openglmediator.h"
 
 #include "layers.h"
@@ -100,7 +100,7 @@ class MainWindow: public QMainWindow
 
         // Canvas Mediator
 
-        CanvasMediator mediator;
+        //CanvasMediator mediator;
 
         QPushButton* modeMenuButton;
         QPushButton* normalsMenuButton;

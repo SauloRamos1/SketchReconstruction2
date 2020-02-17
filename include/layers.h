@@ -7,10 +7,11 @@
 #include <QGraphicsView>
 #include <QListWidget>
 #include <QListWidgetItem>
+#include <QMessageBox>
 
+#include <canvas.h>
 
-
-class CanvasMediator;
+class Canvas;
 
 class Layers: public QWidget  {
 
@@ -22,7 +23,7 @@ public:
 
     ~Layers() = default;
 
-    void setMediator( CanvasMediator* med );
+    void setCanvas( Canvas* cv );
 
     QListWidget *listWidget;
     QListWidgetItem *selectedItem = nullptr;
@@ -41,7 +42,7 @@ public slots:
 
 protected:
 
-    CanvasMediator* mediator = nullptr;
+    Canvas* canvas = nullptr;
 
 private:
 

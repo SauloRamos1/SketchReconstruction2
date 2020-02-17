@@ -30,11 +30,11 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
     canvas = std::make_shared< Canvas > ();
     layers = std::make_shared < Layers > ();
 
-    canvas->setMediator( &mediator );
-    layers->setMediator( &mediator );
+    canvas->setLayers(layers.get());
+    layers->setCanvas(canvas.get());
 
-    mediator.setCanvas( canvas );
-    mediator.setLayers( layers );
+//    mediator.setCanvas( canvas );
+//    mediator.setLayers( layers );
 
     glcanvas = std::make_shared < OpenGLCanvas > () ;
 

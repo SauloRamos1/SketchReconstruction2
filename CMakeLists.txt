@@ -50,7 +50,7 @@ set(SOURCES
     src/main_window.cpp
     src/canvas.cpp
     src/scene.cpp
-    src/canvasmediator.cpp
+#    src/canvasmediator.cpp
     src/input_sketch.cpp
     src/halfedge.cpp
     src/openglcanvas.cpp
@@ -69,7 +69,7 @@ set(HEADERS
     include/main_window.h
     include/canvas.h
     include/scene.h
-    include/canvasmediator.h
+#    include/canvasmediator.h
     include/input_sketch.h
     include/halfedge.h
     include/openglcanvas.h

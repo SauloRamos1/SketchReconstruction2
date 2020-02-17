@@ -1,13 +1,6 @@
 #include "include/layers.h"
 
 
-#include <QMessageBox>
-#include <QListWidget>
-#include <QListWidgetItem>
-
-
-#include "canvasmediator.h"
-
 Layers::Layers(){
 
 
@@ -20,9 +13,9 @@ Layers::Layers(){
 
 }
 
-void Layers::setMediator( CanvasMediator* med )
+void Layers::setCanvas( Canvas* cv )
 {
-    mediator = med;
+    canvas = cv;
 }
 
 void Layers::receiveNamePaths(const QString& name){
@@ -103,7 +96,7 @@ void Layers::renameItem(QListWidgetItem *item){
 
 void Layers::sendRenamedItem(QListWidgetItem *item){
 
-    mediator->renamePath(listWidget->row(item),item->text());
+    //mediator->renamePath(listWidget->row(item),item->text());
 }
 
 void Layers::selectItem(QListWidgetItem *item){

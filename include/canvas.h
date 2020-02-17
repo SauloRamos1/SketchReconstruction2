@@ -6,13 +6,14 @@
 #include <memory>
 
 #include <openglmediator.h>
+#include <layers.h>
 
 #include <QGraphicsView>
 #include <QColorDialog>
 
 #include "scene.h"
 
-class CanvasMediator;
+class Layers;
 class OpenGLMediator;
 
 class Canvas: public QGraphicsView
@@ -25,7 +26,7 @@ public:
         // tell compiler that it is ok to use a default destructor
         ~Canvas() = default;
 
-        void setMediator( CanvasMediator* med );
+        void setLayers( Layers* ly );
 
         void setOpenGlMediator(OpenGLMediator *glmed);
 
@@ -73,7 +74,7 @@ protected:
 protected:
 
         std::shared_ptr< Scene > scene;
-        CanvasMediator* mediator = nullptr;
+        Layers* layers = nullptr;
         OpenGLMediator* glmediator = nullptr;
 
 private:
