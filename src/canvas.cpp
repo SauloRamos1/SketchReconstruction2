@@ -179,6 +179,15 @@ void Canvas::exportMesh(){
 
 }
 
+void Canvas::showLabels(const int checked)
+{
+    if (checked == 0){
+        scene->showLabels(false);
+    } else {
+        scene->showLabels(true);
+    }
+}
+
 void Canvas::changeLayerDifference(const int &difference)
 {
     scene->changeLayerDifference (difference);

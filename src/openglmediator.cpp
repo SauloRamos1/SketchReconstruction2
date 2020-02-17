@@ -209,15 +209,7 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
         return;
     }
 
-    //    std::vector< float > vertices, normals;
-    //    std::vector< unsigned int > faces; //or indices
 
-    //    OCvertices.clear();
-    //    OCnormals.clear();
-    //    OCfaces.clear();
-
-    ///TODO SALVAR VERTICES DIRETAMENTE
-    ///
     int steps = 8;
 
 

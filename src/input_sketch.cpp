@@ -1538,7 +1538,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 painter->setPen(QPen( QColor(lineColorMap[sameOpenContourList[i].level-1].x(), lineColorMap[sameOpenContourList[i].level-1].y(), lineColorMap[sameOpenContourList[i].level-1].z()),sameOpenContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
                 //painter->setPen(QPen( QColor(Qt::white),sameOpenContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
                 painter->drawPath(sameOpenContourList[i].contour);
-                painter->drawText(sameOpenContourList[i].contour.elementAt(0).x + 10, sameOpenContourList[i].contour.elementAt(0).y, sameOpenContourList[i].name);
+                if (showLabels) painter->drawText(sameOpenContourList[i].contour.elementAt(0).x + 10, sameOpenContourList[i].contour.elementAt(0).y, sameOpenContourList[i].name);
             }
         }
 
@@ -1560,7 +1560,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                     painter->setPen(QPen(QColor(lineColorMap[openContourList[i][j].level-1].x(), lineColorMap[openContourList[i][j].level-1].y(), lineColorMap[openContourList[i][j].level-1].z()),openContourList[i][j].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
                     painter->drawPath(openContourList[i][j].contour);
                     painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                    painter->drawText(openContourList[i][j].contour.elementAt(0).x + 10, openContourList[i][j].contour.elementAt(0).y, openContourList[i][j].name);
+                    if (showLabels) painter->drawText(openContourList[i][j].contour.elementAt(0).x + 10, openContourList[i][j].contour.elementAt(0).y, openContourList[i][j].name);
                 }
             }
         }
@@ -1573,7 +1573,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 painter->setOpacity(0.5);
                 painter->setPen(QPen(QColor(Qt::gray),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
                 painter->drawPath(openContourList[i][j].contour);
-                painter->drawText(openContourList[i][j].contour.elementAt(0).x + 10, openContourList[i][j].contour.elementAt(0).y, openContourList[i][j].name);
+                if (showLabels) painter->drawText(openContourList[i][j].contour.elementAt(0).x + 10, openContourList[i][j].contour.elementAt(0).y, openContourList[i][j].name);
                 painter->setOpacity(1);
             }
         }
@@ -1628,7 +1628,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 //painter->setPen(QPen(QColor(Qt::red), closedContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
                 painter->drawPath(closedContourList[i].contour);
                 painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
+                if (showLabels) painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
             }
         }
 
@@ -1645,7 +1645,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
             painter->setPen(QPen(QColor(Qt::gray),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
             painter->drawPath(closedContourList[i].contour);
-            painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
+            if (showLabels) painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
 
         }
         painter->setOpacity(1);
@@ -1687,7 +1687,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 painter->setPen(QPen(QColor(Qt::red),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
                 painter->drawPath(stripeContourList[i][j].rightLine);
                 painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
-                painter->drawText(stripeContourList[i][j].leftLine.elementAt(0).x + 10, stripeContourList[i][j].leftLine.elementAt(0).y, stripeContourList[i][j].name);
+                if (showLabels) painter->drawText(stripeContourList[i][j].leftLine.elementAt(0).x + 10, stripeContourList[i][j].leftLine.elementAt(0).y, stripeContourList[i][j].name);
             }
         }
 
@@ -1777,7 +1777,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 painter->setPen(QPen(QColor(Qt::gray),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
                 painter->drawPath(stripeContourList[i][j].rightLine);
                 painter->setPen(QPen(QColor(Qt::gray),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                painter->drawText(stripeContourList[i][j].leftLine.elementAt(0).x + 10, stripeContourList[i][j].leftLine.elementAt(0).y, stripeContourList[i][j].name);
+                if (showLabels) painter->drawText(stripeContourList[i][j].leftLine.elementAt(0).x + 10, stripeContourList[i][j].leftLine.elementAt(0).y, stripeContourList[i][j].name);
 
             }
         }
@@ -2002,6 +2002,20 @@ int InputSketch::getClosedContourLevel()
 QString InputSketch::getPathNames()
 {
     return names.last();
+}
+
+
+
+
+//************************************************************************************************
+/// ..................................... SETTERS ..........................................
+//************************************************************************************************
+
+void InputSketch::setShowLabels(bool _showLabels)
+{
+    showLabels = _showLabels;
+    update();
+
 }
 
 //************************************************************************************************

@@ -66,6 +66,7 @@ protected:
 
         void exportMesh();
 
+        void showLabels (const int checked);
 
         //void viewOpenContour3D();
 

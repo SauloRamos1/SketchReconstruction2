@@ -564,6 +564,15 @@ QString Scene::getPathNames(){
 
 }
 
+void Scene::showLabels(bool showLabels)
+{
+    sketch.setShowLabels (showLabels);
+
+    //BUG Not updating Scene after just click on Show Labels, needs to move mouse;
+    update ();
+
+}
+
 
 
 #include "moc_scene.cpp"

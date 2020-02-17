@@ -117,6 +117,8 @@ public:
 
     QString getPathNames();
 
+    void setShowLabels (bool _showLabels);
+
 protected:
 
     void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) override;
@@ -169,6 +171,8 @@ private:
     int numberOfLayers = 1;
 
     QVector <int> levelList;
+
+    bool showLabels = true;
 
     /// --------
     ///

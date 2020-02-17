@@ -2,9 +2,15 @@
 
 #include <QtWidgets>
 
+/// TODO https://www.dgp.toronto.edu/projects/fast-winding-numbers/
+/// TODO Poisson Reconstruction
+
 MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
 {
 
+
+
+    //TODO TESTE MAIN WINDOW
 
 //************************************************************************************************
 /// ........................................ STYLESHEET ..........................................
@@ -254,8 +260,10 @@ void MainWindow::createCanvas1Toolbar () {
     layeringDepth->setValue(10);
     layeringDepth->setSingleStep(10);
 
-    checkbox = new QCheckBox("Show Labels", canvas.get());
-    checkbox->setGeometry(QRect(600, 900, 100, 30));
+    showLabels = new QCheckBox("Show Labels", canvas.get());
+    showLabels->setGeometry(QRect(600, 900, 100, 30));
+    showLabels->setChecked(true);
+    //showLabels->setTristate(true);
 
 }
 
@@ -286,6 +294,8 @@ void MainWindow::createCanvas1Actions (){
     connect( selectErase_button, SIGNAL(pressed()), canvas.get(), SLOT(eraseSelection() ));
 
     connect( layeringDepth, SIGNAL(valueChanged(const int &)), canvas.get(),  SLOT(changeLayerDifference(const int &)));
+
+    connect ( showLabels , SIGNAL (stateChanged(const int &)), canvas.get(), SLOT (showLabels (const int &)));
 
     //    connect( ac_selectCross_Selection.get(), &QAction::triggered, canvas.get(), &Canvas::crossSelection );
     //    connect( ac_selectCrop_Selection.get(), &QAction::triggered, canvas.get(), &Canvas::cropSelection );

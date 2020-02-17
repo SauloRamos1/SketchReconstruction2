@@ -79,6 +79,8 @@ public:
     ///NEW LAYER IMPLEMENTATION
     QString getPathNames();
 
+    void showLabels (bool showLabels);
+
 private:
 
 
