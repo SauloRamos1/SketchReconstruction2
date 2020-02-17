@@ -98,6 +98,8 @@ class MainWindow: public QMainWindow
         QSpinBox *layeringDepth;
         QLabel *depth;
 
+        QCheckBox *checkbox;
+
         // Canvas Mediator
 
         //CanvasMediator mediator;

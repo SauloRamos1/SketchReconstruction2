@@ -89,7 +89,7 @@ set(EXTERNAL_LIBS_DIR ${CMAKE_SOURCE_DIR}/libs)
 
 
 # Tell cmake to create the canvas executable
-add_executable(Canvas WIN32 ${SOURCES} resources.qrc)
+add_executable(Canvas WIN32 ${SOURCES} resources.qrc qdarkstyle/style.qrc)
 
 # Make the project's header dirs visible to building tools
 target_include_directories(Canvas PUBLIC ${HEADERS_DIR})

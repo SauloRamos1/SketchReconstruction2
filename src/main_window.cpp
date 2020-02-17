@@ -11,11 +11,22 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
 //************************************************************************************************
 
 
-    QFile file(":/qss/darkorange.qss");
-    file.open(QFile::ReadOnly);
-    QString styleSheet = QLatin1String(file.readAll());
-    setStyleSheet(styleSheet);
-    ensurePolished();
+//    QFile file(":/qdarkstyle/style.qss");
+//    file.open(QFile::ReadOnly);
+//    QString styleSheet = QLatin1String(file.readAll());
+//    setStyleSheet(styleSheet);
+//    ensurePolished();
+
+    QFile f(":qdarkstyle/style.qss");
+
+    if (!f.exists())   {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else   {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        qApp->setStyleSheet(ts.readAll());
+    }
 
     setWindowIcon(QIcon(":/icons/windowicon.png"));
 
@@ -123,28 +134,29 @@ void MainWindow::createCanvas1Toolbar () {
     fileMenuButton = new QPushButton( canvas.get());
     fileMenuButton->setToolTip("File");
     fileMenuButton->setIcon(QIcon(":/icons/file_white.png"));
-    fileMenuButton->setGeometry(QRect(15, 10, 70, 70));
+    fileMenuButton->setGeometry(QRect(15, 10, 90, 70));
     fileMenuButton->setIconSize(fileMenuButton->size()*0.85);
 
     fileMenuButton->setMenu(fileMenu);
 
     movezoom_button = new QPushButton( canvas.get());
     movezoom_button->setToolTip("Move / Zoom");
-    movezoom_button->setGeometry(QRect(15, 90, 70, 70));
+    movezoom_button->setGeometry(QRect(15, 90, 90, 70));
     movezoom_button->setIcon(QIcon(":/icons/move_white.svg"));
     movezoom_button->setIconSize(movezoom_button->size()*0.8);
 
     openContour_button = new QPushButton( "Open \nContour" , canvas.get());
     openContour_button->setToolTip("Open Contour");
-    openContour_button->setGeometry(QRect(15, 170, 70, 70));
+    openContour_button->setGeometry(QRect(15, 170, 90, 70));
+    //openContour_button->setCheckable(true);
 
     closedContour_button = new QPushButton( "Closed \nContour" , canvas.get());
     closedContour_button->setToolTip("Closed Contour");
-    closedContour_button->setGeometry(QRect(15, 250, 70, 70));
+    closedContour_button->setGeometry(QRect(15, 250, 90, 70));
 
     stripe_button = new QPushButton( "Stripe" , canvas.get());
     stripe_button->setToolTip("Stripe");
-    stripe_button->setGeometry(QRect(15, 330, 70, 70));
+    stripe_button->setGeometry(QRect(15, 330, 90, 70));
 
     ac_selectOverlapEffect1 = std::make_shared< QAction >("Contour", this );
     ac_selectOverlapEffect1.get()->setCheckable(true);
@@ -169,7 +181,7 @@ void MainWindow::createCanvas1Toolbar () {
 
     openContourEffect_MenuButton = new QPushButton(canvas.get());
     openContourEffect_MenuButton->setToolTip("Select Overlap Effect");
-    openContourEffect_MenuButton->setGeometry(QRect(85, 170, 15, 70));
+    openContourEffect_MenuButton->setGeometry(QRect(90, 170, 15, 70));
     openContourEffect_MenuButton->setMenu(openContourEffect_Menu);
 
     closedContourEffect_Menu = new QMenu("&tr");
@@ -181,22 +193,22 @@ void MainWindow::createCanvas1Toolbar () {
 
     closedContourEffect_MenuButton = new QPushButton(canvas.get());
     closedContourEffect_MenuButton->setToolTip("Select Overlap Effect");
-    closedContourEffect_MenuButton->setGeometry(QRect(85, 250, 15, 70));
+    closedContourEffect_MenuButton->setGeometry(QRect(90, 250, 15, 70));
     closedContourEffect_MenuButton->setMenu(closedContourEffect_Menu);
 
     selectCross_button = new QPushButton( "Cross" , canvas.get());
     selectCross_button->setToolTip("Cross Selection");
-    selectCross_button->setGeometry(QRect(15, 410, 70, 70));
+    selectCross_button->setGeometry(QRect(15, 410, 90, 70));
     selectCross_button->setIcon(QIcon(":/icons/cross.svg"));
 
     selectCrop_button = new QPushButton( "Brush" , canvas.get());
     selectCrop_button->setToolTip("Brush Selection");
-    selectCrop_button->setGeometry(QRect(15, 490, 70, 70));
+    selectCrop_button->setGeometry(QRect(15, 490, 90, 70));
     selectCrop_button->setIcon(QIcon(":/icons/edit.svg"));
 
     selectErase_button  = new QPushButton( "Erase" , canvas.get());
     selectErase_button->setToolTip("Erase");
-    selectErase_button->setGeometry(QRect(15, 570, 70, 70));
+    selectErase_button->setGeometry(QRect(15, 570, 90, 70));
     selectErase_button->setIcon(QIcon(":/icons/eraser.svg"));
 
 
@@ -218,7 +230,7 @@ void MainWindow::createCanvas1Toolbar () {
 
     modeMenuButton = new QPushButton("Editing \nMenu" , canvas.get());
     modeMenuButton->setToolTip("Select Mode");
-    modeMenuButton->setGeometry(QRect(15, 650, 70, 70));
+    modeMenuButton->setGeometry(QRect(15, 650, 90, 70));
     modeMenuButton->setMenu(modeMenu);
 
     //    normalsMenu = new QMenu("Normals \nMenu");
@@ -227,12 +239,12 @@ void MainWindow::createCanvas1Toolbar () {
 
     exportMesh_button = new QPushButton("Export \nMesh" , canvas.get());
     exportMesh_button->setToolTip("Export OFF & PLY");
-    exportMesh_button->setGeometry(QRect(15, 810, 70, 70));
+    exportMesh_button->setGeometry(QRect(15, 810, 90, 70));
 
 
     view3dLines_button = new QPushButton ("View 3D ", canvas.get());
     view3dLines_button->setToolTip("View 3D");
-    view3dLines_button->setGeometry(QRect(15, 730, 70, 70));
+    view3dLines_button->setGeometry(QRect(15, 730, 90, 70));
 
     depth =  new QLabel ("  Depth Between Layers: ", canvas.get());
     depth->setGeometry(QRect(730, 900, 120, 30));
@@ -241,6 +253,9 @@ void MainWindow::createCanvas1Toolbar () {
     layeringDepth->setGeometry(QRect(850, 900, 40, 30));
     layeringDepth->setValue(10);
     layeringDepth->setSingleStep(10);
+
+    checkbox = new QCheckBox("Show Labels", canvas.get());
+    checkbox->setGeometry(QRect(600, 900, 100, 30));
 
 }
 
