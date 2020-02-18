@@ -10,9 +10,9 @@
 
 InputSketch::InputSketch()
 {
-    setPath (curve);
-    setPath (openContour);
-    setPath (closedContour);
+    //setPath (curve);
+    //setPath (openContour);
+    //setPath (closedContour);
     
     updateColorMap();
 }
@@ -97,6 +97,7 @@ void InputSketch::saveOpenContour (){
     QPainterPath3D curve3D;
     curve3D.contour = openContour;
     curve3D.level = lineLevel;
+
     QString name = "Open ";
     name.append(QString::number(openContourList.size()));
     curve3D.name = name;

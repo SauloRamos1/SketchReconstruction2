@@ -25,15 +25,15 @@ public:
 
     void setCanvas( Canvas* cv );
 
-    QListWidget *listWidget;
+    QListWidget *openContourList;
+    QListWidget *closedContourList;
+    QListWidget *stripeContourList;
+
     QListWidgetItem *selectedItem = nullptr;
 
 public slots:
 
-    void receiveNamePaths (const QString& name);
-
-    void layerUpSelectedCurve();
-    void layerDownSelectedCurve();
+    void receiveNamePaths (const QString& name, const int& type);
 
     void selectItem(QListWidgetItem *item);
     void renameItem(QListWidgetItem *item);

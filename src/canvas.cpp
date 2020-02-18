@@ -29,9 +29,9 @@ void Canvas::createActions()
     connect( scene.get(), &Scene::crossSelectionDone, this, &Canvas::sendCrossSelectionCurves );
     connect( scene.get(), &Scene::cropSelectionDone, this, &Canvas::sendCropSelectionCurves );
 
-    connect( scene.get(), &Scene::openContourDone, this, &Canvas::sendPathNames );
-    connect( scene.get(), &Scene::closedContourDone, this, &Canvas::sendPathNames);
-    connect( scene.get(), &Scene::stripeContourDone, this, &Canvas::sendPathNames);
+    connect( scene.get(), &Scene::openContourDone, this, &Canvas::sendOpenPathNames);
+    connect( scene.get(), &Scene::closedContourDone, this, &Canvas::sendClosedPathNames);
+    connect( scene.get(), &Scene::stripeContourDone, this, &Canvas::sendStripePathNames);
 }
 
 void Canvas::newFile()
@@ -122,9 +122,21 @@ void Canvas::eraseSelection(){
     scene->chooseErase_Selection();
 }
 
-void Canvas::sendPathNames(){
+void Canvas::sendOpenPathNames(){
 
-   layers->receiveNamePaths(scene->getPathNames());
+   layers->receiveNamePaths(scene->getPathNames(), 0);
+
+}
+
+void Canvas::sendClosedPathNames(){
+
+   layers->receiveNamePaths(scene->getPathNames(), 1);
+
+}
+
+void Canvas::sendStripePathNames(){
+
+   layers->receiveNamePaths(scene->getPathNames(), 2);
 
 }
 

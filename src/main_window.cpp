@@ -85,7 +85,10 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
     layers_dock->setWidget(layers.get());
     layers_dock->setMinimumSize( 150, 600);
 
-    layers->listWidget->resize(layers_dock->width(), layers_dock->height()-50);
+    layers->openContourList->resize(layers_dock->width(), (layers_dock->height()-70)/3);
+    layers->closedContourList->resize(layers_dock->width(), (layers_dock->height()-70)/3);
+    layers->stripeContourList->resize(layers_dock->width(), (layers_dock->height()-70)/3);
+
 
     addDockWidget (Qt::LeftDockWidgetArea, dw_sketch) ;
     addDockWidget(Qt::LeftDockWidgetArea, layers_dock);
@@ -333,15 +336,19 @@ void MainWindow::createLayersDockToolbar(){
 
 void MainWindow::createLayersDockActions(){
 
-    connect( layerUp_button, SIGNAL(pressed()), layers.get(), SLOT(layerUpSelectedCurve()) );
-    connect( layerDown_button, SIGNAL(pressed()),  layers.get(), SLOT(layerDownSelectedCurve()));
+//    connect( layerUp_button, SIGNAL(pressed()), layers.get(), SLOT(layerUpSelectedCurve()) );
+//    connect( layerDown_button, SIGNAL(pressed()),  layers.get(), SLOT(layerDownSelectedCurve()));
 
 }
 
 void MainWindow::resizeEvent(QResizeEvent *){
 
-    layers->listWidget->resize(layers_dock->size().width(), layers_dock->size().height()-70);
-    layers->listWidget->move(0,70);
+    layers->openContourList->resize(layers_dock->width(), (layers_dock->height()-70)/3);
+    layers->closedContourList->resize(layers_dock->width(), (layers_dock->height()-70)/3);
+    layers->stripeContourList->resize(layers_dock->width(), (layers_dock->height()-70)/3);;
+    layers->openContourList->move(0,70);
+    layers->closedContourList->move(0,layers->openContourList->height()+70);
+    layers->stripeContourList->move(0,layers->openContourList->height()+layers->closedContourList->height()+70);
 
 }
 

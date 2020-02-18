@@ -4,12 +4,13 @@
 Layers::Layers(){
 
 
-    listWidget = new QListWidget(this);
+    openContourList = new QListWidget(this);
+    closedContourList = new QListWidget(this);
+    stripeContourList = new QListWidget(this);
 
-
-    connect (listWidget, SIGNAL (itemClicked(QListWidgetItem*)), this, SLOT (selectItem(QListWidgetItem *)));
-    connect (listWidget, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (renameItem(QListWidgetItem *)));
- //   connect (listWidget, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (sendRenamedItem(QListWidgetItem *)));
+    //    connect (listWidget, SIGNAL (itemClicked(QListWidgetItem*)), this, SLOT (selectItem(QListWidgetItem *)));
+    //   connect (listWidget, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (renameItem(QListWidgetItem *)));
+    //   connect (listWidget, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (sendRenamedItem(QListWidgetItem *)));
 
 }
 
@@ -18,79 +19,31 @@ void Layers::setCanvas( Canvas* cv )
     canvas = cv;
 }
 
-void Layers::receiveNamePaths(const QString& name){
+void Layers::receiveNamePaths(const QString& name, const int& type){
 
-    QListWidgetItem *item = new QListWidgetItem(name, listWidget);
-    item->setFlags(item->flags() | Qt::ItemIsEditable);
+    if (type == 0) {
+        QListWidgetItem *item = new QListWidgetItem(name, openContourList);
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
 
-}
-
-void Layers::layerUpSelectedCurve(){
-
-    if( selectedItem == nullptr ) {
-        QMessageBox msgBox;
-        msgBox.setText("No contour was selected.");
-        msgBox.setInformativeText("Please select a curve before changing it's order");
-        msgBox.exec();
-
-        return;
     }
+    if (type == 1) {
+        QListWidgetItem *item = new QListWidgetItem(name, closedContourList);
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
 
-    if (listWidget->count() < 2){
-        return;
     }
-
-    if (listWidget->row(selectedItem) == 0){
-        return;
-
-    } else {
-
-        int currentRow = listWidget->row(selectedItem);
-        int previousRow = currentRow - 1;
-
-        QListWidgetItem* itemOne = listWidget->takeItem(currentRow);
-
-        listWidget->insertItem( previousRow, itemOne );
+    if (type == 2) {
+        QListWidgetItem *item = new QListWidgetItem(name, stripeContourList);
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
 
     }
 
-}
-
-void Layers::layerDownSelectedCurve(){
-
-    if( selectedItem == nullptr ) {
-        QMessageBox msgBox;
-        msgBox.setText("No contour was selected.");
-        msgBox.setInformativeText("Please select a curve before changing it's order");
-        msgBox.exec();
-
-        return;
-    }
-
-    if (listWidget->count() < 2){
-        return;
-    }
-
-    if (listWidget->row(selectedItem) == listWidget->count() -1){
-        return;
-
-    } else {
-
-        int currentRow = listWidget->row(selectedItem);
-        int nextrow = currentRow + 1;
-
-        QListWidgetItem* itemOne = listWidget->takeItem(currentRow);
-
-        listWidget->insertItem( nextrow, itemOne );
-
-    }
 
 }
 
 
 void Layers::renameItem(QListWidgetItem *item){
 
-    listWidget->editItem(item);
+    //listWidget->editItem(item);
 
 }
 

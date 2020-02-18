@@ -7,6 +7,7 @@
 #include <QtMath>
 #include <QVector3D>
 #include <QInputDialog>
+#include <QListWidget>
 
 #include "sketch_library.h"
 #include "halfedge.h"
@@ -129,6 +130,10 @@ protected:
 private:
 
     /// Open Contour
+    ///
+
+    // TER uma Lista de Itens para manda para o Layers
+
 
     struct QPainterPath3D {
         QPainterPath contour;
@@ -142,10 +147,16 @@ private:
         QString name;
     };
 
+    struct openContourItem{
+
+        QPainterPath3D contour;
+        Stripe3D stripe;
+
+    };
+
     QPainterPath openContour;
     QList<QPainterPath3D> sameOpenContourList;
     QList<QList<QPainterPath3D>> openContourList;
-
 
     /// --------
     /// Closed Contour
@@ -159,6 +170,7 @@ private:
     QPainterPath stripeContour;
     QList<Stripe3D> sameStripeContourList;
     QList<QList<Stripe3D>> stripeContourList;
+
 
     /// --------
     /// Gray Scale Lines
@@ -174,8 +186,14 @@ private:
 
     bool showLabels = true;
 
+
+
+
+
     /// --------
     ///
+    ///
+
     QList<QString> names;
 
     QPainterPath curve;

@@ -59,7 +59,9 @@ protected:
         void sendCrossSelectionCurves();
         void sendCropSelectionCurves();
 
-        void sendPathNames();
+        void sendOpenPathNames();
+        void sendClosedPathNames();
+        void sendStripePathNames();
 
         void viewOverlapping3D();
 
