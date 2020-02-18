@@ -425,10 +425,11 @@ void Scene::keyPressEvent(QKeyEvent *event){
         if ( leftButtonIsPressed ){
 
             sketch.increaseOpenContourLevelWhileDrawing();
+            emit openContourDone();
 
         } else {
 
-            sketch.saveOpenContour();
+            //sketch.saveOpenContour();
 
             sketch.increaseLevel();
 
@@ -445,10 +446,11 @@ void Scene::keyPressEvent(QKeyEvent *event){
 
 
             sketch.decreaseOpenContourLevelWhileDrawing();
+            emit openContourDone();
 
         } else {
 
-            sketch.saveOpenContour();
+            //sketch.saveOpenContour();
 
             sketch.decreaseLevel();
 
@@ -571,6 +573,21 @@ void Scene::showLabels(bool showLabels)
     //BUG Not updating Scene after just click on Show Labels, needs to move mouse;
     update ();
 
+}
+
+void Scene::selectOpenContour(const int openContourIndex)
+{
+    sketch.selectOpenContour(openContourIndex);
+}
+
+void Scene::selectClosedContour(const int closedContourIndex)
+{
+    sketch.selectClosedContour(closedContourIndex);
+}
+
+void Scene::selectStripeContour(const int stripeContourIndex)
+{
+    sketch.selectStripeContour(stripeContourIndex);
 }
 
 

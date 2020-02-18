@@ -120,6 +120,11 @@ public:
 
     void setShowLabels (bool _showLabels);
 
+    void selectOpenContour (const int openContourIndex);
+    void selectClosedContour (const int closedContourIndex);
+    void selectStripeContour (const int stripeContourIndex);
+
+
 protected:
 
     void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) override;
@@ -147,12 +152,6 @@ private:
         QString name;
     };
 
-    struct openContourItem{
-
-        QPainterPath3D contour;
-        Stripe3D stripe;
-
-    };
 
     QPainterPath openContour;
     QList<QPainterPath3D> sameOpenContourList;
@@ -186,7 +185,7 @@ private:
 
     bool showLabels = true;
 
-
+    QPainterPath selectedPath;
 
 
 
@@ -303,6 +302,11 @@ private:
 
     float getPathArea(QPainterPath p, float step);
 
+    int selectedOpenContour;
+    int selectedClosedContour;
+    int selectedStripeContour;
+
+    int nOpenContours = 0;
 
 
 };

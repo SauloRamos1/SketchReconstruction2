@@ -74,6 +74,10 @@ protected:
 
         void changeLayerDifference(const int &difference);
 
+        void selectOpenContour (const int openContourIndex);
+        void selectClosedContour (const int closedContourIndex);
+        void selectStripeContour (const int stripeContourIndex);
+
 protected:
 
         std::shared_ptr< Scene > scene;

@@ -8,9 +8,17 @@ Layers::Layers(){
     closedContourList = new QListWidget(this);
     stripeContourList = new QListWidget(this);
 
-    //    connect (listWidget, SIGNAL (itemClicked(QListWidgetItem*)), this, SLOT (selectItem(QListWidgetItem *)));
-    //   connect (listWidget, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (renameItem(QListWidgetItem *)));
-    //   connect (listWidget, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (sendRenamedItem(QListWidgetItem *)));
+    connect (openContourList, SIGNAL (itemClicked(QListWidgetItem*)), this, SLOT (selectOpenContourItem(QListWidgetItem *)));
+    connect (closedContourList, SIGNAL (itemClicked(QListWidgetItem*)), this, SLOT (selectClosedContourItem(QListWidgetItem *)));
+    connect (stripeContourList, SIGNAL (itemClicked(QListWidgetItem*)), this, SLOT (selectStripeContourItem(QListWidgetItem *)));
+
+    connect (openContourList, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (renameOpenContourItem(QListWidgetItem *)));
+    connect (closedContourList, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (renameClosedContourItem(QListWidgetItem *)));
+    connect (stripeContourList, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (renameStripeContourItem(QListWidgetItem *)));
+
+    connect (openContourList, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (sendRenamedOpenContourItem(QListWidgetItem *)));
+    connect (closedContourList, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (sendRenamedClosedContourItem(QListWidgetItem *)));
+    connect (stripeContourList, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (sendRenamedStripeContourItem(QListWidgetItem *)));
 
 }
 
@@ -36,26 +44,54 @@ void Layers::receiveNamePaths(const QString& name, const int& type){
         item->setFlags(item->flags() | Qt::ItemIsEditable);
 
     }
-
-
 }
 
 
-void Layers::renameItem(QListWidgetItem *item){
+void Layers::renameOpenContourItem(QListWidgetItem *item){
 
-    //listWidget->editItem(item);
+    openContourList->editItem(item);
+
+}
+void Layers::renameClosedContourItem(QListWidgetItem *item){
+
+    closedContourList->editItem(item);
+
+}
+void Layers::renameStripeContourItem(QListWidgetItem *item){
+
+    stripeContourList->editItem(item);
 
 }
 
-void Layers::sendRenamedItem(QListWidgetItem *item){
+void Layers::sendRenamedOpenContourItem(QListWidgetItem *item){
+
+    //mediator->renamePath(listWidget->row(item),item->text());
+}
+void Layers::sendRenamedClosedContourItem(QListWidgetItem *item){
 
     //mediator->renamePath(listWidget->row(item),item->text());
 }
 
-void Layers::selectItem(QListWidgetItem *item){
+void Layers::sendRenamedStripeContourItem(QListWidgetItem *item){
 
-    //mediator->selectPath(listWidget->row(item));
-    selectedItem = item;
+    //mediator->renamePath(listWidget->row(item),item->text());
 }
+
+void Layers::selectOpenContourItem(QListWidgetItem *item){
+
+    canvas->selectOpenContour(openContourList->row(item));
+
+}
+void Layers::selectClosedContourItem(QListWidgetItem *item){
+
+    canvas->selectClosedContour(closedContourList->row(item));
+}
+
+void Layers::selectStripeContourItem(QListWidgetItem *item){
+
+    canvas->selectStripeContour(stripeContourList->row(item));
+
+}
+
 
 #include "moc_layers.cpp"

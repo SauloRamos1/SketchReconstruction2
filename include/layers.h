@@ -29,16 +29,26 @@ public:
     QListWidget *closedContourList;
     QListWidget *stripeContourList;
 
-    QListWidgetItem *selectedItem = nullptr;
+    QListWidgetItem *openContourSelectedItem = nullptr;
+    QListWidgetItem *closedContourSelectedItem = nullptr;
+    QListWidgetItem *stripeContourSelectedItem = nullptr;
 
 public slots:
 
     void receiveNamePaths (const QString& name, const int& type);
 
-    void selectItem(QListWidgetItem *item);
-    void renameItem(QListWidgetItem *item);
-    void sendRenamedItem (QListWidgetItem *item);
+    void selectOpenContourItem(QListWidgetItem *item);
+    void selectClosedContourItem(QListWidgetItem *item);
+    void selectStripeContourItem(QListWidgetItem *item);
 
+    void sendRenamedOpenContourItem (QListWidgetItem *item);
+    void sendRenamedClosedContourItem (QListWidgetItem *item);
+    void sendRenamedStripeContourItem (QListWidgetItem *item);
+
+
+    void renameOpenContourItem(QListWidgetItem *item);
+    void renameClosedContourItem(QListWidgetItem *item);
+    void renameStripeContourItem(QListWidgetItem *item);
 
 protected:
 

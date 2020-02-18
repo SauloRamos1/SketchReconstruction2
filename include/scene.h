@@ -81,6 +81,10 @@ public:
 
     void showLabels (bool showLabels);
 
+    void selectOpenContour (const int openContourIndex);
+    void selectClosedContour (const int closedContourIndex);
+    void selectStripeContour (const int stripeContourIndex);
+
 private:
 
 

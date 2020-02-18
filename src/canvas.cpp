@@ -205,5 +205,23 @@ void Canvas::changeLayerDifference(const int &difference)
     scene->changeLayerDifference (difference);
 }
 
+void Canvas::selectOpenContour(const int openContourIndex)
+{
+    scene->chooseOpenContour_Interaction();
+    scene->selectOpenContour(openContourIndex);
+}
+
+void Canvas::selectClosedContour(const int closedContourIndex)
+{
+    scene->chooseClosedContour_Interaction();
+    scene->selectClosedContour(closedContourIndex);
+}
+
+void Canvas::selectStripeContour(const int stripeContourIndex)
+{
+    scene->chooseStripes_Interaction();
+    scene->selectStripeContour(stripeContourIndex);
+}
+
 
 #include "moc_canvas.cpp"
