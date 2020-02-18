@@ -337,6 +337,7 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 
     if (event->button() & Qt::LeftButton && status == Interaction::STRIPES){
         sketch.saveStripeContour();
+
         emit stripeContourDone();
 
         QGraphicsScene::mouseReleaseEvent(event);

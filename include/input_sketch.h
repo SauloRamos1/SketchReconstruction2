@@ -308,6 +308,7 @@ private:
 
     int nOpenContours = 0;
     int nClosedContours = 0;
+    int nStripeContours = 0;
 
 };
 

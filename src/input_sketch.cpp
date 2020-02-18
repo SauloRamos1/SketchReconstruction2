@@ -842,7 +842,8 @@ void InputSketch::saveStripeContour (){
     stripe.level = lineLevel;
 
     QString name = "Stripe ";
-    name.append(QString::number(stripeContourList.size()));
+    name.append(QString::number(nStripeContours));
+    nStripeContours++;
     stripe.name = name;
     names.append(name);
 
@@ -916,6 +917,12 @@ void InputSketch::increaseStripeContourLevelWhileDrawing(){
     stripe.leftLine = QPainterPath();
     stripe.rightLine = QPainterPath();
 
+    QString name = "Stripe ";
+    name.append(QString::number(nStripeContours));
+    nStripeContours++;
+    stripe.name = name;
+    names.append(name);
+
     QPainterPath leftBandLine, rightBandLine;
 
     QLineF stripeLeftLine, stripeRightLine;
@@ -988,6 +995,12 @@ void InputSketch::decreaseStripeContourLevelWhileDrawing(){
     QPainterPath leftBandLine, rightBandLine;
 
     QLineF stripeLeftLine, stripeRightLine;
+
+    QString name = "Stripe ";
+    name.append(QString::number(nStripeContours));
+    nStripeContours++;
+    stripe.name = name;
+    names.append(name);
 
     stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
     stripeLeftLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(0))));
@@ -1686,18 +1699,35 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
         //}
 
+        int count = 0;
+
         for (int i = 0 ; i < sameStripeContourList.size() ; i++){
 
-            painter->setPen(QPen(QColor(Qt::blue),sameStripeContourList[i].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
-            painter->drawPath(sameStripeContourList[i].leftLine);
-            painter->setPen(QPen(QColor(Qt::red),sameStripeContourList[i].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
-            painter->drawPath(sameStripeContourList[i].rightLine);
+
+            if (selectedStripeContour == count){
+
+                painter->setPen(QPen(QColor(Qt::black),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                painter->drawPath(sameStripeContourList[i].contour);
+
+                if (showLabels) painter->drawText(sameStripeContourList[i].contour.elementAt(0).x + 10, sameStripeContourList[i].contour.elementAt(0).y, sameStripeContourList[i].name);
+
+            } else {
+                painter->setPen(QPen(QColor(Qt::blue),sameStripeContourList[i].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                painter->drawPath(sameStripeContourList[i].leftLine);
+                painter->setPen(QPen(QColor(Qt::red),sameStripeContourList[i].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                painter->drawPath(sameStripeContourList[i].rightLine);
+                painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                if (showLabels) painter->drawText(sameStripeContourList[i].contour.elementAt(0).x + 10, sameStripeContourList[i].contour.elementAt(0).y, sameStripeContourList[i].name);
+            }
+            count ++ ;
 
         }
+
 
         for (int i = 0 ; i < stripeContourList.size() ; i++){
 
             for (int j = 0; j < stripeContourList[i].size() ; j++) {
+
 
                 painter->setPen(QPen(QColor(Qt::blue),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
                 painter->drawPath(stripeContourList[i][j].leftLine);
@@ -1705,6 +1735,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 painter->drawPath(stripeContourList[i][j].rightLine);
                 painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
                 if (showLabels) painter->drawText(stripeContourList[i][j].leftLine.elementAt(0).x + 10, stripeContourList[i][j].leftLine.elementAt(0).y, stripeContourList[i][j].name);
+
             }
         }
 
