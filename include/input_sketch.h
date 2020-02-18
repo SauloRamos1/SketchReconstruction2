@@ -307,7 +307,7 @@ private:
     int selectedStripeContour;
 
     int nOpenContours = 0;
-
+    int nClosedContours = 0;
 
 };
 
