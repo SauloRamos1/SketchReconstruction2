@@ -1342,6 +1342,29 @@ void InputSketch::smoothClosedContour()
 void InputSketch::smoothStripeContour()
 {
 
+    int count = 0;
+
+    for (int i = 0 ; i < sameStripeContourList.size() ; i++){
+
+
+        if (selectedStripeContour == count){
+            smoothPath(sameStripeContourList[i].contour);
+            smoothPath(sameStripeContourList[i].contour);
+            smoothPath(sameStripeContourList[i].contour);
+
+            smoothPath(sameStripeContourList[i].leftLine);
+            smoothPath(sameStripeContourList[i].leftLine);
+            smoothPath(sameStripeContourList[i].leftLine);
+
+            smoothPath(sameStripeContourList[i].rightLine);
+            smoothPath(sameStripeContourList[i].rightLine);
+            smoothPath(sameStripeContourList[i].rightLine);
+
+
+        }
+        count ++ ;
+
+    }
 
     update();
 }
