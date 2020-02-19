@@ -619,7 +619,16 @@ void Scene::setOversketchingMode(){
 }
 
 void Scene::smoothSketch(){
-    sketch.smooth();
+
+    if (status == Interaction::OPENCONTOUR){
+        sketch.smoothOpenContour();
+    }
+    if (status == Interaction::CLOSEDCONTOUR){
+        sketch.smoothClosedContour();
+    }
+    if (status == Interaction::STRIPES){
+        sketch.smoothStripeContour();
+    }
     update();
 }
 

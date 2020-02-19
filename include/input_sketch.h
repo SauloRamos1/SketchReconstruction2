@@ -31,7 +31,6 @@ public:
     void drawPaths (const QVector<QPainterPath>& readsvgPaths);
 
     int number_subpaths();
-    void smooth();
 
     void chooseDefaultInteraction();
 
@@ -128,6 +127,9 @@ public:
     void createOversketchingCurve(const QPointF &pos);
     void addOversketchingCurve(const QPointF &pos);
 
+    void smoothOpenContour();
+    void smoothClosedContour();
+    void smoothStripeContour();
 
 protected:
 

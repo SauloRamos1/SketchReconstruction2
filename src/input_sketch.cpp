@@ -1290,7 +1290,7 @@ bool InputSketch::joinPaths()
     return changed;
 }
 
-void InputSketch::smooth()
+void InputSketch::smoothOpenContour()
 {
 
     int count = 0;
@@ -1312,7 +1312,42 @@ void InputSketch::smooth()
 
 }
 
+void InputSketch::smoothClosedContour()
+{
+    QPainterPath path;
+
+    for (int i = 0 ; i < closedContourList.size(); i++) {
+
+        if (selectedClosedContour == i){
+
+            path.moveTo(closedContourList[i].contour.pointAtPercent(0));
+
+            for (double k = 0.5; k < closedContourList[i].contour.length(); k = k + 0.5){
+                path.lineTo(closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)));
+            }
+
+            smoothPath(path);
+            smoothPath(path);
+            smoothPath(path);
+
+            closedContourList[i].contour = QPainterPath();
+            closedContourList[i].contour = path;
+        }
+    }
+
+
+    update();
+}
+
+void InputSketch::smoothStripeContour()
+{
+
+
+    update();
+}
+
 QPainterPath InputSketch::smoothPath(QPainterPath &path){
+
 
     auto polygon_list = path.toSubpathPolygons();
     path = QPainterPath();
@@ -1322,7 +1357,6 @@ QPainterPath InputSketch::smoothPath(QPainterPath &path){
         // polygon_curve is a QPolygonF
         auto polygon_curve = SketchLibrary::smooth( polygon_list.at(i) );
         path.addPolygon(polygon_curve);
-
     }
 
     return path;
