@@ -26,7 +26,7 @@ class Scene: public QGraphicsScene
     Q_OBJECT
 public:
 
-    enum class Interaction {DEFAULT, MOVE_ZOOM, OPENCONTOUR, CLOSEDCONTOUR, STRIPES, CROSS_SELECTION, CROP_SELECTION, ERASE_SELECTION};
+    enum class Interaction {DEFAULT, MOVE_ZOOM, OPENCONTOUR, CLOSEDCONTOUR, STRIPES, OVERSKETCHING, CROSS_SELECTION, CROP_SELECTION, ERASE_SELECTION};
 
     Scene();
 
@@ -85,6 +85,9 @@ public:
     void selectClosedContour (const int closedContourIndex);
     void selectStripeContour (const int stripeContourIndex);
 
+    void setOversketchingMode();
+    void smoothSketch();
+    void setDefRotAxisMode();
 private:
 
 

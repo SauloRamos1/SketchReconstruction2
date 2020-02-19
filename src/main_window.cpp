@@ -12,16 +12,16 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
 
     //TODO TESTE MAIN WINDOW
 
-//************************************************************************************************
-/// ........................................ STYLESHEET ..........................................
-//************************************************************************************************
+    //************************************************************************************************
+    /// ........................................ STYLESHEET ..........................................
+    //************************************************************************************************
 
 
-//    QFile file(":/qdarkstyle/style.qss");
-//    file.open(QFile::ReadOnly);
-//    QString styleSheet = QLatin1String(file.readAll());
-//    setStyleSheet(styleSheet);
-//    ensurePolished();
+    //    QFile file(":/qdarkstyle/style.qss");
+    //    file.open(QFile::ReadOnly);
+    //    QString styleSheet = QLatin1String(file.readAll());
+    //    setStyleSheet(styleSheet);
+    //    ensurePolished();
 
     QFile f(":qdarkstyle/style.qss");
 
@@ -39,9 +39,9 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
     setAcceptDrops (true);
 
 
-//************************************************************************************************
-/// ........................................ LINKERS ..........................................
-//************************************************************************************************
+    //************************************************************************************************
+    /// ........................................ LINKERS ..........................................
+    //************************************************************************************************
 
 
     canvas = std::make_shared< Canvas > ();
@@ -50,8 +50,8 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
     canvas->setLayers(layers.get());
     layers->setCanvas(canvas.get());
 
-//    mediator.setCanvas( canvas );
-//    mediator.setLayers( layers );
+    //    mediator.setCanvas( canvas );
+    //    mediator.setLayers( layers );
 
     glcanvas = std::make_shared < OpenGLCanvas > () ;
 
@@ -64,9 +64,9 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
     openglmediator.setCanvas(canvas);
 
 
-//************************************************************************************************
-/// ........................................ QDockWidgets ..........................................
-//************************************************************************************************
+    //************************************************************************************************
+    /// ........................................ QDockWidgets ..........................................
+    //************************************************************************************************
 
     dw_sketch = new QDockWidget ( " Sketch Segmentation", this);
     QMainWindow *canvas_window = new QMainWindow(dw_sketch);
@@ -98,9 +98,9 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
 
     setCentralWidget( glcanvas.get() );
 
-//************************************************************************************************
-/// ........................................ Create Functions ..........................................
-//************************************************************************************************
+    //************************************************************************************************
+    /// ........................................ Create Functions ..........................................
+    //************************************************************************************************
 
     createCanvas1Toolbar();
 
@@ -221,39 +221,51 @@ void MainWindow::createCanvas1Toolbar () {
     selectErase_button->setIcon(QIcon(":/icons/eraser.svg"));
 
 
-    ac_oversketch = std::make_shared< QAction >( "Oversketch", this );
-    ac_smooth = std::make_shared< QAction >( "Smooth", this );
-    ac_defRotAxis = std::make_shared< QAction >( "Define Medial Axis", this );
-    ac_crossSecBlendSurface = std::make_shared< QAction > ("Edit Cross Sectional Blending Surface", this);
+    //    ac_oversketch = std::make_shared< QAction >( "Oversketch", this );
+    //    ac_smooth = std::make_shared< QAction >( "Smooth", this );
+    //    ac_defRotAxis = std::make_shared< QAction >( "Define Medial Axis", this );
+    //    ac_crossSecBlendSurface = std::make_shared< QAction > ("Edit Cross Sectional Blending Surface", this);
 
     //ac_showNormals = std::make_shared< QAction >( "Show Normals", this );
 
     ac_exportFiles = std::make_shared< QAction >( "Export Files", this );
     ac_view3DPoints = std::make_shared< QAction >( "View 3D Points", this );
 
-    modeMenu = new QMenu("Editing \nMenu");
-    modeMenu->addAction(ac_oversketch.get());
-    modeMenu->addAction(ac_smooth.get());
-    modeMenu->addAction(ac_defRotAxis.get());
-    modeMenu->addAction(ac_crossSecBlendSurface.get());
+    //    modeMenu = new QMenu("Editing \nMenu");
+    //    modeMenu->addAction(ac_oversketch.get());
+    //    modeMenu->addAction(ac_smooth.get());
+    //    modeMenu->addAction(ac_defRotAxis.get());
+    //    modeMenu->addAction(ac_crossSecBlendSurface.get());
 
-    modeMenuButton = new QPushButton("Editing \nMenu" , canvas.get());
-    modeMenuButton->setToolTip("Select Mode");
-    modeMenuButton->setGeometry(QRect(15, 650, 90, 70));
-    modeMenuButton->setMenu(modeMenu);
+    oversketch_button = new QPushButton("Oversketch" , canvas.get());
+    oversketch_button->setToolTip("Oversketching Mode");
+    oversketch_button->setGeometry(QRect(15, 650, 90, 20));
+
+    smooth_button = new QPushButton("Smooth" , canvas.get());
+    smooth_button->setToolTip("Smooth Contour");
+    smooth_button->setGeometry(QRect(15, 680, 90, 20));
+
+    defRotAxis_button = new QPushButton("Rotation Axis" , canvas.get());
+    defRotAxis_button->setToolTip("Define Rotation Axis");
+    defRotAxis_button->setGeometry(QRect(15, 710, 90, 20));
+
+    //    modeMenuButton = new QPushButton("Editing \nMenu" , canvas.get());
+    //    modeMenuButton->setToolTip("Select Mode");
+    //    modeMenuButton->setGeometry(QRect(15, 650, 90, 70));
+    //    modeMenuButton->setMenu(modeMenu);
 
     //    normalsMenu = new QMenu("Normals \nMenu");
     //    normalsMenu->addAction(ac_estimateShape.get());
     //    normalsMenu->addAction(ac_showNormals.get());
 
-    exportMesh_button = new QPushButton("Export \nMesh" , canvas.get());
-    exportMesh_button->setToolTip("Export OFF & PLY");
-    exportMesh_button->setGeometry(QRect(15, 810, 90, 70));
-
 
     view3dLines_button = new QPushButton ("View 3D ", canvas.get());
     view3dLines_button->setToolTip("View 3D");
-    view3dLines_button->setGeometry(QRect(15, 730, 90, 70));
+    view3dLines_button->setGeometry(QRect(15, 740, 90, 70));
+
+    exportMesh_button = new QPushButton("Export \nMesh" , canvas.get());
+    exportMesh_button->setToolTip("Export OFF & PLY");
+    exportMesh_button->setGeometry(QRect(15, 820, 90, 70));
 
     depth =  new QLabel ("  Depth Between Layers: ", canvas.get());
     depth->setGeometry(QRect(730, 900, 120, 30));
@@ -290,7 +302,6 @@ void MainWindow::createCanvas1Actions (){
     connect( ac_selectOverlapEffect4.get(), &QAction::triggered, canvas.get(), &Canvas::setOverlapEffect4);
     connect( ac_selectOverlapEffect5.get(), &QAction::triggered, canvas.get(), &Canvas::setStripesInteraction);
 
-
     connect( movezoom_button, SIGNAL(pressed()), canvas.get(), SLOT(moveZoomInteraction() ));
     connect( selectCross_button, SIGNAL(pressed()), canvas.get(), SLOT(crossSelection() ));
     connect( selectCrop_button, SIGNAL(pressed()), canvas.get(), SLOT(cropSelection() ));
@@ -306,9 +317,9 @@ void MainWindow::createCanvas1Actions (){
 
     /// ----- CANVAS 2 ACTIONS&& TOOLBAR MOVED TO CANVAS 1 -----
 
-    //    connect( ac_oversketch.get(), &QAction::triggered, canvas2.get(), &Canvas2::setOversketchingMode);
-    //    connect( ac_smooth.get(), &QAction::triggered, canvas2.get(), &Canvas2::smoothSketch );
-    //    connect( ac_defRotAxis.get(), &QAction::triggered, canvas2.get(), &Canvas2::setDefRotAxisMode);
+        connect( oversketch_button, SIGNAL(pressed()), canvas.get(), SLOT(setOversketchingMode()));
+        connect( smooth_button, SIGNAL(pressed()), canvas.get(), SLOT(smoothSketch()));
+        connect( defRotAxis_button, SIGNAL(pressed()), canvas.get(), SLOT(setDefRotAxisMode()));
     //    connect( ac_crossSecBlendSurface.get(), &QAction::triggered, canvas2.get(), &Canvas2::setCrossSecBlendSurfaceMode);
 
     //    connect( ac_estimateShape.get(), &QAction::triggered, canvas2.get(), &Canvas2::estimateShape );
@@ -336,8 +347,8 @@ void MainWindow::createLayersDockToolbar(){
 
 void MainWindow::createLayersDockActions(){
 
-//    connect( layerUp_button, SIGNAL(pressed()), layers.get(), SLOT(layerUpSelectedCurve()) );
-//    connect( layerDown_button, SIGNAL(pressed()),  layers.get(), SLOT(layerDownSelectedCurve()));
+    //    connect( layerUp_button, SIGNAL(pressed()), layers.get(), SLOT(layerUpSelectedCurve()) );
+    //    connect( layerDown_button, SIGNAL(pressed()),  layers.get(), SLOT(layerDownSelectedCurve()));
 
 }
 

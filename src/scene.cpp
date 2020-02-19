@@ -241,6 +241,14 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event){
     if (status == Interaction::DEFAULT){
         return;
     }
+
+    if (event->buttons() == Qt::LeftButton && status == Interaction::OVERSKETCHING){
+        setFocus();
+        leftButtonIsPressed = true;
+        sketch.createOversketchingCurve( pos );
+        update();
+    }
+
     if (event->buttons() == Qt::LeftButton && status == Interaction::OPENCONTOUR){
         setFocus();
         leftButtonIsPressed = true;
@@ -280,6 +288,10 @@ void Scene::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     if (status == Interaction::DEFAULT){
         return;
     }
+    if (event->buttons() == Qt::LeftButton && status == Interaction::OVERSKETCHING){
+        sketch.addOversketchingCurve( pos );
+        QGraphicsScene::mouseMoveEvent(event);
+    }
     if (event->buttons() == Qt::LeftButton && status == Interaction::OPENCONTOUR){
         sketch.addOpenContour( pos );
         QGraphicsScene::mouseMoveEvent(event);
@@ -317,6 +329,13 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     }
     if (status == Interaction::MOVE_ZOOM){
         return;
+    }
+
+    if (status == Interaction::OVERSKETCHING){
+        static bool first_run = true;
+        bool sketch_has_changed = sketch.joinPaths();
+        update ();
+        QGraphicsScene::mouseReleaseEvent(event);
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::OPENCONTOUR){
@@ -589,6 +608,23 @@ void Scene::selectClosedContour(const int closedContourIndex)
 void Scene::selectStripeContour(const int stripeContourIndex)
 {
     sketch.selectStripeContour(stripeContourIndex);
+}
+
+void Scene::setOversketchingMode(){
+
+    status = Interaction::OVERSKETCHING;
+    sketch.interactionString = "Oversketching Mode";
+    update();
+
+}
+
+void Scene::smoothSketch(){
+    sketch.smooth();
+    update();
+}
+
+void Scene::setDefRotAxisMode(){
+
 }
 
 

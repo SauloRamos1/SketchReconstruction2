@@ -125,6 +125,10 @@ public:
     void selectStripeContour (const int stripeContourIndex);
 
 
+    void createOversketchingCurve(const QPointF &pos);
+    void addOversketchingCurve(const QPointF &pos);
+
+
 protected:
 
     void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) override;
@@ -309,6 +313,8 @@ private:
     int nOpenContours = 0;
     int nClosedContours = 0;
     int nStripeContours = 0;
+
+    QPainterPath oversketchingCurve;
 
 };
 

@@ -223,5 +223,17 @@ void Canvas::selectStripeContour(const int stripeContourIndex)
     scene->selectStripeContour(stripeContourIndex);
 }
 
+void Canvas::setOversketchingMode (){
+    scene->setOversketchingMode();
+}
+
+void Canvas::smoothSketch (){
+    scene->smoothSketch();
+}
+
+void Canvas::setDefRotAxisMode (){
+    scene->setDefRotAxisMode();
+}
+
 
 #include "moc_canvas.cpp"

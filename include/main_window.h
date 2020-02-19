@@ -130,13 +130,18 @@ class MainWindow: public QMainWindow
         QPushButton *layerUp_button;
         QPushButton *layerDown_button;
 
-        QMenu *modeMenu;
+        //QMenu *modeMenu;
 
-        std::shared_ptr< QAction > ac_oversketch;
-        std::shared_ptr< QAction > ac_smooth;
+        QPushButton* oversketch_button;
+        QPushButton* smooth_button;
 
-        std::shared_ptr< QAction > ac_defRotAxis;
-        std::shared_ptr< QAction > ac_crossSecBlendSurface;
+        QPushButton* defRotAxis_button;
+
+//        std::shared_ptr< QAction > ac_oversketch;
+//        std::shared_ptr< QAction > ac_smooth;
+
+//        std::shared_ptr< QAction > ac_defRotAxis;
+//        std::shared_ptr< QAction > ac_crossSecBlendSurface;
 
 
 

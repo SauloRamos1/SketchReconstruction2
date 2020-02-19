@@ -1267,6 +1267,7 @@ QPolygonF InputSketch::getCurve() const
 
 bool InputSketch::joinPaths()
 {
+    //TODO SUBSTITUIR POR LINHA SELECIONADA E OVERSKETCHING CURVE
 
     if( pathsList.size() < 2 ){
         return false;
@@ -1292,24 +1293,23 @@ bool InputSketch::joinPaths()
 void InputSketch::smooth()
 {
 
-    if( curve.isEmpty() == true )
-        return;
+    int count = 0;
 
-    prepareGeometryChange();
+    for (int i = 0; i < openContourList.size(); ++i) {
+        for (int j = 0; j < openContourList[i].size(); ++j) {
 
-    // polygon_list is a QList<QPolygonF> object
-    auto polygon_list = curve.toSubpathPolygons();
-    curve = QPainterPath();
+            if (selectedOpenContour == count){
+                smoothPath(openContourList[i][j].contour);
+                smoothPath(openContourList[i][j].contour);
+                smoothPath(openContourList[i][j].contour);
+            }
 
-    for( int i = 0; i < polygon_list.size(); ++i )
-    {
-        // polygon_curve is a QPolygonF
-        auto polygon_curve = SketchLibrary::smooth( polygon_list.at(i) );
-        curve.addPolygon(polygon_curve);
-
+            count++;
+        }
     }
-
     update();
+
+
 }
 
 QPainterPath InputSketch::smoothPath(QPainterPath &path){
@@ -1327,6 +1327,22 @@ QPainterPath InputSketch::smoothPath(QPainterPath &path){
 
     return path;
 }
+
+void InputSketch::createOversketchingCurve(const QPointF &pos){
+
+    prepareGeometryChange();
+    oversketchingCurve.moveTo( mapFromScene( pos ) );
+
+}
+
+void InputSketch::addOversketchingCurve(const QPointF &pos){
+
+    prepareGeometryChange();
+    oversketchingCurve.lineTo( mapFromScene( pos ) );
+
+}
+
+
 
 
 
@@ -2071,6 +2087,7 @@ void InputSketch::selectOpenContour(const int openContourIndex)
     selectedOpenContour = openContourIndex;
 }
 
+
 void InputSketch::selectClosedContour(const int closedContourIndex)
 {
     selectedClosedContour = closedContourIndex;
@@ -2083,7 +2100,7 @@ void InputSketch::selectStripeContour(const int stripeContourIndex)
 
 
 //************************************************************************************************
-/// ..................................... OTHERS ..........................................
+/// ........................................ OTHERS .............................................
 //************************************************************************************************
 
 

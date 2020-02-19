@@ -78,6 +78,10 @@ protected:
         void selectClosedContour (const int closedContourIndex);
         void selectStripeContour (const int stripeContourIndex);
 
+        void setOversketchingMode ();
+        void smoothSketch ();
+        void setDefRotAxisMode ();
+
 protected:
 
         std::shared_ptr< Scene > scene;
