@@ -58,7 +58,7 @@ public:
     //QVector<QVector3D> getSketchedPaths ();
 
     QPolygonF getCurve() const;
-    bool joinPaths();
+    void joinPaths();
 
     void clear();
 
@@ -127,9 +127,8 @@ public:
     void createOversketchingCurve(const QPointF &pos);
     void addOversketchingCurve(const QPointF &pos);
 
-    void smoothOpenContour();
-    void smoothClosedContour();
-    void smoothStripeContour();
+    void smooth();
+
 
 protected:
 
@@ -308,6 +307,7 @@ private:
 
     float getPathArea(QPainterPath p, float step);
 
+    int lastSelected = 5;
     int selectedOpenContour;
     int selectedClosedContour;
     int selectedStripeContour;
@@ -317,6 +317,7 @@ private:
     int nStripeContours = 0;
 
     QPainterPath oversketchingCurve;
+
 
 };
 

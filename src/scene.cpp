@@ -332,8 +332,14 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     }
 
     if (status == Interaction::OVERSKETCHING){
+
         static bool first_run = true;
-        bool sketch_has_changed = sketch.joinPaths();
+
+        //bool sketch_has_changed = sketch.joinPaths();
+
+        sketch.joinPaths();
+
+
         update ();
         QGraphicsScene::mouseReleaseEvent(event);
     }
@@ -620,15 +626,9 @@ void Scene::setOversketchingMode(){
 
 void Scene::smoothSketch(){
 
-    if (status == Interaction::OPENCONTOUR){
-        sketch.smoothOpenContour();
-    }
-    if (status == Interaction::CLOSEDCONTOUR){
-        sketch.smoothClosedContour();
-    }
-    if (status == Interaction::STRIPES){
-        sketch.smoothStripeContour();
-    }
+
+    sketch.smooth();
+
     update();
 }
 

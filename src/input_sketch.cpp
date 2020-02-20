@@ -63,7 +63,6 @@ void InputSketch::chooseClosedContour_Interaction()
 void InputSketch::chooseStripes_Interaction()
 {
     statusSketch = Interaction::STRIPES;
-
 }
 
 //************************************************************************************************
@@ -1265,109 +1264,171 @@ QPolygonF InputSketch::getCurve() const
     return current_sketch;
 }
 
-bool InputSketch::joinPaths()
+void InputSketch::joinPaths()
 {
     //TODO SUBSTITUIR POR LINHA SELECIONADA E OVERSKETCHING CURVE
 
-    if( pathsList.size() < 2 ){
-        return false;
-    }
+    switch (lastSelected) {
 
-    prepareGeometryChange();
-    QPolygonF current_sketch  = pathsList[pathsList.size()-2].toSubpathPolygons().at(0);
-    QPolygonF new_sketch = pathsList.last().toSubpathPolygons().at(0);
+    case 0 : {
+        int count = 0;
 
-    bool changed = SketchLibrary::overSketch( current_sketch, new_sketch );
-    //Means that an oversketch happened
-    if ( changed )
-    {
+        for (int i = 0; i < openContourList.size(); ++i) {
+            for (int j = 0; j < openContourList[i].size(); ++j) {
 
-        pathsList[pathsList.size()-2] = QPainterPath();
-        pathsList[pathsList.size()-2].addPolygon(current_sketch);
-        pathsList.removeLast();
+                if (selectedOpenContour == count){
 
-    }
-    return changed;
-}
+                    prepareGeometryChange();
+                    QPolygonF current_sketch;
+                    for (int i = 0; i < openContourList[i][j].contour.toSubpathPolygons().size(); ++i) {
+                        current_sketch << openContourList[i][j].contour.toSubpathPolygons().at(i);
+                    }
 
-void InputSketch::smoothOpenContour()
-{
+                    //  ------- Smooth -------
 
-    int count = 0;
+                    QPolygonF polygon_list;
 
-    for (int i = 0; i < openContourList.size(); ++i) {
-        for (int j = 0; j < openContourList[i].size(); ++j) {
+                    for (int i = 0; i < oversketchingCurve.toSubpathPolygons().size(); ++i) {
+                        polygon_list << oversketchingCurve.toSubpathPolygons().at(i);
+                    }
+                    oversketchingCurve = QPainterPath();
 
-            if (selectedOpenContour == count){
-                smoothPath(openContourList[i][j].contour);
-                smoothPath(openContourList[i][j].contour);
-                smoothPath(openContourList[i][j].contour);
+                    auto polygon_curve = SketchLibrary::smooth( polygon_list );
+                    oversketchingCurve.addPolygon(polygon_curve);
+                    QPolygonF new_sketch;
+                    for (int i = 0; i < oversketchingCurve.toSubpathPolygons().size(); ++i) {
+                        new_sketch << oversketchingCurve.toSubpathPolygons().at(i);
+                    }
+
+                    smoothPath(oversketchingCurve);
+                    smoothPath(oversketchingCurve);
+                    smoothPath(oversketchingCurve);
+
+                    bool changed = SketchLibrary::overSketch( current_sketch, new_sketch );
+                    //Means that an oversketch happened
+                    if ( changed )
+                    {
+
+                        openContourList[i][j].contour = QPainterPath();
+                        openContourList[i][j].contour.addPolygon(current_sketch);
+                        smoothPath(openContourList[i][j].contour);
+                        oversketchingCurve = QPainterPath();
+
+                    } else {
+
+                        qDebug () << "Sketch didn't change!";
+                    }
+
+                }
+
+                count++;
             }
-
-            count++;
         }
-    }
-    update();
+    } break;
 
+
+    case 1 :{
+
+    } break;
+
+    case 2 :{
+
+    } break;
+
+
+    }
+
+    oversketchingCurve = QPainterPath();
 
 }
 
-void InputSketch::smoothClosedContour()
-{
-    QPainterPath path;
 
-    for (int i = 0 ; i < closedContourList.size(); i++) {
+void InputSketch::smooth() {
 
-        if (selectedClosedContour == i){
+    switch (lastSelected) {
 
-            path.moveTo(closedContourList[i].contour.pointAtPercent(0));
+    case 0 : {
 
-            for (double k = 0.5; k < closedContourList[i].contour.length(); k = k + 0.5){
-                path.lineTo(closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)));
+        int count = 0;
+
+        for (int i = 0; i < openContourList.size(); ++i) {
+            for (int j = 0; j < openContourList[i].size(); ++j) {
+
+                if (selectedOpenContour == count){
+                    smoothPath(openContourList[i][j].contour);
+                    smoothPath(openContourList[i][j].contour);
+                    smoothPath(openContourList[i][j].contour);
+                }
+
+                count++;
             }
-
-            smoothPath(path);
-            smoothPath(path);
-            smoothPath(path);
-
-            closedContourList[i].contour = QPainterPath();
-            closedContourList[i].contour = path;
         }
     }
 
+        break;
 
-    update();
-}
+    case 1 : {
 
-void InputSketch::smoothStripeContour()
-{
+        QPainterPath path;
 
-    int count = 0;
+        for (int i = 0 ; i < closedContourList.size(); i++) {
 
-    for (int i = 0 ; i < sameStripeContourList.size() ; i++){
+            if (selectedClosedContour == i){
+
+                path.moveTo(closedContourList[i].contour.pointAtPercent(0));
+
+                for (double k = 0.5; k < closedContourList[i].contour.length(); k = k + 0.5){
+                    path.lineTo(closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)));
+                }
+
+                smoothPath(path);
+                smoothPath(path);
+                smoothPath(path);
+
+                closedContourList[i].contour = QPainterPath();
+                closedContourList[i].contour = path;
+            }
+        }
+    }
+
+        break;
+
+    case 2 : {
+
+        int count = 0;
+
+        for (int i = 0 ; i < sameStripeContourList.size() ; i++){
 
 
-        if (selectedStripeContour == count){
-            smoothPath(sameStripeContourList[i].contour);
-            smoothPath(sameStripeContourList[i].contour);
-            smoothPath(sameStripeContourList[i].contour);
+            if (selectedStripeContour == count){
+                smoothPath(sameStripeContourList[i].contour);
+                smoothPath(sameStripeContourList[i].contour);
+                smoothPath(sameStripeContourList[i].contour);
 
-            smoothPath(sameStripeContourList[i].leftLine);
-            smoothPath(sameStripeContourList[i].leftLine);
-            smoothPath(sameStripeContourList[i].leftLine);
+                smoothPath(sameStripeContourList[i].leftLine);
+                smoothPath(sameStripeContourList[i].leftLine);
+                smoothPath(sameStripeContourList[i].leftLine);
 
-            smoothPath(sameStripeContourList[i].rightLine);
-            smoothPath(sameStripeContourList[i].rightLine);
-            smoothPath(sameStripeContourList[i].rightLine);
+                smoothPath(sameStripeContourList[i].rightLine);
+                smoothPath(sameStripeContourList[i].rightLine);
+                smoothPath(sameStripeContourList[i].rightLine);
 
+
+            }
+            count ++ ;
 
         }
-        count ++ ;
+    }
+
+        break;
 
     }
 
     update();
+
+
 }
+
 
 QPainterPath InputSketch::smoothPath(QPainterPath &path){
 
@@ -2040,6 +2101,11 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
         painter->drawText(mousePointer.x(), mousePointer.y() - 5, QString::number(lineLevel));
     }
 
+    if (!oversketchingCurve.isEmpty()){
+        painter->setPen(QPen(QColor(Qt::darkGreen),2,Qt::SolidLine));
+        painter->drawPath(oversketchingCurve);
+    }
+
 }
 
 
@@ -2142,17 +2208,20 @@ void InputSketch::setShowLabels(bool _showLabels)
 void InputSketch::selectOpenContour(const int openContourIndex)
 {
     selectedOpenContour = openContourIndex;
+    lastSelected = 0;
 }
 
 
 void InputSketch::selectClosedContour(const int closedContourIndex)
 {
     selectedClosedContour = closedContourIndex;
+    lastSelected = 1;
 }
 
 void InputSketch::selectStripeContour(const int stripeContourIndex)
 {
     selectedStripeContour = stripeContourIndex;
+    lastSelected = 2;
 }
 
 
