@@ -439,6 +439,19 @@ void Scene::wheelEvent ( QGraphicsSceneWheelEvent *event )
         }
 
     }
+
+    if (status == Interaction::DEFINE_ROT_AXIS_MODE){
+        if ( event->delta() > 0 ) {
+
+            sketch.defRotAxis(1);
+            update();
+
+        } else if (event->delta() < 0) {
+
+            sketch.defRotAxis(-1);
+            update();
+        }
+    }
     event->accept();
 
     update ();
@@ -634,7 +647,19 @@ void Scene::smoothSketch(){
 
 void Scene::setDefRotAxisMode(){
 
+    if (status == Interaction::DEFINE_ROT_AXIS_MODE){
+        status = Interaction::DEFAULT;
+        sketch.interactionString = "Define Rotation Axis Mode";
+        qDebug () << "Selection  Mode";
+    } else {
+        status = Interaction::DEFINE_ROT_AXIS_MODE;
+        sketch.interactionString = "Define Rotation Axis Mode";
+    }
+
+    qDebug () << "Define Rot Axis Mode";
+    update();
 }
+
 
 
 

@@ -14,6 +14,7 @@
 #include <QLabel>
 #include <QGraphicsPixmapItem>
 #include <QFileDialog>
+#include <QWheelEvent>
 
 #include <include/input_sketch.h>
 #include <include/halfedge.h>
@@ -26,7 +27,7 @@ class Scene: public QGraphicsScene
     Q_OBJECT
 public:
 
-    enum class Interaction {DEFAULT, MOVE_ZOOM, OPENCONTOUR, CLOSEDCONTOUR, STRIPES, OVERSKETCHING, CROSS_SELECTION, CROP_SELECTION, ERASE_SELECTION};
+    enum class Interaction {DEFAULT, MOVE_ZOOM, OPENCONTOUR, CLOSEDCONTOUR, STRIPES, OVERSKETCHING, DEFINE_ROT_AXIS_MODE, CROSS_SELECTION, CROP_SELECTION, ERASE_SELECTION};
 
     Scene();
 
