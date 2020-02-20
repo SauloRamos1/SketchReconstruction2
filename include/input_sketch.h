@@ -128,7 +128,10 @@ public:
     void addOversketchingCurve(const QPointF &pos);
 
     void smooth();
+    void defRotAxis(int direction);
 
+
+public slots:
 
 protected:
 
@@ -319,6 +322,7 @@ private:
     QPainterPath oversketchingCurve;
 
 
+    void samplePointsForRotationalBlendingSurface(QPainterPath &selectedCurve);
 };
 
 #endif // INPUTSKETCH_H

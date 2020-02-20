@@ -56,7 +56,7 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
 
     glcanvas = std::make_shared < OpenGLCanvas > () ;
 
-    glcanvas->setMinimumSize( 250, 500 );
+    glcanvas->setMinimumSize( qApp->screens()[0]->size().width()*0.3, qApp->screens()[0]->size().height() );
 
     glcanvas->setOpenGLMediator( &openglmediator );
     canvas->setOpenGlMediator( &openglmediator );
@@ -75,7 +75,7 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
     canvas_window->setParent(dw_sketch);
 
     dw_sketch->setWidget(canvas.get());
-    dw_sketch->setMinimumSize( 900, 1000);
+    dw_sketch->setMinimumSize(qApp->screens()[0]->size().width()*0.4, qApp->screens()[0]->size().height());
 
 
     layers_dock = new QDockWidget( " Layers", this);
@@ -84,11 +84,10 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
 
     layers_window->setParent(layers_dock);
     layers_dock->setWidget(layers.get());
-    layers_dock->setMinimumSize( 150, 600);
+    layers->setMinimumSize(qApp->screens()[0]->size().width()*0.05, qApp->screens()[0]->size().height());
 
-    layers->openContourList->resize(layers_dock->width(), (layers_dock->height()-70)/3);
-    layers->closedContourList->resize(layers_dock->width(), (layers_dock->height()-70)/3);
-    layers->stripeContourList->resize(layers_dock->width(), (layers_dock->height()-70)/3);
+
+
 
 
     addDockWidget (Qt::LeftDockWidgetArea, dw_sketch) ;
@@ -119,7 +118,7 @@ void MainWindow::createCanvas1Toolbar () {
 
     toolbox = new QFrame(canvas.get());
     toolbox->setObjectName(QString::fromUtf8("toolbox"));
-    toolbox->resize(100, qApp->screens()[0]->size().height());
+    toolbox->resize(50, qApp->screens()[0]->size().height());
     toolbox->setFrameShape(QFrame::StyledPanel);
     toolbox->setFrameShadow(QFrame::Raised);
 
@@ -144,29 +143,29 @@ void MainWindow::createCanvas1Toolbar () {
     fileMenuButton = new QPushButton( canvas.get());
     fileMenuButton->setToolTip("File");
     fileMenuButton->setIcon(QIcon(":/icons/file_white.png"));
-    fileMenuButton->setGeometry(QRect(15, 10, 90, 70));
+    fileMenuButton->setGeometry(QRect(5, 5, 50, 50));
     fileMenuButton->setIconSize(fileMenuButton->size()*0.85);
 
     fileMenuButton->setMenu(fileMenu);
 
     movezoom_button = new QPushButton( canvas.get());
     movezoom_button->setToolTip("Move / Zoom");
-    movezoom_button->setGeometry(QRect(15, 90, 90, 70));
+    movezoom_button->setGeometry(QRect(5, 60, 50, 50));
     movezoom_button->setIcon(QIcon(":/icons/move_white.svg"));
     movezoom_button->setIconSize(movezoom_button->size()*0.8);
 
     openContour_button = new QPushButton( "Open \nContour" , canvas.get());
     openContour_button->setToolTip("Open Contour");
-    openContour_button->setGeometry(QRect(15, 170, 90, 70));
+    openContour_button->setGeometry(QRect(5, 115, 50, 50));
     //openContour_button->setCheckable(true);
 
     closedContour_button = new QPushButton( "Closed \nContour" , canvas.get());
     closedContour_button->setToolTip("Closed Contour");
-    closedContour_button->setGeometry(QRect(15, 250, 90, 70));
+    closedContour_button->setGeometry(QRect(5, 170, 50, 50));
 
     stripe_button = new QPushButton( "Stripe" , canvas.get());
     stripe_button->setToolTip("Stripe");
-    stripe_button->setGeometry(QRect(15, 330, 90, 70));
+    stripe_button->setGeometry(QRect(5, 225, 50, 50));
 
     ac_selectOverlapEffect1 = std::make_shared< QAction >("Contour", this );
     ac_selectOverlapEffect1.get()->setCheckable(true);
@@ -191,7 +190,7 @@ void MainWindow::createCanvas1Toolbar () {
 
     openContourEffect_MenuButton = new QPushButton(canvas.get());
     openContourEffect_MenuButton->setToolTip("Select Overlap Effect");
-    openContourEffect_MenuButton->setGeometry(QRect(90, 170, 15, 70));
+    openContourEffect_MenuButton->setGeometry(QRect(55, 115, 15, 50));
     openContourEffect_MenuButton->setMenu(openContourEffect_Menu);
 
     closedContourEffect_Menu = new QMenu("&tr");
@@ -203,22 +202,22 @@ void MainWindow::createCanvas1Toolbar () {
 
     closedContourEffect_MenuButton = new QPushButton(canvas.get());
     closedContourEffect_MenuButton->setToolTip("Select Overlap Effect");
-    closedContourEffect_MenuButton->setGeometry(QRect(90, 250, 15, 70));
+    closedContourEffect_MenuButton->setGeometry(QRect(55, 170, 15, 50));
     closedContourEffect_MenuButton->setMenu(closedContourEffect_Menu);
 
     selectCross_button = new QPushButton( "Cross" , canvas.get());
     selectCross_button->setToolTip("Cross Selection");
-    selectCross_button->setGeometry(QRect(15, 410, 90, 70));
+    selectCross_button->setGeometry(QRect(5, 280, 50, 50));
     selectCross_button->setIcon(QIcon(":/icons/cross.svg"));
 
     selectCrop_button = new QPushButton( "Brush" , canvas.get());
     selectCrop_button->setToolTip("Brush Selection");
-    selectCrop_button->setGeometry(QRect(15, 490, 90, 70));
+    selectCrop_button->setGeometry(QRect(5, 335, 50, 50));
     selectCrop_button->setIcon(QIcon(":/icons/edit.svg"));
 
     selectErase_button  = new QPushButton( "Erase" , canvas.get());
     selectErase_button->setToolTip("Erase");
-    selectErase_button->setGeometry(QRect(15, 570, 90, 70));
+    selectErase_button->setGeometry(QRect(5, 390, 50, 50));
     selectErase_button->setIcon(QIcon(":/icons/eraser.svg"));
 
 
@@ -238,17 +237,17 @@ void MainWindow::createCanvas1Toolbar () {
     //    modeMenu->addAction(ac_defRotAxis.get());
     //    modeMenu->addAction(ac_crossSecBlendSurface.get());
 
-    oversketch_button = new QPushButton("Oversketch" , canvas.get());
+    oversketch_button = new QPushButton("Over\nSketch" , canvas.get());
     oversketch_button->setToolTip("Oversketching Mode");
-    oversketch_button->setGeometry(QRect(15, 650, 90, 20));
+    oversketch_button->setGeometry(QRect(5, 445, 50, 50));
 
     smooth_button = new QPushButton("Smooth" , canvas.get());
     smooth_button->setToolTip("Smooth Contour");
-    smooth_button->setGeometry(QRect(15, 680, 90, 20));
+    smooth_button->setGeometry(QRect(5, 500, 50, 50));
 
-    defRotAxis_button = new QPushButton("Rotation Axis" , canvas.get());
+    defRotAxis_button = new QPushButton("Rotation\nAxis" , canvas.get());
     defRotAxis_button->setToolTip("Define Rotation Axis");
-    defRotAxis_button->setGeometry(QRect(15, 710, 90, 20));
+    defRotAxis_button->setGeometry(QRect(5, 555, 50, 50));
 
     //    modeMenuButton = new QPushButton("Editing \nMenu" , canvas.get());
     //    modeMenuButton->setToolTip("Select Mode");
@@ -262,11 +261,11 @@ void MainWindow::createCanvas1Toolbar () {
 
     view3dLines_button = new QPushButton ("View 3D ", canvas.get());
     view3dLines_button->setToolTip("View 3D");
-    view3dLines_button->setGeometry(QRect(15, 740, 90, 70));
+    view3dLines_button->setGeometry(QRect(5, 610, 50, 50));
 
     exportMesh_button = new QPushButton("Export \nMesh" , canvas.get());
     exportMesh_button->setToolTip("Export OFF & PLY");
-    exportMesh_button->setGeometry(QRect(15, 820, 90, 70));
+    exportMesh_button->setGeometry(QRect(5, 665, 50, 50));
 
     depth =  new QLabel ("  Depth Between Layers: ", canvas.get());
     depth->setGeometry(QRect(730, 900, 120, 30));
@@ -333,15 +332,15 @@ void MainWindow::createCanvas1Actions (){
 void MainWindow::createLayersDockToolbar(){
 
 
-    layerUp_button = new QPushButton("Up" , layers.get());
-    layerUp_button->setToolTip("Move UP");
-    layerUp_button->setGeometry(10, 20, 60, 30);
-    layerUp_button->setIcon(QIcon(":/icons/arrow_up.svg"));
+//    layerUp_button = new QPushButton("Up" , layers.get());
+//    layerUp_button->setToolTip("Move UP");
+//    layerUp_button->setGeometry(10, 20, 60, 30);
+//    layerUp_button->setIcon(QIcon(":/icons/arrow_up.svg"));
 
-    layerDown_button = new QPushButton("Down" , layers.get());
-    layerDown_button->setToolTip("Move Down");
-    layerDown_button->setGeometry(80, 20, 60, 30);
-    layerDown_button->setIcon(QIcon(":/icons/arrow_down.svg"));
+//    layerDown_button = new QPushButton("Down" , layers.get());
+//    layerDown_button->setToolTip("Move Down");
+//    layerDown_button->setGeometry(80, 20, 60, 30);
+//    layerDown_button->setIcon(QIcon(":/icons/arrow_down.svg"));
 
 
 }
@@ -355,12 +354,17 @@ void MainWindow::createLayersDockActions(){
 
 void MainWindow::resizeEvent(QResizeEvent *){
 
-    layers->openContourList->resize(layers_dock->width(), (layers_dock->height()-70)/3);
-    layers->closedContourList->resize(layers_dock->width(), (layers_dock->height()-70)/3);
-    layers->stripeContourList->resize(layers_dock->width(), (layers_dock->height()-70)/3);;
-    layers->openContourList->move(0,70);
-    layers->closedContourList->move(0,layers->openContourList->height()+70);
-    layers->stripeContourList->move(0,layers->openContourList->height()+layers->closedContourList->height()+70);
+    layers->openContourList->resize(layers_dock->width(), (layers_dock->height())/3);
+    layers->closedContourList->resize(layers_dock->width(), (layers_dock->height())/3);
+    layers->stripeContourList->resize(layers_dock->width(), (layers_dock->height())/3);;
+
+    layers->openContourList->resize(layers_dock->width(), (layers_dock->height())/3);
+    layers->closedContourList->resize(layers_dock->width(), (layers_dock->height())/3);
+    layers->stripeContourList->resize(layers_dock->width(), (layers_dock->height())/3);
+
+    //layers->openContourList->move(0,70);
+    layers->closedContourList->move(0,layers->openContourList->height());
+    layers->stripeContourList->move(0,layers->openContourList->height()+layers->closedContourList->height());
 
 }
 

@@ -65,6 +65,7 @@ void InputSketch::chooseStripes_Interaction()
     statusSketch = Interaction::STRIPES;
 }
 
+
 //************************************************************************************************
 /// ................................... OPEN CONTOURS ..........................................
 //************************************************************************************************
@@ -1366,8 +1367,14 @@ void InputSketch::joinPaths()
 
                     closedContourList[i].contour = QPainterPath();
                     closedContourList[i].contour.addPolygon(current_sketch);
+
                     smoothPath(closedContourList[i].contour);
+
+                    samplePointsForRotationalBlendingSurface(closedContourList[i].contour);
                     oversketchingCurve = QPainterPath();
+
+
+
 
                 } else {
 
@@ -1439,6 +1446,102 @@ void InputSketch::joinPaths()
 
 }
 
+void InputSketch::defRotAxis(int direction){
+
+    //Usar Bola do mouse para fazer rotacao ! Por enquanto...
+
+    if (direction == 1){
+        allShapesSampledPoints[selectedClosedContour].qr.push_front(allShapesSampledPoints[selectedClosedContour].ql.first());
+        allShapesSampledPoints[selectedClosedContour].ql.pop_front();
+
+        allShapesSampledPoints[selectedClosedContour].ql.push_back(allShapesSampledPoints[selectedClosedContour].qr.last());
+        allShapesSampledPoints[selectedClosedContour].qr.pop_back();
+
+
+    } else {
+        allShapesSampledPoints[selectedClosedContour].ql.push_front(allShapesSampledPoints[selectedClosedContour].qr.first());
+        allShapesSampledPoints[selectedClosedContour].qr.pop_front();
+
+        allShapesSampledPoints[selectedClosedContour].qr.push_back(allShapesSampledPoints[selectedClosedContour].ql.last());
+        allShapesSampledPoints[selectedClosedContour].ql.pop_back();
+    }
+
+
+    allShapesSampledPoints[selectedClosedContour].midPoints.clear();
+    allShapesSampledPoints[selectedClosedContour].midPointsPath = QPainterPath();
+
+    QPainterPath midPointsPath;
+
+    for (int i = 0; i < allShapesSampledPoints[selectedClosedContour].ql.size() ; ++i) {
+
+        QVector3D temp_ql(allShapesSampledPoints[selectedClosedContour].ql[i].x(),allShapesSampledPoints[selectedClosedContour].ql[i].y(), allShapesSampledPoints[selectedClosedContour].ql[i].z() );
+
+        QVector3D temp_qr(allShapesSampledPoints[selectedClosedContour].qr[i].x(),allShapesSampledPoints[selectedClosedContour].qr[i].y(), allShapesSampledPoints[selectedClosedContour].qr[i].z() );
+
+
+        allShapesSampledPoints[selectedClosedContour].midPoints.push_back((temp_ql + temp_qr) / 2);
+
+        if (i == 0){
+            midPointsPath.moveTo(allShapesSampledPoints[selectedClosedContour].midPoints[0].x(), allShapesSampledPoints[selectedClosedContour].midPoints[0].y());
+        } else {
+            midPointsPath.lineTo(allShapesSampledPoints[selectedClosedContour].midPoints[i].x(), allShapesSampledPoints[selectedClosedContour].midPoints[i].y());
+        }
+
+    }
+
+
+    allShapesSampledPoints[selectedClosedContour].midPointsPath = midPointsPath;
+
+    //RotationalBlendingSurface(selectedPathIndex, paths[selectedPathIndex] ,allShapesSampledPoints[selectedPathIndex].ql, allShapesSampledPoints[selectedPathIndex].qr);
+
+
+    update();
+}
+
+void InputSketch::samplePointsForRotationalBlendingSurface(QPainterPath &selectedCurve){
+
+
+
+    QVector<QPointF> sampledPointsOnCurve;
+
+    allSampledPoints t;
+
+    for (qreal j = 0; j < selectedCurve.length(); j = j + 5) {
+
+        sampledPointsOnCurve.push_back(selectedCurve.pointAtPercent(selectedCurve.percentAtLength(j)));
+
+    }
+
+    QPainterPath midPointsPath;
+
+    for (int j = 0; j < sampledPointsOnCurve.size()/2 ; j++) {
+
+        QVector3D temp_ql(sampledPointsOnCurve[j].x(),sampledPointsOnCurve[j].y(), 0 );
+
+        QVector3D temp_qr(sampledPointsOnCurve[sampledPointsOnCurve.size()-1-j].x(),sampledPointsOnCurve[sampledPointsOnCurve.size()-1-j].y(),0 );
+
+
+        t.midPoints.push_back((temp_ql + temp_qr) / 2);
+        t.ql.push_back(temp_ql);
+        t.qr.push_back(temp_qr);
+        if (j == 0){
+            midPointsPath.moveTo(t.midPoints[0].x(), t.midPoints[0].y());
+        } else {
+            midPointsPath.lineTo(t.midPoints[j].x(), t.midPoints[j].y());
+        }
+    }
+
+    t.midPointsPath = midPointsPath;
+
+    allShapesSampledPoints[selectedClosedContour] = allSampledPoints();
+
+    allShapesSampledPoints[selectedClosedContour] = t;
+
+    //RotationalBlendingSurface(selectedPathIndex, selectedCurve, t.ql, t.qr);
+
+
+}
+
 
 void InputSketch::smooth() {
 
@@ -1484,6 +1587,8 @@ void InputSketch::smooth() {
 
                 closedContourList[i].contour = QPainterPath();
                 closedContourList[i].contour = path;
+                samplePointsForRotationalBlendingSurface(path);
+
             }
         }
     }
@@ -1854,6 +1959,9 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
                 painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
                 painter->drawPath(closedContourList[i].contour);
+
+                painter->setPen(QPen(Qt::darkRed, 2,Qt::SolidLine));
+                painter->drawPath(allShapesSampledPoints[i].midPointsPath);
 
                 if (showLabels) painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
 
