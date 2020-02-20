@@ -9,7 +9,6 @@
 
 
 class Canvas;
-class Canvas2;
 class OpenGLCanvas;
 
 class OpenGLMediator
@@ -23,7 +22,7 @@ public:
     ~OpenGLMediator() = default;
 
     void setCanvas( const std::shared_ptr< Canvas >& cv );
-    void setCanvas2( const std::shared_ptr< Canvas2 >& cv2 );
+//    void setCanvas2( const std::shared_ptr< Canvas2 >& cv2 );
     void setGlCanvas( const std::shared_ptr< OpenGLCanvas >& glcanvas);
 
 //    void viewSketch3D(const QVector<QVector3D> points3D, const QVector<QString> pathNames);
@@ -31,18 +30,23 @@ public:
 
 
    // void viewStripe();
-    void viewOpenContours3D(const QVector<QVector3D> points3D);
+    void viewOpenContours3D(const QList<QVector<QVector3D>> points3D);
     void viewClosedContours3D(const QVector<QVector3D> points3D,  const QVector<QVector3D> normals3D);
     void viewStripes3D(const QVector<QVector3D> points3D);
 
     QVector<QVector3D> createCylinder(int steps, QVector3D base, QVector3D top);
     void exportMesh();
 
+    int nvertices = 0;
+
+    void render();
+
 protected:
 
     std::shared_ptr< Canvas > canvas = nullptr;
-    std::shared_ptr< Canvas2 > canvas2 = nullptr;
+    //std::shared_ptr< Canvas2 > canvas2 = nullptr;
     std::shared_ptr< OpenGLCanvas > glcanvas = nullptr;
+
 
 
 private:
@@ -66,7 +70,7 @@ private:
     std::vector< float > Svertices, Snormals;
     std::vector< unsigned int > Sfaces;
 
-    void render();
+
 
 
     bool getMesh(std::vector<float> &vertex_coordinates,

@@ -14,7 +14,9 @@ OpenGLCanvas::OpenGLCanvas()
 }
 
 void OpenGLCanvas::setOpenGLMediator (OpenGLMediator* glmed){
+
     glmediator = glmed;
+
 }
 
 void OpenGLCanvas::initializeGL(){

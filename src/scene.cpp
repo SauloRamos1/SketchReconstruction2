@@ -19,15 +19,26 @@
 
 Scene::Scene()
 {
-    setSceneRect(QRect (0,0,500,500));
+    setSceneRect(QRect (-50,0,750,750));
 
-    setBackgroundBrush(QColor(255,230,204));
+    //setBackgroundBrush(QColor(255,230,204));
+    setBackgroundBrush(QColor(179,179,179));
 
-    //addEllipse( 0, 0, 10, 10 );
+    //addEllipse( 0, 0, 10,0 10 );
 
-    addRect(QRect(0,0,500,500), QPen(QColor(179,179,179),1,Qt::SolidLine), Qt::white);
+    // addRect(0,0,750,750, QPen(QColor(179,179,179),1,Qt::SolidLine), Qt::white);
+    addRect(0,0,750,750, QPen(QColor(179,179,179),1,Qt::SolidLine), Qt::white);
     addItem ( &sketch );
 
+}
+
+void Scene::chooseDefaultInteraction(){
+    status = Interaction::DEFAULT;
+    sketch.interactionString = "Default";
+    sketch.chooseDefaultInteraction();
+
+    // qDebug () << "Move / Zoom Interaction";
+    update();
 }
 
 void Scene::chooseMoveZoom_Interaction(){
@@ -230,6 +241,14 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event){
     if (status == Interaction::DEFAULT){
         return;
     }
+
+    if (event->buttons() == Qt::LeftButton && status == Interaction::OVERSKETCHING){
+        setFocus();
+        leftButtonIsPressed = true;
+        sketch.createOversketchingCurve( pos );
+        update();
+    }
+
     if (event->buttons() == Qt::LeftButton && status == Interaction::OPENCONTOUR){
         setFocus();
         leftButtonIsPressed = true;
@@ -246,13 +265,15 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event){
     }
 
     if ( event->buttons() == Qt::LeftButton && status == Interaction::MOVE_ZOOM && imageItem->isUnderMouse()){
-
-        imageItem->setSelected(true);
-        startMovePos = pos;
+        if (imageItem->isVisible()){
+            imageItem->setSelected(true);
+            startMovePos = pos;
+        }
 
     } else if ( event->buttons() == Qt::LeftButton && status == Interaction::MOVE_ZOOM && !(imageItem->isUnderMouse())){
-
-        imageItem->setSelected(false);
+        if (imageItem->isVisible()){
+            imageItem->setSelected(false);
+        }
     }
 
     update();
@@ -267,6 +288,10 @@ void Scene::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     if (status == Interaction::DEFAULT){
         return;
     }
+    if (event->buttons() == Qt::LeftButton && status == Interaction::OVERSKETCHING){
+        sketch.addOversketchingCurve( pos );
+        QGraphicsScene::mouseMoveEvent(event);
+    }
     if (event->buttons() == Qt::LeftButton && status == Interaction::OPENCONTOUR){
         sketch.addOpenContour( pos );
         QGraphicsScene::mouseMoveEvent(event);
@@ -280,11 +305,12 @@ void Scene::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
         QGraphicsScene::mouseMoveEvent(event);
     }
     if (event->buttons() == Qt::LeftButton && status == Interaction::MOVE_ZOOM && imageItem->isSelected()){
-
-        imageItem->moveBy(pos.x() - startMovePos.x(), pos.y() - startMovePos.y() );
-        startMovePos = pos;
-        update();
-        QGraphicsScene::mouseMoveEvent(event);
+        if(imageItem->isVisible()){
+            imageItem->moveBy(pos.x() - startMovePos.x(), pos.y() - startMovePos.y() );
+            startMovePos = pos;
+            update();
+            QGraphicsScene::mouseMoveEvent(event);
+        }
     }
 
     sketch.mouseOverPoint(pos);
@@ -301,11 +327,29 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     if (status == Interaction::DEFAULT){
         return;
     }
+    if (status == Interaction::MOVE_ZOOM){
+        return;
+    }
+
+    if (status == Interaction::OVERSKETCHING){
+
+        static bool first_run = true;
+
+        //bool sketch_has_changed = sketch.joinPaths();
+
+        sketch.joinPaths();
+
+
+        update ();
+        QGraphicsScene::mouseReleaseEvent(event);
+    }
 
     if (event->button() & Qt::LeftButton && status == Interaction::OPENCONTOUR){
         sketch.saveOpenContour();
         leftButtonIsPressed = false;
+        emit openContourDone();
         QGraphicsScene::mouseReleaseEvent(event);
+
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::CLOSEDCONTOUR){
@@ -313,17 +357,25 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
         leftButtonIsPressed = false;
         emit closedContourDone();
         QGraphicsScene::mouseReleaseEvent(event);
+
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::STRIPES){
         sketch.saveStripeContour();
+
+        emit stripeContourDone();
+
         QGraphicsScene::mouseReleaseEvent(event);
+
     }
 
     if (event->button() & Qt::RightButton && status == Interaction::STRIPES){
 
         sketch.finishBand();
+        //emit stripeContourDone();
+        emit stripeContourDone();
         QGraphicsScene::mouseReleaseEvent(event);
+
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::CROSS_SELECTION){
@@ -387,6 +439,19 @@ void Scene::wheelEvent ( QGraphicsSceneWheelEvent *event )
         }
 
     }
+
+    if (status == Interaction::DEFINE_ROT_AXIS_MODE){
+        if ( event->delta() > 0 ) {
+
+            sketch.defRotAxis(1);
+            update();
+
+        } else if (event->delta() < 0) {
+
+            sketch.defRotAxis(-1);
+            update();
+        }
+    }
     event->accept();
 
     update ();
@@ -399,10 +464,11 @@ void Scene::keyPressEvent(QKeyEvent *event){
         if ( leftButtonIsPressed ){
 
             sketch.increaseOpenContourLevelWhileDrawing();
+            emit openContourDone();
 
         } else {
 
-            sketch.saveOpenContour();
+            //sketch.saveOpenContour();
 
             sketch.increaseLevel();
 
@@ -419,10 +485,11 @@ void Scene::keyPressEvent(QKeyEvent *event){
 
 
             sketch.decreaseOpenContourLevelWhileDrawing();
+            emit openContourDone();
 
         } else {
 
-            sketch.saveOpenContour();
+            //sketch.saveOpenContour();
 
             sketch.decreaseLevel();
 
@@ -473,23 +540,36 @@ void Scene::keyPressEvent(QKeyEvent *event){
     sketch.updateColorMap();
 }
 
+void Scene::changeLayerDifference (const int &difference){
 
-QVector<QVector3D> Scene::getOpenContoursPoints()
+    sketch.changeLayerDifference(difference);
+
+}
+
+void Scene::estimateShapes()
+{
+    sketch.estimateShapes();
+}
+
+QList<QVector<QVector3D>> Scene::getOpenContoursPoints()
 {
     return sketch.getOpenContoursPoints();
 }
 
-//QVector<QVector3D> Scene::getClosedContoursPoints()
-//{
-//    return sketch.getClosedContoursPoints();
-//}
+QVector<QVector3D> Scene::getClosedContoursPoints()
+{
+    return sketch.getClosedContoursPoints();
+}
+
+QVector<QVector3D> Scene::getClosedContoursNormals()
+{
+    return sketch.getClosedContoursNormals();
+}
 
 QVector<QVector3D> Scene::getStripes()
 {
     return sketch.getStripesPoints();
 }
-
-
 
 QPainterPath Scene::getClosedContour()
 {
@@ -503,16 +583,82 @@ int Scene::getClosedContourLevel()
 
 int Scene::getInteraction(){
 
-    if (status == Interaction::OPENCONTOUR){
+    if (status == Interaction::OPENCONTOUR)
         return 1;
-    }
-    if  (status == Interaction::STRIPES){
+
+    if (status == Interaction::CLOSEDCONTOUR)
+        return 2;
+
+    if  (status == Interaction::STRIPES)
         return 3;
-    }
+
     return 0;
 }
 
+/// === NEW LAYER IMPLEMENTATION
+///
+///
 
+QString Scene::getPathNames(){
+
+    return sketch.getPathNames();
+
+}
+
+void Scene::showLabels(bool showLabels)
+{
+    sketch.setShowLabels (showLabels);
+
+    //BUG Not updating Scene after just click on Show Labels, needs to move mouse;
+    update ();
+
+}
+
+void Scene::selectOpenContour(const int openContourIndex)
+{
+    sketch.selectOpenContour(openContourIndex);
+}
+
+void Scene::selectClosedContour(const int closedContourIndex)
+{
+    sketch.selectClosedContour(closedContourIndex);
+}
+
+void Scene::selectStripeContour(const int stripeContourIndex)
+{
+    sketch.selectStripeContour(stripeContourIndex);
+}
+
+void Scene::setOversketchingMode(){
+
+    status = Interaction::OVERSKETCHING;
+    sketch.interactionString = "Oversketching Mode";
+    update();
+
+}
+
+void Scene::smoothSketch(){
+
+
+    sketch.smooth();
+
+    update();
+}
+
+void Scene::setDefRotAxisMode(){
+
+    if (status == Interaction::DEFINE_ROT_AXIS_MODE){
+        status = Interaction::DEFAULT;
+        sketch.interactionString = "Define Rotation Axis Mode";
+        qDebug () << "Selection  Mode";
+    } else {
+        status = Interaction::DEFINE_ROT_AXIS_MODE;
+        sketch.interactionString = "Define Rotation Axis Mode";
+    }
+
+    qDebug () << "Define Rot Axis Mode";
+    update();
+}
 
 
 

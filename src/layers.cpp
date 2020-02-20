@@ -1,112 +1,97 @@
 #include "include/layers.h"
 
 
-#include <QMessageBox>
-
-
-#include "canvasmediator.h"
-
 Layers::Layers(){
 
-    connect (listWidget, SIGNAL (itemClicked(QListWidgetItem*)), this, SLOT (selectItem(QListWidgetItem *)));
-    connect (listWidget, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (renameItem(QListWidgetItem *)));
-    connect (listWidget, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (sendRenamedItem(QListWidgetItem *)));
+
+    openContourList = new QListWidget(this);
+    closedContourList = new QListWidget(this);
+    stripeContourList = new QListWidget(this);
+
+    connect (openContourList, SIGNAL (itemClicked(QListWidgetItem*)), this, SLOT (selectOpenContourItem(QListWidgetItem *)));
+    connect (closedContourList, SIGNAL (itemClicked(QListWidgetItem*)), this, SLOT (selectClosedContourItem(QListWidgetItem *)));
+    connect (stripeContourList, SIGNAL (itemClicked(QListWidgetItem*)), this, SLOT (selectStripeContourItem(QListWidgetItem *)));
+
+    connect (openContourList, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (renameOpenContourItem(QListWidgetItem *)));
+    connect (closedContourList, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (renameClosedContourItem(QListWidgetItem *)));
+    connect (stripeContourList, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (renameStripeContourItem(QListWidgetItem *)));
+
+    connect (openContourList, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (sendRenamedOpenContourItem(QListWidgetItem *)));
+    connect (closedContourList, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (sendRenamedClosedContourItem(QListWidgetItem *)));
+    connect (stripeContourList, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (sendRenamedStripeContourItem(QListWidgetItem *)));
 
 }
 
-void Layers::setMediator( CanvasMediator* med )
+void Layers::setCanvas( Canvas* cv )
 {
-    mediator = med;
+    canvas = cv;
 }
 
-void Layers::receiveNamePaths(const QString& namePath){
+void Layers::receiveNamePaths(const QString& name, const int& type){
 
-    QListWidgetItem *item = new QListWidgetItem(listWidget);
-
-    item->setText(namePath);
-    item->setFlags (item->flags () | Qt::ItemIsEditable);
-
-}
-
-void Layers::layerUpSelectedCurve(){
-
-    if( selectedItem == nullptr ) {
-        QMessageBox msgBox;
-        msgBox.setText("No contour was selected.");
-        msgBox.setInformativeText("Please select a curve before changing it's order");
-        msgBox.exec();
-
-        return;
-    }
-
-    if (listWidget->count() < 2){
-        return;
-    }
-
-    if (listWidget->row(selectedItem) == 0){
-        return;
-
-    } else {
-
-        int currentRow = listWidget->row(selectedItem);
-        int previousRow = currentRow - 1;
-
-        QListWidgetItem* itemOne = listWidget->takeItem(currentRow);
-
-        listWidget->insertItem( previousRow, itemOne );
+    if (type == 0) {
+        QListWidgetItem *item = new QListWidgetItem(name, openContourList);
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
 
     }
-
-}
-
-void Layers::layerDownSelectedCurve(){
-
-    if( selectedItem == nullptr ) {
-        QMessageBox msgBox;
-        msgBox.setText("No contour was selected.");
-        msgBox.setInformativeText("Please select a curve before changing it's order");
-        msgBox.exec();
-
-        return;
-    }
-
-    if (listWidget->count() < 2){
-        return;
-    }
-
-    if (listWidget->row(selectedItem) == listWidget->count() -1){
-        return;
-
-    } else {
-
-        int currentRow = listWidget->row(selectedItem);
-        int nextrow = currentRow + 1;
-
-        QListWidgetItem* itemOne = listWidget->takeItem(currentRow);
-
-        listWidget->insertItem( nextrow, itemOne );
+    if (type == 1) {
+        QListWidgetItem *item = new QListWidgetItem(name, closedContourList);
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
 
     }
+    if (type == 2) {
+        QListWidgetItem *item = new QListWidgetItem(name, stripeContourList);
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
 
+    }
 }
 
 
-void Layers::renameItem(QListWidgetItem *item){
+void Layers::renameOpenContourItem(QListWidgetItem *item){
 
-    listWidget->editItem(item);
+    openContourList->editItem(item);
+
+}
+void Layers::renameClosedContourItem(QListWidgetItem *item){
+
+    closedContourList->editItem(item);
+
+}
+void Layers::renameStripeContourItem(QListWidgetItem *item){
+
+    stripeContourList->editItem(item);
 
 }
 
-void Layers::sendRenamedItem(QListWidgetItem *item){
+void Layers::sendRenamedOpenContourItem(QListWidgetItem *item){
 
-    mediator->renamePath(listWidget->row(item),item->text());
+    //mediator->renamePath(listWidget->row(item),item->text());
+}
+void Layers::sendRenamedClosedContourItem(QListWidgetItem *item){
+
+    //mediator->renamePath(listWidget->row(item),item->text());
 }
 
-void Layers::selectItem(QListWidgetItem *item){
+void Layers::sendRenamedStripeContourItem(QListWidgetItem *item){
 
-    mediator->selectPath(listWidget->row(item));
-    selectedItem = item;
+    //mediator->renamePath(listWidget->row(item),item->text());
 }
+
+void Layers::selectOpenContourItem(QListWidgetItem *item){
+
+    canvas->selectOpenContour(openContourList->row(item));
+
+}
+void Layers::selectClosedContourItem(QListWidgetItem *item){
+
+    canvas->selectClosedContour(closedContourList->row(item));
+}
+
+void Layers::selectStripeContourItem(QListWidgetItem *item){
+
+    canvas->selectStripeContour(stripeContourList->row(item));
+
+}
+
 
 #include "moc_layers.cpp"
-

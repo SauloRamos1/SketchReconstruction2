@@ -17,6 +17,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Find the Qt5 library
 
 #set (CMAKE_PREFIX_PATH "C:\\Qt\\5.12.3\\msvc2017_64")
+#set (CMAKE_PREFIX_PATH "C:\\Qt\\5.12.5\\msvc2017_64")
 #set(Qt5_DIR "C:\\Qt\\5.12.5\\mingw73_64\\lib\\cmake\\Qt5" CACHE PATH "Initial cache" FORCE)
 find_package(Qt5 COMPONENTS Core Gui Widgets CONFIG REQUIRED)
 
@@ -49,18 +50,17 @@ set(SOURCES
     src/main_window.cpp
     src/canvas.cpp
     src/scene.cpp
-    src/canvasmediator.cpp
+#    src/canvasmediator.cpp
     src/input_sketch.cpp
     src/halfedge.cpp
     src/openglcanvas.cpp
-    src/canvas2.cpp
-    src/scene2.cpp
-    src/input_sketch2.cpp
+#    src/canvas2.cpp
+#    src/scene2.cpp
+#    src/input_sketch2.cpp
     src/layers.cpp
     src/sketch_utilities.cpp
     src/sketch_library.cpp
     src/openglmediator.cpp
-
 
     )
 
@@ -69,17 +69,16 @@ set(HEADERS
     include/main_window.h
     include/canvas.h
     include/scene.h
-    include/canvasmediator.h
+#    include/canvasmediator.h
     include/input_sketch.h
     include/halfedge.h
     include/openglcanvas.h
-    include/canvas2.h
-    include/scene2.h
-    include/input_sketch2.h
+#    include/canvas2.h
+#    include/scene2.h
+#    include/input_sketch2.h
     include/layers.h
     include/sketch_library.h
     include/openglmediator.h
-
 
 )
 
@@ -90,7 +89,7 @@ set(EXTERNAL_LIBS_DIR ${CMAKE_SOURCE_DIR}/libs)
 
 
 # Tell cmake to create the canvas executable
-add_executable(Canvas WIN32 ${SOURCES} resources.qrc)
+add_executable(Canvas WIN32 ${SOURCES} resources.qrc qdarkstyle/style.qrc)
 
 # Make the project's header dirs visible to building tools
 target_include_directories(Canvas PUBLIC ${HEADERS_DIR})

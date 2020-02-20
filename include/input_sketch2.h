@@ -9,7 +9,6 @@
 #include <QDialogButtonBox>
 
 
-
 #include <QHBoxLayout>
 #include "sketch_library.h"
 

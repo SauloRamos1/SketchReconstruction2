@@ -14,6 +14,7 @@
 #include <QLabel>
 #include <QGraphicsPixmapItem>
 #include <QFileDialog>
+#include <QWheelEvent>
 
 #include <include/input_sketch.h>
 #include <include/halfedge.h>
@@ -26,7 +27,7 @@ class Scene: public QGraphicsScene
     Q_OBJECT
 public:
 
-    enum class Interaction {DEFAULT, MOVE_ZOOM, OPENCONTOUR, CLOSEDCONTOUR, STRIPES, CROSS_SELECTION, CROP_SELECTION, ERASE_SELECTION};
+    enum class Interaction {DEFAULT, MOVE_ZOOM, OPENCONTOUR, CLOSEDCONTOUR, STRIPES, OVERSKETCHING, DEFINE_ROT_AXIS_MODE, CROSS_SELECTION, CROP_SELECTION, ERASE_SELECTION};
 
     Scene();
 
@@ -41,6 +42,8 @@ public:
     void loadSVG (const std::string& str);
     void loadIMG (const QString& fileName);
 
+
+    void chooseDefaultInteraction();
     void chooseMoveZoom_Interaction();
 
     void chooseOpenContour_Interaction();
@@ -56,8 +59,10 @@ public:
 
     void setBackgroundImage( const QString& url );
 
-    QVector<QVector3D> getOpenContoursPoints ();
-   // QVector<QVector3D> getClosedContoursPoints ();
+    QList<QVector<QVector3D>> getOpenContoursPoints ();
+    QVector<QVector3D> getClosedContoursPoints ();
+    QVector<QVector3D> getClosedContoursNormals ();
+
     QVector<QVector3D> getStripes ();
 
     QPainterPath getClosedContour();
@@ -68,6 +73,22 @@ public:
     Interaction status = Interaction::DEFAULT;
 
     int getInteraction();
+    void changeLayerDifference(const int &difference);
+
+    void estimateShapes();
+
+    ///NEW LAYER IMPLEMENTATION
+    QString getPathNames();
+
+    void showLabels (bool showLabels);
+
+    void selectOpenContour (const int openContourIndex);
+    void selectClosedContour (const int closedContourIndex);
+    void selectStripeContour (const int stripeContourIndex);
+
+    void setOversketchingMode();
+    void smoothSketch();
+    void setDefRotAxisMode();
 private:
 
 
@@ -91,9 +112,13 @@ private:
 
 signals:
 
+    void openContourDone();
+    void closedContourDone();
+    void stripeContourDone();
+
     void crossSelectionDone();
     void cropSelectionDone();
-    void closedContourDone();
+
 
 protected:
 

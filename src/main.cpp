@@ -10,7 +10,8 @@ int main(int argc, char **argv)
     MainWindow window;
 
 
-    window.showMaximized();
+    window.setFixedSize(1280,720);
+    window.show();
 
 
     return app.exec();

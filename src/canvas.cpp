@@ -1,5 +1,4 @@
 #include "include/canvas.h"
-#include "include/canvasmediator.h"
 
 Canvas::Canvas()
 {
@@ -13,10 +12,11 @@ Canvas::Canvas()
     createActions();
 }
 
-void Canvas::setMediator( CanvasMediator *med ){
+void Canvas::setLayers( Layers *ly ){
 
-    mediator = med;
+    layers = ly;
 }
+
 
 void Canvas::setOpenGlMediator (OpenGLMediator *glmed){
 
@@ -28,7 +28,10 @@ void Canvas::createActions()
 {
     connect( scene.get(), &Scene::crossSelectionDone, this, &Canvas::sendCrossSelectionCurves );
     connect( scene.get(), &Scene::cropSelectionDone, this, &Canvas::sendCropSelectionCurves );
-    connect( scene.get(), &Scene::closedContourDone, this, &Canvas::sendClosedContours);
+
+    connect( scene.get(), &Scene::openContourDone, this, &Canvas::sendOpenPathNames);
+    connect( scene.get(), &Scene::closedContourDone, this, &Canvas::sendClosedPathNames);
+    connect( scene.get(), &Scene::stripeContourDone, this, &Canvas::sendStripePathNames);
 }
 
 void Canvas::newFile()
@@ -87,11 +90,19 @@ void Canvas::moveZoomInteraction(){
 }
 
 void Canvas::setOpenContourInteraction(){
+    if (scene->getInteraction() == 1){
+        scene->chooseDefaultInteraction();
+
+        return;
+    }
+
     scene->chooseOpenContour_Interaction();
 }
+
 void Canvas::setClosedContourInteraction(){
     scene->chooseClosedContour_Interaction();
 }
+
 void Canvas::setStripesInteraction(){
     scene->chooseStripes_Interaction();
 }
@@ -111,26 +122,48 @@ void Canvas::eraseSelection(){
     scene->chooseErase_Selection();
 }
 
-void Canvas::sendClosedContours(){
-    mediator->sendClosedPaths(scene->getClosedContour(), scene->getClosedContourLevel());
+void Canvas::sendOpenPathNames(){
+
+   layers->receiveNamePaths(scene->getPathNames(), 0);
+
 }
+
+void Canvas::sendClosedPathNames(){
+
+   layers->receiveNamePaths(scene->getPathNames(), 1);
+
+}
+
+void Canvas::sendStripePathNames(){
+
+   layers->receiveNamePaths(scene->getPathNames(), 2);
+
+}
+
 
 void Canvas::sendCrossSelectionCurves()
 {
-    if ( mediator == nullptr ) return;
-    if ( scene->crossSelection().isEmpty()) return;
+//    if ( mediator == nullptr ) return;
+//    if ( scene->crossSelection().isEmpty()) return;
 
-    mediator->sendClosedPaths( scene->crossSelection(), scene->SelectionLineLevel() );
+//    mediator->sendClosedPaths( scene->crossSelection(), scene->SelectionLineLevel() );
 
 }
 
 void Canvas::sendCropSelectionCurves(){
 
-    if ( mediator == nullptr ) return;
-    if ( scene->cropSelection().isEmpty()) return;
+//    if ( mediator == nullptr ) return;
+//    if ( scene->cropSelection().isEmpty()) return;
 
-    mediator->closeAndSendPaths( scene->cropSelection(), scene->SelectionLineLevel() );
+//    mediator->closeAndSendPaths( scene->cropSelection(), scene->SelectionLineLevel() );
 }
+
+
+//void Canvas::viewOpenContour3D(){
+
+//     glmediator->viewOpenContours3D(scene->getOpenContoursPoints());
+
+//}
 
 void Canvas::viewOverlapping3D(){
 
@@ -138,13 +171,68 @@ void Canvas::viewOverlapping3D(){
 
     if (scene->getInteraction() == 1){
           glmediator->viewOpenContours3D(scene->getOpenContoursPoints());
-          //glmediator->render();
 
+    } else if (scene->getInteraction() == 2){
+
+        scene->estimateShapes();
+        glmediator->viewClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
+        //glmediator->render();
 
     } else if (scene->getInteraction() == 3){
         glmediator->viewStripes3D(scene->getStripes());
         //glmediator->render();
     }
+    glmediator->render();
+}
+
+void Canvas::exportMesh(){
+
+    glmediator->exportMesh();
+
+}
+
+void Canvas::showLabels(const int checked)
+{
+    if (checked == 0){
+        scene->showLabels(false);
+    } else {
+        scene->showLabels(true);
+    }
+}
+
+void Canvas::changeLayerDifference(const int &difference)
+{
+    scene->changeLayerDifference (difference);
+}
+
+void Canvas::selectOpenContour(const int openContourIndex)
+{
+    scene->chooseOpenContour_Interaction();
+    scene->selectOpenContour(openContourIndex);
+}
+
+void Canvas::selectClosedContour(const int closedContourIndex)
+{
+    scene->chooseClosedContour_Interaction();
+    scene->selectClosedContour(closedContourIndex);
+}
+
+void Canvas::selectStripeContour(const int stripeContourIndex)
+{
+    scene->chooseStripes_Interaction();
+    scene->selectStripeContour(stripeContourIndex);
+}
+
+void Canvas::setOversketchingMode (){
+    scene->setOversketchingMode();
+}
+
+void Canvas::smoothSketch (){
+    scene->smoothSketch();
+}
+
+void Canvas::setDefRotAxisMode (){
+    scene->setDefRotAxisMode();
 }
 
 

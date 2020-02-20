@@ -6,14 +6,14 @@
 #include <memory>
 
 #include <openglmediator.h>
+#include <layers.h>
 
 #include <QGraphicsView>
 #include <QColorDialog>
 
-
 #include "scene.h"
 
-class CanvasMediator;
+class Layers;
 class OpenGLMediator;
 
 class Canvas: public QGraphicsView
@@ -26,8 +26,7 @@ public:
         // tell compiler that it is ok to use a default destructor
         ~Canvas() = default;
 
-        void setMediator( CanvasMediator* med );
-
+        void setLayers( Layers* ly );
 
         void setOpenGlMediator(OpenGLMediator *glmed);
 
@@ -53,8 +52,6 @@ protected:
         void setClosedContourInteraction();
         void setStripesInteraction();
 
-
-
         void crossSelection();
         void cropSelection();
         void eraseSelection();
@@ -62,14 +59,33 @@ protected:
         void sendCrossSelectionCurves();
         void sendCropSelectionCurves();
 
-        void sendClosedContours();
-
+        void sendOpenPathNames();
+        void sendClosedPathNames();
+        void sendStripePathNames();
 
         void viewOverlapping3D();
+
+
+        void exportMesh();
+
+        void showLabels (const int checked);
+
+        //void viewOpenContour3D();
+
+        void changeLayerDifference(const int &difference);
+
+        void selectOpenContour (const int openContourIndex);
+        void selectClosedContour (const int closedContourIndex);
+        void selectStripeContour (const int stripeContourIndex);
+
+        void setOversketchingMode ();
+        void smoothSketch ();
+        void setDefRotAxisMode ();
+
 protected:
 
         std::shared_ptr< Scene > scene;
-        CanvasMediator* mediator = nullptr;
+        Layers* layers = nullptr;
         OpenGLMediator* glmediator = nullptr;
 
 private:

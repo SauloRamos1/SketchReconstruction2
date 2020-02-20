@@ -7,9 +7,11 @@
 #include <QtMath>
 #include <QVector3D>
 #include <QInputDialog>
+#include <QListWidget>
 
 #include "sketch_library.h"
 #include "halfedge.h"
+
 //#include "canvasmediator.h"
 
 
@@ -29,7 +31,8 @@ public:
     void drawPaths (const QVector<QPainterPath>& readsvgPaths);
 
     int number_subpaths();
-    void smooth();
+
+    void chooseDefaultInteraction();
 
     void chooseMoveZoom_Interaction();
 
@@ -46,7 +49,7 @@ public:
     void eraseSelection();
 
     QVector <HalfEdge*> cyclesList;
-    QString interactionString = "Defaulf Mode";
+    QString interactionString = "Default Mode";
 
 
     QPainterPath getCrossSelectionPath() const;
@@ -55,7 +58,7 @@ public:
     //QVector<QVector3D> getSketchedPaths ();
 
     QPolygonF getCurve() const;
-    bool joinPaths();
+    void joinPaths();
 
     void clear();
 
@@ -72,6 +75,7 @@ public:
 
     bool contour = true, halo = false, color = false, hatching = false;
     int lineLevel = 1;
+    int layerDifference = 10;
 
     void createOpenContour(const QPointF &pos);
     void createClosedContour(const QPointF &pos);
@@ -94,14 +98,41 @@ public:
     void increaseStripeContourLevelWhileDrawing();
     void decreaseStripeContourLevelWhileDrawing();
 
+    QPainterPath closePath(QPainterPath pathToBeClosed);
+    QPainterPath closeSVGSegments(const QVector<QPainterPath> &pathsToClose);
 
-    QVector<QVector3D> getOpenContoursPoints();
+    QList<QVector<QVector3D>> getOpenContoursPoints();
+    QVector<QVector3D> getClosedContoursPoints();
 
     QVector<QVector3D> getStripesPoints();
 
+    void changeLayerDifference(const int &difference);
     QPainterPath getClosedContour();
     int getClosedContourLevel();
     void updateColorMap();
+
+    QVector<QVector3D> getClosedContoursNormals();
+
+    void estimateShapes();
+
+    QString getPathNames();
+
+    void setShowLabels (bool _showLabels);
+
+    void selectOpenContour (const int openContourIndex);
+    void selectClosedContour (const int closedContourIndex);
+    void selectStripeContour (const int stripeContourIndex);
+
+
+    void createOversketchingCurve(const QPointF &pos);
+    void addOversketchingCurve(const QPointF &pos);
+
+    void smooth();
+    void defRotAxis(int direction);
+
+
+public slots:
+
 protected:
 
     void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) override;
@@ -112,21 +143,27 @@ protected:
 private:
 
     /// Open Contour
+    ///
+
+    // TER uma Lista de Itens para manda para o Layers
+
 
     struct QPainterPath3D {
         QPainterPath contour;
         int level;
+        QString name;
     };
 
     struct Stripe3D {
         QPainterPath contour, leftLine, rightLine;
         int level;
+        QString name;
     };
 
-    QList<QList<QPainterPath3D>> openContourList;
-    QList<QPainterPath3D> sameOpenContourList;
 
     QPainterPath openContour;
+    QList<QPainterPath3D> sameOpenContourList;
+    QList<QList<QPainterPath3D>> openContourList;
 
     /// --------
     /// Closed Contour
@@ -141,6 +178,7 @@ private:
     QList<Stripe3D> sameStripeContourList;
     QList<QList<Stripe3D>> stripeContourList;
 
+
     /// --------
     /// Gray Scale Lines
     ///
@@ -153,7 +191,17 @@ private:
 
     QVector <int> levelList;
 
+    bool showLabels = true;
+
+    QPainterPath selectedPath;
+
+
+
     /// --------
+    ///
+    ///
+
+    QList<QString> names;
 
     QPainterPath curve;
 
@@ -217,7 +265,64 @@ private:
 
     int stripeNumber = 0;
 
+    bool almostEqual (QPointF a, QPointF b);
 
+
+
+    //************************************************************************************************
+    /// ................................... InputSketch 2 ..........................................
+    //************************************************************************************************
+    struct Vertex{
+        QVector3D point3D;
+        int vertexNumber;
+    };
+
+    struct allSampledPoints{
+
+        QVector<QVector3D> midPoints, ql, qr;
+        QVector<double> anglesql, anglesqr;
+        QPainterPath midPointsPath;
+        QPainterPath crossSectionalRotationalPath;
+        QVector<QVector<Vertex>> shapePoints; // Matrix (u,v) points
+        //Incluir Paths and Names nesta Struct!! Mais facil organizacao
+        QString name;
+        QPainterPath contour; //Path, contour, curve
+    };
+
+    QVector<allSampledPoints> allShapesSampledPoints;
+
+    QPainterPath lastmidPointsPath;
+
+    void receiveSelectedPath (const QPainterPath &path, const QString &name, const int &lineLevel) ;
+
+
+    void RotationalBlendingSurface (const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr);
+
+    QVector <QVector3D> pointsFor3Ddisks;
+    QVector <QVector3D> normalsFor3Ddisks;
+
+    void DataForHRBF (const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr);
+
+//    QVector <QVector3D> totalPoints;
+//    QVector <QVector3D> totalNormals;
+
+    QVector <QLineF> normalsContour;
+
+    float getPathArea(QPainterPath p, float step);
+
+    int lastSelected = 5;
+    int selectedOpenContour;
+    int selectedClosedContour;
+    int selectedStripeContour;
+
+    int nOpenContours = 0;
+    int nClosedContours = 0;
+    int nStripeContours = 0;
+
+    QPainterPath oversketchingCurve;
+
+
+    void samplePointsForRotationalBlendingSurface(QPainterPath &selectedCurve);
 };
 
 #endif // INPUTSKETCH_H

@@ -6,9 +6,12 @@
 
 #include <QGraphicsView>
 #include <QListWidget>
+#include <QListWidgetItem>
+#include <QMessageBox>
 
+#include <canvas.h>
 
-class CanvasMediator;
+class Canvas;
 
 class Layers: public QWidget  {
 
@@ -20,26 +23,36 @@ public:
 
     ~Layers() = default;
 
-    void setMediator( CanvasMediator* med );
+    void setCanvas( Canvas* cv );
 
-    QListWidget *listWidget = new QListWidget(this);
-    QListWidgetItem *selectedItem = nullptr;
+    QListWidget *openContourList;
+    QListWidget *closedContourList;
+    QListWidget *stripeContourList;
+
+    QListWidgetItem *openContourSelectedItem = nullptr;
+    QListWidgetItem *closedContourSelectedItem = nullptr;
+    QListWidgetItem *stripeContourSelectedItem = nullptr;
 
 public slots:
 
-    void receiveNamePaths (const QString& namePath);
+    void receiveNamePaths (const QString& name, const int& type);
 
-    void layerUpSelectedCurve();
-    void layerDownSelectedCurve();
+    void selectOpenContourItem(QListWidgetItem *item);
+    void selectClosedContourItem(QListWidgetItem *item);
+    void selectStripeContourItem(QListWidgetItem *item);
 
-    void selectItem(QListWidgetItem *item);
-    void renameItem(QListWidgetItem *item);
-    void sendRenamedItem (QListWidgetItem *item);
+    void sendRenamedOpenContourItem (QListWidgetItem *item);
+    void sendRenamedClosedContourItem (QListWidgetItem *item);
+    void sendRenamedStripeContourItem (QListWidgetItem *item);
 
+
+    void renameOpenContourItem(QListWidgetItem *item);
+    void renameClosedContourItem(QListWidgetItem *item);
+    void renameStripeContourItem(QListWidgetItem *item);
 
 protected:
 
-    CanvasMediator* mediator = nullptr;
+    Canvas* canvas = nullptr;
 
 private:
 
@@ -52,13 +65,3 @@ private:
 
 
 #endif // LAYERS_H
-
-
-
-
-
-
-
-
-
-

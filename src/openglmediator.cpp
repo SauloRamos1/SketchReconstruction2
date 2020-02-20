@@ -26,11 +26,6 @@ void OpenGLMediator::setCanvas(const std::shared_ptr<Canvas> &cv)
     canvas = cv;
 }
 
-void OpenGLMediator::setCanvas2(const std::shared_ptr<Canvas2> &cv2)
-{
-    canvas2 = cv2;
-}
-
 void OpenGLMediator::setGlCanvas(const std::shared_ptr< OpenGLCanvas >& gl)
 {
     glcanvas = gl;
@@ -38,6 +33,15 @@ void OpenGLMediator::setGlCanvas(const std::shared_ptr< OpenGLCanvas >& gl)
 
 void OpenGLMediator::exportMesh(){
 
+    if (vertices.size() == 0 ) {
+
+        QMessageBox msgBox;
+        msgBox.setText("No mesh to export.");
+        msgBox.setInformativeText("No mesh to export.");
+        msgBox.exec();
+        return;
+        
+    }
     //Export OFF
     std::string outFile = "mesh.off";
     //outFile.append("mesh.off");
@@ -62,41 +66,41 @@ void OpenGLMediator::exportMesh(){
 
     //Export PLY
 
-//    std::string outFile3 = "stripe_mesh";
-//    outFile3.append(".ply");
+    //    std::string outFile3 = "stripe_mesh";
+    //    outFile3.append(".ply");
 
-//    fOut.open(outFile3.c_str());
+    //    fOut.open(outFile3.c_str());
 
 
-//    fOut << "ply" <<std::endl;
-//    fOut << "format ascii 1.0" << std::endl;
-//    fOut << "element vertex " << vertices.size() <<  std::endl;
+    //    fOut << "ply" <<std::endl;
+    //    fOut << "format ascii 1.0" << std::endl;
+    //    fOut << "element vertex " << vertices.size() <<  std::endl;
 
-//    fOut << "property float x" << std::endl;
-//    fOut << "property float y" << std::endl;
-//    fOut << "property float z" << std::endl;
+    //    fOut << "property float x" << std::endl;
+    //    fOut << "property float y" << std::endl;
+    //    fOut << "property float z" << std::endl;
 
-//    fOut << "element face " << faces.size()/3 << std::endl;
+    //    fOut << "element face " << faces.size()/3 << std::endl;
 
-//    fOut << "property list uchar uint vertex" << std::endl;
+    //    fOut << "property list uchar uint vertex" << std::endl;
 
-//    fOut << "end_header" << std::endl;
+    //    fOut << "end_header" << std::endl;
 
-//    for (int i = 0 ; i < vertices.size(); i = i+3){
-//        fOut << vertices[i] << " " << vertices[i+1] << " " << vertices[i+2] << std::endl;
+    //    for (int i = 0 ; i < vertices.size(); i = i+3){
+    //        fOut << vertices[i] << " " << vertices[i+1] << " " << vertices[i+2] << std::endl;
 
-//    }
+    //    }
 
-//    for (int m = 0; m < faces.size(); m=m+3) {
-//        fOut << 3 << " "<< faces[m] <<" "<< faces[m+1]  <<" "<< faces[m+2]  << std::endl;
-//    }
+    //    for (int m = 0; m < faces.size(); m=m+3) {
+    //        fOut << 3 << " "<< faces[m] <<" "<< faces[m+1]  <<" "<< faces[m+2]  << std::endl;
+    //    }
 
-//    fOut.close();
+    //    fOut.close();
 
-//    pathsList.clear();
-//    svgPaths.clear();
+    //    pathsList.clear();
+    //    svgPaths.clear();
 
-//    update();
+    //    update();
 
 }
 
@@ -191,7 +195,10 @@ QVector3D OpenGLMediator::CalculateSurfaceNormal(QVector3D p0, QVector3D p1, QVe
 }
 
 //CREATE TRIANGLES, FACES AND NORMALS FOR RENDERING
-void OpenGLMediator::viewOpenContours3D (const QVector<QVector3D> points3D){
+void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points3D){
+
+
+    qDebug () << points3D.size();
 
     if( points3D.isEmpty() ) {
         QMessageBox msgBox;
@@ -202,108 +209,99 @@ void OpenGLMediator::viewOpenContours3D (const QVector<QVector3D> points3D){
         return;
     }
 
-    //    std::vector< float > vertices, normals;
-    //    std::vector< unsigned int > faces; //or indices
-
-//    OCvertices.clear();
-//    OCnormals.clear();
-//    OCfaces.clear();
 
     int steps = 8;
 
-    QVector<QVector<QVector3D> > vertexMatrix;
 
-    for (int i = 0; i < points3D.size()-1;i++){
+    for (int h = 0 ; h < points3D.size(); h++){
 
-        QVector<QVector3D> diskVertices = createCylinder(steps, points3D[i], points3D[i+1]);
+        QVector<QVector<QVector3D> > vertexMatrix;
 
-        vertexMatrix.append(diskVertices);
-        for (int j = 0; j < diskVertices.size(); j++) {
+        for (int i = 0; i < points3D[h].size()-1; i++){
 
-            QVector3D normal = diskVertices[j] - points3D[i];
-            normal.normalize();
-            OCnormals.push_back(normal.x());
-            OCnormals.push_back(normal.y());
-            OCnormals.push_back(normal.z());
+            QVector<QVector3D> diskVertices = createCylinder(steps, points3D[h][i], points3D[h][i+1]);
 
-            OCvertices.push_back(diskVertices[j].x());
-            OCvertices.push_back(diskVertices[j].y());
-            OCvertices.push_back(diskVertices[j].z());
+            vertexMatrix.append(diskVertices);
+            for (int j = 0; j < diskVertices.size(); j++) {
 
-        }
-    }
-    QVector<QVector<int> > topology;
+                QVector3D normal = diskVertices[j] - points3D[h][i];
+                normal.normalize();
+                normals.push_back(normal.x());
+                normals.push_back(normal.y());
+                normals.push_back(normal.z());
 
-    QVector<int> quadTopology (4);
+                vertices.push_back(diskVertices[j].x());
+                vertices.push_back(diskVertices[j].y());
+                vertices.push_back(diskVertices[j].z());
 
-    QVector<int> lastQuad (4);
-
-    //int nfaces = faces.size();
-
-    for (int i = 0; i < vertexMatrix.size() - 1; ++i) {
-
-        lastQuad[1] = vertexMatrix[i].size() * i;
-        lastQuad[2] = vertexMatrix[i].size() * ( i+1 );
-
-        for (int j = 0; j < vertexMatrix[i].size() - 1; ++j){
-
-            quadTopology[0] = (vertexMatrix[i].size() * i) + j;
-            quadTopology[1] = (vertexMatrix[i].size() * i) + j + 1;
-            quadTopology[2] = (vertexMatrix[i].size() * (i + 1)) + j + 1;
-            quadTopology[3] = (vertexMatrix[i].size() * (i + 1)) + j;
-
-            lastQuad[0] =  (vertexMatrix[i].size() * i) + j + 1;
-            lastQuad[3] = (vertexMatrix[i].size() * (i + 1)) + j + 1;
-
-            OCfaces.push_back(quadTopology[0]);
-            OCfaces.push_back(quadTopology[1]);
-            OCfaces.push_back(quadTopology[2]);
-            OCfaces.push_back(quadTopology[0]);
-            OCfaces.push_back(quadTopology[2]);
-            OCfaces.push_back(quadTopology[3]);
-
+            }
         }
 
-        //        quadTopology[0] = vertexMatrix[i].last().vertexNumber;
-        //        quadTopology[1] = vertexMatrix[i].first().vertexNumber;
-        //        quadTopology[2] = vertexMatrix[i+1].first().vertexNumber;
-        //        quadTopology[3] = vertexMatrix[i+1].last().vertexNumber;
 
-        OCfaces.push_back(lastQuad[0]);
-        OCfaces.push_back(lastQuad[1]);
-        OCfaces.push_back(lastQuad[2]);
-        OCfaces.push_back(lastQuad[0]);
-        OCfaces.push_back(lastQuad[2]);
-        OCfaces.push_back(lastQuad[3]);
+        QVector<QVector<int> > topology;
 
+        QVector<int> quadTopology (4);
+
+        QVector<int> lastQuad (4);
+
+        //int nfaces = faces.size();
+
+        for (int i = 0; i < vertexMatrix.size() - 1; ++i) {
+
+            lastQuad[1] = vertexMatrix[i].size() * i;
+            lastQuad[2] = vertexMatrix[i].size() * ( i+1 );
+
+            for (int j = 0; j < vertexMatrix[i].size() - 1; ++j){
+
+                quadTopology[0] = (vertexMatrix[i].size() * i) + j;
+                quadTopology[1] = (vertexMatrix[i].size() * i) + j + 1;
+                quadTopology[2] = (vertexMatrix[i].size() * (i + 1)) + j + 1;
+                quadTopology[3] = (vertexMatrix[i].size() * (i + 1)) + j;
+
+                lastQuad[0] =  (vertexMatrix[i].size() * i) + j + 1;
+                lastQuad[3] = (vertexMatrix[i].size() * (i + 1)) + j + 1;
+
+                faces.push_back(quadTopology[0]+nvertices);
+                faces.push_back(quadTopology[1]+nvertices);
+                faces.push_back(quadTopology[2]+nvertices);
+                faces.push_back(quadTopology[0]+nvertices);
+                faces.push_back(quadTopology[2]+nvertices);
+                faces.push_back(quadTopology[3]+nvertices);
+
+            }
+
+            //        quadTopology[0] = vertexMatrix[i].last().vertexNumber;
+            //        quadTopology[1] = vertexMatrix[i].first().vertexNumber;
+            //        quadTopology[2] = vertexMatrix[i+1].first().vertexNumber;
+            //        quadTopology[3] = vertexMatrix[i+1].last().vertexNumber;
+
+            faces.push_back(lastQuad[0]+nvertices);
+            faces.push_back(lastQuad[1]+nvertices);
+            faces.push_back(lastQuad[2]+nvertices);
+            faces.push_back(lastQuad[0]+nvertices);
+            faces.push_back(lastQuad[2]+nvertices);
+            faces.push_back(lastQuad[3]+nvertices);
+
+
+
+
+        }
+        nvertices = vertices.size()/3;
 
     }
 
-    qDebug () << "Vertices" << OCvertices.size()/3;
-    qDebug () << "Faces deve ser" << OCvertices.size()/3-steps;
-    qDebug () << "faces eh:" << OCfaces.size()/3;
 
-
-
-
-    // 7 | 4 | 5
-    // 6 | 0 | 1
-
-    //    qDebug () << "Vertices: " << vertices.size()/3;
-    //    qDebug () << "Faces: " << faces.size();
-    //    qDebug () << "Normais: " << normals.size()/3;
-
-    //setShape(points3D);
-
-    //getMeshPath (vertices, faces, normals);
-
-    //normals.clear();
-
-    render () ;
-
+    // render () ;
     //glcanvas->createTube(vertices, faces, normals);
 
-    //glcanvas->renderCylinder(points3D);
+
+    //exportMesh();
+
+
+    //   render () ;
+
+
+
 }
 
 void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, const QVector<QVector3D> normals3D){
@@ -318,9 +316,9 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
     //    std::vector< float > vertices, normals;
     //    std::vector< unsigned int > faces;
 
-//    CCvertices.clear();
-//    CCnormals.clear();
-//    CCfaces.clear();
+    //    CCvertices.clear();
+    //    CCnormals.clear();
+    //    CCfaces.clear();
 
     int steps = 16;
     int centerVertexNumber = 0;
@@ -329,16 +327,16 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
 
         QVector<QVector3D> diskVertices = createCylinder(steps, points3D[i], points3D[i] + normals3D[i]);
 
-        CCvertices.push_back(points3D[i].x());
-        CCvertices.push_back(points3D[i].y());
-        CCvertices.push_back(points3D[i].z());
+        vertices.push_back(points3D[i].x());
+        vertices.push_back(points3D[i].y());
+        vertices.push_back(points3D[i].z());
 
         QVector3D normal = normals3D[i];
 
         normal.normalize();
-        CCnormals.push_back(normal.x());
-        CCnormals.push_back(normal.y());
-        CCnormals.push_back(normal.z());
+        normals.push_back(normal.x());
+        normals.push_back(normal.y());
+        normals.push_back(normal.z());
 
         //  qDebug () << points3D[i];
 
@@ -347,38 +345,42 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
             QVector3D normal = normals3D[i];
 
             normal.normalize();
-            CCnormals.push_back(normal.x());
-            CCnormals.push_back(normal.y());
-            CCnormals.push_back(normal.z());
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
 
             //nvertices ++;
 
-            CCvertices.push_back(diskVertices[j].x());
-            CCvertices.push_back(diskVertices[j].y());
-            CCvertices.push_back(diskVertices[j].z());
+            vertices.push_back(diskVertices[j].x());
+            vertices.push_back(diskVertices[j].y());
+            vertices.push_back(diskVertices[j].z());
 
         }
 
 
         for (int k = 1; k < diskVertices.size(); k++) {
 
-            CCfaces.push_back(centerVertexNumber);
-            CCfaces.push_back(centerVertexNumber+k);
-            CCfaces.push_back(centerVertexNumber+k+1);
+            faces.push_back(centerVertexNumber+nvertices);
+            faces.push_back(centerVertexNumber+k+nvertices);
+            faces.push_back(centerVertexNumber+k+1+nvertices);
 
 
         }
 
 
-        CCfaces.push_back(centerVertexNumber);
-        CCfaces.push_back(centerVertexNumber+diskVertices.size());
-        CCfaces.push_back(centerVertexNumber+1);
+        faces.push_back(centerVertexNumber+nvertices);
+        faces.push_back(centerVertexNumber+diskVertices.size()+nvertices);
+        faces.push_back(centerVertexNumber+1+nvertices);
 
 
 
         centerVertexNumber += diskVertices.size()+1;
 
+
     }
+
+
+    nvertices = vertices.size()/3;
 
 
     //setShape(points3D);
@@ -389,7 +391,7 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
     //    qDebug () << "Faces: " << faces.size();
     //    qDebug () << "Normais: " << normals.size()/3;
 
-    render ();
+    // render ();
     //glcanvas->createTube(vertices, faces, normals);
 
     //    vertices.clear();
@@ -411,9 +413,9 @@ void OpenGLMediator::viewStripes3D (const QVector<QVector3D> points3D){
     //    std::vector< float > vertices, normals;
     //    std::vector< unsigned int > faces;
 
-//    Svertices.clear();
-//    Snormals.clear();
-//    Sfaces.clear();
+    //    Svertices.clear();
+    //    Snormals.clear();
+    //    Sfaces.clear();
 
     QPolygonF quad;
     QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
@@ -502,7 +504,7 @@ void OpenGLMediator::viewStripes3D (const QVector<QVector3D> points3D){
 
     //    getMeshPath (vertices, faces, normals);
 
-    render();
+    // render();
     //glcanvas->createTube(vertices, faces, normals);
 
     //    vertices.clear();
@@ -769,51 +771,7 @@ QPainterPath OpenGLMediator::resizePath(QPainterPath &path){
 
 void OpenGLMediator::render()
 {
-
-    vertices.clear();
-    normals.clear();
-    faces.clear();
-
-    std::copy(OCvertices.begin(), OCvertices.end(), std::back_inserter(vertices));
-    std::copy(OCnormals.begin(), OCnormals.end(), std::back_inserter(normals));
-    std::copy(OCfaces.begin(), OCfaces.end(), std::back_inserter(faces));
-
-    unsigned int lastIndex = 0;
-    foreach (unsigned int indice, faces) {
-        if (indice > lastIndex) {
-            lastIndex = indice;
-        }
-    }
-
-    lastIndex++;
-    std::copy(CCvertices.begin(), CCvertices.end(), std::back_inserter(vertices));
-    std::copy(CCnormals.begin(), CCnormals.end(), std::back_inserter(normals));
-
-    //unsigned int facessize = faces.size()-1;
-    foreach (unsigned int indice, CCfaces) {
-        faces.push_back(indice+lastIndex);
-    }
-
-    lastIndex = 0;
-    foreach (unsigned int indice, faces) {
-        if (indice > lastIndex) {
-            lastIndex = indice;
-        }
-    }
-
-    lastIndex++;
-
-    std::copy(Svertices.begin(), Svertices.end(), std::back_inserter(vertices));
-    std::copy(Snormals.begin(), Snormals.end(), std::back_inserter(normals));
-
-    foreach (unsigned int indice, Sfaces) {
-        faces.push_back(indice+lastIndex);
-    }
-
-
     glcanvas->createTube(vertices, faces, normals);
-
-
 }
 
 bool OpenGLMediator::getMeshPath(std::vector<float> &vertex_coordinates, std::vector<unsigned int> &triangle_list, std::vector<float> &normal_list){
