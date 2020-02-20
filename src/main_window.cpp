@@ -10,7 +10,8 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
 
 
 
-    //TODO TESTE MAIN WINDOW
+    //TODO ->  FIX ALL CODE FOR STRIPES-rendering
+
 
     //************************************************************************************************
     /// ........................................ STYLESHEET ..........................................

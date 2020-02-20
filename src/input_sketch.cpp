@@ -1379,7 +1379,7 @@ void InputSketch::joinPaths()
 
     } break;
 
-    case 2 :{
+    case 2 :{/// TODO -> Create Routine for Oversketching for Stripes
         int count = 0;
 
         for (int i = 0 ; i < sameStripeContourList.size() ; i++){
