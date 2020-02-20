@@ -1278,18 +1278,19 @@ void InputSketch::joinPaths()
 
                 if (selectedOpenContour == count){
 
+                    //  ------- OVERSKETCH -------
                     prepareGeometryChange();
                     QPolygonF current_sketch;
-                    for (int i = 0; i < openContourList[i][j].contour.toSubpathPolygons().size(); ++i) {
-                        current_sketch << openContourList[i][j].contour.toSubpathPolygons().at(i);
+                    for (int k = 0; k < openContourList[i][j].contour.toSubpathPolygons().size(); ++k) {
+                        current_sketch << openContourList[i][j].contour.toSubpathPolygons().at(k);
                     }
 
-                    //  ------- Smooth -------
+
 
                     QPolygonF polygon_list;
 
-                    for (int i = 0; i < oversketchingCurve.toSubpathPolygons().size(); ++i) {
-                        polygon_list << oversketchingCurve.toSubpathPolygons().at(i);
+                    for (int k = 0; k < oversketchingCurve.toSubpathPolygons().size(); ++k) {
+                        polygon_list << oversketchingCurve.toSubpathPolygons().at(k);
                     }
                     oversketchingCurve = QPainterPath();
 
@@ -1329,9 +1330,105 @@ void InputSketch::joinPaths()
 
     case 1 :{
 
+        for (int i = 0 ; i < closedContourList.size(); i++) {
+
+            if (selectedClosedContour == i){
+
+                //  ------- OVERSKETCH -------
+                prepareGeometryChange();
+                QPolygonF current_sketch;
+                for (int j = 0; j < closedContourList[i].contour.toSubpathPolygons().size(); ++j) {
+                    current_sketch << closedContourList[i].contour.toSubpathPolygons().at(j);
+                }
+
+                QPolygonF polygon_list;
+
+                for (int j = 0; j < oversketchingCurve.toSubpathPolygons().size(); ++j) {
+                    polygon_list << oversketchingCurve.toSubpathPolygons().at(i);
+                }
+                oversketchingCurve = QPainterPath();
+
+                auto polygon_curve = SketchLibrary::smooth( polygon_list );
+                oversketchingCurve.addPolygon(polygon_curve);
+                QPolygonF new_sketch;
+                for (int j = 0; j < oversketchingCurve.toSubpathPolygons().size(); ++j) {
+                    new_sketch << oversketchingCurve.toSubpathPolygons().at(i);
+                }
+
+                smoothPath(oversketchingCurve);
+                smoothPath(oversketchingCurve);
+                smoothPath(oversketchingCurve);
+
+                bool changed = SketchLibrary::overSketch( current_sketch, new_sketch );
+                //Means that an oversketch happened
+                if ( changed )
+                {
+
+                    closedContourList[i].contour = QPainterPath();
+                    closedContourList[i].contour.addPolygon(current_sketch);
+                    smoothPath(closedContourList[i].contour);
+                    oversketchingCurve = QPainterPath();
+
+                } else {
+
+                    qDebug () << "Sketch didn't change!";
+                }
+
+            }
+        }
+
     } break;
 
     case 2 :{
+        int count = 0;
+
+        for (int i = 0 ; i < sameStripeContourList.size() ; i++){
+
+            //  ------- OVERSKETCH -------
+            prepareGeometryChange();
+            QPolygonF current_sketch;
+            for (int i = 0; i < sameStripeContourList[i].contour.toSubpathPolygons().size(); ++i) {
+                current_sketch << sameStripeContourList[i].contour.toSubpathPolygons().at(i);
+            }
+
+
+
+            QPolygonF polygon_list;
+
+            for (int i = 0; i < oversketchingCurve.toSubpathPolygons().size(); ++i) {
+                polygon_list << oversketchingCurve.toSubpathPolygons().at(i);
+            }
+            oversketchingCurve = QPainterPath();
+
+            auto polygon_curve = SketchLibrary::smooth( polygon_list );
+            oversketchingCurve.addPolygon(polygon_curve);
+            QPolygonF new_sketch;
+            for (int i = 0; i < oversketchingCurve.toSubpathPolygons().size(); ++i) {
+                new_sketch << oversketchingCurve.toSubpathPolygons().at(i);
+            }
+
+            smoothPath(oversketchingCurve);
+            smoothPath(oversketchingCurve);
+            smoothPath(oversketchingCurve);
+
+            bool changed = SketchLibrary::overSketch( current_sketch, new_sketch );
+            //Means that an oversketch happened
+            if ( changed )
+            {
+
+                sameStripeContourList[i].contour = QPainterPath();
+                sameStripeContourList[i].contour.addPolygon(current_sketch);
+                smoothPath(closedContourList[i].contour);
+                sameStripeContourList[i].contour = QPainterPath();
+
+            } else {
+
+                qDebug () << "Sketch didn't change!";
+            }
+            count ++ ;
+
+        }
+
 
     } break;
 
