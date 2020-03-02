@@ -11,6 +11,8 @@ int main(int argc, char **argv)
 
 
     window.setFixedSize(1280,720);
+
+    //window.showMaximized();
     window.show();
 
 

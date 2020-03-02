@@ -43,6 +43,8 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
     //************************************************************************************************
     /// ........................................ LINKERS ..........................................
     //************************************************************************************************
+    int windowWidth = 1280;
+    int windowHeight = 720;
 
 
     canvas = std::make_shared< Canvas > ();
@@ -56,7 +58,7 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
 
     glcanvas = std::make_shared < OpenGLCanvas > () ;
 
-    glcanvas->setMinimumSize( qApp->screens()[0]->size().width()*0.3, qApp->screens()[0]->size().height() );
+    glcanvas->setMinimumSize(windowWidth*0.3, windowHeight );
 
     glcanvas->setOpenGLMediator( &openglmediator );
     canvas->setOpenGlMediator( &openglmediator );
@@ -69,13 +71,15 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
     /// ........................................ QDockWidgets ..........................................
     //************************************************************************************************
 
+
     dw_sketch = new QDockWidget ( " Sketch Segmentation", this);
     QMainWindow *canvas_window = new QMainWindow(dw_sketch);
 
     canvas_window->setParent(dw_sketch);
 
     dw_sketch->setWidget(canvas.get());
-    dw_sketch->setMinimumSize(qApp->screens()[0]->size().width()*0.4, qApp->screens()[0]->size().height());
+    dw_sketch->setMinimumSize(windowWidth*0.47, windowHeight);
+    //dw_sketch->resize(windowWidth*0.5, windowHeight);
 
 
     layers_dock = new QDockWidget( " Layers", this);
@@ -84,17 +88,14 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
 
     layers_window->setParent(layers_dock);
     layers_dock->setWidget(layers.get());
-    layers->setMinimumSize(qApp->screens()[0]->size().width()*0.05, qApp->screens()[0]->size().height());
-
-
-
+    layers_dock->setFixedSize(windowWidth*0.05, windowHeight);
 
 
     addDockWidget (Qt::LeftDockWidgetArea, dw_sketch) ;
     addDockWidget(Qt::LeftDockWidgetArea, layers_dock);
 
 
-    splitDockWidget( dw_sketch, layers_dock, Qt::Horizontal);
+    splitDockWidget(layers_dock, dw_sketch, Qt::Horizontal);
 
     setCentralWidget( glcanvas.get() );
 
