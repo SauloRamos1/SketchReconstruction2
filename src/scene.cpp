@@ -242,6 +242,12 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event){
     if (status == Interaction::DEFAULT){
         return;
     }
+    if (event->buttons() == Qt::LeftButton && status == Interaction::CROSS_SELECTION){
+        setFocus();
+        leftButtonIsPressed = true;
+        sketch.createSelectionCurve( pos );
+        update();
+    }
 
     if (event->buttons() == Qt::LeftButton && status == Interaction::OVERSKETCHING){
         setFocus();
@@ -288,6 +294,10 @@ void Scene::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
 
     if (status == Interaction::DEFAULT){
         return;
+    }
+    if (event->buttons() == Qt::LeftButton && status == Interaction::CROSS_SELECTION){
+        sketch.addSelectionCurve( pos );
+        QGraphicsScene::mouseMoveEvent(event);
     }
     if (event->buttons() == Qt::LeftButton && status == Interaction::OVERSKETCHING){
         sketch.addOversketchingCurve( pos );

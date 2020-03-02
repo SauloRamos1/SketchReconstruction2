@@ -44,6 +44,9 @@ public:
     void chooseCropSelection();
     void chooseEraseSelection();
 
+    void createSelectionCurve(const QPointF &pos);
+    void addSelectionCurve(const QPointF &pos);
+
     void crossSelection();
     void cropSelection();
     void eraseSelection();
@@ -222,7 +225,9 @@ private:
     QVector <QPainterPath> selectedPathsOnCropSelection;
 
 
+    // SELECTION CONTOURS
     Interaction statusSketch = Interaction::DEFAULT;
+
 
     // Overlapping Variables
 

@@ -1052,6 +1052,25 @@ void InputSketch::decreaseStripeContourLevelWhileDrawing(){
 
 
 //************************************************************************************************
+/// ....................................... SELECTION ..........................................
+//************************************************************************************************
+
+void InputSketch::createSelectionCurve(const QPointF &pos){
+    prepareGeometryChange();
+    curve = QPainterPath();
+    curve.moveTo(pos);
+    update();
+}
+
+void InputSketch::addSelectionCurve(const QPointF &pos){
+
+    prepareGeometryChange();
+    curve.lineTo(pos);
+    update();
+}
+
+
+//************************************************************************************************
 /// ....................................... LAYERING ..........................................
 //************************************************************************************************
 
@@ -1839,13 +1858,13 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
     font.setPointSize ( 8 );
     painter->setFont(font);
     
-    if (svgPaths.size() > 0 && statusSketch == Interaction::DEFAULT){
+    if (svgPaths.size() > 0 && (statusSketch == Interaction::DEFAULT || statusSketch == Interaction::CROSS_SELECTION || statusSketch == Interaction::CROP_SELECTION || statusSketch == Interaction::ERASE_SELECTION)){
 
         foreach (QPainterPath path, svgPaths){
             painter->drawPath(path);
-        }
-
+        }     
     }
+
     
     if (selectedPathsList.size() > 0){
 
@@ -2302,9 +2321,9 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
     }
     painter->setPen(QPen(Qt::black,1,Qt::SolidLine));
 
-    if(statusSketch == Interaction::OPENCONTOUR || statusSketch == Interaction::CLOSEDCONTOUR || statusSketch == Interaction::STRIPES){
-        painter->drawText(mousePointer.x(), mousePointer.y() - 5, QString::number(lineLevel));
-    }
+    //if(statusSketch == Interaction::OPENCONTOUR || statusSketch == Interaction::CLOSEDCONTOUR || statusSketch == Interaction::STRIPES){
+    painter->drawText(mousePointer.x(), mousePointer.y() - 5, QString::number(lineLevel));
+    //}
 
     if (!oversketchingCurve.isEmpty()){
         painter->setPen(QPen(QColor(Qt::darkGreen),2,Qt::SolidLine));
