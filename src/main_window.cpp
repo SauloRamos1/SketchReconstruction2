@@ -262,11 +262,11 @@ void MainWindow::createCanvas1Toolbar () {
 
     view3dLines_button = new QPushButton ("View 3D ", canvas.get());
     view3dLines_button->setToolTip("View 3D");
-    view3dLines_button->setGeometry(QRect(5, 610, 50, 50));
+    view3dLines_button->setGeometry(QRect(5, 610, 50, 40));
 
     exportMesh_button = new QPushButton("Export \nMesh" , canvas.get());
     exportMesh_button->setToolTip("Export OFF & PLY");
-    exportMesh_button->setGeometry(QRect(5, 665, 50, 50));
+    exportMesh_button->setGeometry(QRect(5, 655, 50, 40));
 
     depth =  new QLabel ("  Depth Between Layers: ", canvas.get());
     depth->setGeometry(QRect(730, 900, 120, 30));
