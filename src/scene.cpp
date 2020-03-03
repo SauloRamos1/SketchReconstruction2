@@ -392,13 +392,13 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     if (event->button() & Qt::LeftButton && status == Interaction::CROSS_SELECTION){
 
         sketch.crossSelection();
-        emit crossSelectionDone();
+        emit closedContourDone();
 
     }
     if (event->button() & Qt::LeftButton && status == Interaction::CROP_SELECTION) {
 
         sketch.cropSelection();
-        emit cropSelectionDone();
+        //emit cropSelectionDone();
 
 
     }

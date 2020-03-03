@@ -1187,7 +1187,7 @@ void InputSketch::drawPaths(const QVector<QPainterPath>& readsvgPaths){
 
 void InputSketch::crossSelection(){
 
-    selectedPathOnCrossSelection = QPainterPath();
+    //selectedPathOnCrossSelection = QPainterPath();
 
     ///Interaction -- Cross the Path
     ///
@@ -1197,14 +1197,28 @@ void InputSketch::crossSelection(){
         for (int i = 0 ; i < svgPaths.size(); i++ ) {
 
             if (svgPaths.at(i).intersects(curve)) {
-                selectedPathOnCrossSelection = svgPaths[i];
-                svgPaths[i]  = QPainterPath();
-                if(levelList.size() > 0){
-                    selectedLineLevel = levelList[i];
-                    //levelList.removeAt(i);
-                }
 
-                selectedPathsList.append(selectedPathOnCrossSelection);
+                QPainterPath3D closedContourFromSVG;
+
+                closedContourFromSVG.contour = svgPaths[i];
+                svgPaths[i]  = QPainterPath();
+
+                closedContourFromSVG.level = lineLevel;
+
+                QString name = "Closed ";
+                name.append(QString::number(nClosedContours));
+                nClosedContours++;
+                closedContourFromSVG.name = name;
+                names.append(name);
+
+//                if(levelList.size() > 0){
+//                    selectedLineLevel = levelList[i];
+//                    //levelList.removeAt(i);
+//                }
+
+                receiveSelectedPath(closedContourFromSVG.contour, closedContourFromSVG.name, closedContourFromSVG.level);
+
+                closedContourList.append(closedContourFromSVG);
                 break;
             }
         }

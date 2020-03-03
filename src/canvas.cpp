@@ -26,8 +26,8 @@ void Canvas::setOpenGlMediator (OpenGLMediator *glmed){
 
 void Canvas::createActions()
 {
-    connect( scene.get(), &Scene::crossSelectionDone, this, &Canvas::sendCrossSelectionCurves );
-    connect( scene.get(), &Scene::cropSelectionDone, this, &Canvas::sendCropSelectionCurves );
+//    connect( scene.get(), &Scene::crossSelectionDone, this, &Canvas::sendCrossSelectionCurves );
+//    connect( scene.get(), &Scene::cropSelectionDone, this, &Canvas::sendCropSelectionCurves );
 
     connect( scene.get(), &Scene::openContourDone, this, &Canvas::sendOpenPathNames);
     connect( scene.get(), &Scene::closedContourDone, this, &Canvas::sendClosedPathNames);

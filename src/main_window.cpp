@@ -269,15 +269,15 @@ void MainWindow::createCanvas1Toolbar () {
     exportMesh_button->setGeometry(QRect(5, 655, 50, 40));
 
     depth =  new QLabel ("  Depth Between Layers: ", canvas.get());
-    depth->setGeometry(QRect(730, 900, 120, 30));
+    depth->setGeometry(QRect(430, 640, 130, 30));
 
     layeringDepth = new QSpinBox(canvas.get());
-    layeringDepth->setGeometry(QRect(850, 900, 40, 30));
+    layeringDepth->setGeometry(QRect(560, 640, 40, 30));
     layeringDepth->setValue(10);
     layeringDepth->setSingleStep(10);
 
     showLabels = new QCheckBox("Show Labels", canvas.get());
-    showLabels->setGeometry(QRect(600, 900, 100, 30));
+    showLabels->setGeometry(QRect(500, 610, 100, 30));
     showLabels->setChecked(true);
     //showLabels->setTristate(true);
 

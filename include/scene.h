@@ -116,8 +116,8 @@ signals:
     void closedContourDone();
     void stripeContourDone();
 
-    void crossSelectionDone();
-    void cropSelectionDone();
+//    void crossSelectionDone();
+//    void cropSelectionDone();
 
 
 protected:
