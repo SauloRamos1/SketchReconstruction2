@@ -65,16 +65,17 @@ void Layers::renameStripeContourItem(QListWidgetItem *item){
 
 void Layers::sendRenamedOpenContourItem(QListWidgetItem *item){
 
-    //mediator->renamePath(listWidget->row(item),item->text());
+    canvas->renameOpenContour(openContourList->row(item),item->text());
 }
+
 void Layers::sendRenamedClosedContourItem(QListWidgetItem *item){
 
-    //mediator->renamePath(listWidget->row(item),item->text());
+    canvas->renameClosedContour(closedContourList->row(item),item->text());
 }
 
 void Layers::sendRenamedStripeContourItem(QListWidgetItem *item){
 
-    //mediator->renamePath(listWidget->row(item),item->text());
+    canvas->renameStripeContour(stripeContourList->row(item),item->text());
 }
 
 void Layers::selectOpenContourItem(QListWidgetItem *item){

@@ -82,6 +82,9 @@ protected:
         void smoothSketch ();
         void setDefRotAxisMode ();
 
+        void renameOpenContour(int itemNumber, QString name);
+        void renameClosedContour(int itemNumber, QString name);
+        void renameStripeContour(int itemNumber, QString name);
 protected:
 
         std::shared_ptr< Scene > scene;

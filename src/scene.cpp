@@ -640,6 +640,18 @@ void Scene::selectStripeContour(const int stripeContourIndex)
     sketch.selectStripeContour(stripeContourIndex);
 }
 
+void Scene::renameOpenContour(int itemNumber, QString name){
+    sketch.renameOpenContour(itemNumber,name);
+}
+
+void Scene::renameClosedContour(int itemNumber, QString name){
+    sketch.renameClosedContour(itemNumber, name);
+}
+
+void Scene::renameStripeContour(int itemNumber, QString name){
+    sketch.renameStripeContour(itemNumber,name);
+}
+
 void Scene::setOversketchingMode(){
 
     status = Interaction::OVERSKETCHING;

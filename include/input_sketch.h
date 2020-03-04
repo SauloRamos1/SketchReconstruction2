@@ -134,6 +134,10 @@ public:
     void defRotAxis(int direction);
 
 
+
+    void renameOpenContour(int itemNumber, QString name);
+    void renameClosedContour(int itemNumber, QString name);
+    void renameStripeContour(int itemNumber, QString name);
 public slots:
 
 protected:

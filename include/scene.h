@@ -89,6 +89,10 @@ public:
     void setOversketchingMode();
     void smoothSketch();
     void setDefRotAxisMode();
+    void renameOpenContour(int itemNumber, QString name);
+    void renameClosedContour(int itemNumber, QString name);
+    void renameStripeContour(int itemNumber, QString name);
+
 private:
 
 

@@ -1211,10 +1211,10 @@ void InputSketch::crossSelection(){
                 closedContourFromSVG.name = name;
                 names.append(name);
 
-//                if(levelList.size() > 0){
-//                    selectedLineLevel = levelList[i];
-//                    //levelList.removeAt(i);
-//                }
+                //                if(levelList.size() > 0){
+                //                    selectedLineLevel = levelList[i];
+                //                    //levelList.removeAt(i);
+                //                }
 
                 receiveSelectedPath(closedContourFromSVG.contour, closedContourFromSVG.name, closedContourFromSVG.level);
 
@@ -1895,16 +1895,16 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
     }
 
     
-//    if (selectedPathsList.size() > 0){
+    //    if (selectedPathsList.size() > 0){
 
-//        painter->setPen(QPen(QColor(Qt::gray),1,Qt::SolidLine));
-//        painter->setOpacity(0.5);
+    //        painter->setPen(QPen(QColor(Qt::gray),1,Qt::SolidLine));
+    //        painter->setOpacity(0.5);
 
-//        foreach (QPainterPath path, selectedPathsList){
-//            painter->drawPath(path);
-//        }
+    //        foreach (QPainterPath path, selectedPathsList){
+    //            painter->drawPath(path);
+    //        }
 
-//    }
+    //    }
 
     painter->setOpacity(1);
 
@@ -2477,6 +2477,30 @@ void InputSketch::selectStripeContour(const int stripeContourIndex)
     lastSelected = 2;
 }
 
+void InputSketch::renameOpenContour(int itemNumber, QString name){
+
+    int count = 0;
+    for (int i = 0; i < openContourList.size(); ++i) {
+        for (int j = 0; j < openContourList[i].size(); ++j) {
+             if (itemNumber == count){
+                 openContourList[i][j].name.clear();
+                 openContourList[i][j].name = name;
+                 qDebug () << openContourList[i][j].name ;
+             }
+             count++;
+        }
+    }
+    update();
+
+}
+
+void InputSketch::renameClosedContour(int itemNumber, QString name){
+
+}
+
+void InputSketch::renameStripeContour(int itemNumber, QString name){
+
+}
 
 //************************************************************************************************
 /// ........................................ OTHERS .............................................

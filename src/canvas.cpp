@@ -140,6 +140,15 @@ void Canvas::sendStripePathNames(){
 
 }
 
+void Canvas::renameOpenContour(int itemNumber, QString name){
+    scene->renameOpenContour(itemNumber,name);
+}
+void Canvas::renameClosedContour(int itemNumber, QString name){
+    scene->renameClosedContour(itemNumber, name);
+}
+void Canvas::renameStripeContour(int itemNumber, QString name){
+    scene->renameStripeContour(itemNumber, name);
+}
 
 void Canvas::sendCrossSelectionCurves()
 {
