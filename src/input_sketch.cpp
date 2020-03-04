@@ -2482,12 +2482,12 @@ void InputSketch::renameOpenContour(int itemNumber, QString name){
     int count = 0;
     for (int i = 0; i < openContourList.size(); ++i) {
         for (int j = 0; j < openContourList[i].size(); ++j) {
-             if (itemNumber == count){
-                 openContourList[i][j].name.clear();
-                 openContourList[i][j].name = name;
-                 qDebug () << openContourList[i][j].name ;
-             }
-             count++;
+            if (itemNumber == count){
+                openContourList[i][j].name.clear();
+                openContourList[i][j].name = name;
+                qDebug () << openContourList[i][j].name ;
+            }
+            count++;
         }
     }
     update();
@@ -2496,10 +2496,33 @@ void InputSketch::renameOpenContour(int itemNumber, QString name){
 
 void InputSketch::renameClosedContour(int itemNumber, QString name){
 
+    for (int i = 0 ; i < closedContourList.size(); i++) {
+
+        if (itemNumber == i){
+            closedContourList[i].name.clear();
+            closedContourList[i].name = name;
+
+        }
+    }
+    update();
 }
 
 void InputSketch::renameStripeContour(int itemNumber, QString name){
+    int count = 0;
 
+    for (int i = 0 ; i < stripeContourList.size() ; i++){
+
+        for (int j = 0; j < stripeContourList[i].size() ; j++) {
+            if (itemNumber == count){
+
+                stripeContourList[i][j].name.clear();
+                stripeContourList[i][j].name = name;
+
+            }
+
+            count ++;
+        }
+    }
 }
 
 //************************************************************************************************
