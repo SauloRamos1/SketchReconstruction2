@@ -1260,7 +1260,23 @@ void InputSketch::cropSelection(){
         }
     }
 
-    selectedPathsList.append(selectedPathsOnCropSelection);
+    QPainterPath3D closedContourFromSVG;
+
+    closedContourFromSVG.contour = closeSVGSegments(selectedPathsOnCropSelection);
+    closedContourFromSVG.level = lineLevel;
+
+    QString name = "Closed ";
+    name.append(QString::number(nClosedContours));
+    nClosedContours++;
+    closedContourFromSVG.name = name;
+    names.append(name);
+
+
+    smoothPath(closedContourFromSVG.contour);
+
+    receiveSelectedPath(closedContourFromSVG.contour, closedContourFromSVG.name, closedContourFromSVG.level);
+    closedContourList.append(closedContourFromSVG);
+
 
     curve = QPainterPath();
 }
@@ -1872,24 +1888,23 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
     font.setPointSize ( 8 );
     painter->setFont(font);
     
-    if (svgPaths.size() > 0 && (statusSketch == Interaction::DEFAULT || statusSketch == Interaction::CROSS_SELECTION || statusSketch == Interaction::CROP_SELECTION || statusSketch == Interaction::ERASE_SELECTION)){
-
-        foreach (QPainterPath path, svgPaths){
-            painter->drawPath(path);
-        }     
+    if (statusSketch == Interaction::DEFAULT || statusSketch == Interaction::CROSS_SELECTION || statusSketch == Interaction::CROP_SELECTION || statusSketch == Interaction::ERASE_SELECTION){
+        for (int i = 0; i < svgPaths.size(); i++){
+            painter->drawPath(svgPaths[i]);
+        }
     }
 
     
-    if (selectedPathsList.size() > 0){
+//    if (selectedPathsList.size() > 0){
 
-        painter->setPen(QPen(QColor(Qt::gray),1,Qt::SolidLine));
-        painter->setOpacity(0.5);
+//        painter->setPen(QPen(QColor(Qt::gray),1,Qt::SolidLine));
+//        painter->setOpacity(0.5);
 
-        foreach (QPainterPath path, selectedPathsList){
-            painter->drawPath(path);
-        }
+//        foreach (QPainterPath path, selectedPathsList){
+//            painter->drawPath(path);
+//        }
 
-    }
+//    }
 
     painter->setOpacity(1);
 

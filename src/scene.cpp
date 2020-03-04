@@ -242,11 +242,11 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event){
     if (status == Interaction::DEFAULT){
         return;
     }
-    if (event->buttons() == Qt::LeftButton && status == Interaction::CROSS_SELECTION){
+    if (event->buttons() == Qt::LeftButton &&  (status == Interaction::CROSS_SELECTION || status == Interaction::CROP_SELECTION)){
         setFocus();
         leftButtonIsPressed = true;
         sketch.createSelectionCurve( pos );
-        update();
+        //update();
     }
 
     if (event->buttons() == Qt::LeftButton && status == Interaction::OVERSKETCHING){
@@ -295,7 +295,7 @@ void Scene::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     if (status == Interaction::DEFAULT){
         return;
     }
-    if (event->buttons() == Qt::LeftButton && status == Interaction::CROSS_SELECTION){
+    if (event->buttons() == Qt::LeftButton && (status == Interaction::CROSS_SELECTION || status == Interaction::CROP_SELECTION)){
         sketch.addSelectionCurve( pos );
         QGraphicsScene::mouseMoveEvent(event);
     }
@@ -364,6 +364,7 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::CLOSEDCONTOUR){
+
         sketch.saveClosedContour();
         leftButtonIsPressed = false;
         emit closedContourDone();
@@ -398,8 +399,7 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     if (event->button() & Qt::LeftButton && status == Interaction::CROP_SELECTION) {
 
         sketch.cropSelection();
-        //emit cropSelectionDone();
-
+        emit closedContourDone();
 
     }
     if (event->button() & Qt::LeftButton && status == Interaction::ERASE_SELECTION) {
