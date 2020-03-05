@@ -606,6 +606,19 @@ int Scene::getInteraction(){
     return 0;
 }
 
+bool Scene::isOpenContoursEmpty(){
+
+    return sketch.isOpenContoursEmpty();
+}
+
+bool Scene::isClosedContoursEmpty(){
+    return sketch.isClosedContoursEmpty();
+}
+
+bool Scene::isStripeContoursEmpty(){
+    return sketch.isStripeContoursEmpty();
+}
+
 /// === NEW LAYER IMPLEMENTATION
 ///
 ///

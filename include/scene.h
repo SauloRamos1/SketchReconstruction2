@@ -93,6 +93,9 @@ public:
     void renameClosedContour(int itemNumber, QString name);
     void renameStripeContour(int itemNumber, QString name);
 
+    bool isOpenContoursEmpty();
+    bool isClosedContoursEmpty();
+    bool isStripeContoursEmpty();
 private:
 
 

@@ -196,19 +196,39 @@ void Canvas::viewOverlapping3D(){
 
     if (glmediator == nullptr) return;
 
-    if (scene->getInteraction() == 1){
+    if (!scene->isOpenContoursEmpty()){
+
         glmediator->viewOpenContours3D(scene->getOpenContoursPoints());
 
-    } else if (scene->getInteraction() == 2){
+    }
+
+    if (!scene->isClosedContoursEmpty()){
+
 
         scene->estimateShapes();
         glmediator->viewClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
-        //glmediator->render();
 
-    } else if (scene->getInteraction() == 3){
-        glmediator->viewStripes3D(scene->getStripes());
-        //glmediator->render();
     }
+
+    if (!scene->isStripeContoursEmpty()){
+
+        glmediator->viewStripes3D(scene->getStripes());
+
+    }
+
+//    if (scene->getInteraction() == 1){
+//        glmediator->viewOpenContours3D(scene->getOpenContoursPoints());
+
+//    } else if (scene->getInteraction() == 2){
+
+//        scene->estimateShapes();
+//        glmediator->viewClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
+//        //glmediator->render();
+
+//    } else if (scene->getInteraction() == 3){
+//        glmediator->viewStripes3D(scene->getStripes());
+//        //glmediator->render();
+//    }
     glmediator->render();
 }
 

@@ -202,7 +202,7 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
 
     if( points3D.isEmpty() ) {
         QMessageBox msgBox;
-        msgBox.setText("No contours to reconstruct");
+        msgBox.setText("No OPEN contours to reconstruct");
         msgBox.setInformativeText("Please load contours before the reconstruction");
         msgBox.exec();
 
@@ -305,9 +305,10 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
 }
 
 void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, const QVector<QVector3D> normals3D){
+
     if( points3D.isEmpty() ) {
         QMessageBox msgBox;
-        msgBox.setText("No contours to reconstruct");
+        msgBox.setText("No CLOSED contours to reconstruct");
         msgBox.setInformativeText("Please load contours before the reconstruction");
         msgBox.exec();
 
@@ -404,7 +405,7 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
 void OpenGLMediator::viewStripes3D (const QVector<QVector3D> points3D){
     if( points3D.isEmpty() ) {
         QMessageBox msgBox;
-        msgBox.setText("No contours to reconstruct");
+        msgBox.setText("No STRIPE contours to reconstruct");
         msgBox.setInformativeText("Please load contours before the reconstruction");
         msgBox.exec();
 

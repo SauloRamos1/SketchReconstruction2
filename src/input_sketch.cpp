@@ -421,7 +421,6 @@ void InputSketch::receiveSelectedPath (const QPainterPath &path, const QString &
     t.contour = QPainterPath();
     t.contour = path;
 
-
     allShapesSampledPoints.push_back(t);
 
 
@@ -2442,6 +2441,20 @@ int InputSketch::getClosedContourLevel()
 QString InputSketch::getPathNames()
 {
     return names.last();
+}
+
+bool InputSketch::isOpenContoursEmpty(){
+
+    return openContourList.isEmpty();
+}
+
+bool InputSketch::isClosedContoursEmpty(){
+
+    return closedContourList.isEmpty();
+}
+
+bool InputSketch::isStripeContoursEmpty(){
+    return stripeContourList.isEmpty();
 }
 
 
