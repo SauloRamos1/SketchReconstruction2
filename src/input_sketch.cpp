@@ -2485,11 +2485,12 @@ void InputSketch::renameOpenContour(int itemNumber, QString name){
             if (itemNumber == count){
                 openContourList[i][j].name.clear();
                 openContourList[i][j].name = name;
-                qDebug () << openContourList[i][j].name ;
+
             }
             count++;
         }
     }
+
     update();
 
 }
@@ -2504,6 +2505,7 @@ void InputSketch::renameClosedContour(int itemNumber, QString name){
 
         }
     }
+
     update();
 }
 
