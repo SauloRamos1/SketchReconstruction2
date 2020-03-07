@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QDir>
+
 #include <scene.h>
 
 #include <iostream>
@@ -695,6 +696,25 @@ void Scene::setDefRotAxisMode(){
     qDebug () << "Define Rot Axis Mode";
     update();
 }
+
+
+void Scene::saveSvg(QString path)
+{
+    QSvgGenerator generator;
+    generator.setFileName(path);
+    generator.setSize(QSize(520, 520));
+    generator.setViewBox(QRect(-30,0,520,520));
+    generator.setTitle("SVG Generator Example Drawing");
+    generator.setDescription("An SVG drawing created by the SVG Generator "
+                                "Example provided with Qt.");
+
+    QPainter painter;
+    painter.begin(&generator);
+    sketch.paint(&painter,nullptr,nullptr);
+    painter.end();
+
+}
+
 
 
 

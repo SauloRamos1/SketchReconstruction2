@@ -19,7 +19,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 #set (CMAKE_PREFIX_PATH "C:\\Qt\\5.12.3\\msvc2017_64")
 #set (CMAKE_PREFIX_PATH "C:\\Qt\\5.12.5\\msvc2017_64")
 #set(Qt5_DIR "C:\\Qt\\5.12.5\\mingw73_64\\lib\\cmake\\Qt5" CACHE PATH "Initial cache" FORCE)
-find_package(Qt5 COMPONENTS Core Gui Widgets CONFIG REQUIRED)
+find_package(Qt5 COMPONENTS Core Gui Widgets Svg CONFIG REQUIRED)
 
 # Instruct CMake to run moc automatically when needed
 set(CMAKE_AUTOMOC ON)
@@ -96,7 +96,7 @@ target_include_directories(Canvas PUBLIC ${HEADERS_DIR})
 target_include_directories(Canvas SYSTEM PRIVATE ${EXTERNAL_LIBS_DIR})
 
 # Use Core, Gui and Widgets modules from Qt5
-target_link_libraries(Canvas Qt5::Core Qt5::Gui Qt5::Widgets)
+target_link_libraries(Canvas Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Svg)
 
 # Use tucanow wrapper
 target_link_libraries(Canvas tucanow)

@@ -40,6 +40,7 @@ protected:
         void newFile();
         void loadSVG();
         void loadIMG();
+        void saveSVG();
 
         void moveZoomInteraction();
 
@@ -85,6 +86,8 @@ protected:
         void renameOpenContour(int itemNumber, QString name);
         void renameClosedContour(int itemNumber, QString name);
         void renameStripeContour(int itemNumber, QString name);
+
+
 protected:
 
         std::shared_ptr< Scene > scene;
@@ -94,6 +97,9 @@ protected:
 private:
 
         bool contour = true, halo = false, color = false, hatching = false;
+
+
+        QString path;
 
 };
 

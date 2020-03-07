@@ -1872,6 +1872,7 @@ QRectF InputSketch::boundingRect() const
 
 
 void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) {
+//void InputSketch::paint( QPainter *painter) {
     
     
     painter->setRenderHint(QPainter::Antialiasing);
@@ -2401,8 +2402,6 @@ void InputSketch::clear()
 
     update();
 }
-
-
 
 
 

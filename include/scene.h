@@ -16,6 +16,8 @@
 #include <QFileDialog>
 #include <QWheelEvent>
 
+#include <QSvgGenerator>
+#include <QPainter>
 #include <include/input_sketch.h>
 #include <include/halfedge.h>
 
@@ -96,6 +98,10 @@ public:
     bool isOpenContoursEmpty();
     bool isClosedContoursEmpty();
     bool isStripeContoursEmpty();
+
+    void saveSvg(QString path);
+public slots:
+
 private:
 
 
@@ -116,6 +122,7 @@ private:
 
     bool leftButtonIsPressed = false;
     bool rightButtonIsPressed = false;
+
 
 signals:
 

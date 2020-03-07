@@ -9,6 +9,9 @@
 #include <QInputDialog>
 #include <QListWidget>
 
+
+#include <QtSvg/QSvgGenerator>
+
 #include "sketch_library.h"
 #include "halfedge.h"
 
@@ -143,11 +146,11 @@ public:
     bool isClosedContoursEmpty();
     bool isStripeContoursEmpty();
 
+    void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) override;
 public slots:
 
 protected:
 
-    void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) override;
     virtual QRectF boundingRect() const override;
 
 

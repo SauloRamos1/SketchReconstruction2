@@ -130,6 +130,8 @@ void MainWindow::createCanvas1Toolbar () {
     ac_loadSVG->setIcon(QIcon(":/icons/svgicon.png"));
     ac_loadIMG = std::make_shared< QAction >( "Load Image", this );
     ac_loadIMG->setIcon(QIcon(":/icons/image.png"));
+    ac_saveSVG = std::make_shared< QAction >( "Save SVG", this );
+    //ac_saveSVG->setIcon(QIcon(":/icons/image.png"));
     ac_exit = std::make_shared< QAction > ("Exit", this);
 
 
@@ -138,6 +140,8 @@ void MainWindow::createCanvas1Toolbar () {
     fileMenu->addSeparator();
     fileMenu->addAction(ac_loadSVG.get());
     fileMenu->addAction(ac_loadIMG.get());
+    fileMenu->addSeparator();
+    fileMenu->addAction(ac_saveSVG.get());
     fileMenu->addSeparator();
     fileMenu->addAction(QIcon(":/icons/exit.ico"), tr("E&xit"), qApp, &QApplication::closeAllWindows);
 
@@ -290,6 +294,8 @@ void MainWindow::createCanvas1Actions (){
     connect( ac_newFile.get(), &QAction::triggered, canvas.get(), &Canvas::newFile);
     connect( ac_loadSVG.get(), &QAction::triggered, canvas.get(), &Canvas::loadSVG);
     connect( ac_loadIMG.get(), &QAction::triggered, canvas.get(), &Canvas::loadIMG);
+
+    connect( ac_saveSVG.get(), &QAction::triggered, canvas.get(), &Canvas::saveSVG);
 
     connect( openContour_button, SIGNAL(pressed()), canvas.get(), SLOT(setOpenContourInteraction()));
     connect( closedContour_button, SIGNAL(pressed()), canvas.get(), SLOT(setClosedContourInteraction() ));

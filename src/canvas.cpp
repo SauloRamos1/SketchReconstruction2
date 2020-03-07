@@ -61,6 +61,18 @@ void Canvas::loadIMG()
     update();
 }
 
+void Canvas::saveSVG(){
+
+    QString newPath = QFileDialog::getSaveFileName(this, tr("Save SVG"), path, tr("SVG files (*.svg)"));
+
+    if (newPath.isEmpty())
+        return;
+
+    path = newPath;
+
+    scene->saveSvg(path);
+}
+
 
 
 void Canvas::setOverlapEffect1(bool checked)
