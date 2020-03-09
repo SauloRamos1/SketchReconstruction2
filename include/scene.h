@@ -130,6 +130,8 @@ signals:
     void closedContourDone();
     void stripeContourDone();
 
+    void stripeContourFinished();
+
 //    void crossSelectionDone();
 //    void cropSelectionDone();
 

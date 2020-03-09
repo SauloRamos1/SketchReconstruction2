@@ -50,6 +50,8 @@ public slots:
     void renameClosedContourItem(QListWidgetItem *item);
     void renameStripeContourItem(QListWidgetItem *item);
 
+    void clearStripeList();
+
 protected:
 
     Canvas* canvas = nullptr;

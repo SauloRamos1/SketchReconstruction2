@@ -779,6 +779,8 @@ void InputSketch::finishBand (){//Finish
 
     //newLevelList.append(levelList[0]);
 
+    int subStripes = sameStripeContourList.size();
+
     if (sameStripeContourList.size() > 1){
 
         for (int i = 0; i < sameStripeContourList.size()-1; ++i) {
@@ -811,6 +813,8 @@ void InputSketch::finishBand (){//Finish
 
     prepareGeometryChange();
 
+
+
     for (int i = 0; i < sameStripeContourList.size(); i++){
         for (int j = 0; j < 10; j++){
             smoothPath(sameStripeContourList[i].leftLine);
@@ -819,8 +823,17 @@ void InputSketch::finishBand (){//Finish
     }
 
     stripeContourList.append(sameStripeContourList);
+    sameStripeContourList.clear();
 
-    qDebug ()<< stripeContourList.size();
+    nStripeContours -= subStripes;
+
+    QString name = "Stripe ";
+    name.append(QString::number(nStripeContours));
+    nStripeContours++;
+    stripeContourList.last().last().name = name;
+    names.append(name);
+
+    qDebug () << stripeContourList.size();
 }
 
 
@@ -883,8 +896,7 @@ void InputSketch::saveStripeContour (){
         stripe.rightLine = rightBandLine;
         sameStripeContourList.append(stripe);
 
-    }
-    else {
+    } else {
 
         stripe.leftLine = rightBandLine;
         stripe.rightLine = leftBandLine;
@@ -2439,6 +2451,7 @@ int InputSketch::getClosedContourLevel()
 
 QString InputSketch::getPathNames()
 {
+    qDebug () << names.size();
     return names.last();
 }
 

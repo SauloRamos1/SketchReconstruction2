@@ -1,7 +1,7 @@
 #include <QPainterPath>
 
 #include "polygonalcurve/CurveN.hpp"
-/// TODO: we don't use polycurve.h anymore, remove?
+/// NOTE: we don't use polycurve.h anymore, remove?
 #include "polycurve.h"
 
 #include "sketch_library.h"

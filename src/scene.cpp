@@ -374,8 +374,8 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::STRIPES){
-        sketch.saveStripeContour();
 
+        sketch.saveStripeContour();
         emit stripeContourDone();
 
         QGraphicsScene::mouseReleaseEvent(event);
@@ -386,7 +386,7 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 
         sketch.finishBand();
         //emit stripeContourDone();
-        emit stripeContourDone();
+        emit stripeContourFinished();
         QGraphicsScene::mouseReleaseEvent(event);
 
     }
@@ -634,9 +634,6 @@ void Scene::showLabels(bool showLabels)
 {
     sketch.setShowLabels (showLabels);
 
-    //BUG Not updating Scene after just click on Show Labels, needs to move mouse;
-    update ();
-
 }
 
 void Scene::selectOpenContour(const int openContourIndex)
@@ -704,9 +701,8 @@ void Scene::saveSvg(QString path)
     generator.setFileName(path);
     generator.setSize(QSize(520, 520));
     generator.setViewBox(QRect(-30,0,520,520));
-    generator.setTitle("SVG Generator Example Drawing");
-    generator.setDescription("An SVG drawing created by the SVG Generator "
-                                "Example provided with Qt.");
+    generator.setTitle("SVG SketchCanvas");
+    generator.setDescription("An SVG drawing created by the SVG Generator QT.");
 
     QPainter painter;
     painter.begin(&generator);

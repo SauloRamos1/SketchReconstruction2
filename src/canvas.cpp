@@ -33,6 +33,8 @@ void Canvas::createActions()
     connect( scene.get(), &Scene::openContourDone, this, &Canvas::sendOpenPathNames);
     connect( scene.get(), &Scene::closedContourDone, this, &Canvas::sendClosedPathNames);
     connect( scene.get(), &Scene::stripeContourDone, this, &Canvas::sendStripePathNames);
+
+    connect (scene.get(), &Scene::stripeContourFinished, this, &Canvas::updateStripeContourList);
 }
 
 void Canvas::newFile()
@@ -178,6 +180,11 @@ void Canvas::renameClosedContour(int itemNumber, QString name){
 void Canvas::renameStripeContour(int itemNumber, QString name){
     scene->renameStripeContour(itemNumber, name);
     update();
+}
+
+void Canvas::updateStripeContourList(){
+    layers->clearStripeList();
+    layers->receiveNamePaths(scene->getPathNames(), 2);
 }
 
 void Canvas::sendCrossSelectionCurves()

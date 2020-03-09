@@ -91,7 +91,10 @@ void Layers::selectClosedContourItem(QListWidgetItem *item){
 void Layers::selectStripeContourItem(QListWidgetItem *item){
 
     canvas->selectStripeContour(stripeContourList->row(item));
+}
 
+void Layers::clearStripeList(){
+    stripeContourList->clear();
 }
 
 

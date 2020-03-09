@@ -88,6 +88,7 @@ protected:
         void renameStripeContour(int itemNumber, QString name);
 
 
+        void updateStripeContourList();
 protected:
 
         std::shared_ptr< Scene > scene;
