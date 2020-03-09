@@ -42,7 +42,6 @@ void Layers::receiveNamePaths(const QString& name, const int& type){
     if (type == 2) {
         QListWidgetItem *item = new QListWidgetItem(name, stripeContourList);
         item->setFlags(item->flags() | Qt::ItemIsEditable);
-
     }
 }
 
@@ -94,7 +93,18 @@ void Layers::selectStripeContourItem(QListWidgetItem *item){
 }
 
 void Layers::clearStripeList(){
+
+    stripesNames.clear();
+    for (int i = 0; i < stripeContourList->count()-1; ++i) {
+        stripesNames.append(stripeContourList->item(i)->text());
+    }
+
     stripeContourList->clear();
+    stripeCounter++;
+
+    for (int i = 0; i < stripeCounter-1; ++i) {
+        receiveNamePaths(stripesNames[i],2);
+    }
 }
 
 
