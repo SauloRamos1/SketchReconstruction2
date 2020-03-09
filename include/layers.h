@@ -61,10 +61,6 @@ private:
     QVector<QString> stripesNames;
     int stripeCounter = 0;
 
-
-
-
-
 };
 
 

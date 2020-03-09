@@ -403,6 +403,7 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
 }
 
 void OpenGLMediator::viewStripes3D (const QVector<QVector3D> points3D){
+
     if( points3D.isEmpty() ) {
         QMessageBox msgBox;
         msgBox.setText("No STRIPE contours to reconstruct");
@@ -448,37 +449,37 @@ void OpenGLMediator::viewStripes3D (const QVector<QVector3D> points3D){
         QVector3D normal = CalculateSurfaceNormal(p,q,r); //Normal for 1st triangle
         QVector3D normal1 = CalculateSurfaceNormal(r,p,s);//Normal for 2nd triangle
 
-        Svertices.push_back(p.x());
-        Svertices.push_back(p.y());
-        Svertices.push_back(p.z());
+        vertices.push_back(p.x());
+        vertices.push_back(p.y());
+        vertices.push_back(p.z());
 
-        Snormals.push_back(normal.x());
-        Snormals.push_back(normal.y());
-        Snormals.push_back(normal.z());
+        normals.push_back(normal.x());
+        normals.push_back(normal.y());
+        normals.push_back(normal.z());
 
-        Svertices.push_back(q.x());
-        Svertices.push_back(q.y());
-        Svertices.push_back(q.z());
+        vertices.push_back(q.x());
+        vertices.push_back(q.y());
+        vertices.push_back(q.z());
 
-        Snormals.push_back(normal.x());
-        Snormals.push_back(normal.y());
-        Snormals.push_back(normal.z());
+        normals.push_back(normal.x());
+        normals.push_back(normal.y());
+        normals.push_back(normal.z());
 
-        Svertices.push_back(r.x());
-        Svertices.push_back(r.y());
-        Svertices.push_back(r.z());
+        vertices.push_back(r.x());
+        vertices.push_back(r.y());
+        vertices.push_back(r.z());
 
-        Snormals.push_back(normal.x());
-        Snormals.push_back(normal.y());
-        Snormals.push_back(normal.z());
+        normals.push_back(normal.x());
+        normals.push_back(normal.y());
+        normals.push_back(normal.z());
 
-        Svertices.push_back(s.x());
-        Svertices.push_back(s.y());
-        Svertices.push_back(s.z());
+        vertices.push_back(s.x());
+        vertices.push_back(s.y());
+        vertices.push_back(s.z());
 
-        Snormals.push_back(normal.x());
-        Snormals.push_back(normal.y());
-        Snormals.push_back(normal.z());
+        normals.push_back(normal.x());
+        normals.push_back(normal.y());
+        normals.push_back(normal.z());
 
         facesNumber += 4;
 
@@ -487,19 +488,17 @@ void OpenGLMediator::viewStripes3D (const QVector<QVector3D> points3D){
         quadTopology[2] = facesNumber - 2;
         quadTopology[3] = facesNumber - 1;
 
-        Sfaces.push_back(quadTopology[0]);
-
-        Sfaces.push_back(quadTopology[1]);
-
-        Sfaces.push_back(quadTopology[2]);
-
-        Sfaces.push_back(quadTopology[0]);
-
-        Sfaces.push_back(quadTopology[2]);
-
-        Sfaces.push_back(quadTopology[3]);
+        faces.push_back(quadTopology[0]+nvertices);
+        faces.push_back(quadTopology[1]+nvertices);
+        faces.push_back(quadTopology[2]+nvertices);
+        faces.push_back(quadTopology[0]+nvertices);
+        faces.push_back(quadTopology[2]+nvertices);
+        faces.push_back(quadTopology[3]+nvertices);
 
     }
+
+
+    nvertices = vertices.size()/3;
 
     //    setShape(points3D);
 

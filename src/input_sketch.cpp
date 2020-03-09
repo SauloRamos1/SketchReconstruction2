@@ -1804,7 +1804,8 @@ QVector<QVector3D> InputSketch::getStripesPoints () {
         QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
         QVector<QVector3D> quadMesh;
 
-        int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference STRIPE", "Layering difference in depth STRIPE");
+        //int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference STRIPE", "Layering difference in depth STRIPE");
+        int depthdiff = layerDifference;
 
         for (int i = 0 ; i <  stripeContourList.size(); i++) {
 
