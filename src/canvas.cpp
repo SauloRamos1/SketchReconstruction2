@@ -215,6 +215,8 @@ void Canvas::viewOverlapping3D(){
 
     if (glmediator == nullptr) return;
 
+    glmediator->clearTriangles();
+
     if (!scene->isOpenContoursEmpty()){
 
         glmediator->viewOpenContours3D(scene->getOpenContoursPoints());

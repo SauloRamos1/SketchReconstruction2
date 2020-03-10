@@ -194,6 +194,14 @@ QVector3D OpenGLMediator::CalculateSurfaceNormal(QVector3D p0, QVector3D p1, QVe
     return normal;
 }
 
+void OpenGLMediator::clearTriangles(){
+
+    vertices.clear();
+    faces.clear();
+    normals.clear();
+
+}
+
 //CREATE TRIANGLES, FACES AND NORMALS FOR RENDERING
 void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points3D){
 

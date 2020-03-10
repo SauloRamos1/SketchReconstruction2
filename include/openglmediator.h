@@ -38,8 +38,10 @@ public:
     void exportMesh();
 
     int nvertices = 0;
-
+    void clearTriangles();
     void render();
+
+public slots:
 
 protected:
 

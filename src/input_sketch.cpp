@@ -451,7 +451,7 @@ void InputSketch::estimateShapes(){
         }
     }
 
-    update();
+   // update();
 
 }
 
@@ -460,6 +460,7 @@ void InputSketch::estimateShapes(){
 void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr){
 
     //Normal Plane
+
 
     for (int i = 0; i < ql.size(); ++i) {
         ql[i].setZ(ql[i].z()*layerDifference);
@@ -538,6 +539,10 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
         u += u_step;
 
+    }
+    for (int i = 0; i < ql.size(); ++i) {
+        ql[i].setZ(ql[i].z()/layerDifference);
+        qr[i].setZ(qr[i].z()/layerDifference);
     }
 
 }
