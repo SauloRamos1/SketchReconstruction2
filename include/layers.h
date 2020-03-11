@@ -52,6 +52,9 @@ public slots:
 
     void clearStripeList();
 
+    void removeItemOpenContourList(int item);
+    void removeItemClosedContourList(int item);
+    void removeItemStripeContourList(int item);
 protected:
 
     Canvas* canvas = nullptr;

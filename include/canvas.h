@@ -89,6 +89,8 @@ protected:
 
 
         void updateStripeContourList();
+
+        void removeItemLayersList();
 protected:
 
         std::shared_ptr< Scene > scene;

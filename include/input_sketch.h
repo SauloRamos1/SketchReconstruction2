@@ -52,7 +52,7 @@ public:
 
     void crossSelection();
     void cropSelection();
-    void eraseSelection();
+    int eraseSelection();
 
     QVector <HalfEdge*> cyclesList;
     QString interactionString = "Default Mode";
@@ -148,6 +148,11 @@ public:
 
     void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) override;
     void setSaveSVG();
+    int getErasedTypeContour();
+    int getErasedOpenContourNumber();
+    int getErasedClosedContourNumber();
+    int getErasedStripeContourNumber();
+
 public slots:
 
 protected:

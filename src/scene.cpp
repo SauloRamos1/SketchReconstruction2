@@ -425,8 +425,12 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     }
     if (event->button() & Qt::LeftButton && status == Interaction::ERASE_SELECTION) {
 
-        sketch.eraseSelection();
-        //emit eraseSelectionDone();
+        if (sketch.eraseSelection() != -1){
+            emit eraseSelectionDone();
+        }
+
+
+
 
     }
 
@@ -698,10 +702,9 @@ void Scene::setOversketchingMode(){
 
 void Scene::smoothSketch(){
 
-
     sketch.smooth();
-
     update();
+
 }
 
 void Scene::setDefRotAxisMode(){
@@ -737,10 +740,25 @@ void Scene::saveSvg(QString path)
 
 }
 
+int Scene::getErasedTypeContour(){
 
+    return (sketch.getErasedTypeContour());
+}
 
+int Scene::getErasedOpenItemNumber(){
 
+    return (sketch.getErasedOpenContourNumber());
+}
 
+int Scene::getErasedClosedItemNumber(){
+
+    return (sketch.getErasedClosedContourNumber());
+}
+
+int Scene::getErasedStripeItemNumber(){
+
+    return (sketch.getErasedStripeContourNumber());
+}
 
 
 #include "moc_scene.cpp"

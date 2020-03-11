@@ -107,5 +107,16 @@ void Layers::clearStripeList(){
     }
 }
 
+void Layers::removeItemOpenContourList(int item){
+   openContourList->takeItem(item);
+
+}
+void Layers::removeItemClosedContourList(int item){
+    closedContourList->takeItem(item);
+}
+void Layers::removeItemStripeContourList(int item){
+    stripeContourList->takeItem(item);
+}
+
 
 #include "moc_layers.cpp"

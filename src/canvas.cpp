@@ -35,6 +35,9 @@ void Canvas::createActions()
     connect( scene.get(), &Scene::stripeContourDone, this, &Canvas::sendStripePathNames);
 
     connect (scene.get(), &Scene::stripeContourFinished, this, &Canvas::updateStripeContourList);
+
+
+    connect (scene.get(), &Scene::eraseSelectionDone, this, &Canvas::removeItemLayersList);
 }
 
 void Canvas::newFile()
@@ -185,6 +188,27 @@ void Canvas::renameStripeContour(int itemNumber, QString name){
 void Canvas::updateStripeContourList(){
     layers->clearStripeList();
     layers->receiveNamePaths(scene->getPathNames(), 2);
+}
+
+void Canvas::removeItemLayersList()
+{
+    if (scene->getErasedTypeContour() == 0){
+
+        layers->removeItemOpenContourList(scene->getErasedOpenItemNumber());
+
+    }
+
+    if (scene->getErasedTypeContour() == 1){
+
+        layers->removeItemClosedContourList(scene->getErasedClosedItemNumber());
+
+    }
+
+    if (scene->getErasedTypeContour() == 2){
+
+        layers->removeItemStripeContourList(scene->getErasedStripeItemNumber());
+
+    }
 }
 
 void Canvas::sendCrossSelectionCurves()

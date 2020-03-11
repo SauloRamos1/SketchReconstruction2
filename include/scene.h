@@ -100,6 +100,12 @@ public:
     bool isStripeContoursEmpty();
 
     void saveSvg(QString path);
+
+    int getErasedTypeContour();
+    int getErasedOpenItemNumber();
+    int getErasedClosedItemNumber();
+    int getErasedStripeItemNumber();
+
 public slots:
 
 private:
@@ -131,6 +137,7 @@ signals:
     void stripeContourDone();
 
     void stripeContourFinished();
+    void eraseSelectionDone();
 
 //    void crossSelectionDone();
 //    void cropSelectionDone();

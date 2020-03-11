@@ -1310,19 +1310,23 @@ void InputSketch::cropSelection(){
     curve = QPainterPath();
 }
 
-void InputSketch::eraseSelection(){
+int InputSketch::eraseSelection(){
 
     /// Interaction -- Erase Paths
     ///
     ///
 
-
     for (int i = 0 ; i < svgPaths.size(); i++ ) {
 
         if (svgPaths[i].intersects(curve)) {
             svgPaths[i] = QPainterPath();
+            curve = QPainterPath();
+            return -1 ;
+
         }
     }
+
+    int count = 0;
 
     for (int i = 0 ; i < openContourList.size(); i++ ) {
         for (int j = 0 ; j < openContourList[i].size(); j++ ) {
@@ -1330,18 +1334,30 @@ void InputSketch::eraseSelection(){
             if (openContourList[i][j].contour.intersects(curve)) {
                 openContourList[i][j].contour = QPainterPath();
                 openContourList[i].removeAt(j);
+                selectedOpenContour = count;
+                lastSelected = 0;
+                curve = QPainterPath();
+                return 0;
             }
+            count++;
         }
     }
 
+    count = 0;
 
     for (int i = 0 ; i < closedContourList.size(); i++ ) {
 
         if (closedContourList[i].contour.intersects(curve)) {
             closedContourList[i].contour = QPainterPath();
             closedContourList.removeAt(i);
+            selectedClosedContour = count;
+            lastSelected = 1;
+            curve = QPainterPath();
+            return 1;
         }
+        count++;
     }
+    count = 0;
 
     for (int i = 0 ; i < stripeContourList.size(); i++ ) {
         for (int j = 0 ; j < stripeContourList[i].size(); j++ ) {
@@ -1349,11 +1365,18 @@ void InputSketch::eraseSelection(){
             if (stripeContourList[i][j].contour.intersects(curve)) {
                 stripeContourList[i][j].contour = QPainterPath();
                 stripeContourList[i].removeAt(j);
+                selectedStripeContour = count;
+                lastSelected = 2;
+                curve = QPainterPath();
+                return 2;
             }
+            count++;
         }
     }
 
+
     curve = QPainterPath();
+    return -1 ;
 
     //TODO atualizar Layers Dock
 
@@ -2651,6 +2674,23 @@ bool InputSketch::isClosedContoursEmpty(){
 bool InputSketch::isStripeContoursEmpty(){
     return stripeContourList.isEmpty();
 }
+
+int InputSketch::getErasedTypeContour(){
+    return lastSelected;
+}
+
+int InputSketch::getErasedOpenContourNumber(){
+    return selectedOpenContour;
+}
+
+int InputSketch::getErasedClosedContourNumber(){
+    return selectedClosedContour;
+}
+
+int InputSketch::getErasedStripeContourNumber(){
+    return selectedStripeContour;
+}
+
 
 
 
