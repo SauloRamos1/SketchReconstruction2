@@ -32,6 +32,8 @@ Scene::Scene()
     addRect(0,0,sceneRect().width(),sceneRect().height(), QPen(QColor(179,179,179),1,Qt::SolidLine), Qt::white);
     addItem ( &sketch );
 
+    setFocus();
+
 }
 
 void Scene::chooseDefaultInteraction(){
@@ -243,7 +245,7 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event){
     if (status == Interaction::DEFAULT){
         return;
     }
-    if (event->buttons() == Qt::LeftButton &&  (status == Interaction::CROSS_SELECTION || status == Interaction::CROP_SELECTION)){
+    if (event->buttons() == Qt::LeftButton &&  (status == Interaction::CROSS_SELECTION || status == Interaction::CROP_SELECTION || status == Interaction::ERASE_SELECTION)){
         setFocus();
         leftButtonIsPressed = true;
         sketch.createSelectionCurve( pos );
@@ -291,12 +293,14 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event){
 
 void Scene::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
 
+    setFocus();
     QPointF pos = event->scenePos();
 
+
     if (status == Interaction::DEFAULT){
-        return;
+
     }
-    if (event->buttons() == Qt::LeftButton && (status == Interaction::CROSS_SELECTION || status == Interaction::CROP_SELECTION)){
+    if (event->buttons() == Qt::LeftButton && (status == Interaction::CROSS_SELECTION || status == Interaction::CROP_SELECTION || status == Interaction::ERASE_SELECTION)){
         sketch.addSelectionCurve( pos );
         QGraphicsScene::mouseMoveEvent(event);
     }
@@ -357,26 +361,31 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::OPENCONTOUR){
-        sketch.saveOpenContour();
+        if (sketch.saveOpenContour()){
+           emit openContourDone();
+        }
         leftButtonIsPressed = false;
-        emit openContourDone();
+
         QGraphicsScene::mouseReleaseEvent(event);
 
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::CLOSEDCONTOUR){
 
-        sketch.saveClosedContour();
+        if (sketch.saveClosedContour()){
+           emit closedContourDone();
+        }
+
         leftButtonIsPressed = false;
-        emit closedContourDone();
         QGraphicsScene::mouseReleaseEvent(event);
 
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::STRIPES){
 
-        sketch.saveStripeContour();
-        emit stripeContourDone();
+        if (sketch.saveStripeContour()){
+           emit stripeContourDone();
+        }
 
         QGraphicsScene::mouseReleaseEvent(event);
 
@@ -406,6 +415,7 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     if (event->button() & Qt::LeftButton && status == Interaction::ERASE_SELECTION) {
 
         sketch.eraseSelection();
+        //emit eraseSelectionDone();
 
     }
 
@@ -471,6 +481,9 @@ void Scene::wheelEvent ( QGraphicsSceneWheelEvent *event )
 
 void Scene::keyPressEvent(QKeyEvent *event){
 
+    setFocus();
+
+    qDebug () << "KEY PRESS SCENE";
 
     if ( event->key() == Qt::Key_Plus && status == Interaction::OPENCONTOUR ){
         if ( leftButtonIsPressed ){
@@ -550,6 +563,7 @@ void Scene::keyPressEvent(QKeyEvent *event){
     }
 
     sketch.updateColorMap();
+    update();
 }
 
 void Scene::changeLayerDifference (const int &difference){
@@ -710,6 +724,8 @@ void Scene::saveSvg(QString path)
     painter.end();
 
 }
+
+
 
 
 

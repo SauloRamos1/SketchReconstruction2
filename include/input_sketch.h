@@ -91,9 +91,9 @@ public:
     void addClosedContour(const QPointF &pos);
     void addStripeContour(const QPointF &pos);
 
-    void saveOpenContour();
-    void saveClosedContour();
-    void saveStripeContour();
+    bool saveOpenContour();
+    bool saveClosedContour();
+    bool saveStripeContour();
 
     void increaseOpenContourLevelWhileDrawing();
     void decreaseOpenContourLevelWhileDrawing();

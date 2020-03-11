@@ -81,7 +81,6 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
     dw_sketch->setMinimumSize(windowWidth*0.47, windowHeight);
     //dw_sketch->resize(windowWidth*0.5, windowHeight);
 
-
     layers_dock = new QDockWidget( " Layers", this);
 
     QMainWindow *layers_window = new QMainWindow(layers_dock);
@@ -324,9 +323,9 @@ void MainWindow::createCanvas1Actions (){
 
     /// ----- CANVAS 2 ACTIONS&& TOOLBAR MOVED TO CANVAS 1 -----
 
-        connect( oversketch_button, SIGNAL(pressed()), canvas.get(), SLOT(setOversketchingMode()));
-        connect( smooth_button, SIGNAL(pressed()), canvas.get(), SLOT(smoothSketch()));
-        connect( defRotAxis_button, SIGNAL(pressed()), canvas.get(), SLOT(setDefRotAxisMode()));
+    connect( oversketch_button, SIGNAL(pressed()), canvas.get(), SLOT(setOversketchingMode()));
+    connect( smooth_button, SIGNAL(pressed()), canvas.get(), SLOT(smoothSketch()));
+    connect( defRotAxis_button, SIGNAL(pressed()), canvas.get(), SLOT(setDefRotAxisMode()));
     //    connect( ac_crossSecBlendSurface.get(), &QAction::triggered, canvas2.get(), &Canvas2::setCrossSecBlendSurfaceMode);
 
     //    connect( ac_estimateShape.get(), &QAction::triggered, canvas2.get(), &Canvas2::estimateShape );
@@ -339,15 +338,15 @@ void MainWindow::createCanvas1Actions (){
 void MainWindow::createLayersDockToolbar(){
 
 
-//    layerUp_button = new QPushButton("Up" , layers.get());
-//    layerUp_button->setToolTip("Move UP");
-//    layerUp_button->setGeometry(10, 20, 60, 30);
-//    layerUp_button->setIcon(QIcon(":/icons/arrow_up.svg"));
+    //    layerUp_button = new QPushButton("Up" , layers.get());
+    //    layerUp_button->setToolTip("Move UP");
+    //    layerUp_button->setGeometry(10, 20, 60, 30);
+    //    layerUp_button->setIcon(QIcon(":/icons/arrow_up.svg"));
 
-//    layerDown_button = new QPushButton("Down" , layers.get());
-//    layerDown_button->setToolTip("Move Down");
-//    layerDown_button->setGeometry(80, 20, 60, 30);
-//    layerDown_button->setIcon(QIcon(":/icons/arrow_down.svg"));
+    //    layerDown_button = new QPushButton("Down" , layers.get());
+    //    layerDown_button->setToolTip("Move Down");
+    //    layerDown_button->setGeometry(80, 20, 60, 30);
+    //    layerDown_button->setIcon(QIcon(":/icons/arrow_down.svg"));
 
 
 }
@@ -358,6 +357,8 @@ void MainWindow::createLayersDockActions(){
     //    connect( layerDown_button, SIGNAL(pressed()),  layers.get(), SLOT(layerDownSelectedCurve()));
 
 }
+
+
 
 void MainWindow::resizeEvent(QResizeEvent *){
 
@@ -372,6 +373,15 @@ void MainWindow::resizeEvent(QResizeEvent *){
     //layers->openContourList->move(0,70);
     layers->closedContourList->move(0,layers->openContourList->height());
     layers->stripeContourList->move(0,layers->openContourList->height()+layers->closedContourList->height());
+
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+
+    dw_sketch->setFocus();
+    canvas.get()->setFocus();
+    //Set Focus on Mouse Move.. Can be changed to Mouse Over QDockWidget.
 
 }
 

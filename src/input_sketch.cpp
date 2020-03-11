@@ -75,6 +75,7 @@ void InputSketch::createOpenContour (const QPointF& pos){
     prepareGeometryChange();
     openContour.moveTo(pos);
     update();
+
     
 }
 
@@ -86,10 +87,13 @@ void InputSketch::addOpenContour (const QPointF& pos){
 
 }
 
-void InputSketch::saveOpenContour (){
+bool InputSketch::saveOpenContour (){
 
-    if (openContour.length() < 2) return; //Testa se ha linha desenhada
+    if (openContour.length() < 2){
+        openContour = QPainterPath();
+        return false; //Testa se ha linha desenhada
 
+    }
     smoothPath(openContour);
     smoothPath(openContour);
     smoothPath(openContour);
@@ -111,6 +115,8 @@ void InputSketch::saveOpenContour (){
 
 
     update();
+
+    return true;
 
 }
 
@@ -183,6 +189,7 @@ void InputSketch::createClosedContour (const QPointF& pos){
 
 void InputSketch::addClosedContour (const QPointF& pos){
 
+
     prepareGeometryChange();
     closedContour.lineTo(pos);
 
@@ -221,10 +228,12 @@ void InputSketch::addClosedContour (const QPointF& pos){
     update();
 }
 
-void InputSketch::saveClosedContour (){
+bool InputSketch::saveClosedContour (){
 
-    if (closedContour.length() < 2) return; //Testa se ha linha desenhada
-
+    if (closedContour.length() < 2){
+        closedContour = QPainterPath();
+        return false; //Testa se ha linha desenhada
+    }
     smoothPath(closedContour);
     smoothPath(closedContour);
     smoothPath(closedContour);
@@ -244,7 +253,7 @@ void InputSketch::saveClosedContour (){
 
     closedContourList.append(curve3D);
     closedContour = QPainterPath();
-
+    return true;
 }
 
 //USE IT FOR SVG and SKETCHING
@@ -451,7 +460,7 @@ void InputSketch::estimateShapes(){
         }
     }
 
-   // update();
+    // update();
 
 }
 
@@ -842,9 +851,12 @@ void InputSketch::finishBand (){//Finish
 }
 
 
-void InputSketch::saveStripeContour (){
+bool InputSketch::saveStripeContour (){
 
-    if (stripeContour.length() < 2) return; //Testa se ha linha desenhada
+    if (stripeContour.length() < 2){//Testa se ha linha desenhada
+        stripeContour = QPainterPath();
+        return false;
+    }
 
     smoothPath(stripeContour);
     smoothPath(stripeContour);
@@ -912,6 +924,7 @@ void InputSketch::saveStripeContour (){
 
     //Invert Band
     front = !front ;
+    return true;
 
 }
 
@@ -1302,17 +1315,47 @@ void InputSketch::eraseSelection(){
     /// Interaction -- Erase Paths
     ///
     ///
-    if (svgPaths.size() > 0){
 
-        for (int i = 0 ; i < svgPaths.size(); i++ ) {
 
-            if (svgPaths[i].intersects(curve)) {
-                svgPaths[i] = QPainterPath();
+    for (int i = 0 ; i < svgPaths.size(); i++ ) {
+
+        if (svgPaths[i].intersects(curve)) {
+            svgPaths[i] = QPainterPath();
+        }
+    }
+
+    for (int i = 0 ; i < openContourList.size(); i++ ) {
+        for (int j = 0 ; j < openContourList[i].size(); j++ ) {
+
+            if (openContourList[i][j].contour.intersects(curve)) {
+                openContourList[i][j].contour = QPainterPath();
+                openContourList[i].removeAt(j);
+            }
+        }
+    }
+
+
+    for (int i = 0 ; i < closedContourList.size(); i++ ) {
+
+        if (closedContourList[i].contour.intersects(curve)) {
+            closedContourList[i].contour = QPainterPath();
+            closedContourList.removeAt(i);
+        }
+    }
+
+    for (int i = 0 ; i < stripeContourList.size(); i++ ) {
+        for (int j = 0 ; j < stripeContourList[i].size(); j++ ) {
+
+            if (stripeContourList[i][j].contour.intersects(curve)) {
+                stripeContourList[i][j].contour = QPainterPath();
+                stripeContourList[i].removeAt(j);
             }
         }
     }
 
     curve = QPainterPath();
+
+    //TODO atualizar Layers Dock
 
 }
 
@@ -1890,7 +1933,7 @@ QRectF InputSketch::boundingRect() const
 
 
 void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) {
-//void InputSketch::paint( QPainter *painter) {
+    //void InputSketch::paint( QPainter *painter) {
     
     
     painter->setRenderHint(QPainter::Antialiasing);

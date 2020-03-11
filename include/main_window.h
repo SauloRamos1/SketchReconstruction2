@@ -11,6 +11,7 @@
 #include <QDockWidget>
 #include <QPushButton>
 #include <QSpinBox>
+#include <QMouseEvent>
 
 #include "canvas.h"
 #include "openglcanvas.h"
@@ -47,6 +48,8 @@ class MainWindow: public QMainWindow
         void createLayersDockToolbar();
         void createCanvas1Actions();
         void createLayersDockActions();
+
+        void mouseMoveEvent(QMouseEvent *event);
 
     private:
 

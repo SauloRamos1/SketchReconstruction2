@@ -161,6 +161,7 @@ void OpenGLCanvas::mouseReleaseEvent(QMouseEvent *event){
 
     QOpenGLWidget::mouseReleaseEvent( event );
 
+
 }
 
 void OpenGLCanvas::wheelEvent(QWheelEvent *event){
