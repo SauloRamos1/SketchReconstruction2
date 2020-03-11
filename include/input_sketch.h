@@ -147,6 +147,7 @@ public:
     bool isStripeContoursEmpty();
 
     void paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget ) override;
+    void setSaveSVG();
 public slots:
 
 protected:
@@ -340,6 +341,8 @@ private:
 
 
     void samplePointsForRotationalBlendingSurface(QPainterPath &selectedCurve);
+
+    bool saveSVGFlag = false;
 };
 
 #endif // INPUTSKETCH_H

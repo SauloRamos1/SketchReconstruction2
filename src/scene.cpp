@@ -246,9 +246,13 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event){
         return;
     }
 
-    if ( event->buttons() == Qt::LeftButton && status != Interaction::MOVE_ZOOM && imageItem->isSelected()){
+    if ( event->buttons() == Qt::LeftButton && status != Interaction::MOVE_ZOOM ){
+        if (imageItem == nullptr){
 
-        imageItem->setSelected(false);
+        } else {
+            if (imageItem->isSelected())
+                imageItem->setSelected(false);
+        }
     }
 
 
@@ -726,6 +730,7 @@ void Scene::saveSvg(QString path)
     generator.setDescription("An SVG drawing created by the SVG Generator QT.");
 
     QPainter painter;
+    sketch.setSaveSVG();
     painter.begin(&generator);
     sketch.paint(&painter,nullptr,nullptr);
     painter.end();
