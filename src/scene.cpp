@@ -245,6 +245,13 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event){
     if (status == Interaction::DEFAULT){
         return;
     }
+
+    if ( event->buttons() == Qt::LeftButton && status != Interaction::MOVE_ZOOM && imageItem->isSelected()){
+
+        imageItem->setSelected(false);
+    }
+
+
     if (event->buttons() == Qt::LeftButton &&  (status == Interaction::CROSS_SELECTION || status == Interaction::CROP_SELECTION || status == Interaction::ERASE_SELECTION)){
         setFocus();
         leftButtonIsPressed = true;
@@ -362,7 +369,7 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
 
     if (event->button() & Qt::LeftButton && status == Interaction::OPENCONTOUR){
         if (sketch.saveOpenContour()){
-           emit openContourDone();
+            emit openContourDone();
         }
         leftButtonIsPressed = false;
 
@@ -373,7 +380,7 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     if (event->button() & Qt::LeftButton && status == Interaction::CLOSEDCONTOUR){
 
         if (sketch.saveClosedContour()){
-           emit closedContourDone();
+            emit closedContourDone();
         }
 
         leftButtonIsPressed = false;
@@ -384,7 +391,7 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     if (event->button() & Qt::LeftButton && status == Interaction::STRIPES){
 
         if (sketch.saveStripeContour()){
-           emit stripeContourDone();
+            emit stripeContourDone();
         }
 
         QGraphicsScene::mouseReleaseEvent(event);
