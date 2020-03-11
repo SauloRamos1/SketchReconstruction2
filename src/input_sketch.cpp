@@ -2607,16 +2607,17 @@ void InputSketch::clear()
 
     linesToPolygon.clear();
 
-    closingLines1.clear();
-    closingLines2.clear();
-    closingLines3.clear();
-
 
     curvePolygon = QPolygonF();
     pathPolygon = QPolygonF();
     currentPolySugestion = QPolygonF();
 
     setPath( curve );
+    //New Clear
+    cyclesList.clear();
+    twistingThickness = 10;
+    lineLevel = 1;
+    layerDifference = 10;
 
     update();
 }

@@ -114,6 +114,7 @@ void Layers::removeItemOpenContourList(int item){
 void Layers::removeItemClosedContourList(int item){
     closedContourList->takeItem(item);
 }
+
 void Layers::removeItemStripeContourList(int item){
     stripeContourList->takeItem(item);
 }

@@ -274,7 +274,6 @@ private:
     QVector <int> levelListfor3D;
     QPointF mousePointer;
 
-    QVector <QPainterPath> closingLines1, closingLines2, closingLines3;
 
     bool front = true;//True = front, False = Back
     //Front/True -> Red Line on front

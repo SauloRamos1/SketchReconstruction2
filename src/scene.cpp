@@ -102,6 +102,8 @@ void Scene::newFile()
 {
 
     //setSceneRect( QRect( 0, 0, 500, 500 ) );
+    status = Interaction::DEFAULT;
+    sketch.interactionString = "Default Mode";
 
     sketch.clear();
 

@@ -10,6 +10,7 @@
 
 #include <QGraphicsView>
 #include <QColorDialog>
+#include <QProcess>
 
 #include "scene.h"
 

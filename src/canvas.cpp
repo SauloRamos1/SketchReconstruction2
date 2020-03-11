@@ -42,7 +42,8 @@ void Canvas::createActions()
 
 void Canvas::newFile()
 {
-    scene->newFile();
+    QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
+    qApp->quit();
 }
 
 void Canvas::loadSVG()
