@@ -59,8 +59,9 @@ private:
     std::shared_ptr<QOpenGLShader> shader;
     std::shared_ptr<QOpenGLBuffer> bf_vertices;
 
+    int viewportWidth ;
 
-
+    int viewportHeight ;
 
 
 };

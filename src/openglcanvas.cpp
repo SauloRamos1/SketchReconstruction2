@@ -52,6 +52,8 @@ void OpenGLCanvas::initializeShaders(){
     toggleHeadlight();
 
 
+
+
 }
 
 void OpenGLCanvas::createTube(std::vector<float> &vertex_coordinates, std::vector<unsigned int> &triangle_list, std::vector<float> &normal_list){
@@ -61,6 +63,14 @@ void OpenGLCanvas::createTube(std::vector<float> &vertex_coordinates, std::vecto
     //tscene->setMeshColor(0xF1, 0xA3, 0x40);
 
     tscene->setMeshColor(0x00, 0x99, 0x33);
+
+    tscene->resetCamera();
+    tscene->rotateCamera(viewportWidth/2 , 720 );
+//    for (int i = 720; i > 0; --i) {
+//        tscene->rotateCamera(viewportWidth/2 , i );
+//    }
+    tscene->rotateCamera(viewportWidth/2 , 0 );
+    tscene->stopRotateCamera();
 
 
 
@@ -85,6 +95,9 @@ void OpenGLCanvas::renderCylinder (QVector<QVector3D> points3D){
 
 void OpenGLCanvas::resizeGL(int w, int h){
 
+    viewportWidth = w;
+    viewportHeight = h;
+
     tscene->setViewport(w,h);
 
 }
@@ -93,6 +106,7 @@ void OpenGLCanvas::paintGL(){
 
     tscene->render();
     //glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 }
 
 void OpenGLCanvas::toggleHeadlight()
@@ -131,6 +145,8 @@ void OpenGLCanvas::mousePressEvent(QMouseEvent *event){
     QPointF p = event->pos();
     if (event->buttons() == Qt::LeftButton){
         tscene->rotateCamera( p.x(), p.y() );
+        qDebug () << p;
+
     }
 
     update();
@@ -156,6 +172,7 @@ void OpenGLCanvas::mouseMoveEvent( QMouseEvent* event )
 void OpenGLCanvas::mouseReleaseEvent(QMouseEvent *event){
 
     tscene->stopRotateCamera();
+
 
     update();
 
