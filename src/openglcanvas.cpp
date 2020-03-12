@@ -37,6 +37,7 @@ void OpenGLCanvas::initializeGL(){
 
     //    bf_vertices = std::make_shared< QOpenGLBuffer >();
     //    bf_vertices->create();
+    timerId = startTimer(16);
 
 }
 
@@ -50,9 +51,6 @@ void OpenGLCanvas::initializeShaders(){
     tscene->setClearColor(0xF7, 0xF7, 0xF7);
 
     toggleHeadlight();
-
-
-
 
 }
 
@@ -71,6 +69,12 @@ void OpenGLCanvas::createTube(std::vector<float> &vertex_coordinates, std::vecto
 //    }
     tscene->rotateCamera(viewportWidth/2 , 0 );
     tscene->stopRotateCamera();
+
+    if (vertex_coordinates.size() > 0){
+        sceneHasModel = true;
+    } else{
+        sceneHasModel = false;
+    }
 
 
 
@@ -97,6 +101,8 @@ void OpenGLCanvas::resizeGL(int w, int h){
 
     viewportWidth = w;
     viewportHeight = h;
+
+    y_RotateTimer = viewportHeight/2;
 
     tscene->setViewport(w,h);
 
@@ -134,6 +140,10 @@ void OpenGLCanvas::keyPressEvent(QKeyEvent *event){
     if (event->key() == Qt::Key_W){
         toggleWireframe();
     }
+
+    if (event->key() == Qt::Key_R){
+        rotateAnimation = !rotateAnimation;
+    }
     update();
     QOpenGLWidget::keyPressEvent(event);
 }
@@ -141,6 +151,9 @@ void OpenGLCanvas::keyPressEvent(QKeyEvent *event){
 void OpenGLCanvas::mousePressEvent(QMouseEvent *event){
 
     setFocus();
+    mouseIsClicked = true;
+
+    tscene->stopRotateCamera();
 
     QPointF p = event->pos();
     if (event->buttons() == Qt::LeftButton){
@@ -163,6 +176,8 @@ void OpenGLCanvas::mouseMoveEvent( QMouseEvent* event )
         tscene->rotateCamera( p.x(), p.y() );
     }
 
+    qDebug () << event->pos();
+
     update();
 
     QOpenGLWidget::mouseMoveEvent( event );
@@ -173,7 +188,7 @@ void OpenGLCanvas::mouseReleaseEvent(QMouseEvent *event){
 
     tscene->stopRotateCamera();
 
-
+    mouseIsClicked = false;
     update();
 
     QOpenGLWidget::mouseReleaseEvent( event );
@@ -199,7 +214,26 @@ void OpenGLCanvas::wheelEvent(QWheelEvent *event){
 }
 
 
+void OpenGLCanvas::timerEvent(QTimerEvent *event)
+{
+    qDebug() << "Update...";
+    if (!sceneHasModel || mouseIsClicked || rotateAnimation == false) return;
 
+    tscene->rotateCamera(x_RotateTimer , y_RotateTimer);
+    x_RotateTimer++;
+    x_RotateTimer++;
+    x_RotateTimer++;
+    x_RotateTimer++;
+
+    if (x_RotateTimer > viewportWidth){
+        tscene->stopRotateCamera();
+        x_RotateTimer = 0;
+    }
+    update();
+
+
+
+}
 
 
 

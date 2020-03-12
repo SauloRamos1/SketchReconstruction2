@@ -50,6 +50,8 @@ protected:
     void mouseReleaseEvent (QMouseEvent* event) override;
     void wheelEvent (QWheelEvent* event) override;
 
+    void timerEvent(QTimerEvent *event);
+
 private:
 
     std::shared_ptr<tucanow::Scene> tscene;
@@ -63,6 +65,14 @@ private:
 
     int viewportHeight ;
 
+    int y_RotateTimer, x_RotateTimer = 0 ;
+
+    bool rotateAnimation = true;
+    bool sceneHasModel =false;
+
+    int timerId;
+
+    bool mouseIsClicked = false;
 
 };
 
