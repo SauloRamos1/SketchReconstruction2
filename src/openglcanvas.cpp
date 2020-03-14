@@ -37,7 +37,7 @@ void OpenGLCanvas::initializeGL(){
 
     //    bf_vertices = std::make_shared< QOpenGLBuffer >();
     //    bf_vertices->create();
-    timerId = startTimer(16);
+    timerId = startTimer(25);
 
 }
 
@@ -216,7 +216,7 @@ void OpenGLCanvas::wheelEvent(QWheelEvent *event){
 
 void OpenGLCanvas::timerEvent(QTimerEvent *event)
 {
-    qDebug() << "Update...";
+
     if (!sceneHasModel || mouseIsClicked || rotateAnimation == false) return;
 
     tscene->rotateCamera(x_RotateTimer , y_RotateTimer);
@@ -225,9 +225,9 @@ void OpenGLCanvas::timerEvent(QTimerEvent *event)
     x_RotateTimer++;
     x_RotateTimer++;
 
-    if (x_RotateTimer > viewportWidth){
+    if (x_RotateTimer > viewportWidth-50){
         tscene->stopRotateCamera();
-        x_RotateTimer = 0;
+        x_RotateTimer = 50;
     }
     update();
 

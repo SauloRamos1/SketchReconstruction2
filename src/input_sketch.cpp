@@ -2092,6 +2092,10 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
         saveSVGFlag = !saveSVGFlag;
         return;
     }
+
+    painter->setRenderHint(QPainter::Antialiasing);
+    painter->setPen(QPen(Qt::black,1,Qt::SolidLine));
+
     font.setPointSize ( 11 );
 
     painter->setFont(font);
@@ -2136,66 +2140,76 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
     if (statusSketch == Interaction::OPENCONTOUR){
 
-        for (int i = 0; i < sameOpenContourList.size(); ++i) {
+        for (int h = numberOfLayers; h > 0; h--) {
 
-            if (halo){
-                painter->setOpacity(0.5);
-                painter->setPen(QPen(QColor(Qt::black),sameOpenContourList[i].level+16,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                painter->drawPath(sameOpenContourList[i].contour);
-                painter->setOpacity(1);
-                painter->setPen(QPen(QColor(Qt::white),sameOpenContourList[i].level+9,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                painter->drawPath(sameOpenContourList[i].contour);
+            for (int i = 0; i < sameOpenContourList.size(); ++i) {
 
-            }
-
-            if (contour){
-
-                painter->setPen(QPen(QColor(Qt::black),sameOpenContourList[i].level+1.5,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                painter->drawPath(sameOpenContourList[i].contour);
-                painter->setPen(QPen( QColor(lineColorMap[sameOpenContourList[i].level-1].x(), lineColorMap[sameOpenContourList[i].level-1].y(), lineColorMap[sameOpenContourList[i].level-1].z()),sameOpenContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //painter->setPen(QPen( QColor(Qt::white),sameOpenContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                painter->drawPath(sameOpenContourList[i].contour);
-                if (showLabels) painter->drawText(sameOpenContourList[i].contour.elementAt(0).x + 10, sameOpenContourList[i].contour.elementAt(0).y, sameOpenContourList[i].name);
-            }
-        }
-        int count = 0;
-
-        for (int i = 0; i < openContourList.size(); ++i) {
-            for (int j = 0; j < openContourList[i].size(); ++j) {
-
-                if (selectedOpenContour == count){
-
-                    painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                    painter->drawPath(openContourList[i][j].contour);
-
-                    if (showLabels) painter->drawText(openContourList[i][j].contour.elementAt(0).x + 10, openContourList[i][j].contour.elementAt(0).y, openContourList[i][j].name);
-
-                } else {
-
+                if (sameOpenContourList[i].level == h){
 
                     if (halo){
                         painter->setOpacity(0.5);
-                        painter->setPen(QPen(QColor(Qt::white),openContourList[i][j].level+16,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                        painter->drawPath(openContourList[i][j].contour);
+                        painter->setPen(QPen(QColor(Qt::black),sameOpenContourList[i].level+16,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(sameOpenContourList[i].contour);
                         painter->setOpacity(1);
-                        painter->setPen(QPen(QColor(Qt::white),openContourList[i][j].level+9,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                        painter->drawPath(openContourList[i][j].contour);
+                        painter->setPen(QPen(QColor(Qt::white),sameOpenContourList[i].level+9,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(sameOpenContourList[i].contour);
+
                     }
 
                     if (contour){
-                        painter->setPen(QPen(QColor(Qt::black),openContourList[i][j].level+1.5,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                        painter->drawPath(openContourList[i][j].contour);
-                        painter->setPen(QPen(QColor(lineColorMap[openContourList[i][j].level-1].x(), lineColorMap[openContourList[i][j].level-1].y(), lineColorMap[openContourList[i][j].level-1].z()),openContourList[i][j].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                        painter->drawPath(openContourList[i][j].contour);
-                        painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                        if (showLabels) painter->drawText(openContourList[i][j].contour.elementAt(0).x + 10, openContourList[i][j].contour.elementAt(0).y, openContourList[i][j].name);
+
+                        painter->setPen(QPen(QColor(Qt::black),sameOpenContourList[i].level+1.5,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(sameOpenContourList[i].contour);
+                        painter->setPen(QPen( QColor(lineColorMap[sameOpenContourList[i].level-1].x(), lineColorMap[sameOpenContourList[i].level-1].y(), lineColorMap[sameOpenContourList[i].level-1].z()),sameOpenContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        //painter->setPen(QPen( QColor(Qt::white),sameOpenContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(sameOpenContourList[i].contour);
+                        if (showLabels) painter->drawText(sameOpenContourList[i].contour.elementAt(0).x + 10, sameOpenContourList[i].contour.elementAt(0).y, sameOpenContourList[i].name);
                     }
                 }
-
-                count++;
             }
-        }
+            int count = 0;
 
+            for (int i = 0; i < openContourList.size(); ++i) {
+                for (int j = 0; j < openContourList[i].size(); ++j) {
+
+
+                    if (selectedOpenContour == count){
+
+                        painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(openContourList[i][j].contour);
+
+                        if (showLabels) painter->drawText(openContourList[i][j].contour.elementAt(0).x + 10, openContourList[i][j].contour.elementAt(0).y, openContourList[i][j].name);
+
+                    } else {
+
+                        if (openContourList[i][j].level == h) {
+
+                            if (halo){
+                                painter->setOpacity(0.5);
+                                painter->setPen(QPen(QColor(Qt::white),openContourList[i][j].level+16,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                                painter->drawPath(openContourList[i][j].contour);
+                                painter->setOpacity(1);
+                                painter->setPen(QPen(QColor(Qt::white),openContourList[i][j].level+9,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                                painter->drawPath(openContourList[i][j].contour);
+                            }
+
+                            if (contour){
+                                painter->setPen(QPen(QColor(Qt::black),openContourList[i][j].level+1.5,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                                painter->drawPath(openContourList[i][j].contour);
+                                painter->setPen(QPen(QColor(lineColorMap[openContourList[i][j].level-1].x(), lineColorMap[openContourList[i][j].level-1].y(), lineColorMap[openContourList[i][j].level-1].z()),openContourList[i][j].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                                painter->drawPath(openContourList[i][j].contour);
+                                painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                                if (showLabels) painter->drawText(openContourList[i][j].contour.elementAt(0).x + 10, openContourList[i][j].contour.elementAt(0).y, openContourList[i][j].name);
+                            }
+                        }
+                    }
+
+
+                    count++;
+                }
+            }
+
+        }
     } else {
         //Show Contours with water mark
         for (int i = 0; i < openContourList.size(); ++i) {
@@ -2216,59 +2230,69 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
         painter->setBrush( Qt::NoBrush );
 
-        for (int i = 0 ; i < closedContourList.size(); i++) {
+        for (int h = numberOfLayers; h > 0; --h) {
 
-            if (selectedClosedContour == i){
+            for (int i = 0 ; i < closedContourList.size(); i++) {
 
-                painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                painter->drawPath(closedContourList[i].contour);
+                qDebug () << "H:" << h << "Number of Layers:" << numberOfLayers;
 
-                painter->setPen(QPen(Qt::darkRed, 2,Qt::SolidLine));
-                painter->drawPath(allShapesSampledPoints[i].midPointsPath);
 
-                if (showLabels) painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
 
-            } else {
+                if (selectedClosedContour == i){
 
-                if (color){
-
-                    painter->setOpacity( 1 /static_cast<qreal>(closedContourList.size()));
-                    painter->fillPath(closedContourList[i].contour, QColor(shapeColorMap[closedContourList[i].level-1].x(), shapeColorMap[closedContourList[i].level-1].y(), shapeColorMap[closedContourList[i].level-1].z()));
-                }
-
-                if (hatching){
-                    painter->setOpacity( 1 );
-                    painter->fillPath(closedContourList[i].contour, hatchingMap[closedContourList[i].level-1]);
-
-                }
-                if (halo){
-                    painter->setOpacity(0.5);
-                    painter->setPen(QPen(QColor(Qt::white),closedContourList[i].level+16,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                    painter->drawPath(closedContourList[i].contour);
-                    painter->setOpacity(1);
-                    painter->setPen(QPen(QColor(Qt::white),closedContourList[i].level+9,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                    painter->drawPath(closedContourList[i].contour);
-                }
-
-                if (contour){
-                    painter->setPen(QPen(QColor(Qt::black),closedContourList[i].level+1.5,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                    painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
                     painter->drawPath(closedContourList[i].contour);
 
+                    painter->setPen(QPen(Qt::darkRed, 2,Qt::SolidLine));
+                    painter->drawPath(allShapesSampledPoints[i].midPointsPath);
 
-                    painter->setPen(QPen(QColor(lineColorMap[closedContourList[i].level-1].x(), lineColorMap[closedContourList[i].level-1].y(), lineColorMap[closedContourList[i].level-1].z()), closedContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
-
-                    //painter->setPen(QPen(QColor(Qt::red), closedContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                    painter->drawPath(closedContourList[i].contour);
-                    painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::FlatCap, Qt::RoundJoin));
                     if (showLabels) painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
+
+                } else {
+                    if (closedContourList[i].level == h){
+
+                        if (color){
+
+                            painter->setOpacity( 1 /static_cast<qreal>(closedContourList.size()));
+                            painter->fillPath(closedContourList[i].contour, QColor(shapeColorMap[closedContourList[i].level-1].x(), shapeColorMap[closedContourList[i].level-1].y(), shapeColorMap[closedContourList[i].level-1].z()));
+                        }
+
+                        if (hatching){
+                            painter->setOpacity( 1 );
+                            painter->fillPath(closedContourList[i].contour, hatchingMap[closedContourList[i].level-1]);
+
+                        }
+                        if (halo){
+                            painter->setOpacity(0.5);
+                            painter->setPen(QPen(QColor(Qt::white),closedContourList[i].level+16,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                            painter->drawPath(closedContourList[i].contour);
+                            painter->setOpacity(1);
+                            painter->setPen(QPen(QColor(Qt::white),closedContourList[i].level+9,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                            painter->drawPath(closedContourList[i].contour);
+                        }
+
+                        if (contour){
+                            painter->setPen(QPen(QColor(Qt::black),closedContourList[i].level+1.5,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                            painter->drawPath(closedContourList[i].contour);
+
+
+                            painter->setPen(QPen(QColor(lineColorMap[closedContourList[i].level-1].x(), lineColorMap[closedContourList[i].level-1].y(), lineColorMap[closedContourList[i].level-1].z()), closedContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
+
+                            //painter->setPen(QPen(QColor(Qt::red), closedContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                            painter->drawPath(closedContourList[i].contour);
+                            painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                            if (showLabels) painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
+                        }
+
+                        painter->setPen(QPen(Qt::darkRed, 2,Qt::SolidLine));
+                        painter->drawPath(allShapesSampledPoints[i].midPointsPath);
+                    }
                 }
-
-                painter->setPen(QPen(Qt::darkRed, 2,Qt::SolidLine));
-                painter->drawPath(allShapesSampledPoints[i].midPointsPath);
             }
+
+
+
         }
-
-
 
     } else {
 
@@ -2303,119 +2327,128 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
         int count = 0;
 
-        for (int i = 0 ; i < sameStripeContourList.size() ; i++){
+        for (int h = numberOfLayers; h > 0; h--) {
+
+            for (int i = 0 ; i < sameStripeContourList.size() ; i++){
 
 
-            if (selectedStripeContour == count){
 
-                painter->setPen(QPen(QColor(Qt::black),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                painter->drawPath(sameStripeContourList[i].contour);
+                if (selectedStripeContour == count){
 
-                if (showLabels) painter->drawText(sameStripeContourList[i].contour.elementAt(0).x + 10, sameStripeContourList[i].contour.elementAt(0).y, sameStripeContourList[i].name);
+                    painter->setPen(QPen(QColor(Qt::black),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                    painter->drawPath(sameStripeContourList[i].contour);
 
-            } else {
-                painter->setPen(QPen(QColor(Qt::blue),sameStripeContourList[i].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
-                painter->drawPath(sameStripeContourList[i].leftLine);
-                painter->setPen(QPen(QColor(Qt::red),sameStripeContourList[i].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
-                painter->drawPath(sameStripeContourList[i].rightLine);
-                painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
-                if (showLabels) painter->drawText(sameStripeContourList[i].contour.elementAt(0).x + 10, sameStripeContourList[i].contour.elementAt(0).y, sameStripeContourList[i].name);
-            }
-            count ++ ;
+                    if (showLabels) painter->drawText(sameStripeContourList[i].contour.elementAt(0).x + 10, sameStripeContourList[i].contour.elementAt(0).y, sameStripeContourList[i].name);
 
-        }
+                } else {
 
 
-        for (int i = 0 ; i < stripeContourList.size() ; i++){
-
-            for (int j = 0; j < stripeContourList[i].size() ; j++) {
-
-
-                painter->setPen(QPen(QColor(Qt::blue),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
-                painter->drawPath(stripeContourList[i][j].leftLine);
-                painter->setPen(QPen(QColor(Qt::red),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
-                painter->drawPath(stripeContourList[i][j].rightLine);
-                painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
-                if (showLabels) painter->drawText(stripeContourList[i][j].leftLine.elementAt(0).x + 10, stripeContourList[i][j].leftLine.elementAt(0).y, stripeContourList[i][j].name);
+                    if (sameStripeContourList[i].level == h) {
+                        painter->setPen(QPen(QColor(Qt::blue),sameStripeContourList[i].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                        painter->drawPath(sameStripeContourList[i].leftLine);
+                        painter->setPen(QPen(QColor(Qt::red),sameStripeContourList[i].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                        painter->drawPath(sameStripeContourList[i].rightLine);
+                        painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                        if (showLabels) painter->drawText(sameStripeContourList[i].contour.elementAt(0).x + 10, sameStripeContourList[i].contour.elementAt(0).y, sameStripeContourList[i].name);
+                    }
+                }
+                count ++ ;
 
             }
-        }
 
-        painter->setBrush(Qt::NoBrush);
-        painter->setOpacity(0.5);
-        painter->setPen(QPen(QColor(Qt::black),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
 
-        QVector3D triangleNormal;
+            for (int i = 0 ; i < stripeContourList.size() ; i++){
 
-        for (int m = 0; m < triangleMesh.size(); m = m + 3) {
+                for (int j = 0; j < stripeContourList[i].size() ; j++) {
 
-            triangleNormal = QVector3D::crossProduct(triangleMesh[m] - triangleMesh[m+1],triangleMesh[m+1] - triangleMesh[m+2]);
+                    if (stripeContourList[i][j].level == h) {
 
-            triangleNormal.normalize();
-
-            if (triangleNormal.z() > 0) {
-                painter->setOpacity(0.3);
-                painter->setPen(QPen(QColor(Qt::red),1,Qt::SolidLine));
-                //painter->setPen(QPen(QColor(Qt::red),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-            } else {
-                painter->setOpacity(0.3);
-                painter->setPen(QPen(QColor(Qt::blue),1,Qt::SolidLine));
-                //painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->setPen(QPen(QColor(Qt::blue),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                        painter->drawPath(stripeContourList[i][j].leftLine);
+                        painter->setPen(QPen(QColor(Qt::red),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                        painter->drawPath(stripeContourList[i][j].rightLine);
+                        painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                        if (showLabels) painter->drawText(stripeContourList[i][j].leftLine.elementAt(0).x + 10, stripeContourList[i][j].leftLine.elementAt(0).y, stripeContourList[i][j].name);
+                    }
+                }
             }
-
-
-            //                    if (triangleNormal.z() > 0) {
-            //                        painter->setPen(QPen(QColor(Qt::black),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-            //                        painter->setOpacity(1);
-            //                        painter->setBrush(Qt::DiagCrossPattern);
-            //                    } else {
-            //                        painter->setOpacity(1);
-            //                        painter->setPen(QPen(QColor(Qt::white),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-            //                    }
-            QPolygonF triangle;
-
-            triangle << triangleMesh[m].toPointF();
-            triangle << triangleMesh[m+1].toPointF();
-            triangle << triangleMesh[m+2].toPointF();
-
-            painter->drawPolygon(triangle);
-
 
             painter->setBrush(Qt::NoBrush);
+            painter->setOpacity(0.5);
+            painter->setPen(QPen(QColor(Qt::black),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+
+            QVector3D triangleNormal;
+
+            for (int m = 0; m < triangleMesh.size(); m = m + 3) {
+
+                triangleNormal = QVector3D::crossProduct(triangleMesh[m] - triangleMesh[m+1],triangleMesh[m+1] - triangleMesh[m+2]);
+
+                triangleNormal.normalize();
+
+                if (triangleNormal.z() > 0) {
+                    painter->setOpacity(0.3);
+                    painter->setPen(QPen(QColor(Qt::red),1,Qt::SolidLine));
+                    //painter->setPen(QPen(QColor(Qt::red),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                } else {
+                    painter->setOpacity(0.3);
+                    painter->setPen(QPen(QColor(Qt::blue),1,Qt::SolidLine));
+                    //painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                }
+
+
+                //                    if (triangleNormal.z() > 0) {
+                //                        painter->setPen(QPen(QColor(Qt::black),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                //                        painter->setOpacity(1);
+                //                        painter->setBrush(Qt::DiagCrossPattern);
+                //                    } else {
+                //                        painter->setOpacity(1);
+                //                        painter->setPen(QPen(QColor(Qt::white),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                //                    }
+                QPolygonF triangle;
+
+                triangle << triangleMesh[m].toPointF();
+                triangle << triangleMesh[m+1].toPointF();
+                triangle << triangleMesh[m+2].toPointF();
+
+                painter->drawPolygon(triangle);
+
+
+                painter->setBrush(Qt::NoBrush);
 
 
 
 
-            //            foreach (QPainterPath path, finalSecondBandLineListRight) {
-            //                painter->setBrush(Qt::NoBrush);
-            //                painter->setOpacity(0.5);
-            //                painter->setPen(QPen(QColor(Qt::white),16,penStyle, Qt::FlatCap, Qt::RoundJoin));
-            //                painter->drawPath(path);
-            //                painter->setOpacity(1);
-            //                painter->setPen(QPen(QColor(Qt::white),9,penStyle, Qt::FlatCap, Qt::RoundJoin));
-            //                painter->drawPath(path);
-            //                painter->setPen(QPen(QColor(Qt::black),3,penStyle, Qt::FlatCap, Qt::RoundJoin));
-            //                painter->drawPath(path);
-            //                painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-            //                painter->drawPath(path);
-            //            }
+                //            foreach (QPainterPath path, finalSecondBandLineListRight) {
+                //                painter->setBrush(Qt::NoBrush);
+                //                painter->setOpacity(0.5);
+                //                painter->setPen(QPen(QColor(Qt::white),16,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                //                painter->drawPath(path);
+                //                painter->setOpacity(1);
+                //                painter->setPen(QPen(QColor(Qt::white),9,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                //                painter->drawPath(path);
+                //                painter->setPen(QPen(QColor(Qt::black),3,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                //                painter->drawPath(path);
+                //                painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                //                painter->drawPath(path);
+                //            }
 
 
-            //            foreach (QPainterPath path, finalSecondBandLineListLeft) {
-            //                painter->setOpacity(0.5);
-            //                painter->setPen(QPen(QColor(Qt::white),16,penStyle, Qt::FlatCap, Qt::RoundJoin));
-            //                painter->drawPath(path);
-            //                painter->setOpacity(1);
-            //                painter->setPen(QPen(QColor(Qt::white),9,penStyle, Qt::FlatCap, Qt::RoundJoin));
-            //                painter->drawPath(path);
-            //                painter->setPen(QPen(QColor(Qt::black),3,penStyle, Qt::FlatCap, Qt::RoundJoin));
-            //                painter->drawPath(path);
-            //                painter->setPen(QPen(QColor(Qt::red),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-            //                painter->drawPath(path);
-            //            }
+                //            foreach (QPainterPath path, finalSecondBandLineListLeft) {
+                //                painter->setOpacity(0.5);
+                //                painter->setPen(QPen(QColor(Qt::white),16,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                //                painter->drawPath(path);
+                //                painter->setOpacity(1);
+                //                painter->setPen(QPen(QColor(Qt::white),9,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                //                painter->drawPath(path);
+                //                painter->setPen(QPen(QColor(Qt::black),3,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                //                painter->drawPath(path);
+                //                painter->setPen(QPen(QColor(Qt::red),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                //                painter->drawPath(path);
+                //            }
+
+            }
 
         }
-
     } else {
 
         for (int i = 0 ; i < stripeContourList.size() ; i++){
