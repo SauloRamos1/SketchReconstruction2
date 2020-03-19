@@ -811,6 +811,8 @@ void InputSketch::finishBand (){//Finish
 
             } else {
 
+                sameStripeContourList[i].name = "";
+
                 //            finalSecondBandLineListLeft.append(secondbandLineListLeft[i]);
                 //            finalSecondBandLineListRight.append(secondbandLineListRight[i]);
                 //            newLevelList.append(levelList[i]);
@@ -933,18 +935,16 @@ void InputSketch::increaseStripeContourLevelWhileDrawing(){
 
     if (stripeContour.length() < 2) return; //Testa se ha linha desenhada
 
-    lineLevel +=1;
-
-    // smoothPath(stripeContour);
-    // smoothPath(stripeContour);
-    // smoothPath(stripeContour);
+     smoothPath(stripeContour);
+     smoothPath(stripeContour);
+     smoothPath(stripeContour);
 
     Stripe3D stripe;
-    stripe.contour = QPainterPath ();
+    //stripe.contour = QPainterPath ();
     stripe.contour = stripeContour;
 
-    stripe.leftLine = QPainterPath();
-    stripe.rightLine = QPainterPath();
+//    stripe.leftLine = QPainterPath();
+//    stripe.rightLine = QPainterPath();
 
     QString name = "Stripe ";
     name.append(QString::number(nStripeContours));
@@ -961,8 +961,8 @@ void InputSketch::increaseStripeContourLevelWhileDrawing(){
     stripeRightLine.setLength(twistingThickness);
     stripeLeftLine.setLength(twistingThickness);
 
-    stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))+90);
-    stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))-90);
+    stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))-90);
+    stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))+90);
 
     leftBandLine.moveTo(stripeLeftLine.p2());
     rightBandLine.moveTo(stripeRightLine.p2());
@@ -1001,6 +1001,10 @@ void InputSketch::increaseStripeContourLevelWhileDrawing(){
     }
 
     stripeContour = QPainterPath ();
+    stripeContour.moveTo(stripe.contour.pointAtPercent(1));
+
+    lineLevel +=1;
+    update();
 }
 
 
@@ -1008,18 +1012,16 @@ void InputSketch::decreaseStripeContourLevelWhileDrawing(){
 
     if (stripeContour.length() < 2) return; //Testa se ha linha desenhada
 
-    lineLevel -=1;
-
-    //  smoothPath(stripeContour);
-    //  smoothPath(stripeContour);
-    //  smoothPath(stripeContour);
+      smoothPath(stripeContour);
+      smoothPath(stripeContour);
+      smoothPath(stripeContour);
 
     Stripe3D stripe;
-    stripe.contour = QPainterPath ();
+    //stripe.contour = QPainterPath ();
     stripe.contour = stripeContour;
 
-    stripe.leftLine = QPainterPath();
-    stripe.rightLine = QPainterPath();
+//    stripe.leftLine = QPainterPath();
+//    stripe.rightLine = QPainterPath();
 
     QPainterPath leftBandLine, rightBandLine;
 
@@ -1036,8 +1038,8 @@ void InputSketch::decreaseStripeContourLevelWhileDrawing(){
     stripeRightLine.setLength(twistingThickness);
     stripeLeftLine.setLength(twistingThickness);
 
-    stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))+90);
-    stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))-90);
+    stripeRightLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))-90);
+    stripeLeftLine.setAngle(stripeContour.angleAtPercent(stripeContour.percentAtLength(0))+90);
 
     leftBandLine.moveTo(stripeLeftLine.p2());
     rightBandLine.moveTo(stripeRightLine.p2());
@@ -1076,6 +1078,10 @@ void InputSketch::decreaseStripeContourLevelWhileDrawing(){
     }
 
     stripeContour = QPainterPath ();
+    stripeContour.moveTo(stripe.contour.pointAtPercent(1));
+
+    lineLevel -=1;
+    update();
 }
 
 
@@ -2063,8 +2069,6 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
         for (int i = 0 ; i < sameStripeContourList.size() ; i++){
 
-
-
             painter->setPen(QPen(QColor(Qt::blue),sameStripeContourList[i].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
             painter->drawPath(sameStripeContourList[i].leftLine);
             painter->setPen(QPen(QColor(Qt::red),sameStripeContourList[i].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
@@ -2233,9 +2237,6 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
         for (int h = numberOfLayers; h > 0; --h) {
 
             for (int i = 0 ; i < closedContourList.size(); i++) {
-
-                qDebug () << "H:" << h << "Number of Layers:" << numberOfLayers;
-
 
 
                 if (selectedClosedContour == i){

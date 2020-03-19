@@ -284,6 +284,7 @@ void Scene::mousePressEvent(QGraphicsSceneMouseEvent *event){
     }
     if (event->buttons() == Qt::LeftButton && status == Interaction::STRIPES){
         setFocus();
+        leftButtonIsPressed = true;
         sketch.createStripeContour( pos );
     }
 
@@ -389,7 +390,7 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
             emit closedContourDone();
         }
 
-        leftButtonIsPressed = false;
+
         QGraphicsScene::mouseReleaseEvent(event);
 
     }
@@ -399,7 +400,7 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
         if (sketch.saveStripeContour()){
             emit stripeContourDone();
         }
-
+        leftButtonIsPressed = false;
         QGraphicsScene::mouseReleaseEvent(event);
 
     }
@@ -500,7 +501,6 @@ void Scene::keyPressEvent(QKeyEvent *event){
 
     setFocus();
 
-    qDebug () << "KEY PRESS SCENE";
 
     if ( event->key() == Qt::Key_Plus && status == Interaction::OPENCONTOUR ){
         if ( leftButtonIsPressed ){
@@ -551,6 +551,7 @@ void Scene::keyPressEvent(QKeyEvent *event){
     }
 
     if ( event->key() == Qt::Key_Plus && status == Interaction::STRIPES ){
+        qDebug () << leftButtonIsPressed;
         if ( leftButtonIsPressed ){
 
             sketch.increaseStripeContourLevelWhileDrawing();
@@ -570,7 +571,7 @@ void Scene::keyPressEvent(QKeyEvent *event){
         if ( leftButtonIsPressed ){
 
             sketch.decreaseStripeContourLevelWhileDrawing();
-
+            qDebug () << "DECREASE";
 
         } else {
 

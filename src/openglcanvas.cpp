@@ -158,7 +158,6 @@ void OpenGLCanvas::mousePressEvent(QMouseEvent *event){
     QPointF p = event->pos();
     if (event->buttons() == Qt::LeftButton){
         tscene->rotateCamera( p.x(), p.y() );
-        qDebug () << p;
 
     }
 
@@ -175,8 +174,6 @@ void OpenGLCanvas::mouseMoveEvent( QMouseEvent* event )
 
         tscene->rotateCamera( p.x(), p.y() );
     }
-
-    qDebug () << event->pos();
 
     update();
 
