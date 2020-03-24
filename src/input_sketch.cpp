@@ -813,9 +813,6 @@ void InputSketch::finishBand (){//Finish
 
                 sameStripeContourList[i].name = "";
 
-                //            finalSecondBandLineListLeft.append(secondbandLineListLeft[i]);
-                //            finalSecondBandLineListRight.append(secondbandLineListRight[i]);
-                //            newLevelList.append(levelList[i]);
             }
         }
     }
@@ -1044,7 +1041,7 @@ void InputSketch::decreaseStripeContourLevelWhileDrawing(){
     leftBandLine.moveTo(stripeLeftLine.p2());
     rightBandLine.moveTo(stripeRightLine.p2());
 
-    for (double i = 0; i < stripeContour.length(); i = i+0.5) {
+    for (double i = 0; i < stripeContour.length(); i = i + 0.5) {
 
         stripeRightLine.setP1(stripeContour.pointAtPercent((stripeContour.percentAtLength(i))));
         stripeRightLine.setLength(twistingThickness);
