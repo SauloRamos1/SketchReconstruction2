@@ -173,6 +173,8 @@ private:
         QPainterPath contour;
         int level;
         QString name;
+        int attachClosedContour = 0;
+        float maior_z = 0;
     };
 
     struct Stripe3D {
@@ -190,6 +192,7 @@ private:
     /// Closed Contour
 
     QPainterPath closedContour;
+    int closedContourIntersects = 0;
     QList<QPainterPath3D> closedContourList;
 
     /// --------
@@ -319,6 +322,7 @@ private:
 
 
     void RotationalBlendingSurface (const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr);
+
 
     QVector <QVector3D> pointsFor3Ddisks;
     QVector <QVector3D> normalsFor3Ddisks;

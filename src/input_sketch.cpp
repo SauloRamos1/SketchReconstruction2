@@ -197,6 +197,9 @@ void InputSketch::addClosedContour (const QPointF& pos){
 
         if (closedContourList[i].contour.intersects(closedContour) && closedContourList[i].level == lineLevel){
 
+            // Se intersecta o abaixo esta acima e deve calcular depth automatico, indica que o proximo esta intersectando
+
+            //-----
             linesToPolygon.clear();
 
             curvePolygon = closedContour.toFillPolygon();
@@ -204,6 +207,9 @@ void InputSketch::addClosedContour (const QPointF& pos){
             pathPolygon = pathPolygon.united(closedContourList[i].contour.toFillPolygon().intersected(curvePolygon));
 
             if (closedContourList[i].contour.contains(closedContour.pointAtPercent(1))){
+                if (closedContourIntersects == 0){
+                    closedContourIntersects = i;
+                }
 
                 QPainterPath poly;
 
@@ -248,6 +254,9 @@ bool InputSketch::saveClosedContour (){
     nClosedContours++;
     curve3D.name = name;
     names.append(name);
+
+    curve3D.attachClosedContour = closedContourIntersects;
+    closedContourIntersects = 0;
 
     receiveSelectedPath(curve3D.contour, curve3D.name, curve3D.level);
 
@@ -448,6 +457,9 @@ void InputSketch::estimateShapes(){
     for (int i = 0; i < allShapesSampledPoints.size(); ++i) {
 
         int reconstType = 0;
+        if (closedContourList[i].attachClosedContour == 0){
+
+        }
 
         while (reconstType < 1 || reconstType > 2){
             reconstType = QInputDialog::getInt(nullptr, "Select Reconstruction Type for " + allShapesSampledPoints[i].name, "Select Reconstruction Type for: " + allShapesSampledPoints[i].name + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function");
@@ -470,11 +482,20 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
     //Normal Plane
 
-
-    for (int i = 0; i < ql.size(); ++i) {
-        ql[i].setZ(ql[i].z()*layerDifference);
-        qr[i].setZ(qr[i].z()*layerDifference);
+    if (closedContourList[shapeNumber].attachClosedContour != 0){
+        int attachedContour = closedContourList[shapeNumber].attachClosedContour;
+//        for (int i = 0; i < ql.size(); ++i) {
+//            ql[i].setZ(ql[i].z() + closedContourList[attachedContour].maior_z);
+//            qr[i].setZ(qr[i].z() + closedContourList[attachedContour].maior_z);
+//        }
+    } else {
+        for (int i = 0; i < ql.size(); ++i) {
+            ql[i].setZ(ql[i].z()*layerDifference);
+            qr[i].setZ(qr[i].z()*layerDifference);
+        }
     }
+
+
 
     QVector3D n;
     QVector3D pl, pr;
@@ -529,6 +550,16 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
             QVector3D p = ( 1 - t ) * pl + t * pr;
 
+            if (closedContourList[shapeNumber].attachClosedContour != 0){
+                int attachedContour = closedContourList[shapeNumber].attachClosedContour;
+                p.setZ(p.z() + closedContourList[attachedContour].maior_z);
+            }
+
+            if (p.z() > closedContourList[shapeNumber].maior_z){
+                closedContourList[shapeNumber].maior_z = p.z();
+            }
+
+
             pointsFor3Ddisks.push_back(p);
             normalsFor3Ddisks.push_back((p - center).normalized());
 
@@ -549,10 +580,19 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
         u += u_step;
 
     }
-    for (int i = 0; i < ql.size(); ++i) {
-        ql[i].setZ(ql[i].z()/layerDifference);
-        qr[i].setZ(qr[i].z()/layerDifference);
+    if (closedContourList[shapeNumber].attachClosedContour != 0){
+//        int attachedContour = closedContourList[shapeNumber].attachClosedContour;
+//        for (int i = 0; i < ql.size(); ++i) {
+//            ql[i].setZ(ql[i].z() + closedContourList[attachedContour].maior_z);
+//            qr[i].setZ(qr[i].z() + closedContourList[attachedContour].maior_z);
+//        }
+    } else {
+        for (int i = 0; i < ql.size(); ++i) {
+            ql[i].setZ(ql[i].z()/layerDifference);
+            qr[i].setZ(qr[i].z()/layerDifference);
+        }
     }
+
 
 }
 
@@ -932,16 +972,16 @@ void InputSketch::increaseStripeContourLevelWhileDrawing(){
 
     if (stripeContour.length() < 2) return; //Testa se ha linha desenhada
 
-     smoothPath(stripeContour);
-     smoothPath(stripeContour);
-     smoothPath(stripeContour);
+    smoothPath(stripeContour);
+    smoothPath(stripeContour);
+    smoothPath(stripeContour);
 
     Stripe3D stripe;
     //stripe.contour = QPainterPath ();
     stripe.contour = stripeContour;
 
-//    stripe.leftLine = QPainterPath();
-//    stripe.rightLine = QPainterPath();
+    //    stripe.leftLine = QPainterPath();
+    //    stripe.rightLine = QPainterPath();
 
     QString name = "Stripe ";
     name.append(QString::number(nStripeContours));
@@ -1009,16 +1049,16 @@ void InputSketch::decreaseStripeContourLevelWhileDrawing(){
 
     if (stripeContour.length() < 2) return; //Testa se ha linha desenhada
 
-      smoothPath(stripeContour);
-      smoothPath(stripeContour);
-      smoothPath(stripeContour);
+    smoothPath(stripeContour);
+    smoothPath(stripeContour);
+    smoothPath(stripeContour);
 
     Stripe3D stripe;
     //stripe.contour = QPainterPath ();
     stripe.contour = stripeContour;
 
-//    stripe.leftLine = QPainterPath();
-//    stripe.rightLine = QPainterPath();
+    //    stripe.leftLine = QPainterPath();
+    //    stripe.rightLine = QPainterPath();
 
     QPainterPath leftBandLine, rightBandLine;
 

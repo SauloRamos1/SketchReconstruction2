@@ -501,8 +501,6 @@ void Scene::keyPressEvent(QKeyEvent *event){
 
     setFocus();
 
-    qDebug () << "KEY PRESS";
-
     if ( event->key() == Qt::Key_Plus && status == Interaction::OPENCONTOUR ){
         if ( leftButtonIsPressed ){
 
@@ -541,7 +539,6 @@ void Scene::keyPressEvent(QKeyEvent *event){
 
     if ( event->key() == Qt::Key_Plus && status == Interaction::CLOSEDCONTOUR && !leftButtonIsPressed ){
         sketch.increaseLevel();
-        qDebug () << "LVL INCREASED";
     }
 
     if ( event->key() == Qt::Key_Minus && status == Interaction::CLOSEDCONTOUR && !leftButtonIsPressed ){
