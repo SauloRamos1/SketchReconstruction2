@@ -192,7 +192,7 @@ private:
     /// Closed Contour
 
     QPainterPath closedContour;
-    int closedContourIntersects = 0;
+    int closedContourIntersects = -1;
     QList<QPainterPath3D> closedContourList;
 
     /// --------

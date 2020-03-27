@@ -207,7 +207,7 @@ void InputSketch::addClosedContour (const QPointF& pos){
             pathPolygon = pathPolygon.united(closedContourList[i].contour.toFillPolygon().intersected(curvePolygon));
 
             if (closedContourList[i].contour.contains(closedContour.pointAtPercent(1))){
-                if (closedContourIntersects == 0){
+                if (closedContourIntersects == -1){
                     closedContourIntersects = i;
                 }
 
@@ -256,7 +256,7 @@ bool InputSketch::saveClosedContour (){
     names.append(name);
 
     curve3D.attachClosedContour = closedContourIntersects;
-    closedContourIntersects = 0;
+    closedContourIntersects = -1;
 
     receiveSelectedPath(curve3D.contour, curve3D.name, curve3D.level);
 
@@ -482,12 +482,20 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
     //Normal Plane
 
-    if (closedContourList[shapeNumber].attachClosedContour != 0){
+//    qDebug () << "SHAPE NUMBER";
+//    qDebug () << shapeNumber;
+
+    if (closedContourList[shapeNumber].attachClosedContour != -1){
         int attachedContour = closedContourList[shapeNumber].attachClosedContour;
-//        for (int i = 0; i < ql.size(); ++i) {
-//            ql[i].setZ(ql[i].z() + closedContourList[attachedContour].maior_z);
-//            qr[i].setZ(qr[i].z() + closedContourList[attachedContour].maior_z);
-//        }
+//        qDebug () << "ATTACHED CONTOUR";
+//        qDebug () << attachedContour;
+//        qDebug () << "MAIOR_Z";
+//        qDebug () << closedContourList[attachedContour].maior_z;
+//        qDebug () << "--";
+        for (int i = 0; i < ql.size(); ++i) {
+            ql[i].setZ(closedContourList[attachedContour].maior_z*0.9);
+            qr[i].setZ(closedContourList[attachedContour].maior_z*0.9);
+        }
     } else {
         for (int i = 0; i < ql.size(); ++i) {
             ql[i].setZ(ql[i].z()*layerDifference);
@@ -550,13 +558,9 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
             QVector3D p = ( 1 - t ) * pl + t * pr;
 
-            if (closedContourList[shapeNumber].attachClosedContour != 0){
-                int attachedContour = closedContourList[shapeNumber].attachClosedContour;
-                p.setZ(p.z() + closedContourList[attachedContour].maior_z);
-            }
-
-            if (p.z() > closedContourList[shapeNumber].maior_z){
+            if (p.z() < closedContourList[shapeNumber].maior_z){
                 closedContourList[shapeNumber].maior_z = p.z();
+                qDebug () << p.z();
             }
 
 
@@ -580,18 +584,21 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
         u += u_step;
 
     }
-    if (closedContourList[shapeNumber].attachClosedContour != 0){
-//        int attachedContour = closedContourList[shapeNumber].attachClosedContour;
-//        for (int i = 0; i < ql.size(); ++i) {
-//            ql[i].setZ(ql[i].z() + closedContourList[attachedContour].maior_z);
-//            qr[i].setZ(qr[i].z() + closedContourList[attachedContour].maior_z);
-//        }
+    if (closedContourList[shapeNumber].attachClosedContour != -1){
+        int attachedContour = closedContourList[shapeNumber].attachClosedContour;
+        layerDifference = closedContourList[attachedContour].maior_z;
+        for (int i = 0; i < ql.size(); ++i) {
+            ql[i].setZ(ql[i].z() - closedContourList[attachedContour].maior_z);
+            qr[i].setZ(qr[i].z() - closedContourList[attachedContour].maior_z);
+        }
     } else {
         for (int i = 0; i < ql.size(); ++i) {
             ql[i].setZ(ql[i].z()/layerDifference);
             qr[i].setZ(qr[i].z()/layerDifference);
         }
     }
+
+
 
 
 }
