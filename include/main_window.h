@@ -111,10 +111,18 @@ class MainWindow: public QMainWindow
         QPushButton* modeMenuButton;
         QPushButton* normalsMenuButton;
 
-        QPushButton *exportMesh_button;
         QPushButton *view3DPoints_button;
-
         std::shared_ptr< QAction > ac_view3DPoints;
+
+        QMenu *exportMenu;
+        QPushButton *exportMenu_button;
+        std::shared_ptr< QAction > ac_exportView;
+        std::shared_ptr< QAction > ac_exportMesh;
+
+       // QPushButton *exportMesh_button;
+
+
+
 
 
         // OpenGL Mediator

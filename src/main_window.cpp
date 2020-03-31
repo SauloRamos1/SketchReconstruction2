@@ -267,9 +267,22 @@ void MainWindow::createCanvas1Toolbar () {
     view3dLines_button->setToolTip("View 3D");
     view3dLines_button->setGeometry(QRect(5, 610, 50, 40));
 
-    exportMesh_button = new QPushButton("Export \nMesh" , canvas.get());
-    exportMesh_button->setToolTip("Export OFF & PLY");
-    exportMesh_button->setGeometry(QRect(5, 655, 50, 40));
+    ac_exportView = std::make_shared< QAction >( "Export View", this );
+    ac_exportMesh = std::make_shared< QAction >( "Export Mesh", this );
+
+    exportMenu = new QMenu("Export \nMesh");
+
+
+
+    exportMenu->addAction(ac_exportView.get());
+    exportMenu->addAction(ac_exportMesh.get());
+
+    exportMenu_button = new QPushButton( canvas.get());
+    exportMenu_button->setGeometry(QRect(5, 655, 50, 40));
+    exportMenu_button->setToolTip("Export View & Mesh");
+    exportMenu_button->setText("Export");
+    //exportMenu_button->setIcon(QIcon(":/icons/Export.ico"));
+    exportMenu_button->setMenu(exportMenu);
 
     depth =  new QLabel ("  Depth Between Layers: ", canvas.get());
     depth->setGeometry(QRect(430, 640, 130, 30));
@@ -331,7 +344,7 @@ void MainWindow::createCanvas1Actions (){
     //    connect( ac_estimateShape.get(), &QAction::triggered, canvas2.get(), &Canvas2::estimateShape );
     //    connect( ac_showNormals.get(), &QAction::toggled, canvas2.get(), &Canvas2::showNormals );
 
-    connect( exportMesh_button, SIGNAL(pressed()), canvas.get(), SLOT(exportMesh()));
+    //connect( exportMesh_button, SIGNAL(pressed()), canvas.get(), SLOT(exportMesh()));
 
 }
 
