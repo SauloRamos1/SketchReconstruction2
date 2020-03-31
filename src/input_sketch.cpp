@@ -480,19 +480,11 @@ void InputSketch::estimateShapes(){
 
 void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr){
 
-    //Normal Plane
-
-//    qDebug () << "SHAPE NUMBER";
-//    qDebug () << shapeNumber;
-
     if (closedContourList[shapeNumber].attachClosedContour != -1){
         int attachedContour = closedContourList[shapeNumber].attachClosedContour;
-//        qDebug () << "ATTACHED CONTOUR";
-//        qDebug () << attachedContour;
-//        qDebug () << "MAIOR_Z";
-//        qDebug () << closedContourList[attachedContour].maior_z;
-//        qDebug () << "--";
         for (int i = 0; i < ql.size(); ++i) {
+            ql[i].setZ(ql[i].z()*layerDifference);
+            qr[i].setZ(qr[i].z()*layerDifference);
             ql[i].setZ(closedContourList[attachedContour].maior_z*0.9);
             qr[i].setZ(closedContourList[attachedContour].maior_z*0.9);
         }
@@ -560,7 +552,7 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
             if (p.z() < closedContourList[shapeNumber].maior_z){
                 closedContourList[shapeNumber].maior_z = p.z();
-                qDebug () << p.z();
+//                qDebug () << p.z();
             }
 
 
@@ -586,10 +578,13 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
     }
     if (closedContourList[shapeNumber].attachClosedContour != -1){
         int attachedContour = closedContourList[shapeNumber].attachClosedContour;
-        layerDifference = closedContourList[attachedContour].maior_z;
+//        layerDifference = closedContourList[attachedContour].maior_z*0.9;
+//        qDebug () << layerDifference;
         for (int i = 0; i < ql.size(); ++i) {
             ql[i].setZ(ql[i].z() - closedContourList[attachedContour].maior_z);
             qr[i].setZ(qr[i].z() - closedContourList[attachedContour].maior_z);
+            ql[i].setZ(ql[i].z()/layerDifference);
+            qr[i].setZ(qr[i].z()/layerDifference);
         }
     } else {
         for (int i = 0; i < ql.size(); ++i) {
