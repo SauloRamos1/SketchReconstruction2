@@ -344,7 +344,7 @@ void MainWindow::createCanvas1Actions (){
     //    connect( ac_estimateShape.get(), &QAction::triggered, canvas2.get(), &Canvas2::estimateShape );
     //    connect( ac_showNormals.get(), &QAction::toggled, canvas2.get(), &Canvas2::showNormals );
 
-    //connect( exportMesh_button, SIGNAL(pressed()), canvas.get(), SLOT(exportMesh()));
+    connect( ac_exportView.get(), &QAction::triggered, canvas.get(), &Canvas::exportMesh);
 
 }
 

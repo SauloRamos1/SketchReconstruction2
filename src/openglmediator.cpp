@@ -64,6 +64,8 @@ void OpenGLMediator::exportMesh(){
     }
     fOut.close();
 
+    qDebug () << "Exported Mesh";
+
     //Export PLY
 
     //    std::string outFile3 = "stripe_mesh";
