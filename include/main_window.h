@@ -99,8 +99,7 @@ class MainWindow: public QMainWindow
         QPushButton *selectCrop_button;
         QPushButton *selectErase_button;
 
-        QSpinBox *layeringDepth;
-        QLabel *depth;
+
 
         QCheckBox *showLabels;
 
@@ -119,6 +118,9 @@ class MainWindow: public QMainWindow
         std::shared_ptr< QAction > ac_exportView;
         std::shared_ptr< QAction > ac_exportMesh;
 
+//        QSpinBox *layeringDepth;
+        QLabel *depth;
+        QListWidget *layerDepthList;
        // QPushButton *exportMesh_button;
 
 

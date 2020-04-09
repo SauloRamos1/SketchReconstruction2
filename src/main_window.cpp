@@ -284,18 +284,22 @@ void MainWindow::createCanvas1Toolbar () {
     //exportMenu_button->setIcon(QIcon(":/icons/Export.ico"));
     exportMenu_button->setMenu(exportMenu);
 
-    depth =  new QLabel ("  Depth Between Layers: ", canvas.get());
-    depth->setGeometry(QRect(430, 640, 130, 30));
+    depth =  new QLabel ("  Depths Between Layers: ", canvas.get());
+    depth->setGeometry(QRect(310, 640, 130, 30));
 
-    layeringDepth = new QSpinBox(canvas.get());
-    layeringDepth->setGeometry(QRect(560, 640, 40, 30));
-    layeringDepth->setValue(10);
-    layeringDepth->setSingleStep(10);
+//    layeringDepth = new QSpinBox(canvas.get());
+//    layeringDepth->setGeometry(QRect(560, 640, 40, 30));
+//    layeringDepth->setValue(10);
+//    layeringDepth->setSingleStep(10);
 
     showLabels = new QCheckBox("Show Labels", canvas.get());
     showLabels->setGeometry(QRect(500, 610, 100, 30));
     showLabels->setChecked(true);
     //showLabels->setTristate(true);
+
+
+    layerDepthList = new QListWidget(this);
+    layerDepthList->setGeometry(QRect(560, 660, 100, 50));
 
 }
 
@@ -326,9 +330,9 @@ void MainWindow::createCanvas1Actions (){
     connect( selectCrop_button, SIGNAL(pressed()), canvas.get(), SLOT(cropSelection() ));
     connect( selectErase_button, SIGNAL(pressed()), canvas.get(), SLOT(eraseSelection() ));
 
-    connect( layeringDepth, SIGNAL(valueChanged(const int &)), canvas.get(),  SLOT(changeLayerDifference(const int &)));
+    //connect( layeringDepth, SIGNAL(valueChanged(const int &)), canvas.get(),  SLOT(changeLayerDifference(const int &)));
 
-    connect ( showLabels , SIGNAL (stateChanged(const int &)), canvas.get(), SLOT (showLabels (const int &)));
+    connect ( showLabels, SIGNAL (stateChanged(const int &)), canvas.get(), SLOT (showLabels (const int &)));
 
     //    connect( ac_selectCross_Selection.get(), &QAction::triggered, canvas.get(), &Canvas::crossSelection );
     //    connect( ac_selectCrop_Selection.get(), &QAction::triggered, canvas.get(), &Canvas::cropSelection );
@@ -399,4 +403,3 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 }
 
 #include "moc_main_window.cpp"
-

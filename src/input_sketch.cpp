@@ -482,11 +482,12 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
     if (closedContourList[shapeNumber].attachClosedContour != -1){
         int attachedContour = closedContourList[shapeNumber].attachClosedContour;
+        qDebug () << "Contour: " <<  shapeNumber <<  "Attached Contour: " << attachedContour;
         for (int i = 0; i < ql.size(); ++i) {
             ql[i].setZ(ql[i].z()*layerDifference);
             qr[i].setZ(qr[i].z()*layerDifference);
-            ql[i].setZ(closedContourList[attachedContour].maior_z*0.9);
-            qr[i].setZ(closedContourList[attachedContour].maior_z*0.9);
+            ql[i].setZ(closedContourList[attachedContour].maior_z*0.8);
+            qr[i].setZ(closedContourList[attachedContour].maior_z*0.8);
         }
     } else {
         for (int i = 0; i < ql.size(); ++i) {
