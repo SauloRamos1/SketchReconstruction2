@@ -41,6 +41,9 @@ class MainWindow: public QMainWindow
         void resizeEvent(QResizeEvent *) override;
 
         QString mode;
+public slots:
+        void updateLayerList();
+
 
     protected:
 
@@ -48,6 +51,7 @@ class MainWindow: public QMainWindow
         void createLayersDockToolbar();
         void createCanvas1Actions();
         void createLayersDockActions();
+
 
         void mouseMoveEvent(QMouseEvent *event);
 

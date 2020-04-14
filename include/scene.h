@@ -139,6 +139,8 @@ signals:
     void stripeContourFinished();
     void eraseSelectionDone();
 
+    void updateLayerList();
+
 //    void crossSelectionDone();
 //    void cropSelectionDone();
 

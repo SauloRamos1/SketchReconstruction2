@@ -38,6 +38,8 @@ void Canvas::createActions()
 
 
     connect (scene.get(), &Scene::eraseSelectionDone, this, &Canvas::removeItemLayersList);
+
+    connect (scene.get(), &Scene::updateLayerList,this, &Canvas::updateLayerList );
 }
 
 void Canvas::newFile()
@@ -336,6 +338,12 @@ void Canvas::smoothSketch (){
 void Canvas::setDefRotAxisMode (){
     scene->setDefRotAxisMode();
     update();
+}
+
+void Canvas::updateLayerList(){
+
+    emit updateLayerListSignal();
+
 }
 
 

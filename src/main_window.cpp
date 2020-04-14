@@ -284,8 +284,6 @@ void MainWindow::createCanvas1Toolbar () {
     //exportMenu_button->setIcon(QIcon(":/icons/Export.ico"));
     exportMenu_button->setMenu(exportMenu);
 
-    depth =  new QLabel ("  Depths Between Layers: ", canvas.get());
-    depth->setGeometry(QRect(310, 640, 130, 30));
 
 //    layeringDepth = new QSpinBox(canvas.get());
 //    layeringDepth->setGeometry(QRect(560, 640, 40, 30));
@@ -293,13 +291,16 @@ void MainWindow::createCanvas1Toolbar () {
 //    layeringDepth->setSingleStep(10);
 
     showLabels = new QCheckBox("Show Labels", canvas.get());
-    showLabels->setGeometry(QRect(500, 610, 100, 30));
+    showLabels->setGeometry(QRect(100, 630, 100, 30));
     showLabels->setChecked(true);
     //showLabels->setTristate(true);
 
 
-    layerDepthList = new QListWidget(this);
-    layerDepthList->setGeometry(QRect(560, 660, 100, 50));
+    depth =  new QLabel (" Depths Between Layers: ", canvas.get());
+    depth->setGeometry(QRect(350, 635, 130, 30));
+
+    layerDepthList = new QListWidget(canvas.get());
+    layerDepthList->setGeometry(QRect(490, 615, 100, 70));
 
 }
 
@@ -349,6 +350,8 @@ void MainWindow::createCanvas1Actions (){
     //    connect( ac_showNormals.get(), &QAction::toggled, canvas2.get(), &Canvas2::showNormals );
 
     connect( ac_exportView.get(), &QAction::triggered, canvas.get(), &Canvas::exportMesh);
+
+    connect( canvas.get(), &Canvas::updateLayerListSignal, this, &MainWindow::updateLayerList);
 
 }
 
@@ -400,6 +403,12 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     canvas.get()->setFocus();
     //Set Focus on Mouse Move.. Can be changed to Mouse Over QDockWidget.
 
+}
+
+void MainWindow::updateLayerList(){
+
+    qDebug () << "Update on MainWindow";
+    //LER LAYER LIST ON INPUTSKETCH
 }
 
 #include "moc_main_window.cpp"

@@ -579,6 +579,7 @@ void Scene::keyPressEvent(QKeyEvent *event){
     }
 
     sketch.updateColorMap();
+    emit updateLayerList();
     update();
 }
 

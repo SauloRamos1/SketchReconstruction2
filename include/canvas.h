@@ -92,6 +92,8 @@ protected:
         void updateStripeContourList();
 
         void removeItemLayersList();
+
+        void updateLayerList();
 protected:
 
         std::shared_ptr< Scene > scene;
@@ -104,7 +106,8 @@ private:
 
 
         QString path;
-
+signals:
+        void updateLayerListSignal();
 };
 
 #endif // CANVAS_H
