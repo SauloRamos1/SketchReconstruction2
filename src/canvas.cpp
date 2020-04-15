@@ -345,6 +345,14 @@ void Canvas::updateLayerList(){
     emit updateLayerListSignal();
 
 }
+QList<QString> Canvas::getLayerList(){
+    return scene->getLayerList();
+}
+
+void Canvas::setDepths()
+{
+
+}
 
 
 #include "moc_canvas.cpp"

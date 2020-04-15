@@ -41,9 +41,13 @@ class MainWindow: public QMainWindow
         void resizeEvent(QResizeEvent *) override;
 
         QString mode;
-public slots:
         void updateLayerList();
 
+
+public slots:
+
+
+        void setDepths(QListWidgetItem *item);
 
     protected:
 
@@ -163,7 +167,6 @@ public slots:
 
 
 
-
-    };
+};
 
     #endif // MAINWINDOW_H

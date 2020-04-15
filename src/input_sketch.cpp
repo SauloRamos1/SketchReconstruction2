@@ -2767,7 +2767,15 @@ int InputSketch::getErasedStripeContourNumber(){
 }
 
 
+QList<QString> InputSketch::getLayerList(){
 
+    for (int i = 0; i < numberOfLayers ; i++){
+
+    }
+
+    QList<QString> a;
+    return a;
+}
 
 
 //************************************************************************************************

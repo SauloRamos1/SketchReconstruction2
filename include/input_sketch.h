@@ -153,6 +153,7 @@ public:
     int getErasedClosedContourNumber();
     int getErasedStripeContourNumber();
 
+    QList<QString> getLayerList();
 public slots:
 
 protected:

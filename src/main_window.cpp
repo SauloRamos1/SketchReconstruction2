@@ -352,6 +352,7 @@ void MainWindow::createCanvas1Actions (){
     connect( ac_exportView.get(), &QAction::triggered, canvas.get(), &Canvas::exportMesh);
 
     connect( canvas.get(), &Canvas::updateLayerListSignal, this, &MainWindow::updateLayerList);
+    connect (layerDepthList, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (setDepths(QListWidgetItem *)));
 
 }
 
@@ -408,7 +409,16 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 void MainWindow::updateLayerList(){
 
     qDebug () << "Update on MainWindow";
-    //LER LAYER LIST ON INPUTSKETCH
+    layerDepthList->clear();
+    layerDepthList->addItems(canvas->getLayerList());
+
 }
+void MainWindow::setDepths(QListWidgetItem *item){
+
+    qDebug () << "Modified on MainWindow";
+    canvas->setDepths();
+}
+
+
 
 #include "moc_main_window.cpp"

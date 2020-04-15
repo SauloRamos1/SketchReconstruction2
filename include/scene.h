@@ -106,6 +106,8 @@ public:
     int getErasedClosedItemNumber();
     int getErasedStripeItemNumber();
 
+    QList<QString> getLayerList();
+
 public slots:
 
 private:

@@ -762,5 +762,10 @@ int Scene::getErasedStripeItemNumber(){
     return (sketch.getErasedStripeContourNumber());
 }
 
+QList<QString> Scene::getLayerList() {
+
+    return sketch.getLayerList();
+}
+
 
 #include "moc_scene.cpp"

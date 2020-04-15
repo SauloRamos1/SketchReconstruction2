@@ -94,6 +94,8 @@ protected:
         void removeItemLayersList();
 
         void updateLayerList();
+        QList<QString> getLayerList();
+        void setDepths();
 protected:
 
         std::shared_ptr< Scene > scene;
