@@ -301,6 +301,7 @@ void MainWindow::createCanvas1Toolbar () {
 
     layerDepthList = new QListWidget(canvas.get());
     layerDepthList->setGeometry(QRect(490, 615, 100, 70));
+    layerDepthList->addItem("Layer 1 : 0");
 
 }
 
@@ -413,17 +414,16 @@ void MainWindow::updateLayerList(){
     QList<QString> a = canvas->getLayerList();
 
     for (int i = 0 ; i < a.size(); i++){
+        QString label;
 
-        QListWidgetItem *item = new QListWidgetItem(a[i], layerDepthList);
+        label = "Layer ";
+        label.append(QString::number(i+1));
+        label.append(" : ");
+        label.append(a[i]);
+
+        QListWidgetItem *item = new QListWidgetItem(label, layerDepthList);
         item->setFlags(item->flags() | Qt::ItemIsEditable);
     }
-
-
-    //    for (int i = 0; i < a.size(); i++ ) {
-    //        QListWidgetItem item = QListWidgetItem(a[i], layerDepthList);
-    //        qDebug () << a[i];
-    //
-    //    }
 
 
 
