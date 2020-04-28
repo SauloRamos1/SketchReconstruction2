@@ -285,10 +285,10 @@ void MainWindow::createCanvas1Toolbar () {
     exportMenu_button->setMenu(exportMenu);
 
 
-//    layeringDepth = new QSpinBox(canvas.get());
-//    layeringDepth->setGeometry(QRect(560, 640, 40, 30));
-//    layeringDepth->setValue(10);
-//    layeringDepth->setSingleStep(10);
+    //    layeringDepth = new QSpinBox(canvas.get());
+    //    layeringDepth->setGeometry(QRect(560, 640, 40, 30));
+    //    layeringDepth->setValue(10);
+    //    layeringDepth->setSingleStep(10);
 
     showLabels = new QCheckBox("Show Labels", canvas.get());
     showLabels->setGeometry(QRect(100, 630, 100, 30));
@@ -410,7 +410,22 @@ void MainWindow::updateLayerList(){
 
     qDebug () << "Update on MainWindow";
     layerDepthList->clear();
-    layerDepthList->addItems(canvas->getLayerList());
+    QList<QString> a = canvas->getLayerList();
+
+    for (int i = 0 ; i < a.size(); i++){
+
+        QListWidgetItem *item = new QListWidgetItem(a[i], layerDepthList);
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
+    }
+
+
+    //    for (int i = 0; i < a.size(); i++ ) {
+    //        QListWidgetItem item = QListWidgetItem(a[i], layerDepthList);
+    //        qDebug () << a[i];
+    //
+    //    }
+
+
 
 }
 void MainWindow::setDepths(QListWidgetItem *item){
