@@ -890,7 +890,7 @@ void InputSketch::finishBand (){//Finish
     stripeContourList.last().last().name = name;
     names.append(name);
 
-    qDebug () << stripeContourList.size();
+   // qDebug () << stripeContourList.size();
 }
 
 
@@ -1858,12 +1858,13 @@ void InputSketch::changeLayerDifference(const int &difference)
 }
 QList<QVector<QVector3D> > InputSketch::getOpenContoursPoints() {
 
+
     QList<QVector<QVector3D> > pointsFor3D;
 
     if (!openContourList.isEmpty()) { //Somente os contornos abertos, primeiro caso
 
         //int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference OPEN CONTOURS", "Layering difference in depth OPEN CONTOURS");
-        int depthdiff = layerDifference;
+        //int depthdiff = layerDifference;
 
         for (int i = 0; i < openContourList.size(); i++) {
 
@@ -1873,14 +1874,14 @@ QList<QVector<QVector3D> > InputSketch::getOpenContoursPoints() {
 
                 for (double k = 0; k < openContourList[i][j].contour.length(); k = k + 0.5) {
 
-                    QVector3D p(openContourList[i][j].contour.pointAtPercent(openContourList[i][j].contour.percentAtLength(k)).x(),openContourList[i][j].contour.pointAtPercent(openContourList[i][j].contour.percentAtLength(k)).y(), depthdiff*openContourList[i][j].level);
+                    QVector3D p(openContourList[i][j].contour.pointAtPercent(openContourList[i][j].contour.percentAtLength(k)).x(),openContourList[i][j].contour.pointAtPercent(openContourList[i][j].contour.percentAtLength(k)).y(), depthLevelList[openContourList[i][j].level-1]);
 
                     openContour3DPoints.append(p);
 
                 }
             }
 
-            for (int l = 0; l < depthdiff * 10; l++){ // i < 200
+            for (int l = 0; l < layerDifference * 10; l++){ // i < 200
                 chaikinOnZ (openContour3DPoints);
             }
 
@@ -2732,7 +2733,7 @@ int InputSketch::getClosedContourLevel()
 
 QString InputSketch::getPathNames()
 {
-    qDebug () << names.size();
+    //qDebug () << names.size();
     return names.last();
 }
 
@@ -2862,7 +2863,8 @@ void InputSketch::setDepths(int row, QString depth){
 
     depthLevelList[row] = depth.toFloat();
 
-    qDebug () << depthLevelList[row];
+    //qDebug () << depthLevelList[row];
+
 }
 
 //************************************************************************************************

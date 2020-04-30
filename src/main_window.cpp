@@ -435,7 +435,7 @@ void MainWindow::updateLayerList(){
 
 void MainWindow::adjustDepth(QListWidgetItem *item){
 
-    //qDebug () << "DOUBLE CLICKED";
+    //() << "DOUBLE CLICKED";
 
     layerDepthList->editItem(item);
 
@@ -443,7 +443,7 @@ void MainWindow::adjustDepth(QListWidgetItem *item){
 
 void MainWindow::setDepths(QListWidgetItem *item){
 
-    //qDebug () << "Modified on MainWindow";
+    //() << "Modified on MainWindow";
 
     if (item->text().size()>3){
         return;
