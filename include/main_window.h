@@ -49,6 +49,9 @@ public slots:
 
         void setDepths(QListWidgetItem *item);
 
+
+        void adjustDepth(QListWidgetItem *item);
+
     protected:
 
         void createCanvas1Toolbar();
@@ -164,7 +167,6 @@ public slots:
 
 //        std::shared_ptr< QAction > ac_defRotAxis;
 //        std::shared_ptr< QAction > ac_crossSecBlendSurface;
-
 
 
 };

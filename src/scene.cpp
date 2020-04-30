@@ -767,5 +767,9 @@ QList<QString> Scene::getLayerList() {
     return sketch.getLayerList();
 }
 
+void Scene::setDepths (int row, QString depth){
+    sketch.setDepths(row,depth);
+}
+
 
 #include "moc_scene.cpp"

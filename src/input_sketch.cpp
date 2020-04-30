@@ -15,6 +15,7 @@ InputSketch::InputSketch()
     //setPath (closedContour);
     
     updateColorMap();
+    depthLevelList.push_back(0);
 }
 
 
@@ -1164,9 +1165,9 @@ void InputSketch::updateColorMap(){
 
     //  Update number of Layers
 
-
     if (lineLevel > numberOfLayers){
         numberOfLayers = lineLevel;
+        depthLevelList.push_back(depthLevelList.last() + layerDifference);
     }
 
     lineColorMap.clear();
@@ -2667,7 +2668,6 @@ void InputSketch::clear()
 
     curve = QPainterPath();
     pathsList.clear();
-    levelList.clear();
 
     svgPaths.clear();
 
@@ -2770,9 +2770,8 @@ int InputSketch::getErasedStripeContourNumber(){
 QList<QString> InputSketch::getLayerList(){
 
     QList<QString> a;
-    for (int i = 0; i < numberOfLayers ; i++){
-
-        a.push_back(QString::number(i));
+    for (int i = 0; i < depthLevelList.size() ; i++){
+        a.push_back(QString::number(depthLevelList[i]));
     }
 
     return a;
@@ -2857,6 +2856,13 @@ void InputSketch::renameStripeContour(int itemNumber, QString name){
             count ++;
         }
     }
+}
+
+void InputSketch::setDepths(int row, QString depth){
+
+    depthLevelList[row] = depth.toFloat();
+
+    qDebug () << depthLevelList[row];
 }
 
 //************************************************************************************************

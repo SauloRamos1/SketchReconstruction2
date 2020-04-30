@@ -95,7 +95,7 @@ protected:
 
         void updateLayerList();
         QList<QString> getLayerList();
-        void setDepths();
+        void setDepths(int row, QString depth);
 protected:
 
         std::shared_ptr< Scene > scene;

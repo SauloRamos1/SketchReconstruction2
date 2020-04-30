@@ -154,6 +154,8 @@ public:
     int getErasedStripeContourNumber();
 
     QList<QString> getLayerList();
+    void setDepths(int row, QString depth);
+
 public slots:
 
 protected:
@@ -214,7 +216,8 @@ private:
 
     int numberOfLayers = 1;
 
-    QVector <int> levelList;
+    QVector <float> depthLevelList;
+
 
     bool showLabels = true;
 

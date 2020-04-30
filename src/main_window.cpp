@@ -301,7 +301,9 @@ void MainWindow::createCanvas1Toolbar () {
 
     layerDepthList = new QListWidget(canvas.get());
     layerDepthList->setGeometry(QRect(490, 615, 100, 70));
-    layerDepthList->addItem("Layer 1 : 0");
+    QListWidgetItem *item = new QListWidgetItem ( "Layer 1 : 0", layerDepthList );
+    item->setFlags( item->flags() | Qt::ItemIsEditable );
+
 
 }
 
@@ -353,6 +355,7 @@ void MainWindow::createCanvas1Actions (){
     connect( ac_exportView.get(), &QAction::triggered, canvas.get(), &Canvas::exportMesh);
 
     connect( canvas.get(), &Canvas::updateLayerListSignal, this, &MainWindow::updateLayerList);
+    //connect (layerDepthList, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (adjustDepth(QListWidgetItem *)));
     connect (layerDepthList, SIGNAL (itemChanged(QListWidgetItem*)), this, SLOT (setDepths(QListWidgetItem *)));
 
 }
@@ -409,9 +412,10 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 
 void MainWindow::updateLayerList(){
 
-    qDebug () << "Update on MainWindow";
+    //qDebug () << "Update on MainWindow";
     layerDepthList->clear();
     QList<QString> a = canvas->getLayerList();
+    //qDebug () << a;
 
     for (int i = 0 ; i < a.size(); i++){
         QString label;
@@ -421,18 +425,48 @@ void MainWindow::updateLayerList(){
         label.append(" : ");
         label.append(a[i]);
 
-        QListWidgetItem *item = new QListWidgetItem(label, layerDepthList);
-        item->setFlags(item->flags() | Qt::ItemIsEditable);
+        QListWidgetItem *item = new QListWidgetItem ( label, layerDepthList );
+        item->setFlags( item->flags() | Qt::ItemIsEditable );
     }
 
 
 
 }
+
+void MainWindow::adjustDepth(QListWidgetItem *item){
+
+    //qDebug () << "DOUBLE CLICKED";
+
+    layerDepthList->editItem(item);
+
+}
+
 void MainWindow::setDepths(QListWidgetItem *item){
 
-    qDebug () << "Modified on MainWindow";
-    canvas->setDepths();
+    //qDebug () << "Modified on MainWindow";
+
+    if (item->text().size()>3){
+        return;
+    }
+
+    canvas->setDepths(layerDepthList->row(item), item->text());
+    QString label;
+
+    label = "Layer ";
+    label.append(QString::number(layerDepthList->row(item) + 1));
+    label.append(" : ");
+    label.append(item->text());
+
+    QListWidgetItem *it = new QListWidgetItem(label);
+    it->setFlags( it->flags() | Qt::ItemIsEditable );
+
+    layerDepthList->insertItem(layerDepthList->row(item),it);
+    layerDepthList->takeItem(layerDepthList->row(item));
+
 }
+
+
+
 
 
 

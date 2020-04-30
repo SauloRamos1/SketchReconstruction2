@@ -349,10 +349,12 @@ QList<QString> Canvas::getLayerList(){
     return scene->getLayerList();
 }
 
-void Canvas::setDepths()
+void Canvas::setDepths(int row, QString depth)
 {
+    scene->setDepths(row, depth);
 
 }
+
 
 
 #include "moc_canvas.cpp"

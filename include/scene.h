@@ -107,6 +107,7 @@ public:
     int getErasedStripeItemNumber();
 
     QList<QString> getLayerList();
+    void setDepths (int row, QString depth);
 
 public slots:
 
