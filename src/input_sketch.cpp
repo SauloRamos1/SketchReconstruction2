@@ -1519,13 +1519,13 @@ void InputSketch::joinPaths()
                 //  ------- OVERSKETCH -------
                 prepareGeometryChange();
                 QPolygonF current_sketch;
-                for (int j = 0; j < closedContourList[i].contour.toSubpathPolygons().size(); ++j) {
+                for (int j = 0; j < closedContourList[i].contour.toSubpathPolygons().size(); j++) {
                     current_sketch << closedContourList[i].contour.toSubpathPolygons().at(j);
                 }
 
                 QPolygonF polygon_list;
 
-                for (int j = 0; j < oversketchingCurve.toSubpathPolygons().size(); ++j) {
+                for (int j = 0; j < oversketchingCurve.toSubpathPolygons().size(); j++) {
                     polygon_list << oversketchingCurve.toSubpathPolygons().at(i);
                 }
                 oversketchingCurve = QPainterPath();
@@ -1533,7 +1533,7 @@ void InputSketch::joinPaths()
                 auto polygon_curve = SketchLibrary::smooth( polygon_list );
                 oversketchingCurve.addPolygon(polygon_curve);
                 QPolygonF new_sketch;
-                for (int j = 0; j < oversketchingCurve.toSubpathPolygons().size(); ++j) {
+                for (int j = 0; j < oversketchingCurve.toSubpathPolygons().size(); j++) {
                     new_sketch << oversketchingCurve.toSubpathPolygons().at(i);
                 }
 
@@ -1549,10 +1549,16 @@ void InputSketch::joinPaths()
                     closedContourList[i].contour = QPainterPath();
                     closedContourList[i].contour.addPolygon(current_sketch);
 
-                    smoothPath(closedContourList[i].contour);
+                    closedContourList[i].contour.lineTo(closedContourList[i].contour.pointAtPercent(0));
 
-                    samplePointsForRotationalBlendingSurface(closedContourList[i].contour);
+                    closePath(closedContourList[i].contour);
+
+                    smoothPath(closedContourList[i].contour);
+                    allShapesSampledPoints.remove(i);
+
+                    receiveSelectedPath(closedContourList[i].contour,closedContourList[i].name, closedContourList[i].level );
                     oversketchingCurve = QPainterPath();
+
 
 
 
@@ -1682,6 +1688,7 @@ void InputSketch::defRotAxis(int direction){
 void InputSketch::samplePointsForRotationalBlendingSurface(QPainterPath &selectedCurve){
 
 
+    allShapesSampledPoints[selectedClosedContour] = allSampledPoints();
 
     QVector<QPointF> sampledPointsOnCurve;
 
@@ -1713,8 +1720,6 @@ void InputSketch::samplePointsForRotationalBlendingSurface(QPainterPath &selecte
     }
 
     t.midPointsPath = midPointsPath;
-
-    allShapesSampledPoints[selectedClosedContour] = allSampledPoints();
 
     allShapesSampledPoints[selectedClosedContour] = t;
 
