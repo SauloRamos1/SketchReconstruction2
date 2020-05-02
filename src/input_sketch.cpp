@@ -455,6 +455,9 @@ void InputSketch::estimateShapes(){
     //    lineLeveldiff = QInputDialog::getInt(nullptr, "Depth Difference", "Layering difference in depth");
     //    lineLeveldiff*=-1;
 
+    pointsFor3Ddisks.clear();
+    normalsFor3Ddisks.clear();
+
     for (int i = 0; i < allShapesSampledPoints.size(); ++i) {
 
         int reconstType = 0;
