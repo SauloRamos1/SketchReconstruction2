@@ -27,6 +27,9 @@ void OpenGLCanvas::initializeGL(){
 
     initializeShaders();
 
+    glEnable(GL_CULL_FACE);
+    //glCullFace(GL_FRONT);
+
     //glClearColor( 0.8f, 0.8f, 1.0,1.0);
 
     //    program = std::make_shared< QOpenGLShaderProgram >();
