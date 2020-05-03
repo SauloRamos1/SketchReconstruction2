@@ -488,15 +488,15 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
         int attachedContour = closedContourList[shapeNumber].attachClosedContour;
         qDebug () << "Contour: " <<  shapeNumber <<  "Attached Contour: " << attachedContour;
         for (int i = 0; i < ql.size(); ++i) {
-            ql[i].setZ(ql[i].z()*layerDifference);
-            qr[i].setZ(qr[i].z()*layerDifference);
-            ql[i].setZ(closedContourList[attachedContour].maior_z*0.8);
-            qr[i].setZ(closedContourList[attachedContour].maior_z*0.8);
+            ql[i].setZ(depthLevelList[closedContourList[attachedContour].level-1] + closedContourList[attachedContour].maior_z*0.8);
+            qr[i].setZ(depthLevelList[closedContourList[attachedContour].level-1] + closedContourList[attachedContour].maior_z*0.8);
+//            ql[i].setZ(closedContourList[attachedContour].maior_z*0.8);
+//            qr[i].setZ(closedContourList[attachedContour].maior_z*0.8);
         }
     } else {
         for (int i = 0; i < ql.size(); ++i) {
-            ql[i].setZ(ql[i].z()*layerDifference);
-            qr[i].setZ(qr[i].z()*layerDifference);
+            ql[i].setZ(depthLevelList[closedContourList[shapeNumber].level-1]);
+            qr[i].setZ(depthLevelList[closedContourList[shapeNumber].level-1]);
         }
     }
 
@@ -581,22 +581,22 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
         u += u_step;
 
     }
-    if (closedContourList[shapeNumber].attachClosedContour != -1){
-        int attachedContour = closedContourList[shapeNumber].attachClosedContour;
-//        layerDifference = closedContourList[attachedContour].maior_z*0.9;
-//        qDebug () << layerDifference;
-        for (int i = 0; i < ql.size(); ++i) {
-            ql[i].setZ(ql[i].z() - closedContourList[attachedContour].maior_z);
-            qr[i].setZ(qr[i].z() - closedContourList[attachedContour].maior_z);
-            ql[i].setZ(ql[i].z()/layerDifference);
-            qr[i].setZ(qr[i].z()/layerDifference);
-        }
-    } else {
-        for (int i = 0; i < ql.size(); ++i) {
-            ql[i].setZ(ql[i].z()/layerDifference);
-            qr[i].setZ(qr[i].z()/layerDifference);
-        }
-    }
+//    if (closedContourList[shapeNumber].attachClosedContour != -1){
+//        int attachedContour = closedContourList[shapeNumber].attachClosedContour;
+////        layerDifference = closedContourList[attachedContour].maior_z*0.9;
+////        qDebug () << layerDifference;
+//        for (int i = 0; i < ql.size(); ++i) {
+//            ql[i].setZ(ql[i].z() - closedContourList[attachedContour].maior_z);
+//            qr[i].setZ(qr[i].z() - closedContourList[attachedContour].maior_z);
+//            ql[i].setZ(ql[i].z()/layerDifference);
+//            qr[i].setZ(qr[i].z()/layerDifference);
+//        }
+//    } else {
+//        for (int i = 0; i < ql.size(); ++i) {
+//            ql[i].setZ(ql[i].z()/layerDifference);
+//            qr[i].setZ(qr[i].z()/layerDifference);
+//        }
+//    }
 
 
 
