@@ -504,8 +504,9 @@ void Scene::keyPressEvent(QKeyEvent *event){
     if ( event->key() == Qt::Key_Plus && status == Interaction::OPENCONTOUR ){
         if ( leftButtonIsPressed ){
 
-            sketch.increaseOpenContourLevelWhileDrawing();
+            if(sketch.increaseOpenContourLevelWhileDrawing()){
             emit openContourDone();
+            }
 
         } else {
 
@@ -524,10 +525,9 @@ void Scene::keyPressEvent(QKeyEvent *event){
 
         if ( leftButtonIsPressed ){
 
-
-            sketch.decreaseOpenContourLevelWhileDrawing();
+            if(sketch.decreaseOpenContourLevelWhileDrawing()){
             emit openContourDone();
-
+            }
         } else {
 
             //sketch.saveOpenContour();

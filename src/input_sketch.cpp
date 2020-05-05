@@ -121,9 +121,10 @@ bool InputSketch::saveOpenContour (){
 
 }
 
-void InputSketch::increaseOpenContourLevelWhileDrawing(){
+bool InputSketch::increaseOpenContourLevelWhileDrawing(){
 
-    if (openContour.length() < 2) return; //Testa se ha linha desenhada
+    //if (openContour.length() < 2) return; //Testa se ha linha desenhada
+    if (openContour.isEmpty()) return false; //Testa se ha linha desenhada
 
     smoothPath(openContour);
     smoothPath(openContour);
@@ -145,13 +146,16 @@ void InputSketch::increaseOpenContourLevelWhileDrawing(){
     openContour.moveTo(curve3D.contour.pointAtPercent(1));
 
     lineLevel +=1;
+
     update();
+    return true;
 }
 
-void InputSketch::decreaseOpenContourLevelWhileDrawing(){
+bool InputSketch::decreaseOpenContourLevelWhileDrawing(){
 
 
-    if (openContour.length() < 2) return; //Testa se ha linha desenhada
+    //if (openContour.length() < 2) return; //Testa se ha linha desenhada
+    if (openContour.isEmpty()) return false; //Testa se ha linha desenhada
 
     smoothPath(openContour);
     smoothPath(openContour);
@@ -172,6 +176,7 @@ void InputSketch::decreaseOpenContourLevelWhileDrawing(){
 
     lineLevel -=1;
     update();
+    return true;
 
 }
 

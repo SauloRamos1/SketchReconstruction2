@@ -95,8 +95,8 @@ public:
     bool saveClosedContour();
     bool saveStripeContour();
 
-    void increaseOpenContourLevelWhileDrawing();
-    void decreaseOpenContourLevelWhileDrawing();
+    bool increaseOpenContourLevelWhileDrawing();
+    bool decreaseOpenContourLevelWhileDrawing();
 
     void increaseLevel ();
     void decreaseLevel ();
