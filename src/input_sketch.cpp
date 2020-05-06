@@ -1273,7 +1273,7 @@ void InputSketch::drawPaths(const QVector<QPainterPath>& readsvgPaths){
 }
 
 
-void InputSketch::crossSelection(){
+bool InputSketch::crossSelection(){
 
     //selectedPathOnCrossSelection = QPainterPath();
 
@@ -1307,12 +1307,15 @@ void InputSketch::crossSelection(){
                 receiveSelectedPath(closedContourFromSVG.contour, closedContourFromSVG.name, closedContourFromSVG.level);
 
                 closedContourList.append(closedContourFromSVG);
-                break;
+                curve = QPainterPath();
+                return true;
             }
         }
     }
-
     curve = QPainterPath();
+    return false;
+
+
 }
 
 void InputSketch::cropSelection(){
@@ -2345,7 +2348,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                         }
 
                         painter->setPen(QPen(Qt::darkRed, 2,Qt::SolidLine));
-                        painter->drawPath(allShapesSampledPoints[i].midPointsPath);
+                        //painter->drawPath(allShapesSampledPoints[i].midPointsPath);
                     }
                 }
             }

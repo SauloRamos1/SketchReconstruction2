@@ -28,6 +28,7 @@ void OpenGLCanvas::initializeGL(){
     initializeShaders();
 
     glEnable(GL_CULL_FACE);
+
     //glCullFace(GL_FRONT);
 
     //glClearColor( 0.8f, 0.8f, 1.0,1.0);
@@ -147,6 +148,7 @@ void OpenGLCanvas::keyPressEvent(QKeyEvent *event){
     if (event->key() == Qt::Key_R){
         rotateAnimation = !rotateAnimation;
     }
+
     update();
     QOpenGLWidget::keyPressEvent(event);
 }

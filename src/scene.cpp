@@ -415,10 +415,10 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     }
 
     if (event->button() & Qt::LeftButton && status == Interaction::CROSS_SELECTION){
-
-        sketch.crossSelection();
         leftButtonIsPressed = false;
-        emit closedContourDone();
+        if (sketch.crossSelection()){
+            emit closedContourDone();
+        }
 
     }
     if (event->button() & Qt::LeftButton && status == Interaction::CROP_SELECTION) {

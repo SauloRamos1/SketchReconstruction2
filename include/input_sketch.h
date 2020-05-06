@@ -50,7 +50,7 @@ public:
     void createSelectionCurve(const QPointF &pos);
     void addSelectionCurve(const QPointF &pos);
 
-    void crossSelection();
+    bool crossSelection();
     void cropSelection();
     int eraseSelection();
 
