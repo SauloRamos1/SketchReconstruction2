@@ -417,17 +417,20 @@ void Scene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event){
     if (event->button() & Qt::LeftButton && status == Interaction::CROSS_SELECTION){
 
         sketch.crossSelection();
+        leftButtonIsPressed = false;
         emit closedContourDone();
 
     }
     if (event->button() & Qt::LeftButton && status == Interaction::CROP_SELECTION) {
 
         sketch.cropSelection();
+        leftButtonIsPressed = false;
         emit closedContourDone();
 
     }
     if (event->button() & Qt::LeftButton && status == Interaction::ERASE_SELECTION) {
 
+        leftButtonIsPressed = false;
         if (sketch.eraseSelection() != -1){
             emit eraseSelectionDone();
         }
@@ -542,6 +545,19 @@ void Scene::keyPressEvent(QKeyEvent *event){
     }
 
     if ( event->key() == Qt::Key_Minus && status == Interaction::CLOSEDCONTOUR && !leftButtonIsPressed ){
+
+        if (sketch.lineLevel == 1){
+            return;
+        }
+        sketch.decreaseLevel();
+    }
+
+    if ( event->key() == Qt::Key_Plus && status == Interaction::CROSS_SELECTION && !leftButtonIsPressed ){
+        sketch.increaseLevel();
+        qDebug () << "Increase";
+    }
+
+    if ( event->key() == Qt::Key_Minus && status == Interaction::CROSS_SELECTION && !leftButtonIsPressed ){
 
         if (sketch.lineLevel == 1){
             return;

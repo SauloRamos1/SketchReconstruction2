@@ -1161,10 +1161,14 @@ void InputSketch::addSelectionCurve(const QPointF &pos){
 
 void InputSketch::increaseLevel(){
     lineLevel +=1;
+    qDebug () << lineLevel;
+    update();
 }
 
 void InputSketch::decreaseLevel(){
     lineLevel-=1;
+    qDebug () << lineLevel;
+    update();
 }
 
 
