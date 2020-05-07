@@ -282,9 +282,9 @@ void Canvas::viewOverlapping3D(){
     glmediator->render();
 }
 
-void Canvas::exportMesh(){
+void Canvas::exportView(){
 
-    glmediator->exportMesh();
+    glmediator->exportView();
 
 }
 

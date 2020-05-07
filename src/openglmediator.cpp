@@ -31,7 +31,7 @@ void OpenGLMediator::setGlCanvas(const std::shared_ptr< OpenGLCanvas >& gl)
     glcanvas = gl;
 }
 
-void OpenGLMediator::exportMesh(){
+void OpenGLMediator::exportView(){
 
     if (vertices.size() == 0 ) {
 
@@ -64,41 +64,42 @@ void OpenGLMediator::exportMesh(){
     }
     fOut.close();
 
-    qDebug () << "Exported Mesh";
+    qDebug () << "Exported OFF Mesh";
 
     //Export PLY
 
-    //    std::string outFile3 = "stripe_mesh";
-    //    outFile3.append(".ply");
+    std::string outFile3 = "stripe_mesh";
+    std::ofstream fOut1;
+    outFile3.append(".ply");
 
-    //    fOut.open(outFile3.c_str());
+    fOut1.open(outFile3.c_str());
 
 
-    //    fOut << "ply" <<std::endl;
-    //    fOut << "format ascii 1.0" << std::endl;
-    //    fOut << "element vertex " << vertices.size() <<  std::endl;
+    fOut1 << "ply" <<std::endl;
+    fOut1 << "format ascii 1.0" << std::endl;
+    fOut1 << "element vertex " << vertices.size()/3 <<  std::endl;
 
-    //    fOut << "property float x" << std::endl;
-    //    fOut << "property float y" << std::endl;
-    //    fOut << "property float z" << std::endl;
+    fOut1 << "property float x" << std::endl;
+    fOut1 << "property float y" << std::endl;
+    fOut1 << "property float z" << std::endl;
 
-    //    fOut << "element face " << faces.size()/3 << std::endl;
+    fOut1 << "element face " << faces.size()/3 << std::endl;
 
-    //    fOut << "property list uchar uint vertex" << std::endl;
+    fOut1 << "property list uint8 int32 vertex_indices" << std::endl;
 
-    //    fOut << "end_header" << std::endl;
+    fOut1 << "end_header" << std::endl;
 
-    //    for (int i = 0 ; i < vertices.size(); i = i+3){
-    //        fOut << vertices[i] << " " << vertices[i+1] << " " << vertices[i+2] << std::endl;
+    for (int i = 0 ; i < vertices.size()/3; i++){
+        fOut1 << vertices[3*i+0] << " " << vertices[3*i + 1] << " " << vertices[3*i+2] << std::endl;
+    }
 
-    //    }
+    for (int m = 0; m < faces.size()/3; m++) {
+        fOut1 << 3 << " "<< faces[3*m+0] <<" "<< faces[3*m+1]  <<" "<< faces[3*m+2]  << std::endl;
+    }
 
-    //    for (int m = 0; m < faces.size(); m=m+3) {
-    //        fOut << 3 << " "<< faces[m] <<" "<< faces[m+1]  <<" "<< faces[m+2]  << std::endl;
-    //    }
+    fOut1.close();
 
-    //    fOut.close();
-
+    qDebug () << "Exported PLY Mesh";
     //    pathsList.clear();
     //    svgPaths.clear();
 

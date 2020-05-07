@@ -68,7 +68,7 @@ protected:
         void viewOverlapping3D();
 
 
-        void exportMesh();
+        void exportView();
 
         void showLabels (const int checked);
 

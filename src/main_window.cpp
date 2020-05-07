@@ -352,7 +352,7 @@ void MainWindow::createCanvas1Actions (){
     //    connect( ac_estimateShape.get(), &QAction::triggered, canvas2.get(), &Canvas2::estimateShape );
     //    connect( ac_showNormals.get(), &QAction::toggled, canvas2.get(), &Canvas2::showNormals );
 
-    connect( ac_exportView.get(), &QAction::triggered, canvas.get(), &Canvas::exportMesh);
+    connect( ac_exportView.get(), &QAction::triggered, canvas.get(), &Canvas::exportView);
 
     connect( canvas.get(), &Canvas::updateLayerListSignal, this, &MainWindow::updateLayerList);
     //connect (layerDepthList, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (adjustDepth(QListWidgetItem *)));

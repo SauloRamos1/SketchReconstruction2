@@ -35,7 +35,7 @@ public:
     void viewStripes3D(const QVector<QVector3D> points3D);
 
     QVector<QVector3D> createCylinder(int steps, QVector3D base, QVector3D top);
-    void exportMesh();
+    void exportView();
 
     int nvertices = 0;
     void clearTriangles();

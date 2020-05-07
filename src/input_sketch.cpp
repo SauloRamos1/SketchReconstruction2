@@ -1298,6 +1298,7 @@ bool InputSketch::crossSelection(){
                 nClosedContours++;
                 closedContourFromSVG.name = name;
                 names.append(name);
+                closedContourFromSVG.attachClosedContour = -1;
 
                 //                if(levelList.size() > 0){
                 //                    selectedLineLevel = levelList[i];
