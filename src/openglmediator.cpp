@@ -43,7 +43,7 @@ void OpenGLMediator::exportView(){
         
     }
     //Export OFF
-    std::string outFile = "mesh.off";
+    std::string outFile = "ViewMesh.off";
     //outFile.append("mesh.off");
     std::ofstream fOut;
     fOut.open(outFile.c_str());
@@ -68,9 +68,8 @@ void OpenGLMediator::exportView(){
 
     //Export PLY
 
-    std::string outFile3 = "stripe_mesh";
+    std::string outFile3 = "ViewMesh.ply";
     std::ofstream fOut1;
-    outFile3.append(".ply");
 
     fOut1.open(outFile3.c_str());
 
