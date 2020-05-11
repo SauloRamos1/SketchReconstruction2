@@ -118,6 +118,70 @@ QVector<QVector3D> OpenGLMediator::createCylinder(int steps, QVector3D base, QVe
     int    i, j;
     float  phi, dphi = 2.*M_PI / (float)(steps);
 
+    float R1 = 2.0f, R2 = 1.0f;
+    float angle;
+    int H = 1;
+
+    float vx = top.x()-base.x();
+    float vy = top.y()-base.y();
+    float vz = top.z()-base.z();
+
+    float v = sqrt( vx*vx + vy*vy + vz*vz );
+    float ax;
+
+    if (fabs(vz) < 1.0e-3) {
+        ax = 57.2957795*acos( vx/v ); // rotation angle in x-y plane
+        if ( vy <= 0.0 )
+            ax = -ax;
+    }
+    else {
+        ax = 57.2957795*acos( vz/v ); // rotation angle
+        if ( vz <= 0.0 )
+            ax = -ax;
+    }
+
+    float rx = -vy*vz;
+    float ry = vx*vz;
+
+
+    for(phi = 0.; phi <= 2.*M_PI; phi += dphi) {
+
+        QVector3D b(R1*cos(phi), R1*sin(phi), 0);
+        // QVector3D c(R2*cos(phi), R2*sin(phi), 0);
+
+        QMatrix4x4 m1;
+        m1.setToIdentity();
+        m1.translate(base);
+
+        if (fabs(vz) < 1.0e-3) {
+            m1.rotate(90.0, 0, 1, 0.0); // Rotate & align with x axis
+            m1.rotate(ax, -1.0, 0.0, 0.0); // Rotate to point 2 in x-y plane
+        }
+        else {
+            m1.rotate(ax, rx, ry, 0.0); // Rotate about rotation vector
+        }
+
+        b = m1 * b;
+
+
+        diskVertex.push_back(b);
+
+    }
+
+
+    return diskVertex;
+}
+
+QVector<QVector3D> OpenGLMediator::createDisk(int steps, QVector3D base, QVector3D top){
+
+    ///CODE FROM https://github.com/curran/renderCyliner/blob/master/renderCylinder.c
+    /// http://lifeofaprogrammergeek.blogspot.com/2008/07/rendering-cylinder-between-two-points.html
+
+    QVector<QVector3D> diskVertex;
+
+    int    i, j;
+    float  phi, dphi = 2.*M_PI / (float)(steps);
+
     float R1 = 1.0f, R2 = 1.0f;
     float angle;
     int H = 1;
@@ -337,7 +401,7 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
 
     for (int i = 0; i < points3D.size(); i++){
 
-        QVector<QVector3D> diskVertices = createCylinder(steps, points3D[i], points3D[i] + normals3D[i]);
+        QVector<QVector3D> diskVertices = createDisk(steps, points3D[i], points3D[i] + normals3D[i]);
 
         vertices.push_back(points3D[i].x());
         vertices.push_back(points3D[i].y());
