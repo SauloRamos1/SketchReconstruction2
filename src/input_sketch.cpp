@@ -1463,6 +1463,10 @@ void InputSketch::joinPaths()
 {
     //TODO SUBSTITUIR POR LINHA SELECIONADA E OVERSKETCHING CURVE
 
+    if (oversketchingCurve.length() < 2) {
+        return;
+    }
+
     switch (lastSelected) {
 
     case 0 : {
