@@ -219,14 +219,14 @@ void InputSketch::addClosedContour (const QPointF& pos){
 
                 QPainterPath poly;
 
-                currentPolySugestion = closedContourList[i].contour.toFillPolygon();
+               // currentPolySugestion = closedContourList[i].contour.toFillPolygon();
 
-                for (int j = 0; j < currentPolySugestion.size()-1; ++j) {
+                for (double j = 0; j < closedContourList[i].contour.length(); j = j + 5) {
 
                     poly = QPainterPath();
                     poly.moveTo(closedContour.pointAtPercent(1));
-                    poly.lineTo(currentPolySugestion[j]);
-                    poly.lineTo(currentPolySugestion[j+1]);
+                    poly.lineTo(closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(j)));
+                    poly.lineTo(closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(j + 5)));
                     linesToPolygon.append(poly);
                 }
             }
@@ -1337,7 +1337,7 @@ void InputSketch::cropSelection(){
 
         QPointF pos = curve.pointAtPercent(curve.percentAtLength(i));
 
-        QRectF brushRectSelect(pos.x()-3,pos.y()-3,6,6);
+        QRectF brushRectSelect(pos.x()-3,pos.y()-3,10,10);
 
         rectList.append(brushRectSelect);
 
@@ -2559,10 +2559,18 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
         foreach (QPainterPath poly, linesToPolygon){
 
             painter->setOpacity((fabs (last2pointsAngle - poly.angleAtPercent(0)) / 150));
+            double absAngle = fabs (last2pointsAngle - poly.angleAtPercent(0));
 
-            if (painter->opacity() < 0.2 && painter->opacity() > 0.18){
+            //if (true){
 
-                painter->setOpacity(1);
+            if (absAngle > 28 && absAngle < 32){
+            //if (painter->opacity() > 0.18 && painter->opacity() < 0.2){
+
+                qDebug () << poly.angleAtPercent(0);
+                qDebug () << painter->opacity();
+                qDebug () << last2pointsAngle - poly.angleAtPercent(0);
+
+                painter->setOpacity(0.5);
 
                 QLinearGradient linearGrad(poly.pointAtPercent(0), poly.pointAtPercent(1));
 

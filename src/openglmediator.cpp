@@ -118,7 +118,7 @@ QVector<QVector3D> OpenGLMediator::createCylinder(int steps, QVector3D base, QVe
     int    i, j;
     float  phi, dphi = 2.*M_PI / (float)(steps);
 
-    float R1 = 2.0f, R2 = 1.0f;
+    float R1 = 4.0f, R2 = 1.0f;
     float angle;
     int H = 1;
 
