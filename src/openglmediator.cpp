@@ -1027,7 +1027,9 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
     QPolygonF quad;
     QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
 
-    for (int h = 0; h < points3D[h].size(); h++){
+    for (int h = 0; h < points3D.size(); h++){
+        std::vector< float > Svertices, Snormals;
+        std::vector< unsigned int > Sfaces;
 
         for (int i = 0 ; i < points3D[h].size()/2; i++) {
             pointsfor3Dleft.push_back(points3D[h][i]);
@@ -1053,37 +1055,37 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
             QVector3D normal = CalculateSurfaceNormal(p,q,r); //Normal for 1st triangle
             QVector3D normal1 = CalculateSurfaceNormal(r,p,s);//Normal for 2nd triangle
 
-            vertices.push_back(p.x());
-            vertices.push_back(p.y());
-            vertices.push_back(p.z());
+            Svertices.push_back(p.x());
+            Svertices.push_back(p.y());
+            Svertices.push_back(p.z());
 
-            normals.push_back(normal.x());
-            normals.push_back(normal.y());
-            normals.push_back(normal.z());
+            Snormals.push_back(normal.x());
+            Snormals.push_back(normal.y());
+            Snormals.push_back(normal.z());
 
-            vertices.push_back(q.x());
-            vertices.push_back(q.y());
-            vertices.push_back(q.z());
+            Svertices.push_back(q.x());
+            Svertices.push_back(q.y());
+            Svertices.push_back(q.z());
 
-            normals.push_back(normal.x());
-            normals.push_back(normal.y());
-            normals.push_back(normal.z());
+            Snormals.push_back(normal.x());
+            Snormals.push_back(normal.y());
+            Snormals.push_back(normal.z());
 
-            vertices.push_back(r.x());
-            vertices.push_back(r.y());
-            vertices.push_back(r.z());
+            Svertices.push_back(r.x());
+            Svertices.push_back(r.y());
+            Svertices.push_back(r.z());
 
-            normals.push_back(normal.x());
-            normals.push_back(normal.y());
-            normals.push_back(normal.z());
+            Snormals.push_back(normal.x());
+            Snormals.push_back(normal.y());
+            Snormals.push_back(normal.z());
 
-            vertices.push_back(s.x());
-            vertices.push_back(s.y());
-            vertices.push_back(s.z());
+            Svertices.push_back(s.x());
+            Svertices.push_back(s.y());
+            Svertices.push_back(s.z());
 
-            normals.push_back(normal.x());
-            normals.push_back(normal.y());
-            normals.push_back(normal.z());
+            Snormals.push_back(normal.x());
+            Snormals.push_back(normal.y());
+            Snormals.push_back(normal.z());
 
             facesNumber += 4;
 
@@ -1092,14 +1094,77 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
             quadTopology[2] = facesNumber - 2;
             quadTopology[3] = facesNumber - 1;
 
-            faces.push_back(quadTopology[0]+nvertices);
-            faces.push_back(quadTopology[1]+nvertices);
-            faces.push_back(quadTopology[2]+nvertices);
-            faces.push_back(quadTopology[0]+nvertices);
-            faces.push_back(quadTopology[2]+nvertices);
-            faces.push_back(quadTopology[3]+nvertices);
+            Sfaces.push_back(quadTopology[0]);
+            Sfaces.push_back(quadTopology[1]);
+            Sfaces.push_back(quadTopology[2]);
+            Sfaces.push_back(quadTopology[0]);
+            Sfaces.push_back(quadTopology[2]);
+            Sfaces.push_back(quadTopology[3]);
 
         }
+
+        //EXPORT STRIPE
+
+        //Export OFF
+        std::string outFile = "Stripe";
+        outFile.append(std::to_string(h));
+        outFile.append(".off");
+        std::ofstream fOut;
+        fOut.open(outFile.c_str());
+
+
+        fOut << "OFF" <<std::endl;
+
+        //Vertices, Faces, Edges
+
+        fOut << Svertices.size()/3  <<" " << Sfaces.size()/3 <<" " << "0" <<std::endl;
+        for (int i = 0 ; i < Svertices.size()/3; i++){
+            fOut << Svertices[3*i+0] << " " << Svertices[3*i + 1] << " " << Svertices[3*i+2] << std::endl;
+
+        }
+
+        for (int m = 0; m < Sfaces.size()/3; m++) {
+            fOut << 3 << " "<< Sfaces[3*m+0] <<" "<< Sfaces[3*m+1]  <<" "<< Sfaces[3*m+2]  << std::endl;
+        }
+        fOut.close();
+
+        qDebug () << "Exported OFF Mesh";
+
+        //Export PLY
+
+        std::string outFile3 = "Stripe";
+        outFile3.append(std::to_string(h));
+        outFile3.append(".ply");
+        std::ofstream fOut1;
+
+        fOut1.open(outFile3.c_str());
+
+
+        fOut1 << "ply" <<std::endl;
+        fOut1 << "format ascii 1.0" << std::endl;
+        fOut1 << "element vertex " << Svertices.size()/3 <<  std::endl;
+
+        fOut1 << "property float x" << std::endl;
+        fOut1 << "property float y" << std::endl;
+        fOut1 << "property float z" << std::endl;
+
+        fOut1 << "element face " << Sfaces.size()/3 << std::endl;
+
+        fOut1 << "property list uint8 int32 vertex_indices" << std::endl;
+
+        fOut1 << "end_header" << std::endl;
+
+        for (int i = 0 ; i < Svertices.size()/3; i++){
+            fOut1 << Svertices[3*i+0] << " " << Svertices[3*i + 1] << " " << Svertices[3*i+2] << std::endl;
+        }
+
+        for (int m = 0; m < Sfaces.size()/3; m++) {
+            fOut1 << 3 << " "<< Sfaces[3*m+0] <<" "<< Sfaces[3*m+1]  <<" "<< Sfaces[3*m+2]  << std::endl;
+        }
+
+        fOut1.close();
+
+        qDebug () << "Exported PLY Mesh";
     }
 
 
