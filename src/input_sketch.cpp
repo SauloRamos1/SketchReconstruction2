@@ -219,7 +219,7 @@ void InputSketch::addClosedContour (const QPointF& pos){
 
                 QPainterPath poly;
 
-               // currentPolySugestion = closedContourList[i].contour.toFillPolygon();
+                // currentPolySugestion = closedContourList[i].contour.toFillPolygon();
 
                 for (double j = 0; j < closedContourList[i].contour.length(); j = j + 5) {
 
@@ -495,8 +495,8 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
         for (int i = 0; i < ql.size(); ++i) {
             ql[i].setZ(depthLevelList[closedContourList[attachedContour].level-1] + closedContourList[attachedContour].maior_z*0.8);
             qr[i].setZ(depthLevelList[closedContourList[attachedContour].level-1] + closedContourList[attachedContour].maior_z*0.8);
-//            ql[i].setZ(closedContourList[attachedContour].maior_z*0.8);
-//            qr[i].setZ(closedContourList[attachedContour].maior_z*0.8);
+            //            ql[i].setZ(closedContourList[attachedContour].maior_z*0.8);
+            //            qr[i].setZ(closedContourList[attachedContour].maior_z*0.8);
         }
     } else {
         for (int i = 0; i < ql.size(); ++i) {
@@ -562,7 +562,7 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
             if (p.z() < closedContourList[shapeNumber].maior_z){
                 closedContourList[shapeNumber].maior_z = p.z();
-//                qDebug () << p.z();
+                //                qDebug () << p.z();
             }
 
 
@@ -586,25 +586,125 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
         u += u_step;
 
     }
-//    if (closedContourList[shapeNumber].attachClosedContour != -1){
-//        int attachedContour = closedContourList[shapeNumber].attachClosedContour;
-////        layerDifference = closedContourList[attachedContour].maior_z*0.9;
-////        qDebug () << layerDifference;
-//        for (int i = 0; i < ql.size(); ++i) {
-//            ql[i].setZ(ql[i].z() - closedContourList[attachedContour].maior_z);
-//            qr[i].setZ(qr[i].z() - closedContourList[attachedContour].maior_z);
-//            ql[i].setZ(ql[i].z()/layerDifference);
-//            qr[i].setZ(qr[i].z()/layerDifference);
-//        }
-//    } else {
-//        for (int i = 0; i < ql.size(); ++i) {
-//            ql[i].setZ(ql[i].z()/layerDifference);
-//            qr[i].setZ(qr[i].z()/layerDifference);
-//        }
-//    }
+
+    int i = shapeNumber;
+    int npoints = 0;
+
+    QVector<int> quadTopology (4);
+    QVector<QVector<int>> topology;
+
+
+    for (int j = 0; j < allShapesSampledPoints[i].shapePoints.size()-1 ; ++j) {
+
+        //allShapesSampledPoints[i].shapePoints[j].push_back(allShapesSampledPoints[i].shapePoints[j].at(0));
+
+        npoints = allShapesSampledPoints[i].shapePoints[j].size() * allShapesSampledPoints[i].shapePoints.size();
+
+        for (int k = 0; k < allShapesSampledPoints[i].shapePoints[j].size() -1 ; ++k) {
+
+            quadTopology[0] = (allShapesSampledPoints[i].shapePoints[j].size() * j) + k;
+            quadTopology[1] = (allShapesSampledPoints[i].shapePoints[j].size() * j) + k + 1;
+            quadTopology[2] = (allShapesSampledPoints[i].shapePoints[j].size() * (j + 1)) + k + 1;
+            quadTopology[3] = (allShapesSampledPoints[i].shapePoints[j].size() * (j + 1)) + k;
+
+            topology.push_back(quadTopology);
+
+        }
+
+        quadTopology[0] = allShapesSampledPoints[i].shapePoints[j].last().vertexNumber;
+        quadTopology[1] = allShapesSampledPoints[i].shapePoints[j].first().vertexNumber;
+        quadTopology[2] = allShapesSampledPoints[i].shapePoints[j+1].first().vertexNumber;
+        quadTopology[3] = allShapesSampledPoints[i].shapePoints[j+1].last().vertexNumber;
+        topology.push_back(quadTopology);
+
+    }
 
 
 
+    std::string outFile2 = ("Closed");
+    outFile2.append(std::to_string(i));
+    outFile2.append(".off");
+    std::ofstream fOut;
+    fOut.open(outFile2.c_str());
+
+
+    fOut << "OFF" <<std::endl;
+
+    //Vertices, Faces, Edges
+
+    fOut << npoints  <<" " << topology.size()  <<" " << "0" <<std::endl;
+    for (int l = 0; l < allShapesSampledPoints[i].shapePoints.size(); ++l) {
+        for (int m = 0; m < allShapesSampledPoints[i].shapePoints[l].size(); ++m) {
+
+            fOut << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
+
+        }
+    }
+
+    for (int m = 0; m < topology.size(); ++m) {
+        fOut << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
+    }
+    fOut.close();
+
+    //Export PLY
+
+    std::string outFile3 = "Closed";
+    outFile3.append(std::to_string(i));
+    outFile3.append(".ply");
+    std::ofstream fOut1;
+
+    fOut1.open(outFile3.c_str());
+
+
+    fOut1 << "ply" <<std::endl;
+    fOut1 << "format ascii 1.0" << std::endl;
+    fOut1 << "element vertex " << npoints <<  std::endl;
+
+    fOut1 << "property float x" << std::endl;
+    fOut1 << "property float y" << std::endl;
+    fOut1 << "property float z" << std::endl;
+
+    fOut1 << "element face " << topology.size() << std::endl;
+
+    fOut1 << "property list uchar uint vertex" << std::endl;
+
+    fOut1 << "end_header" << std::endl;
+
+    for (int l = 0; l < allShapesSampledPoints[i].shapePoints.size(); ++l) {
+        for (int m = 0; m < allShapesSampledPoints[i].shapePoints[l].size(); ++m) {
+
+            fOut << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
+
+        }
+    }
+
+
+    for (int m = 0; m < topology.size(); m++) {
+        fOut1 << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
+    }
+
+    fOut1.close();
+
+
+
+
+
+    //    if (closedContourList[shapeNumber].attachClosedContour != -1){
+    //        int attachedContour = closedContourList[shapeNumber].attachClosedContour;
+    ////        layerDifference = closedContourList[attachedContour].maior_z*0.9;
+    ////        qDebug () << layerDifference;
+    //        for (int i = 0; i < ql.size(); ++i) {
+    //            ql[i].setZ(ql[i].z() - closedContourList[attachedContour].maior_z);
+    //            qr[i].setZ(qr[i].z() - closedContourList[attachedContour].maior_z);
+    //            ql[i].setZ(ql[i].z()/layerDifference);
+    //            qr[i].setZ(qr[i].z()/layerDifference);
+    //        }
+    //    } else {
+    //        for (int i = 0; i < ql.size(); ++i) {
+    //            ql[i].setZ(ql[i].z()/layerDifference);
+    //            qr[i].setZ(qr[i].z()/layerDifference);
+    //        }
+    //    }
 
 }
 
@@ -898,7 +998,7 @@ void InputSketch::finishBand (){//Finish
     stripeContourList.last().last().name = name;
     names.append(name);
 
-   // qDebug () << stripeContourList.size();
+    // qDebug () << stripeContourList.size();
 }
 
 
@@ -2569,7 +2669,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
             //if (true){
 
             if (absAngle > 28 && absAngle < 32){
-            //if (painter->opacity() > 0.18 && painter->opacity() < 0.2){
+                //if (painter->opacity() > 0.18 && painter->opacity() < 0.2){
 
                 qDebug () << poly.angleAtPercent(0);
                 qDebug () << painter->opacity();
