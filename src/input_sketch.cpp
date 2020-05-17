@@ -1949,7 +1949,7 @@ QVector<QVector3D> InputSketch::getStripesPoints () {
         QVector<QVector3D> quadMesh;
 
         //int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference STRIPE", "Layering difference in depth STRIPE");
-        int depthdiff = layerDifference;
+        //int depthdiff = layerDifference;
 
         for (int i = 0 ; i <  stripeContourList.size(); i++) {
 
@@ -1958,24 +1958,24 @@ QVector<QVector3D> InputSketch::getStripesPoints () {
                 float aspectratio = stripeContourList[i][j].rightLine.length() / stripeContourList[i][j].leftLine.length();
 
                 for (int k = 0; k < stripeContourList[i][j].leftLine.length(); k++){
-                    QVector3D p(stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).x(), stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).y(), stripeContourList[i][j].level*depthdiff);
+                    QVector3D p(stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).x(), stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).y(), depthLevelList[stripeContourList[i][j].level-1]);
 
                     pointsfor3Dleft.append(p);
                 }
 
                 for (float k = 0; k < stripeContourList[i][j].rightLine.length(); k = k + aspectratio){
-                    QVector3D p(stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).x(), stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).y(), stripeContourList[i][j].level*depthdiff);
+                    QVector3D p(stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).x(), stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).y(), depthLevelList[stripeContourList[i][j].level-1]);
 
                     pointsfor3Dright.append(p);
                 }
             }
         }
 
-        for (int i = 0; i < depthdiff * 10; i++){ // i < 200
+        for (int i = 0; i < 200; i++){ // i < 200
             chaikinOnZ (pointsfor3Dleft);
         }
 
-        for (int i = 0; i < depthdiff * 10; i++){ // i < 200
+        for (int i = 0; i < 200; i++){ // i < 200
             chaikinOnZ (pointsfor3Dright);
         }
 

@@ -306,7 +306,7 @@ void Canvas::exportMesh(){
 
     if (!scene->isStripeContoursEmpty()){
 
-        //glmediator->exportStripes3D(scene->getStripes());
+        glmediator->exportStripes3D(scene->getStripes());
 
     }
 
