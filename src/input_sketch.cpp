@@ -756,7 +756,7 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
     fOut << knownPoints.size() <<std::endl;
     for(QVector3D p:knownPoints)
     {
-        p.setZ(p.z() + (layerDifference * ql[0].z()));
+        p.setZ(p.z() + (depthLevelList[closedContourList[shapeNumber].level-1]));
         //       p.setZ(p.z() + (ql[0].z()));
         fOut << p.x() <<" " << p.y()<< " " << p.z()<< std::endl;
         pointsFor3Ddisks.append(p);
@@ -775,7 +775,7 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
         QVector3D n = totalNormals.at(k);
 
         fOut << n.x() <<" " << n.y()<< " " << n.z()<< std::endl;
-        p.setZ(p.z() + (layerDifference * ql[0].z()));
+        p.setZ(p.z() + (depthLevelList[closedContourList[shapeNumber].level-1]));
         //p.setZ(p.z() + (ql[0].z()));
         fOut << p.x() <<" " << p.y()<< " " << p.z()<< std::endl;
         pointsFor3Ddisks.append(p);
@@ -1543,7 +1543,7 @@ void InputSketch::joinPaths()
                 QPolygonF polygon_list;
 
                 for (int j = 0; j < oversketchingCurve.toSubpathPolygons().size(); j++) {
-                    polygon_list << oversketchingCurve.toSubpathPolygons().at(i);
+                    polygon_list << oversketchingCurve.toSubpathPolygons().at(j);
                 }
                 oversketchingCurve = QPainterPath();
 
@@ -1551,7 +1551,7 @@ void InputSketch::joinPaths()
                 oversketchingCurve.addPolygon(polygon_curve);
                 QPolygonF new_sketch;
                 for (int j = 0; j < oversketchingCurve.toSubpathPolygons().size(); j++) {
-                    new_sketch << oversketchingCurve.toSubpathPolygons().at(i);
+                    new_sketch << oversketchingCurve.toSubpathPolygons().at(j);
                 }
 
                 smoothPath(oversketchingCurve);
@@ -2599,6 +2599,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 painter->drawLine(arrowRight);
 
                 painter->fillPath (poly, QColor(Qt::black));
+                //painter->drawPath(poly);
 
             }
 
