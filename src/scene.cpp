@@ -625,7 +625,7 @@ QVector<QVector3D> Scene::getClosedContoursNormals()
     return sketch.getClosedContoursNormals();
 }
 
-QVector<QVector3D> Scene::getStripes()
+QList<QVector<QVector3D>> Scene::getStripes()
 {
     return sketch.getStripesPoints();
 }

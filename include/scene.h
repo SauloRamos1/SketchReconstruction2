@@ -65,7 +65,7 @@ public:
     QVector<QVector3D> getClosedContoursPoints ();
     QVector<QVector3D> getClosedContoursNormals ();
 
-    QVector<QVector3D> getStripes ();
+    QList<QVector<QVector3D>> getStripes ();
 
     QPainterPath getClosedContour();
     int getClosedContourLevel();

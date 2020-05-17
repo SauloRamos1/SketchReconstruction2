@@ -110,7 +110,7 @@ public:
     QList<QVector<QVector3D>> getOpenContoursPoints();
     QVector<QVector3D> getClosedContoursPoints();
 
-    QVector<QVector3D> getStripesPoints();
+    QList<QVector<QVector3D>> getStripesPoints();
 
     void changeLayerDifference(const int &difference);
     QPainterPath getClosedContour();

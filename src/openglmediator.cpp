@@ -476,7 +476,7 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
     //glcanvas->renderCylinder(points3D);
 }
 
-void OpenGLMediator::viewStripes3D (const QVector<QVector3D> points3D){
+void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
 
     if( points3D.isEmpty() ) {
         QMessageBox msgBox;
@@ -493,99 +493,105 @@ void OpenGLMediator::viewStripes3D (const QVector<QVector3D> points3D){
     //    Snormals.clear();
     //    Sfaces.clear();
 
-    QPolygonF quad;
-    QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
+    for (int h = 0; h < points3D.size(); h++){
 
-    //vector1.insert( vector1.end(), vector2.begin(), vector2.end() );
-    //TODO
+        QPolygonF quad;
+        QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
 
-    for (int i = 0 ; i < points3D.size()/2; i++) {
-        pointsfor3Dleft.push_back(points3D[i]);
+        //vector1.insert( vector1.end(), vector2.begin(), vector2.end() );
+        //TODO
+
+        for (int i = 0 ; i < points3D[h].size()/2; i++) {
+            pointsfor3Dleft.push_back(points3D[h][i]);
+        }
+
+        for (int i = points3D[h].size()/2 ; i < points3D[h].size(); i++) {
+            pointsfor3Dright.push_back(points3D[h][i]);
+        }
+
+        QVector<QVector3D> quadMesh;
+        int facesNumber = 0;
+        QVector<int> quadTopology (4);
+
+        for (int i = 0 ; i < pointsfor3Dleft.size()-1; i++) {
+
+            QVector3D p(pointsfor3Dleft[i].x(),pointsfor3Dleft[i].y(), pointsfor3Dleft[i].z());
+            QVector3D q(pointsfor3Dleft[i+1].x(),pointsfor3Dleft[i+1].y(), pointsfor3Dleft[i+1].z());
+            QVector3D r(pointsfor3Dright[i+1].x(),pointsfor3Dright[i+1].y(), pointsfor3Dright[i+1].z());
+            QVector3D s(pointsfor3Dright[i].x(),pointsfor3Dright[i].y(), pointsfor3Dright[i].z());
+
+            //https://stackoverflow.com/questions/9806630/calculating-the-vertex-normals-of-a-quad
+
+            QVector3D normal = CalculateSurfaceNormal(p,q,r); //Normal for 1st triangle
+            QVector3D normal1 = CalculateSurfaceNormal(r,p,s);//Normal for 2nd triangle
+
+            vertices.push_back(p.x());
+            vertices.push_back(p.y());
+            vertices.push_back(p.z());
+
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
+
+            vertices.push_back(q.x());
+            vertices.push_back(q.y());
+            vertices.push_back(q.z());
+
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
+
+            vertices.push_back(r.x());
+            vertices.push_back(r.y());
+            vertices.push_back(r.z());
+
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
+
+            vertices.push_back(s.x());
+            vertices.push_back(s.y());
+            vertices.push_back(s.z());
+
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
+
+            facesNumber += 4;
+
+            quadTopology[0] = facesNumber - 4;
+            quadTopology[1] = facesNumber - 3;
+            quadTopology[2] = facesNumber - 2;
+            quadTopology[3] = facesNumber - 1;
+
+            faces.push_back(quadTopology[0]+nvertices);
+            faces.push_back(quadTopology[1]+nvertices);
+            faces.push_back(quadTopology[2]+nvertices);
+            faces.push_back(quadTopology[0]+nvertices);
+            faces.push_back(quadTopology[2]+nvertices);
+            faces.push_back(quadTopology[3]+nvertices);
+
+        }
+
+
+        nvertices = vertices.size()/3;
+
+        //    setShape(points3D);
+
+        //    getMeshPath (vertices, faces, normals);
+
+        // render();
+        //glcanvas->createTube(vertices, faces, normals);
+
+        //    vertices.clear();
+        //    faces.clear();
+        //    normals.clear();
+
+        //glcanvas->renderCylinder(points3D);
+
     }
 
-    for (int i = points3D.size()/2 ; i < points3D.size(); i++) {
-        pointsfor3Dright.push_back(points3D[i]);
-    }
 
-    QVector<QVector3D> quadMesh;
-    int facesNumber = 0;
-    QVector<int> quadTopology (4);
-
-    for (int i = 0 ; i < pointsfor3Dleft.size()-1; i++) {
-
-        QVector3D p(pointsfor3Dleft[i].x(),pointsfor3Dleft[i].y(), pointsfor3Dleft[i].z());
-        QVector3D q(pointsfor3Dleft[i+1].x(),pointsfor3Dleft[i+1].y(), pointsfor3Dleft[i+1].z());
-        QVector3D r(pointsfor3Dright[i+1].x(),pointsfor3Dright[i+1].y(), pointsfor3Dright[i+1].z());
-        QVector3D s(pointsfor3Dright[i].x(),pointsfor3Dright[i].y(), pointsfor3Dright[i].z());
-
-        //https://stackoverflow.com/questions/9806630/calculating-the-vertex-normals-of-a-quad
-
-        QVector3D normal = CalculateSurfaceNormal(p,q,r); //Normal for 1st triangle
-        QVector3D normal1 = CalculateSurfaceNormal(r,p,s);//Normal for 2nd triangle
-
-        vertices.push_back(p.x());
-        vertices.push_back(p.y());
-        vertices.push_back(p.z());
-
-        normals.push_back(normal.x());
-        normals.push_back(normal.y());
-        normals.push_back(normal.z());
-
-        vertices.push_back(q.x());
-        vertices.push_back(q.y());
-        vertices.push_back(q.z());
-
-        normals.push_back(normal.x());
-        normals.push_back(normal.y());
-        normals.push_back(normal.z());
-
-        vertices.push_back(r.x());
-        vertices.push_back(r.y());
-        vertices.push_back(r.z());
-
-        normals.push_back(normal.x());
-        normals.push_back(normal.y());
-        normals.push_back(normal.z());
-
-        vertices.push_back(s.x());
-        vertices.push_back(s.y());
-        vertices.push_back(s.z());
-
-        normals.push_back(normal.x());
-        normals.push_back(normal.y());
-        normals.push_back(normal.z());
-
-        facesNumber += 4;
-
-        quadTopology[0] = facesNumber - 4;
-        quadTopology[1] = facesNumber - 3;
-        quadTopology[2] = facesNumber - 2;
-        quadTopology[3] = facesNumber - 1;
-
-        faces.push_back(quadTopology[0]+nvertices);
-        faces.push_back(quadTopology[1]+nvertices);
-        faces.push_back(quadTopology[2]+nvertices);
-        faces.push_back(quadTopology[0]+nvertices);
-        faces.push_back(quadTopology[2]+nvertices);
-        faces.push_back(quadTopology[3]+nvertices);
-
-    }
-
-
-    nvertices = vertices.size()/3;
-
-    //    setShape(points3D);
-
-    //    getMeshPath (vertices, faces, normals);
-
-    // render();
-    //glcanvas->createTube(vertices, faces, normals);
-
-    //    vertices.clear();
-    //    faces.clear();
-    //    normals.clear();
-
-    //glcanvas->renderCylinder(points3D);
 }
 
 
@@ -1015,83 +1021,85 @@ void OpenGLMediator::exportClosedContours3D(const QVector<QVector3D> points3D, c
 
 }
 
-void OpenGLMediator::exportStripes3D(const QVector<QVector3D> points3D)
+void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
 {
 
     QPolygonF quad;
     QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
 
+    for (int h = 0; h < points3D[h].size(); h++){
 
-    for (int i = 0 ; i < points3D.size()/2; i++) {
-        pointsfor3Dleft.push_back(points3D[i]);
-    }
+        for (int i = 0 ; i < points3D[h].size()/2; i++) {
+            pointsfor3Dleft.push_back(points3D[h][i]);
+        }
 
-    for (int i = points3D.size()/2 ; i < points3D.size(); i++) {
-        pointsfor3Dright.push_back(points3D[i]);
-    }
+        for (int i = points3D[h].size()/2 ; i < points3D[h].size(); i++) {
+            pointsfor3Dright.push_back(points3D[h][i]);
+        }
 
-    QVector<QVector3D> quadMesh;
-    int facesNumber = 0;
-    QVector<int> quadTopology (4);
+        QVector<QVector3D> quadMesh;
+        int facesNumber = 0;
+        QVector<int> quadTopology (4);
 
-    for (int i = 0 ; i < pointsfor3Dleft.size()-1; i++) {
+        for (int i = 0 ; i < pointsfor3Dleft.size()-1; i++) {
 
-        QVector3D p(pointsfor3Dleft[i].x(),pointsfor3Dleft[i].y(), pointsfor3Dleft[i].z());
-        QVector3D q(pointsfor3Dleft[i+1].x(),pointsfor3Dleft[i+1].y(), pointsfor3Dleft[i+1].z());
-        QVector3D r(pointsfor3Dright[i+1].x(),pointsfor3Dright[i+1].y(), pointsfor3Dright[i+1].z());
-        QVector3D s(pointsfor3Dright[i].x(),pointsfor3Dright[i].y(), pointsfor3Dright[i].z());
+            QVector3D p(pointsfor3Dleft[i].x(),pointsfor3Dleft[i].y(), pointsfor3Dleft[i].z());
+            QVector3D q(pointsfor3Dleft[i+1].x(),pointsfor3Dleft[i+1].y(), pointsfor3Dleft[i+1].z());
+            QVector3D r(pointsfor3Dright[i+1].x(),pointsfor3Dright[i+1].y(), pointsfor3Dright[i+1].z());
+            QVector3D s(pointsfor3Dright[i].x(),pointsfor3Dright[i].y(), pointsfor3Dright[i].z());
 
-        //https://stackoverflow.com/questions/9806630/calculating-the-vertex-normals-of-a-quad
+            //https://stackoverflow.com/questions/9806630/calculating-the-vertex-normals-of-a-quad
 
-        QVector3D normal = CalculateSurfaceNormal(p,q,r); //Normal for 1st triangle
-        QVector3D normal1 = CalculateSurfaceNormal(r,p,s);//Normal for 2nd triangle
+            QVector3D normal = CalculateSurfaceNormal(p,q,r); //Normal for 1st triangle
+            QVector3D normal1 = CalculateSurfaceNormal(r,p,s);//Normal for 2nd triangle
 
-        vertices.push_back(p.x());
-        vertices.push_back(p.y());
-        vertices.push_back(p.z());
+            vertices.push_back(p.x());
+            vertices.push_back(p.y());
+            vertices.push_back(p.z());
 
-        normals.push_back(normal.x());
-        normals.push_back(normal.y());
-        normals.push_back(normal.z());
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
 
-        vertices.push_back(q.x());
-        vertices.push_back(q.y());
-        vertices.push_back(q.z());
+            vertices.push_back(q.x());
+            vertices.push_back(q.y());
+            vertices.push_back(q.z());
 
-        normals.push_back(normal.x());
-        normals.push_back(normal.y());
-        normals.push_back(normal.z());
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
 
-        vertices.push_back(r.x());
-        vertices.push_back(r.y());
-        vertices.push_back(r.z());
+            vertices.push_back(r.x());
+            vertices.push_back(r.y());
+            vertices.push_back(r.z());
 
-        normals.push_back(normal.x());
-        normals.push_back(normal.y());
-        normals.push_back(normal.z());
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
 
-        vertices.push_back(s.x());
-        vertices.push_back(s.y());
-        vertices.push_back(s.z());
+            vertices.push_back(s.x());
+            vertices.push_back(s.y());
+            vertices.push_back(s.z());
 
-        normals.push_back(normal.x());
-        normals.push_back(normal.y());
-        normals.push_back(normal.z());
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
 
-        facesNumber += 4;
+            facesNumber += 4;
 
-        quadTopology[0] = facesNumber - 4;
-        quadTopology[1] = facesNumber - 3;
-        quadTopology[2] = facesNumber - 2;
-        quadTopology[3] = facesNumber - 1;
+            quadTopology[0] = facesNumber - 4;
+            quadTopology[1] = facesNumber - 3;
+            quadTopology[2] = facesNumber - 2;
+            quadTopology[3] = facesNumber - 1;
 
-        faces.push_back(quadTopology[0]+nvertices);
-        faces.push_back(quadTopology[1]+nvertices);
-        faces.push_back(quadTopology[2]+nvertices);
-        faces.push_back(quadTopology[0]+nvertices);
-        faces.push_back(quadTopology[2]+nvertices);
-        faces.push_back(quadTopology[3]+nvertices);
+            faces.push_back(quadTopology[0]+nvertices);
+            faces.push_back(quadTopology[1]+nvertices);
+            faces.push_back(quadTopology[2]+nvertices);
+            faces.push_back(quadTopology[0]+nvertices);
+            faces.push_back(quadTopology[2]+nvertices);
+            faces.push_back(quadTopology[3]+nvertices);
 
+        }
     }
 
 

@@ -1906,7 +1906,7 @@ QList<QVector<QVector3D> > InputSketch::getOpenContoursPoints() {
                 }
             }
 
-            for (int l = 0; l < layerDifference * 10; l++){ // i < 200
+            for (int l = 0; l < 100; l++){ // i < 200
                 chaikinOnZ (openContour3DPoints);
             }
 
@@ -1938,20 +1938,24 @@ QVector<QVector3D> InputSketch::getClosedContoursNormals() {
     return normalsFor3Ddisks;
 }
 
-QVector<QVector3D> InputSketch::getStripesPoints () {
+QList<QVector<QVector3D>> InputSketch::getStripesPoints () {
 
 
-    QVector<QVector3D> pointsFor3D, stripeContour3DPoints;
+    QList<QVector<QVector3D>>stripesPointsFor3D;
+
     if (!stripeContourList.isEmpty()) {
 
         QPolygonF quad;
-        QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
+
         QVector<QVector3D> quadMesh;
 
         //int depthdiff = QInputDialog::getInt(nullptr, "Depth Difference STRIPE", "Layering difference in depth STRIPE");
         //int depthdiff = layerDifference;
 
         for (int i = 0 ; i <  stripeContourList.size(); i++) {
+
+            QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
+            QVector<QVector3D> pointsFor3D;
 
             for (int j = 0 ; j <  stripeContourList[i].size(); j++) {
 
@@ -1969,23 +1973,24 @@ QVector<QVector3D> InputSketch::getStripesPoints () {
                     pointsfor3Dright.append(p);
                 }
             }
+
+            for (int i = 0; i < 200; i++){ // i < 200
+                chaikinOnZ (pointsfor3Dleft);
+            }
+
+            for (int i = 0; i < 200; i++){ // i < 200
+                chaikinOnZ (pointsfor3Dright);
+            }
+            pointsFor3D.append(pointsfor3Dleft);
+            pointsFor3D.append(pointsfor3Dright);
+            stripesPointsFor3D.append(pointsFor3D);
         }
 
-        for (int i = 0; i < 200; i++){ // i < 200
-            chaikinOnZ (pointsfor3Dleft);
-        }
-
-        for (int i = 0; i < 200; i++){ // i < 200
-            chaikinOnZ (pointsfor3Dright);
-        }
-
-        pointsFor3D.append(pointsfor3Dleft);
-        pointsFor3D.append(pointsfor3Dright);
 
 
     }
 
-    return pointsFor3D;
+    return stripesPointsFor3D;
 }
 
 

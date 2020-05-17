@@ -32,7 +32,7 @@ public:
    // void viewStripe();
     void viewOpenContours3D(const QList<QVector<QVector3D>> points3D);
     void viewClosedContours3D(const QVector<QVector3D> points3D,  const QVector<QVector3D> normals3D);
-    void viewStripes3D(const QVector<QVector3D> points3D);
+    void viewStripes3D(const QList<QVector<QVector3D>> points3D);
 
     QVector<QVector3D> createCylinder(int steps, QVector3D base, QVector3D top);
     QVector<QVector3D> createDisk(int steps, QVector3D base, QVector3D top);
@@ -44,7 +44,7 @@ public:
 
     void exportOpenContours3D(const QList<QVector<QVector3D>> points3D);
     void exportClosedContours3D(const QVector<QVector3D> points3D,  const QVector<QVector3D> normals3D);
-    void exportStripes3D(const QVector<QVector3D> points3D);
+    void exportStripes3D(const QList<QVector<QVector3D>> points3D);
 
 public slots:
 
