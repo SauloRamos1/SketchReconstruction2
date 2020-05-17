@@ -42,6 +42,10 @@ public:
     void clearTriangles();
     void render();
 
+    void exportOpenContours3D(const QList<QVector<QVector3D>> points3D);
+    void exportClosedContours3D(const QVector<QVector3D> points3D,  const QVector<QVector3D> normals3D);
+    void exportStripes3D(const QVector<QVector3D> points3D);
+
 public slots:
 
 protected:
@@ -66,14 +70,11 @@ private:
     std::vector< float > vertices, normals;
     std::vector< unsigned int > faces;
 
-    std::vector< float > OCvertices, OCnormals;
-    std::vector< unsigned int > OCfaces;
+
     std::vector< float > CCvertices, CCnormals;
     std::vector< unsigned int > CCfaces;
     std::vector< float > Svertices, Snormals;
     std::vector< unsigned int > Sfaces;
-
-
 
 
     bool getMesh(std::vector<float> &vertex_coordinates,

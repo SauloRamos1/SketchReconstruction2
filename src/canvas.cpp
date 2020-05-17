@@ -288,6 +288,32 @@ void Canvas::exportView(){
 
 }
 
+void Canvas::exportMesh(){
+
+    if (glmediator == nullptr) return;
+
+    if (!scene->isOpenContoursEmpty()){
+
+        glmediator->exportOpenContours3D(scene->getOpenContoursPoints());
+
+    }
+
+    if (!scene->isClosedContoursEmpty()){
+
+        //glmediator->exportClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
+
+    }
+
+    if (!scene->isStripeContoursEmpty()){
+
+        //glmediator->exportStripes3D(scene->getStripes());
+
+    }
+
+
+
+}
+
 void Canvas::showLabels(const int checked)
 {
     if (checked == 0){

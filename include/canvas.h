@@ -69,6 +69,7 @@ protected:
 
 
         void exportView();
+        void exportMesh();
 
         void showLabels (const int checked);
 

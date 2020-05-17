@@ -353,6 +353,7 @@ void MainWindow::createCanvas1Actions (){
     //    connect( ac_showNormals.get(), &QAction::toggled, canvas2.get(), &Canvas2::showNormals );
 
     connect( ac_exportView.get(), &QAction::triggered, canvas.get(), &Canvas::exportView);
+    connect( ac_exportMesh.get(), &QAction::triggered, canvas.get(), &Canvas::exportMesh);
 
     connect( canvas.get(), &Canvas::updateLayerListSignal, this, &MainWindow::updateLayerList);
     //connect (layerDepthList, SIGNAL (itemDoubleClicked(QListWidgetItem*)), this, SLOT (adjustDepth(QListWidgetItem *)));
