@@ -324,6 +324,8 @@ private:
 
     void receiveSelectedPath (const QPainterPath &path, const QString &name, const int &lineLevel) ;
 
+    void updateSelectedPath(const int &contourNumber, const QPainterPath &path, const QString &name, const int &lineLevel);
+
 
     void RotationalBlendingSurface (const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr);
 

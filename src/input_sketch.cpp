@@ -263,6 +263,8 @@ bool InputSketch::saveClosedContour (){
 
     curve3D.attachClosedContour = closedContourIntersects;
     closedContourIntersects = -1;
+    curve3D.maior_z = 0;
+
 
     receiveSelectedPath(curve3D.contour, curve3D.name, curve3D.level);
 
@@ -274,7 +276,7 @@ bool InputSketch::saveClosedContour (){
 //USE IT FOR SVG and SKETCHING
 QPainterPath InputSketch::closePath (QPainterPath pathToBeClosed){
 
-    if ( almostEqual( pathToBeClosed.pointAtPercent(0),pathToBeClosed.pointAtPercent(1) ) ){
+    if (  pathToBeClosed.pointAtPercent(0) == pathToBeClosed.pointAtPercent(1) ){
 
         return pathToBeClosed;
 
@@ -446,6 +448,77 @@ void InputSketch::receiveSelectedPath (const QPainterPath &path, const QString &
     t.contour = path;
 
     allShapesSampledPoints.push_back(t);
+
+
+    //RotationalBlendingSurface(i, paths[i], t.ql, t.qr);
+    //update();
+
+}
+
+void InputSketch::updateSelectedPath (const int &contourNumber, const QPainterPath &path, const QString &name, const int &lineLevel) {
+
+    QVector<QPointF> sampledPointsOnCurve;
+    QVector<qreal> angleAtSampledPoint;
+
+    allSampledPoints t = allSampledPoints();
+    float contourSamplingStep = 5.0f;
+    //float contourSamplingStep = 0.5f;
+
+
+    for (qreal j = 0; j < path.length(); j = j + contourSamplingStep) {
+
+        sampledPointsOnCurve.push_back(path.pointAtPercent(path.percentAtLength(j)));
+        angleAtSampledPoint.push_back(path.angleAtPercent(path.percentAtLength(j)));
+
+    }
+
+
+    for (int j = 0; j < sampledPointsOnCurve.size()/2 ; j++) {
+
+        QVector3D temp_ql(sampledPointsOnCurve[j].x(),sampledPointsOnCurve[j].y(), (lineLevel));
+        qreal temp_angleql(angleAtSampledPoint[j]);
+
+        QVector3D temp_qr(sampledPointsOnCurve[sampledPointsOnCurve.size()-1-j].x(),sampledPointsOnCurve[sampledPointsOnCurve.size()-1-j].y(), (lineLevel));
+        qreal temp_angleqr(angleAtSampledPoint[angleAtSampledPoint.size()-1-j]);
+
+        t.ql.push_back(temp_ql);
+        t.anglesql.push_back(temp_angleql);
+        t.qr.push_back(temp_qr);
+        t.anglesqr.push_back(temp_angleqr);
+
+    }
+
+//    for (int j = 0; j < t.ql.size(); ++j) {
+
+//        if (j == 0){
+//            lastmidPointsPath.moveTo(((t.ql[j] + t.qr[j]) / 2).x(), ((t.ql[j] + t.qr[j]) / 2).y());
+//        } else {
+//            lastmidPointsPath.lineTo(((t.ql[j] + t.qr[j]) / 2).x(), ((t.ql[j] + t.qr[j]) / 2).y());
+//        }
+//    }
+
+    //findSymmetricalMedialAxis(pathList[i], t.ql, t.qr);
+
+    QPainterPath midPointsPath;
+    for (int j = 0; j < t.ql.size(); ++j) {
+
+        t.midPoints.push_back((t.ql[j] + t.qr[j]) / 2);
+
+        if (j == 0){
+            midPointsPath.moveTo(t.midPoints[0].x(), t.midPoints[0].y());
+        } else {
+            midPointsPath.lineTo(t.midPoints[j].x(), t.midPoints[j].y());
+        }
+    }
+
+    t.midPointsPath = midPointsPath;
+    t.name = name;
+    t.contour = QPainterPath();
+    t.contour = path;
+
+    allShapesSampledPoints[contourNumber] = allSampledPoints();
+
+    allShapesSampledPoints[contourNumber] = t;
 
 
     //RotationalBlendingSurface(i, paths[i], t.ql, t.qr);
@@ -648,42 +721,42 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
     //Export PLY
 
-    std::string outFile3 = "Closed";
-    outFile3.append(std::to_string(i));
-    outFile3.append(".ply");
-    std::ofstream fOut1;
+//    std::string outFile3 = "Closed";
+//    outFile3.append(std::to_string(i));
+//    outFile3.append(".ply");
+//    std::ofstream fOut1;
 
-    fOut1.open(outFile3.c_str());
-
-
-    fOut1 << "ply" <<std::endl;
-    fOut1 << "format ascii 1.0" << std::endl;
-    fOut1 << "element vertex " << npoints <<  std::endl;
-
-    fOut1 << "property float x" << std::endl;
-    fOut1 << "property float y" << std::endl;
-    fOut1 << "property float z" << std::endl;
-
-    fOut1 << "element face " << topology.size() << std::endl;
-
-    fOut1 << "property list uchar uint vertex" << std::endl;
-
-    fOut1 << "end_header" << std::endl;
-
-    for (int l = 0; l < allShapesSampledPoints[i].shapePoints.size(); ++l) {
-        for (int m = 0; m < allShapesSampledPoints[i].shapePoints[l].size(); ++m) {
-
-            fOut << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
-
-        }
-    }
+//    fOut1.open(outFile3.c_str());
 
 
-    for (int m = 0; m < topology.size(); m++) {
-        fOut1 << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
-    }
+//    fOut1 << "ply" <<std::endl;
+//    fOut1 << "format ascii 1.0" << std::endl;
+//    fOut1 << "element vertex " << npoints <<  std::endl;
 
-    fOut1.close();
+//    fOut1 << "property float x" << std::endl;
+//    fOut1 << "property float y" << std::endl;
+//    fOut1 << "property float z" << std::endl;
+
+//    fOut1 << "element face " << topology.size() << std::endl;
+
+//    fOut1 << "property list uchar uint vertex" << std::endl;
+
+//    fOut1 << "end_header" << std::endl;
+
+//    for (int l = 0; l < allShapesSampledPoints[i].shapePoints.size(); ++l) {
+//        for (int m = 0; m < allShapesSampledPoints[i].shapePoints[l].size(); ++m) {
+
+//            fOut << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
+
+//        }
+//    }
+
+
+//    for (int m = 0; m < topology.size(); m++) {
+//        fOut1 << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
+//    }
+
+//    fOut1.close();
 
 
 
@@ -1671,14 +1744,10 @@ void InputSketch::joinPaths()
                     closePath(closedContourList[i].contour);
 
                     smoothPath(closedContourList[i].contour);
-                    allShapesSampledPoints.remove(i);
+                    //allShapesSampledPoints.remove(i);
 
-                    receiveSelectedPath(closedContourList[i].contour,closedContourList[i].name, closedContourList[i].level );
+                    updateSelectedPath(i, closedContourList[i].contour,closedContourList[i].name, closedContourList[i].level );
                     oversketchingCurve = QPainterPath();
-
-
-
-
 
                 } else {
 
