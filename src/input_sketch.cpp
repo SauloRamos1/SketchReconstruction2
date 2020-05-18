@@ -274,9 +274,9 @@ bool InputSketch::saveClosedContour (){
 }
 
 //USE IT FOR SVG and SKETCHING
-QPainterPath InputSketch::closePath (QPainterPath pathToBeClosed){
+QPainterPath InputSketch::closePath (QPainterPath &pathToBeClosed){
 
-    if (  pathToBeClosed.pointAtPercent(0) == pathToBeClosed.pointAtPercent(1) ){
+    if ( almostEqual(pathToBeClosed.pointAtPercent(0),  pathToBeClosed.pointAtPercent(1)) ){
 
         return pathToBeClosed;
 
@@ -313,7 +313,10 @@ QPainterPath InputSketch::closePath (QPainterPath pathToBeClosed){
 
         finalClosedContour.addPath(pathThatClosesContour);
 
-        return finalClosedContour;
+        pathToBeClosed = QPainterPath();
+        pathToBeClosed = finalClosedContour;
+
+        return pathToBeClosed;
 
     }
 
@@ -1478,6 +1481,9 @@ bool InputSketch::crossSelection(){
                 //                    //levelList.removeAt(i);
                 //                }
 
+                closePath(closedContourFromSVG.contour);
+                smoothPath(closedContourFromSVG.contour);
+
                 receiveSelectedPath(closedContourFromSVG.contour, closedContourFromSVG.name, closedContourFromSVG.level);
 
                 closedContourList.append(closedContourFromSVG);
@@ -1510,7 +1516,7 @@ void InputSketch::cropSelection(){
 
         QPointF pos = curve.pointAtPercent(curve.percentAtLength(i));
 
-        QRectF brushRectSelect(pos.x()-3,pos.y()-3,10,10);
+        QRectF brushRectSelect(pos.x()-3,pos.y()-3,6,6);
 
         rectList.append(brushRectSelect);
 
@@ -2261,7 +2267,8 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
             if (color){
 
-                painter->setOpacity( 1 /static_cast<qreal>(closedContourList.size()));
+                //painter->setOpacity( 1 /static_cast<qreal>(closedContourList.size()));
+                painter->setOpacity( 1 / numberOfLayers);
                 painter->fillPath(closedContourList[i].contour, QColor(shapeColorMap[closedContourList[i].level-1].x(), shapeColorMap[closedContourList[i].level-1].y(), shapeColorMap[closedContourList[i].level-1].z()));
             }
 
@@ -2499,7 +2506,9 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
                         if (color){
 
-                            painter->setOpacity( 1 /static_cast<qreal>(closedContourList.size()));
+                            //painter->setOpacity( 1 /static_cast<qreal>(closedContourList.size()));
+                            //painter->setOpacity( 1 / numberOfLayers);
+                            painter->setOpacity(0.5);
                             painter->fillPath(closedContourList[i].contour, QColor(shapeColorMap[closedContourList[i].level-1].x(), shapeColorMap[closedContourList[i].level-1].y(), shapeColorMap[closedContourList[i].level-1].z()));
                         }
 

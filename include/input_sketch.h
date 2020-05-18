@@ -104,7 +104,7 @@ public:
     void increaseStripeContourLevelWhileDrawing();
     void decreaseStripeContourLevelWhileDrawing();
 
-    QPainterPath closePath(QPainterPath pathToBeClosed);
+    QPainterPath closePath(QPainterPath &pathToBeClosed);
     QPainterPath closeSVGSegments(const QVector<QPainterPath> &pathsToClose);
 
     QList<QVector<QVector3D>> getOpenContoursPoints();
