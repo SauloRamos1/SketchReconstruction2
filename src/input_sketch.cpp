@@ -1482,11 +1482,20 @@ bool InputSketch::crossSelection(){
                 //                }
 
                 closePath(closedContourFromSVG.contour);
-                smoothPath(closedContourFromSVG.contour);
+
+                //prepareGeometryChange();
+                QPolygonF current_sketch;
+                for (int j = 0; j < closedContourFromSVG.contour.toSubpathPolygons().size(); j++) {
+                    current_sketch << closedContourFromSVG.contour.toSubpathPolygons().at(j);
+                }
+
+                closedContourFromSVG.contour = QPainterPath();
+                closedContourFromSVG.contour.addPolygon(current_sketch);
 
                 receiveSelectedPath(closedContourFromSVG.contour, closedContourFromSVG.name, closedContourFromSVG.level);
 
                 closedContourList.append(closedContourFromSVG);
+
                 curve = QPainterPath();
                 return true;
             }
@@ -1494,6 +1503,8 @@ bool InputSketch::crossSelection(){
     }
     curve = QPainterPath();
     return false;
+
+    update();
 
 
 }
@@ -1734,9 +1745,9 @@ void InputSketch::joinPaths()
                     new_sketch << oversketchingCurve.toSubpathPolygons().at(j);
                 }
 
-                smoothPath(oversketchingCurve);
-                smoothPath(oversketchingCurve);
-                smoothPath(oversketchingCurve);
+//                smoothPath(oversketchingCurve);
+//                smoothPath(oversketchingCurve);
+//                smoothPath(oversketchingCurve);
 
                 bool changed = SketchLibrary::overSketch( current_sketch, new_sketch );
                 //Means that an oversketch happened
@@ -2268,7 +2279,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
             if (color){
 
                 //painter->setOpacity( 1 /static_cast<qreal>(closedContourList.size()));
-                painter->setOpacity( 1 / numberOfLayers);
+                painter->setOpacity(0.5);
                 painter->fillPath(closedContourList[i].contour, QColor(shapeColorMap[closedContourList[i].level-1].x(), shapeColorMap[closedContourList[i].level-1].y(), shapeColorMap[closedContourList[i].level-1].z()));
             }
 
@@ -2510,6 +2521,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                             //painter->setOpacity( 1 / numberOfLayers);
                             painter->setOpacity(0.5);
                             painter->fillPath(closedContourList[i].contour, QColor(shapeColorMap[closedContourList[i].level-1].x(), shapeColorMap[closedContourList[i].level-1].y(), shapeColorMap[closedContourList[i].level-1].z()));
+
                         }
 
                         if (hatching){
@@ -2753,9 +2765,9 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
             if (absAngle > 28 && absAngle < 32){
                 //if (painter->opacity() > 0.18 && painter->opacity() < 0.2){
 
-                qDebug () << poly.angleAtPercent(0);
-                qDebug () << painter->opacity();
-                qDebug () << last2pointsAngle - poly.angleAtPercent(0);
+//                qDebug () << poly.angleAtPercent(0);
+//                qDebug () << painter->opacity();
+//                qDebug () << last2pointsAngle - poly.angleAtPercent(0);
 
                 painter->setOpacity(0.5);
 
