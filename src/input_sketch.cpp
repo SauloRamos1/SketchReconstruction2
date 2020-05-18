@@ -1553,12 +1553,19 @@ void InputSketch::cropSelection(){
     closedContourFromSVG.name = name;
     names.append(name);
 
+    QPolygonF current_sketch;
+    for (int j = 0; j < closedContourFromSVG.contour.toSubpathPolygons().size(); j++) {
+        current_sketch << closedContourFromSVG.contour.toSubpathPolygons().at(j);
+    }
 
     smoothPath(closedContourFromSVG.contour);
 
-    receiveSelectedPath(closedContourFromSVG.contour, closedContourFromSVG.name, closedContourFromSVG.level);
-    closedContourList.append(closedContourFromSVG);
+    closedContourFromSVG.contour = QPainterPath();
+    closedContourFromSVG.contour.addPolygon(current_sketch);
 
+    receiveSelectedPath(closedContourFromSVG.contour, closedContourFromSVG.name, closedContourFromSVG.level);
+
+    closedContourList.append(closedContourFromSVG);
 
     curve = QPainterPath();
 }
