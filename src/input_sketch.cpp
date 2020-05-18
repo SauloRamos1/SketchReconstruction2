@@ -1588,6 +1588,7 @@ int InputSketch::eraseSelection(){
             closedContourList.removeAt(i);
             selectedClosedContour = count;
             lastSelected = 1;
+            allShapesSampledPoints.removeAt(i);
             curve = QPainterPath();
             return 1;
         }
@@ -1947,19 +1948,22 @@ void InputSketch::smooth() {
 
             if (selectedClosedContour == i){
 
-                path.moveTo(closedContourList[i].contour.pointAtPercent(0));
+//                path.moveTo(closedContourList[i].contour.pointAtPercent(0));
 
-                for (double k = 0.5; k < closedContourList[i].contour.length(); k = k + 0.5){
-                    path.lineTo(closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)));
-                }
+//                for (double k = 0.5; k < closedContourList[i].contour.length(); k = k + 0.5){
+//                    path.lineTo(closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)));
+//                }
 
-                smoothPath(path);
-                smoothPath(path);
-                smoothPath(path);
+                smoothPath(closedContourList[i].contour);
+                smoothPath(closedContourList[i].contour);
+                smoothPath(closedContourList[i].contour);
 
-                closedContourList[i].contour = QPainterPath();
-                closedContourList[i].contour = path;
-                samplePointsForRotationalBlendingSurface(path);
+                //closedContourList[i].contour = QPainterPath();
+                //closedContourList[i].contour = path;
+
+                updateSelectedPath(selectedClosedContour, closedContourList[i].contour, closedContourList[i].name, closedContourList[i].level);
+
+                //samplePointsForRotationalBlendingSurface(path);
 
             }
         }
