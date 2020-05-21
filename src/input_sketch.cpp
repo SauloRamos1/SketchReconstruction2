@@ -1372,20 +1372,20 @@ void InputSketch::updateColorMap(){
     for (int i = 0; i < numberOfLayers ; i++){
 
         if (numberOfLayers == 1){
-            ratio = 0;
+            ratio = 1;
         } else {
-            ratio = (  static_cast<float>(i) /static_cast<float>((numberOfLayers - 1)));
+            ratio = 1 - (  static_cast<float>(i) /static_cast<float>((numberOfLayers - 1)));
         }
 
-        ratio = ratio;
+       // ratio = 1 - ratio;
 
         // qDebug () << "ratio: " << ratio;
 
         //ratio should go from 0 to 1?
 
-        float red = (ratio*startRedVal + (ratio)*endRedValue);
-        float green = (ratio*startGreenVal + (ratio)*endGreenValue);
-        float blue = (ratio*startBlueVal + (ratio)*endBlueValue);
+        float red = (ratio*startRedVal + (1-ratio)*endRedValue);
+        float green = (ratio*startGreenVal + (1-ratio)*endGreenValue);
+        float blue = (ratio*startBlueVal + (1-ratio)*endBlueValue);
         QVector3D color(red,green,blue);
         lineColorMap.append(color);
     }
@@ -1401,13 +1401,31 @@ void InputSketch::updateColorMap(){
 
     for (int i = 0; i < numberOfLayers ; i++){
 
+//        if (numberOfLayers == 1){
+//            ratio = 0;
+//        } else {
+//            ratio = (  static_cast<float>(i) /static_cast<float>((numberOfLayers - 1)));
+//        }
+
+//        ratio = 1 - ratio;
+
+//        // qDebug () << "ratio: " << ratio;
+
+//        //ratio should go from 0 to 1?
+
+//        float red = (ratio*startRedVal + (1-ratio)*endRedValue);
+//        float green = (ratio*startGreenVal + (1-ratio)*endGreenValue);
+//        float blue = (ratio*startBlueVal + (1-ratio)*endBlueValue);
+//        QVector3D color(red,green,blue);
+//        shapeColorMap.append(color);
+
         if (numberOfLayers == 1){
-            ratio = 0;
+            ratio = 1;
         } else {
-            ratio = (  static_cast<float>(i) /static_cast<float>((numberOfLayers - 1)));
+            ratio = 1 - (  static_cast<float>(i) /static_cast<float>((numberOfLayers - 1)));
         }
 
-        ratio = 1 - ratio;
+        //ratio = 1 - ratio;
 
         // qDebug () << "ratio: " << ratio;
 
