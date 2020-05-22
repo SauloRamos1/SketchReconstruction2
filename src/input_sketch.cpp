@@ -491,14 +491,14 @@ void InputSketch::updateSelectedPath (const int &contourNumber, const QPainterPa
 
     }
 
-//    for (int j = 0; j < t.ql.size(); ++j) {
+    //    for (int j = 0; j < t.ql.size(); ++j) {
 
-//        if (j == 0){
-//            lastmidPointsPath.moveTo(((t.ql[j] + t.qr[j]) / 2).x(), ((t.ql[j] + t.qr[j]) / 2).y());
-//        } else {
-//            lastmidPointsPath.lineTo(((t.ql[j] + t.qr[j]) / 2).x(), ((t.ql[j] + t.qr[j]) / 2).y());
-//        }
-//    }
+    //        if (j == 0){
+    //            lastmidPointsPath.moveTo(((t.ql[j] + t.qr[j]) / 2).x(), ((t.ql[j] + t.qr[j]) / 2).y());
+    //        } else {
+    //            lastmidPointsPath.lineTo(((t.ql[j] + t.qr[j]) / 2).x(), ((t.ql[j] + t.qr[j]) / 2).y());
+    //        }
+    //    }
 
     //findSymmetricalMedialAxis(pathList[i], t.ql, t.qr);
 
@@ -724,42 +724,42 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
     //Export PLY
 
-//    std::string outFile3 = "Closed";
-//    outFile3.append(std::to_string(i));
-//    outFile3.append(".ply");
-//    std::ofstream fOut1;
+    //    std::string outFile3 = "Closed";
+    //    outFile3.append(std::to_string(i));
+    //    outFile3.append(".ply");
+    //    std::ofstream fOut1;
 
-//    fOut1.open(outFile3.c_str());
-
-
-//    fOut1 << "ply" <<std::endl;
-//    fOut1 << "format ascii 1.0" << std::endl;
-//    fOut1 << "element vertex " << npoints <<  std::endl;
-
-//    fOut1 << "property float x" << std::endl;
-//    fOut1 << "property float y" << std::endl;
-//    fOut1 << "property float z" << std::endl;
-
-//    fOut1 << "element face " << topology.size() << std::endl;
-
-//    fOut1 << "property list uchar uint vertex" << std::endl;
-
-//    fOut1 << "end_header" << std::endl;
-
-//    for (int l = 0; l < allShapesSampledPoints[i].shapePoints.size(); ++l) {
-//        for (int m = 0; m < allShapesSampledPoints[i].shapePoints[l].size(); ++m) {
-
-//            fOut << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
-
-//        }
-//    }
+    //    fOut1.open(outFile3.c_str());
 
 
-//    for (int m = 0; m < topology.size(); m++) {
-//        fOut1 << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
-//    }
+    //    fOut1 << "ply" <<std::endl;
+    //    fOut1 << "format ascii 1.0" << std::endl;
+    //    fOut1 << "element vertex " << npoints <<  std::endl;
 
-//    fOut1.close();
+    //    fOut1 << "property float x" << std::endl;
+    //    fOut1 << "property float y" << std::endl;
+    //    fOut1 << "property float z" << std::endl;
+
+    //    fOut1 << "element face " << topology.size() << std::endl;
+
+    //    fOut1 << "property list uchar uint vertex" << std::endl;
+
+    //    fOut1 << "end_header" << std::endl;
+
+    //    for (int l = 0; l < allShapesSampledPoints[i].shapePoints.size(); ++l) {
+    //        for (int m = 0; m < allShapesSampledPoints[i].shapePoints[l].size(); ++m) {
+
+    //            fOut << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
+
+    //        }
+    //    }
+
+
+    //    for (int m = 0; m < topology.size(); m++) {
+    //        fOut1 << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
+    //    }
+
+    //    fOut1.close();
 
 
 
@@ -1377,7 +1377,7 @@ void InputSketch::updateColorMap(){
             ratio = 1 - (  static_cast<float>(i) /static_cast<float>((numberOfLayers - 1)));
         }
 
-       // ratio = 1 - ratio;
+        // ratio = 1 - ratio;
 
         // qDebug () << "ratio: " << ratio;
 
@@ -1401,23 +1401,23 @@ void InputSketch::updateColorMap(){
 
     for (int i = 0; i < numberOfLayers ; i++){
 
-//        if (numberOfLayers == 1){
-//            ratio = 0;
-//        } else {
-//            ratio = (  static_cast<float>(i) /static_cast<float>((numberOfLayers - 1)));
-//        }
+        //        if (numberOfLayers == 1){
+        //            ratio = 0;
+        //        } else {
+        //            ratio = (  static_cast<float>(i) /static_cast<float>((numberOfLayers - 1)));
+        //        }
 
-//        ratio = 1 - ratio;
+        //        ratio = 1 - ratio;
 
-//        // qDebug () << "ratio: " << ratio;
+        //        // qDebug () << "ratio: " << ratio;
 
-//        //ratio should go from 0 to 1?
+        //        //ratio should go from 0 to 1?
 
-//        float red = (ratio*startRedVal + (1-ratio)*endRedValue);
-//        float green = (ratio*startGreenVal + (1-ratio)*endGreenValue);
-//        float blue = (ratio*startBlueVal + (1-ratio)*endBlueValue);
-//        QVector3D color(red,green,blue);
-//        shapeColorMap.append(color);
+        //        float red = (ratio*startRedVal + (1-ratio)*endRedValue);
+        //        float green = (ratio*startGreenVal + (1-ratio)*endGreenValue);
+        //        float blue = (ratio*startBlueVal + (1-ratio)*endBlueValue);
+        //        QVector3D color(red,green,blue);
+        //        shapeColorMap.append(color);
 
         if (numberOfLayers == 1){
             ratio = 1;
@@ -1770,9 +1770,9 @@ void InputSketch::joinPaths()
                     new_sketch << oversketchingCurve.toSubpathPolygons().at(j);
                 }
 
-//                smoothPath(oversketchingCurve);
-//                smoothPath(oversketchingCurve);
-//                smoothPath(oversketchingCurve);
+                //                smoothPath(oversketchingCurve);
+                //                smoothPath(oversketchingCurve);
+                //                smoothPath(oversketchingCurve);
 
                 bool changed = SketchLibrary::overSketch( current_sketch, new_sketch );
                 //Means that an oversketch happened
@@ -1990,11 +1990,11 @@ void InputSketch::smooth() {
 
             if (selectedClosedContour == i){
 
-//                path.moveTo(closedContourList[i].contour.pointAtPercent(0));
+                //                path.moveTo(closedContourList[i].contour.pointAtPercent(0));
 
-//                for (double k = 0.5; k < closedContourList[i].contour.length(); k = k + 0.5){
-//                    path.lineTo(closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)));
-//                }
+                //                for (double k = 0.5; k < closedContourList[i].contour.length(); k = k + 0.5){
+                //                    path.lineTo(closedContourList[i].contour.pointAtPercent(closedContourList[i].contour.percentAtLength(k)));
+                //                }
 
                 smoothPath(closedContourList[i].contour);
                 smoothPath(closedContourList[i].contour);
@@ -2121,7 +2121,7 @@ QList<QVector<QVector3D> > InputSketch::getOpenContoursPoints() {
                 }
             }
 
-            for (int l = 0; l < 100; l++){ // i < 200
+            for (int l = 0; l < 200; l++){ // i < 200
                 chaikinOnZ (openContour3DPoints);
             }
 
@@ -2189,11 +2189,11 @@ QList<QVector<QVector3D>> InputSketch::getStripesPoints () {
                 }
             }
 
-            for (int i = 0; i < 200; i++){ // i < 200
+            for (int i = 0; i < 100; i++){ // i < 200
                 chaikinOnZ (pointsfor3Dleft);
             }
 
-            for (int i = 0; i < 200; i++){ // i < 200
+            for (int i = 0; i < 100; i++){ // i < 200
                 chaikinOnZ (pointsfor3Dright);
             }
             pointsFor3D.append(pointsfor3Dleft);
@@ -2669,23 +2669,95 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
             painter->setOpacity(0.5);
             painter->setPen(QPen(QColor(Qt::black),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
 
-            QVector3D triangleNormal;
+            for (int i = 0 ; i <  stripeContourList.size(); i++) {
 
-            for (int m = 0; m < triangleMesh.size(); m = m + 3) {
+                QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
+                QVector<QVector3D> pointsFor3D;
 
-                triangleNormal = QVector3D::crossProduct(triangleMesh[m] - triangleMesh[m+1],triangleMesh[m+1] - triangleMesh[m+2]);
+                for (int j = 0 ; j <  stripeContourList[i].size(); j++) {
 
-                triangleNormal.normalize();
+                    float aspectratio = stripeContourList[i][j].rightLine.length() / stripeContourList[i][j].leftLine.length();
 
-                if (triangleNormal.z() > 0) {
-                    painter->setOpacity(0.3);
-                    painter->setPen(QPen(QColor(Qt::red),1,Qt::SolidLine));
-                    //painter->setPen(QPen(QColor(Qt::red),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                } else {
-                    painter->setOpacity(0.3);
-                    painter->setPen(QPen(QColor(Qt::blue),1,Qt::SolidLine));
-                    //painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                    for (int k = 0; k < stripeContourList[i][j].leftLine.length(); k++){
+                        QVector3D p(stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).x(), stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).y(), depthLevelList[stripeContourList[i][j].level-1]);
+
+                        pointsfor3Dleft.append(p);
+                    }
+
+                    for (float k = 0; k < stripeContourList[i][j].rightLine.length(); k = k + aspectratio){
+                        QVector3D p(stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).x(), stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).y(), depthLevelList[stripeContourList[i][j].level-1]);
+
+                        pointsfor3Dright.append(p);
+                    }
                 }
+
+                for (int i = 0; i < 100; i++){ // i < 200
+                    chaikinOnZ (pointsfor3Dleft);
+                }
+
+                for (int i = 0; i < 100; i++){ // i < 200
+                    chaikinOnZ (pointsfor3Dright);
+                }
+                pointsFor3D.append(pointsfor3Dleft);
+                pointsFor3D.append(pointsfor3Dright);
+
+
+                for (int i = 0 ; i < pointsfor3Dleft.size()-1; i++) {
+
+                    QVector3D p(pointsfor3Dleft[i].x(),pointsfor3Dleft[i].y(), pointsfor3Dleft[i].z());
+                    QVector3D q(pointsfor3Dleft[i+1].x(),pointsfor3Dleft[i+1].y(), pointsfor3Dleft[i+1].z());
+                    QVector3D r(pointsfor3Dright[i+1].x(),pointsfor3Dright[i+1].y(), pointsfor3Dright[i+1].z());
+                    QVector3D s(pointsfor3Dright[i].x(),pointsfor3Dright[i].y(), pointsfor3Dright[i].z());
+
+                    //https://stackoverflow.com/questions/9806630/calculating-the-vertex-normals-of-a-quad
+
+                    QVector3D normal =  QVector3D::crossProduct(q - p, r - p);
+                    normal.normalize();
+
+                    if (normal.z() > 0) {
+                        painter->setOpacity(0.3);
+                        painter->setPen(QPen(QColor(Qt::red),1,Qt::SolidLine));
+                        //painter->setPen(QPen(QColor(Qt::red),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                    } else {
+                        painter->setOpacity(0.3);
+                        painter->setPen(QPen(QColor(Qt::blue),1,Qt::SolidLine));
+                        //painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                    }
+                    QPolygonF triangle;
+
+                    triangle << p.toPointF();
+                    triangle << q.toPointF();
+                    triangle << r.toPointF();
+
+                    painter->drawPolygon(triangle);
+
+
+
+                }
+
+
+
+
+
+                //                QVector3D triangleNormal;
+
+                //                for (int m = 0; m < triangleMesh.size(); m = m + 3) {
+
+                //                    triangleNormal = QVector3D::crossProduct(triangleMesh[m] - triangleMesh[m+1],triangleMesh[m+1] - triangleMesh[m+2]);
+
+                //                    triangleNormal.normalize();
+
+                //                    if (triangleNormal.z() > 0) {
+                //                        painter->setOpacity(0.3);
+                //                        painter->setPen(QPen(QColor(Qt::red),1,Qt::SolidLine));
+                //                        //painter->setPen(QPen(QColor(Qt::red),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                //                    } else {
+                //                        painter->setOpacity(0.3);
+                //                        painter->setPen(QPen(QColor(Qt::blue),1,Qt::SolidLine));
+                //                        //painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                //                    }
+
+
 
 
                 //                    if (triangleNormal.z() > 0) {
@@ -2696,16 +2768,16 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                 //                        painter->setOpacity(1);
                 //                        painter->setPen(QPen(QColor(Qt::white),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
                 //                    }
-                QPolygonF triangle;
+                //                    QPolygonF triangle;
 
-                triangle << triangleMesh[m].toPointF();
-                triangle << triangleMesh[m+1].toPointF();
-                triangle << triangleMesh[m+2].toPointF();
+                //                    triangle << triangleMesh[m].toPointF();
+                //                    triangle << triangleMesh[m+1].toPointF();
+                //                    triangle << triangleMesh[m+2].toPointF();
 
-                painter->drawPolygon(triangle);
+                //                    painter->drawPolygon(triangle);
 
 
-                painter->setBrush(Qt::NoBrush);
+                //                    painter->setBrush(Qt::NoBrush);
 
 
 
@@ -2790,9 +2862,9 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
             if (absAngle > 28 && absAngle < 32){
                 //if (painter->opacity() > 0.18 && painter->opacity() < 0.2){
 
-//                qDebug () << poly.angleAtPercent(0);
-//                qDebug () << painter->opacity();
-//                qDebug () << last2pointsAngle - poly.angleAtPercent(0);
+                //                qDebug () << poly.angleAtPercent(0);
+                //                qDebug () << painter->opacity();
+                //                qDebug () << last2pointsAngle - poly.angleAtPercent(0);
 
                 painter->setOpacity(0.5);
 
