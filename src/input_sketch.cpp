@@ -1075,6 +1075,78 @@ void InputSketch::finishBand (){//Finish
     names.append(name);
 
     // qDebug () << stripeContourList.size();
+    //    for (int i = 0 ; i <  stripeContourList.size(); i++) {
+
+    //        QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
+    //        QVector<QVector3D> pointsFor3D;
+
+    //        for (int j = 0 ; j <  stripeContourList[i].size(); j++) {
+
+    //            float aspectratio = stripeContourList[i][j].rightLine.length() / stripeContourList[i][j].leftLine.length();
+
+    //            for (int k = 0; k < stripeContourList[i][j].leftLine.length(); k++){
+    //                QVector3D p(stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).x(), stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).y(), depthLevelList[stripeContourList[i][j].level-1]);
+
+    //                pointsfor3Dleft.append(p);
+    //            }
+
+    //            for (float k = 0; k < stripeContourList[i][j].rightLine.length(); k = k + aspectratio){
+    //                QVector3D p(stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).x(), stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).y(), depthLevelList[stripeContourList[i][j].level-1]);
+
+    //                pointsfor3Dright.append(p);
+    //            }
+    //        }
+
+    //        for (int i = 0; i < 100; i++){ // i < 200
+    //            chaikinOnZ (pointsfor3Dleft);
+    //        }
+
+    //        for (int i = 0; i < 100; i++){ // i < 200
+    //            chaikinOnZ (pointsfor3Dright);
+    //        }
+    //        pointsFor3D.append(pointsfor3Dleft);
+    //        pointsFor3D.append(pointsfor3Dright);
+
+
+    //        for (int i = 0 ; i < pointsfor3Dleft.size()-1; i++) {
+
+    //            QVector3D p(pointsfor3Dleft[i].x(),pointsfor3Dleft[i].y(), pointsfor3Dleft[i].z());
+    //            QVector3D q(pointsfor3Dleft[i+1].x(),pointsfor3Dleft[i+1].y(), pointsfor3Dleft[i+1].z());
+    //            QVector3D r(pointsfor3Dright[i+1].x(),pointsfor3Dright[i+1].y(), pointsfor3Dright[i+1].z());
+    //            QVector3D s(pointsfor3Dright[i].x(),pointsfor3Dright[i].y(), pointsfor3Dright[i].z());
+
+    //            //https://stackoverflow.com/questions/9806630/calculating-the-vertex-normals-of-a-quad
+
+    //            QVector3D normal =  QVector3D::crossProduct(q - p, r - p);
+    //            normal.normalize();
+
+    //            if (normal.z() > 0) {
+    //              //  painter->setOpacity(0.3);
+    //               // painter->setPen(QPen(QColor(Qt::red),1,Qt::SolidLine));
+    //                //painter->setPen(QPen(QColor(Qt::red),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+    //            } else {
+    //              //  painter->setOpacity(0.3);
+    //              //  painter->setPen(QPen(QColor(Qt::blue),1,Qt::SolidLine));
+    //                //painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
+    //            }
+    //            QPolygonF triangle;
+
+    //            triangle << p.toPointF();
+    //            triangle << q.toPointF();
+    //            triangle << r.toPointF();
+
+    //            //painter->drawPolygon(triangle);
+
+
+
+    //        }
+
+
+
+
+
+
+    //    }
 }
 
 
@@ -2655,11 +2727,27 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
                     if (stripeContourList[i][j].level == h) {
 
+                        painter->setOpacity(0.5);
+                        painter->setPen(QPen(QColor(Qt::white),stripeContourList[i][j].level+16,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(stripeContourList[i][j].leftLine);
+                        painter->setOpacity(1);
+                        painter->setPen(QPen(QColor(Qt::white),stripeContourList[i][j].level+9,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(stripeContourList[i][j].leftLine);
+                        painter->setOpacity(0.5);
+                        painter->setPen(QPen(QColor(Qt::white),stripeContourList[i][j].level+16,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(stripeContourList[i][j].rightLine);
+                        painter->setOpacity(1);
+                        painter->setPen(QPen(QColor(Qt::white),stripeContourList[i][j].level+9,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(stripeContourList[i][j].rightLine);
+
                         painter->setPen(QPen(QColor(Qt::blue),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
                         painter->drawPath(stripeContourList[i][j].leftLine);
                         painter->setPen(QPen(QColor(Qt::red),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
                         painter->drawPath(stripeContourList[i][j].rightLine);
                         painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+
+
+
                         if (showLabels) painter->drawText(stripeContourList[i][j].leftLine.elementAt(0).x + 10, stripeContourList[i][j].leftLine.elementAt(0).y, stripeContourList[i][j].name);
                     }
                 }
@@ -2669,148 +2757,9 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
             painter->setOpacity(0.5);
             painter->setPen(QPen(QColor(Qt::black),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
 
-            for (int i = 0 ; i <  stripeContourList.size(); i++) {
-
-                QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
-                QVector<QVector3D> pointsFor3D;
-
-                for (int j = 0 ; j <  stripeContourList[i].size(); j++) {
-
-                    float aspectratio = stripeContourList[i][j].rightLine.length() / stripeContourList[i][j].leftLine.length();
-
-                    for (int k = 0; k < stripeContourList[i][j].leftLine.length(); k++){
-                        QVector3D p(stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).x(), stripeContourList[i][j].leftLine.pointAtPercent(stripeContourList[i][j].leftLine.percentAtLength(k)).y(), depthLevelList[stripeContourList[i][j].level-1]);
-
-                        pointsfor3Dleft.append(p);
-                    }
-
-                    for (float k = 0; k < stripeContourList[i][j].rightLine.length(); k = k + aspectratio){
-                        QVector3D p(stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).x(), stripeContourList[i][j].rightLine.pointAtPercent(stripeContourList[i][j].rightLine.percentAtLength(k)).y(), depthLevelList[stripeContourList[i][j].level-1]);
-
-                        pointsfor3Dright.append(p);
-                    }
-                }
-
-                for (int i = 0; i < 100; i++){ // i < 200
-                    chaikinOnZ (pointsfor3Dleft);
-                }
-
-                for (int i = 0; i < 100; i++){ // i < 200
-                    chaikinOnZ (pointsfor3Dright);
-                }
-                pointsFor3D.append(pointsfor3Dleft);
-                pointsFor3D.append(pointsfor3Dright);
+            //PAINT TRIANGLES
 
 
-                for (int i = 0 ; i < pointsfor3Dleft.size()-1; i++) {
-
-                    QVector3D p(pointsfor3Dleft[i].x(),pointsfor3Dleft[i].y(), pointsfor3Dleft[i].z());
-                    QVector3D q(pointsfor3Dleft[i+1].x(),pointsfor3Dleft[i+1].y(), pointsfor3Dleft[i+1].z());
-                    QVector3D r(pointsfor3Dright[i+1].x(),pointsfor3Dright[i+1].y(), pointsfor3Dright[i+1].z());
-                    QVector3D s(pointsfor3Dright[i].x(),pointsfor3Dright[i].y(), pointsfor3Dright[i].z());
-
-                    //https://stackoverflow.com/questions/9806630/calculating-the-vertex-normals-of-a-quad
-
-                    QVector3D normal =  QVector3D::crossProduct(q - p, r - p);
-                    normal.normalize();
-
-                    if (normal.z() > 0) {
-                        painter->setOpacity(0.3);
-                        painter->setPen(QPen(QColor(Qt::red),1,Qt::SolidLine));
-                        //painter->setPen(QPen(QColor(Qt::red),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                    } else {
-                        painter->setOpacity(0.3);
-                        painter->setPen(QPen(QColor(Qt::blue),1,Qt::SolidLine));
-                        //painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                    }
-                    QPolygonF triangle;
-
-                    triangle << p.toPointF();
-                    triangle << q.toPointF();
-                    triangle << r.toPointF();
-
-                    painter->drawPolygon(triangle);
-
-
-
-                }
-
-
-
-
-
-                //                QVector3D triangleNormal;
-
-                //                for (int m = 0; m < triangleMesh.size(); m = m + 3) {
-
-                //                    triangleNormal = QVector3D::crossProduct(triangleMesh[m] - triangleMesh[m+1],triangleMesh[m+1] - triangleMesh[m+2]);
-
-                //                    triangleNormal.normalize();
-
-                //                    if (triangleNormal.z() > 0) {
-                //                        painter->setOpacity(0.3);
-                //                        painter->setPen(QPen(QColor(Qt::red),1,Qt::SolidLine));
-                //                        //painter->setPen(QPen(QColor(Qt::red),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //                    } else {
-                //                        painter->setOpacity(0.3);
-                //                        painter->setPen(QPen(QColor(Qt::blue),1,Qt::SolidLine));
-                //                        //painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //                    }
-
-
-
-
-                //                    if (triangleNormal.z() > 0) {
-                //                        painter->setPen(QPen(QColor(Qt::black),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //                        painter->setOpacity(1);
-                //                        painter->setBrush(Qt::DiagCrossPattern);
-                //                    } else {
-                //                        painter->setOpacity(1);
-                //                        painter->setPen(QPen(QColor(Qt::white),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //                    }
-                //                    QPolygonF triangle;
-
-                //                    triangle << triangleMesh[m].toPointF();
-                //                    triangle << triangleMesh[m+1].toPointF();
-                //                    triangle << triangleMesh[m+2].toPointF();
-
-                //                    painter->drawPolygon(triangle);
-
-
-                //                    painter->setBrush(Qt::NoBrush);
-
-
-
-
-                //            foreach (QPainterPath path, finalSecondBandLineListRight) {
-                //                painter->setBrush(Qt::NoBrush);
-                //                painter->setOpacity(0.5);
-                //                painter->setPen(QPen(QColor(Qt::white),16,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //                painter->drawPath(path);
-                //                painter->setOpacity(1);
-                //                painter->setPen(QPen(QColor(Qt::white),9,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //                painter->drawPath(path);
-                //                painter->setPen(QPen(QColor(Qt::black),3,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //                painter->drawPath(path);
-                //                painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //                painter->drawPath(path);
-                //            }
-
-
-                //            foreach (QPainterPath path, finalSecondBandLineListLeft) {
-                //                painter->setOpacity(0.5);
-                //                painter->setPen(QPen(QColor(Qt::white),16,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //                painter->drawPath(path);
-                //                painter->setOpacity(1);
-                //                painter->setPen(QPen(QColor(Qt::white),9,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //                painter->drawPath(path);
-                //                painter->setPen(QPen(QColor(Qt::black),3,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //                painter->drawPath(path);
-                //                painter->setPen(QPen(QColor(Qt::red),2,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                //                painter->drawPath(path);
-                //            }
-
-            }
 
         }
     } else {
