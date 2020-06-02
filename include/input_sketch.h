@@ -205,6 +205,9 @@ private:
     QList<Stripe3D> sameStripeContourList;
     QList<QList<Stripe3D>> stripeContourList;
 
+    QList<QPolygonF> stripeTriangles;
+    QList<QColor> colorStripeTriangles;
+
 
     /// --------
     /// Gray Scale Lines

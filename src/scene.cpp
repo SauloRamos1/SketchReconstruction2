@@ -552,12 +552,12 @@ void Scene::keyPressEvent(QKeyEvent *event){
         sketch.decreaseLevel();
     }
 
-    if ( event->key() == Qt::Key_Plus && status == Interaction::CROSS_SELECTION && !leftButtonIsPressed ){
+    if ( event->key() == Qt::Key_Plus && (status == Interaction::CROSS_SELECTION || status == Interaction::CROP_SELECTION)  && !leftButtonIsPressed ){
         sketch.increaseLevel();
         qDebug () << "Increase";
     }
 
-    if ( event->key() == Qt::Key_Minus && status == Interaction::CROSS_SELECTION && !leftButtonIsPressed ){
+    if ( event->key() == Qt::Key_Minus &&  (status == Interaction::CROSS_SELECTION || status == Interaction::CROP_SELECTION) && !leftButtonIsPressed ){
 
         if (sketch.lineLevel == 1){
             return;

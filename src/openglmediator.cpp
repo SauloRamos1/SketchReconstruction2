@@ -493,6 +493,9 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
     //    Snormals.clear();
     //    Sfaces.clear();
 
+    double hip = 10/2; //Hipotenusa
+    double hquad = hip*hip;
+
     for (int h = 0; h < points3D.size(); h++){
 
         QPolygonF quad;
@@ -513,6 +516,7 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
         int facesNumber = 0;
         QVector<int> quadTopology (4);
 
+
         for (int i = 0 ; i < pointsfor3Dleft.size()-1; i++) {
 
             QVector3D p(pointsfor3Dleft[i].x(),pointsfor3Dleft[i].y(), pointsfor3Dleft[i].z());
@@ -521,6 +525,44 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
             QVector3D s(pointsfor3Dright[i].x(),pointsfor3Dright[i].y(), pointsfor3Dright[i].z());
 
             //https://stackoverflow.com/questions/9806630/calculating-the-vertex-normals-of-a-quad
+            QPointF _p = p.toPointF();
+            QPointF _q = q.toPointF();
+            QPointF _r = r.toPointF();
+            QPointF _s = s.toPointF();
+
+            //Pares P - S e Q - R
+
+            QLineF dist;
+            dist.setP1(_p);
+            dist.setP2(_s);
+
+            double c = dist.length() / 4 ;
+
+            double z = hip * sqrt(1 - (c*c / hquad));
+
+            if (!std::isnan (z)){
+
+                p.setZ(p.z() + z);
+                s.setZ(s.z() - z);
+            }
+
+            dist.setP1(_q);
+            dist.setP2(_r);
+
+            c = dist.length() / 4 ;
+
+            z = hip * sqrt(1 - (c*c / hquad));
+
+            if (!std::isnan (z)){
+
+                q.setZ(q.z() + z);
+                r.setZ(r.z() - z);
+
+            }
+
+            qDebug () << p << q << r << s << dist.length();
+
+
 
             QVector3D normal = CalculateSurfaceNormal(p,q,r); //Normal for 1st triangle
             QVector3D normal1 = CalculateSurfaceNormal(r,p,s);//Normal for 2nd triangle
@@ -1027,6 +1069,9 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
     QPolygonF quad;
     QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
 
+    float hip = 10/2; //Hipotenusa
+    float hquad = hip*hip;
+
     for (int h = 0; h < points3D.size(); h++){
         std::vector< float > Svertices, Snormals;
         std::vector< unsigned int > Sfaces;
@@ -1051,6 +1096,42 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
             QVector3D s(pointsfor3Dright[i].x(),pointsfor3Dright[i].y(), pointsfor3Dright[i].z());
 
             //https://stackoverflow.com/questions/9806630/calculating-the-vertex-normals-of-a-quad
+            //https://stackoverflow.com/questions/9806630/calculating-the-vertex-normals-of-a-quad
+            QPointF _p = p.toPointF();
+            QPointF _q = q.toPointF();
+            QPointF _r = r.toPointF();
+            QPointF _s = s.toPointF();
+
+            //Pares P - S e Q - R
+
+            QLineF dist;
+            dist.setP1(_p);
+            dist.setP2(_s);
+
+            float c = dist.length() / 4 ;
+
+            double z = hip * sqrt(1 - (c*c / hquad));
+
+            if (!std::isnan (z)){
+
+                p.setZ(p.z() + z);
+                s.setZ(s.z() - z);
+            }
+
+            dist.setP1(_q);
+            dist.setP2(_r);
+
+            c = dist.length() / 4 ;
+
+            z = hip * sqrt(1 - (c*c / hquad));
+
+            if (!std::isnan (z)){
+
+                q.setZ(q.z() + z);
+                r.setZ(r.z() - z);
+
+            }
+
 
             QVector3D normal = CalculateSurfaceNormal(p,q,r); //Normal for 1st triangle
             QVector3D normal1 = CalculateSurfaceNormal(r,p,s);//Normal for 2nd triangle
