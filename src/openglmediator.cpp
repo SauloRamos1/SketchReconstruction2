@@ -493,7 +493,7 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
     //    Snormals.clear();
     //    Sfaces.clear();
 
-    double hip = 10/2; //Hipotenusa
+    double hip = 10; //Hipotenusa
     double hquad = hip*hip;
 
     for (int h = 0; h < points3D.size(); h++){
@@ -536,7 +536,7 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
             dist.setP1(_p);
             dist.setP2(_s);
 
-            double c = dist.length() / 4 ;
+            double c = dist.length() / 2 ;
 
             double z = hip * sqrt(1 - (c*c / hquad));
 
@@ -549,7 +549,7 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
             dist.setP1(_q);
             dist.setP2(_r);
 
-            c = dist.length() / 4 ;
+            c = dist.length() / 2 ;
 
             z = hip * sqrt(1 - (c*c / hquad));
 
@@ -560,7 +560,7 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
 
             }
 
-            qDebug () << p << q << r << s << dist.length();
+            //qDebug () << p << q << r << s << dist.length();
 
 
 
@@ -1066,15 +1066,17 @@ void OpenGLMediator::exportClosedContours3D(const QVector<QVector3D> points3D, c
 void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
 {
 
-    QPolygonF quad;
-    QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
 
-    float hip = 10/2; //Hipotenusa
+
+    float hip = 10; //Hipotenusa
     float hquad = hip*hip;
 
     for (int h = 0; h < points3D.size(); h++){
         std::vector< float > Svertices, Snormals;
         std::vector< unsigned int > Sfaces;
+
+        QPolygonF quad;
+        QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
 
         for (int i = 0 ; i < points3D[h].size()/2; i++) {
             pointsfor3Dleft.push_back(points3D[h][i]);
@@ -1108,7 +1110,7 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
             dist.setP1(_p);
             dist.setP2(_s);
 
-            float c = dist.length() / 4 ;
+            float c = dist.length() / 2 ;
 
             double z = hip * sqrt(1 - (c*c / hquad));
 
@@ -1121,7 +1123,7 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
             dist.setP1(_q);
             dist.setP2(_r);
 
-            c = dist.length() / 4 ;
+            c = dist.length() / 2 ;
 
             z = hip * sqrt(1 - (c*c / hquad));
 

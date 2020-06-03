@@ -468,6 +468,7 @@ void Scene::wheelEvent ( QGraphicsSceneWheelEvent *event )
 
             if (sketch.twistingThickness < 25){
                 sketch.twistingThickness +=1;
+                qDebug () << sketch.twistingThickness;
                 //sketch.savePath();
             }
         } else if (event->delta() < 0 ){
@@ -476,6 +477,7 @@ void Scene::wheelEvent ( QGraphicsSceneWheelEvent *event )
 
             if (sketch.twistingThickness > -25){
                 sketch.twistingThickness -=1;
+                qDebug () << sketch.twistingThickness;
                 //sketch.savePath();
 
             }
