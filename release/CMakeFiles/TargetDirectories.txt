@@ -1,0 +1,10 @@
+C:/Users/srdcp/Documents/sketchreconstruction2/release/CMakeFiles/Canvas.dir
+C:/Users/srdcp/Documents/sketchreconstruction2/release/CMakeFiles/edit_cache.dir
+C:/Users/srdcp/Documents/sketchreconstruction2/release/CMakeFiles/rebuild_cache.dir
+C:/Users/srdcp/Documents/sketchreconstruction2/release/CMakeFiles/Canvas_autogen.dir
+C:/Users/srdcp/Documents/sketchreconstruction2/release/libs/tucanow/CMakeFiles/tucanow.dir
+C:/Users/srdcp/Documents/sketchreconstruction2/release/libs/tucanow/CMakeFiles/edit_cache.dir
+C:/Users/srdcp/Documents/sketchreconstruction2/release/libs/tucanow/CMakeFiles/rebuild_cache.dir
+C:/Users/srdcp/Documents/sketchreconstruction2/release/libs/tucanow/CMakeFiles/tucanow_autogen.dir
+C:/Users/srdcp/Documents/sketchreconstruction2/release/libs/tucanow/win32-libs/CMakeFiles/edit_cache.dir
+C:/Users/srdcp/Documents/sketchreconstruction2/release/libs/tucanow/win32-libs/CMakeFiles/rebuild_cache.dir

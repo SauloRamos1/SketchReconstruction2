@@ -1,0 +1,5 @@
+# Hashes of file build rules.
+98439faaeac1c5bf2c3e6af879050a53 CMakeFiles/Canvas_autogen
+e5449a9d46eb0f8d21cd1c28f5dc6971 Canvas_autogen/EWIEGA46WW/qrc_resources.cpp
+9adb94dd69e945abc5737a25dfec5161 Canvas_autogen/Z2SJJ2MXWF/qrc_style.cpp
+49754d5b363ad88490b2bd423b1c029e libs/tucanow/CMakeFiles/tucanow_autogen

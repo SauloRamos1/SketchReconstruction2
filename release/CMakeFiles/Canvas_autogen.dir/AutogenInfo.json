@@ -1,0 +1,105 @@
+{
+	"BUILD_DIR" : "C:/Users/srdcp/Documents/sketchreconstruction2/release/Canvas_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/srdcp/Documents/sketchreconstruction2/release",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/srdcp/Documents/sketchreconstruction2/release",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/srdcp/Documents/sketchreconstruction2",
+	"CMAKE_EXECUTABLE" : "C:/Program Files/CMake/bin/cmake.exe",
+	"CMAKE_SOURCE_DIR" : "C:/Users/srdcp/Documents/sketchreconstruction2",
+	"HEADERS" : 
+	[
+		[
+			"C:/Users/srdcp/Documents/sketchreconstruction2/src/sketch_utilities.h",
+			"MU",
+			"UVLADIE3JM/moc_sketch_utilities.cpp"
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "C:/Users/srdcp/Documents/sketchreconstruction2/release/Canvas_autogen/include",
+	"MOC_COMPILATION_FILE" : "C:/Users/srdcp/Documents/sketchreconstruction2/release/Canvas_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_NO_DEBUG",
+		"QT_SVG_LIB",
+		"QT_WIDGETS_LIB",
+		"WIN32"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"C:/Users/srdcp/Documents/sketchreconstruction2/release",
+		"C:/Users/srdcp/Documents/sketchreconstruction2",
+		"C:/Users/srdcp/Documents/sketchreconstruction2/include",
+		"C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/include",
+		"C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/eigen3",
+		"C:/Users/srdcp/Documents/sketchreconstruction2/libs",
+		"C:/Qt/5.12.5/msvc2017_64/include",
+		"C:/Qt/5.12.5/msvc2017_64/include/QtCore",
+		"C:/Qt/5.12.5/msvc2017_64/mkspecs/win32-msvc",
+		"C:/Qt/5.12.5/msvc2017_64/include/QtGui",
+		"C:/Qt/5.12.5/msvc2017_64/include/QtANGLE",
+		"C:/Qt/5.12.5/msvc2017_64/include/QtWidgets",
+		"C:/Qt/5.12.5/msvc2017_64/include/QtSvg"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : true,
+	"MOC_PREDEFS_CMD" : [],
+	"MOC_PREDEFS_FILE" : "",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 6,
+	"PARSE_CACHE_FILE" : "C:/Users/srdcp/Documents/sketchreconstruction2/release/CMakeFiles/Canvas_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "C:/Qt/5.12.5/msvc2017_64/bin/moc.exe",
+	"QT_UIC_EXECUTABLE" : "C:/Qt/5.12.5/msvc2017_64/bin/uic.exe",
+	"QT_VERSION_MAJOR" : 5,
+	"SETTINGS_FILE" : "C:/Users/srdcp/Documents/sketchreconstruction2/release/CMakeFiles/Canvas_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[ "C:/Users/srdcp/Documents/sketchreconstruction2/src/canvas.cpp", "MU" ],
+		[
+			"C:/Users/srdcp/Documents/sketchreconstruction2/src/halfedge.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/srdcp/Documents/sketchreconstruction2/src/input_sketch.cpp",
+			"MU"
+		],
+		[ "C:/Users/srdcp/Documents/sketchreconstruction2/src/layers.cpp", "MU" ],
+		[ "C:/Users/srdcp/Documents/sketchreconstruction2/src/main.cpp", "MU" ],
+		[
+			"C:/Users/srdcp/Documents/sketchreconstruction2/src/main_window.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/srdcp/Documents/sketchreconstruction2/src/openglcanvas.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/srdcp/Documents/sketchreconstruction2/src/openglmediator.cpp",
+			"MU"
+		],
+		[ "C:/Users/srdcp/Documents/sketchreconstruction2/src/scene.cpp", "MU" ],
+		[
+			"C:/Users/srdcp/Documents/sketchreconstruction2/src/sketch_library.cpp",
+			"MU"
+		],
+		[
+			"C:/Users/srdcp/Documents/sketchreconstruction2/src/sketch_utilities.cpp",
+			"MU"
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : [],
+	"UIC_UI_FILES" : [],
+	"VERBOSITY" : 0
+}

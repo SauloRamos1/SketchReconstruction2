@@ -1490,6 +1490,7 @@ void InputSketch::updateColorMap(){
             startBlueVal = 0,
             endBlueValue = 255;
 
+
     float ratio;
 
     for (int i = 0; i < numberOfLayers ; i++){
@@ -1515,12 +1516,19 @@ void InputSketch::updateColorMap(){
 
     shapeColorMap.clear();
 
-    startRedVal = 0;
-    endRedValue = 255;
-    startGreenVal = 0;
-    endGreenValue = 255;
-    startBlueVal = 255;
-    endBlueValue = 0;
+//    startRedVal = 0;
+//    endRedValue = 255;
+//    startGreenVal = 0;
+//    endGreenValue = 255;
+//    startBlueVal = 255;
+//    endBlueValue = 0;
+
+    startRedVal = 255;
+    endRedValue = 0;
+    startGreenVal = 255;
+    endGreenValue = 0;
+    startBlueVal = 0;
+    endBlueValue = 255;
 
     for (int i = 0; i < numberOfLayers ; i++){
 
@@ -2243,8 +2251,10 @@ QList<QVector<QVector3D> > InputSketch::getOpenContoursPoints() {
 
                 }
             }
+            QString openContourNumberLabel = openContourList[i][0].name;
+            int smoothing = QInputDialog::getInt(nullptr, "Number of Smoothing Operations in OpenContour starting with", openContourNumberLabel );
 
-            for (int l = 0; l < 500; l++){ // i < 200
+            for (int l = 0; l < smoothing; l++){ // i < 200
                 chaikinOnZ (openContour3DPoints);
             }
 
@@ -2694,6 +2704,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
                             painter->setPen(QPen(QColor(lineColorMap[closedContourList[i].level-1].x(), lineColorMap[closedContourList[i].level-1].y(), lineColorMap[closedContourList[i].level-1].z()), closedContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
 
                             //painter->setPen(QPen(QColor(Qt::red), closedContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                            painter->setOpacity( 1 );
                             painter->drawPath(closedContourList[i].contour);
                             painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::FlatCap, Qt::RoundJoin));
                             if (showLabels) painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
