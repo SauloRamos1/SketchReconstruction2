@@ -1,12 +1,5 @@
-ply
-format ascii 1.0
-element vertex 3612
-property float x
-property float y
-property float z
-element face 1806
-property list uint8 int32 vertex_indices
-end_header
+OFF
+3612 1806 0
 83.0474 376.027 0.00422864
 83.2625 375.576 0
 103.369 377.962 0

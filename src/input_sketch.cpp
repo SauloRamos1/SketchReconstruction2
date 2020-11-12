@@ -808,7 +808,7 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
     QVector3D normalVector;
     normalVector.setZ(0);
 
-
+    double lambdaPartBB = QInputDialog::getDouble(nullptr, QString::number(shapeNumber), "Default: 0.1 - Lambda", 0.1,-1000,1000,3);
     ///TODO FIND POINTS ON PATH TO RETRIVE ANGLE
 
 
@@ -901,7 +901,7 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
 
 
                 if (n.z() < 0.5f){
-                    p.setZ(n.z()*(static_cast<float>(pathBox.width())/5)); //Adjustable
+                    p.setZ(n.z()*(static_cast<float>(pathBox.width())*lambdaPartBB)); //Adjustable
                     //p.setZ(p.z() + lineLeveldiff * ql[0].z());
 
                     totalPoints.push_back(p);
