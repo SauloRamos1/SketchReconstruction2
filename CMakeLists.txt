@@ -12,13 +12,22 @@ option(SKETCH_CANVAS_DEPLOY_QT
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+# Copied from https://doc-snapshots.qt.io/qt6-dev/cmake-get-started.html
+#set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
 #ICONS-
 
-# Find the Qt5 library
+# Find the Qt6 library
 
 #set (CMAKE_PREFIX_PATH "C:\\Qt\\5.12.3\\msvc2017_64")
 #set (CMAKE_PREFIX_PATH "C:\\Qt\\5.12.5\\msvc2017_64")
-#set(Qt5_DIR "C:\\Qt\\5.12.5\\mingw73_64\\lib\\cmake\\Qt5" CACHE PATH "Initial cache" FORCE)
+#set(Qt6_DIR "C:\\Qt\\5.12.5\\mingw73_64\\lib\\cmake\\Qt6" CACHE PATH "Initial cache" FORCE)
+
+#set (Qt5_DIR "C:\\Qt\\5.12.5\\msvc2017_64\\lib\\cmake\\Qt5")
+#set (QTDIR "C:\\Qt\\5.12.5\\msvc2017_64\\lib\\cmake\\Qt5")
+
 find_package(Qt5 COMPONENTS Core Gui Widgets Svg CONFIG REQUIRED)
 
 # Instruct CMake to run moc automatically when needed
@@ -95,7 +104,7 @@ add_executable(Canvas WIN32 ${SOURCES} resources.qrc qdarkstyle/style.qrc)
 target_include_directories(Canvas PUBLIC ${HEADERS_DIR})
 target_include_directories(Canvas SYSTEM PRIVATE ${EXTERNAL_LIBS_DIR})
 
-# Use Core, Gui and Widgets modules from Qt5
+# Use Core, Gui and Widgets modules from Qt6
 target_link_libraries(Canvas Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Svg)
 
 # Use tucanow wrapper

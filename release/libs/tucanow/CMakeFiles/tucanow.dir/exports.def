@@ -49,6 +49,8 @@ EXPORTS
 	??_R0?AVTrackball@Tucano@@@8 	 DATA
 	??_R0?AVWireframe@Effects@Tucano@@@8 	 DATA
 	??_R0?AV_Ref_count_base@std@@@8 	 DATA
+	??_R0?AVbad_alloc@std@@@8 	 DATA
+	??_R0?AVbad_array_new_length@std@@@8 	 DATA
 	??_R0?AVbad_cast@std@@@8 	 DATA
 	??_R0?AVexception@std@@@8 	 DATA
 	??_R0?AVios_base@std@@@8 	 DATA
@@ -59,6 +61,7 @@ EXPORTS
 	?_Psave@?$_Facetptr@V?$ctype@D@std@@@std@@2PEBVfacet@locale@2@EB 	 DATA
 	?_Stinit@?1??_Init@?$basic_filebuf@DU?$char_traits@D@std@@@std@@IEAAXPEAU_iobuf@@W4_Initfl@23@@Z@4U_Mbstatet@@A 	 DATA
 	?_instance@?1??Instance@TextureManager@Tucano@@SAAEAV23@XZ@4V23@A 	 DATA
+	??$?0$$V@?$_Compressed_pair@U?$default_delete@USceneImpl@tucanow@@@std@@PEAUSceneImpl@tucanow@@$00@std@@QEAA@U_Zero_then_variadic_args_t@1@@Z
 	??$?0$$V@?$_Compressed_pair@V?$allocator@D@std@@V?$_String_val@U?$_Simple_types@D@std@@@2@$00@std@@QEAA@U_Zero_then_variadic_args_t@1@@Z
 	??$?0$$V@?$_Compressed_pair@V?$allocator@H@std@@V?$_Vector_val@U?$_Simple_types@H@std@@@2@$00@std@@QEAA@U_Zero_then_variadic_args_t@1@@Z
 	??$?0$$V@?$_Compressed_pair@V?$allocator@I@std@@V?$_Vector_val@U?$_Simple_types@I@std@@@2@$00@std@@QEAA@U_Zero_then_variadic_args_t@1@@Z
@@ -70,13 +73,13 @@ EXPORTS
 	??$?0$$V@?$_Compressed_pair@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@V?$_Vector_val@U?$_Simple_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@2@$00@std@@QEAA@U_Zero_then_variadic_args_t@1@@Z
 	??$?0$$V@?$_Compressed_pair@V?$allocator@VVertexAttribute@Tucano@@@std@@V?$_Vector_val@U?$_Simple_types@VVertexAttribute@Tucano@@@std@@@2@$00@std@@QEAA@U_Zero_then_variadic_args_t@1@@Z
 	??$?0AEAPEAUGuiImpl@tucanow@@@?$_Compressed_pair@U?$default_delete@UGuiImpl@tucanow@@@std@@PEAUGuiImpl@tucanow@@$00@std@@QEAA@U_Zero_then_variadic_args_t@1@AEAPEAUGuiImpl@tucanow@@@Z
-	??$?0AEAPEAUSceneImpl@tucanow@@@?$_Compressed_pair@U?$default_delete@USceneImpl@tucanow@@@std@@PEAUSceneImpl@tucanow@@$00@std@@QEAA@U_Zero_then_variadic_args_t@1@AEAPEAUSceneImpl@tucanow@@@Z
 	??$?0AEAPEAV_Facet_base@std@@@?$_Compressed_pair@U?$default_delete@V_Facet_base@std@@@std@@PEAV_Facet_base@2@$00@std@@QEAA@U_Zero_then_variadic_args_t@1@AEAPEAV_Facet_base@1@@Z
 	??$?0AEBV?$allocator@D@std@@$$V@?$_Compressed_pair@V?$allocator@D@std@@V?$_String_val@U?$_Simple_types@D@std@@@2@$00@std@@QEAA@U_One_then_variadic_args_t@1@AEBV?$allocator@D@1@@Z
-	??$?0AEBV?$allocator@D@std@@X@?$_String_alloc@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEAA@AEBV?$allocator@D@1@@Z
 	??$?0AEBV?$allocator@M@std@@$$V@?$_Compressed_pair@V?$allocator@M@std@@V?$_Vector_val@U?$_Simple_types@M@std@@@2@$00@std@@QEAA@U_One_then_variadic_args_t@1@AEBV?$allocator@M@1@@Z
-	??$?0AEBV?$allocator@M@std@@X@?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEAA@AEBV?$allocator@M@1@@Z
+	??$?0D@?$allocator@U_Container_proxy@std@@@std@@QEAA@AEBV?$allocator@D@1@@Z
+	??$?0H@?$allocator@U_Container_proxy@std@@@std@@QEAA@AEBV?$allocator@H@1@@Z
 	??$?0HH@?$Matrix@H$01$00$0A@$01$00@Eigen@@QEAA@AEBH0@Z
+	??$?0I@?$allocator@U_Container_proxy@std@@@std@@QEAA@AEBV?$allocator@I@1@@Z
 	??$?0IV<lambda_0eb331034ec64f284d3276d5eb9bc498>@@$0A@@?$shared_ptr@I@std@@QEAA@PEAIV<lambda_0eb331034ec64f284d3276d5eb9bc498>@@@Z
 	??$?0IV<lambda_1d192c76f25f01443164c3008efd2f7a>@@$0A@@?$shared_ptr@I@std@@QEAA@PEAIV<lambda_1d192c76f25f01443164c3008efd2f7a>@@@Z
 	??$?0IV<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@$0A@@?$shared_ptr@I@std@@QEAA@PEAIV<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@@Z
@@ -88,17 +91,16 @@ EXPORTS
 	??$?0IV<lambda_b660b692aa17cad6c64c8293c384ce89>@@$0A@@?$shared_ptr@I@std@@QEAA@PEAIV<lambda_b660b692aa17cad6c64c8293c384ce89>@@@Z
 	??$?0IV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@$0A@@?$shared_ptr@I@std@@QEAA@PEAIV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@@Z
 	??$?0IV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@$0A@@?$shared_ptr@I@std@@QEAA@PEAIV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@@Z
+	??$?0M@?$allocator@U_Container_proxy@std@@@std@@QEAA@AEBV?$allocator@M@1@@Z
 	??$?0MM@?$Matrix@M$01$00$0A@$01$00@Eigen@@QEAA@AEBM0@Z
 	??$?0NN@?$Matrix@M$01$00$0A@$01$00@Eigen@@QEAA@AEBN0@Z
-	??$?0PEAUGuiImpl@tucanow@@@?$_Unique_ptr_base@UGuiImpl@tucanow@@U?$default_delete@UGuiImpl@tucanow@@@std@@@std@@QEAA@PEAUGuiImpl@tucanow@@@Z
-	??$?0PEAUSceneImpl@tucanow@@@?$_Unique_ptr_base@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEAA@PEAUSceneImpl@tucanow@@@Z
-	??$?0PEAUSceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@?$_Unique_ptr_base@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEAA@PEAUSceneImpl@tucanow@@$$QEAU?$default_delete@USceneImpl@tucanow@@@1@@Z
-	??$?0PEAV_Facet_base@std@@@?$_Unique_ptr_base@V_Facet_base@std@@U?$default_delete@V_Facet_base@std@@@2@@std@@QEAA@PEAV_Facet_base@1@@Z
+	??$?0PEAVElement@GUI@Tucano@@@?$allocator@U_Container_proxy@std@@@std@@QEAA@AEBV?$allocator@PEAVElement@GUI@Tucano@@@1@@Z
+	??$?0PEAVShader@Tucano@@@?$allocator@U_Container_proxy@std@@@std@@QEAA@AEBV?$allocator@PEAVShader@Tucano@@@1@@Z
 	??$?0U?$default_delete@UGuiImpl@tucanow@@@std@@$0A@@?$unique_ptr@UGuiImpl@tucanow@@U?$default_delete@UGuiImpl@tucanow@@@std@@@std@@QEAA@PEAUGuiImpl@tucanow@@@Z
+	??$?0U?$default_delete@USceneImpl@tucanow@@@std@@$0A@@?$unique_ptr@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEAA@$$QEAV01@@Z
 	??$?0U?$default_delete@USceneImpl@tucanow@@@std@@$0A@@?$unique_ptr@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEAA@XZ
-	??$?0U?$default_delete@USceneImpl@tucanow@@@std@@AEAPEAUSceneImpl@tucanow@@@?$_Compressed_pair@U?$default_delete@USceneImpl@tucanow@@@std@@PEAUSceneImpl@tucanow@@$00@std@@QEAA@U_One_then_variadic_args_t@1@$$QEAU?$default_delete@USceneImpl@tucanow@@@1@AEAPEAUSceneImpl@tucanow@@@Z
+	??$?0U?$default_delete@USceneImpl@tucanow@@@std@@PEAUSceneImpl@tucanow@@@?$_Compressed_pair@U?$default_delete@USceneImpl@tucanow@@@std@@PEAUSceneImpl@tucanow@@$00@std@@QEAA@U_One_then_variadic_args_t@1@$$QEAU?$default_delete@USceneImpl@tucanow@@@1@$$QEAPEAUSceneImpl@tucanow@@@Z
 	??$?0U?$default_delete@V_Facet_base@std@@@std@@$0A@@?$unique_ptr@V_Facet_base@std@@U?$default_delete@V_Facet_base@std@@@2@@std@@QEAA@PEAV_Facet_base@1@@Z
-	??$?0U?$integral_constant@_N$00@std@@@_Unused_parameter@std@@QEAA@$$QEAU?$integral_constant@_N$00@1@@Z
 	??$?0V<lambda_0eb331034ec64f284d3276d5eb9bc498>@@AEAPEAI@?$_Compressed_pair@V<lambda_0eb331034ec64f284d3276d5eb9bc498>@@PEAI$00@std@@QEAA@U_One_then_variadic_args_t@1@$$QEAV<lambda_0eb331034ec64f284d3276d5eb9bc498>@@AEAPEAI@Z
 	??$?0V<lambda_1d192c76f25f01443164c3008efd2f7a>@@AEAPEAI@?$_Compressed_pair@V<lambda_1d192c76f25f01443164c3008efd2f7a>@@PEAI$00@std@@QEAA@U_One_then_variadic_args_t@1@$$QEAV<lambda_1d192c76f25f01443164c3008efd2f7a>@@AEAPEAI@Z
 	??$?0V<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@AEAPEAI@?$_Compressed_pair@V<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@PEAI$00@std@@QEAA@U_One_then_variadic_args_t@1@$$QEAV<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@AEAPEAI@Z
@@ -130,7 +132,10 @@ EXPORTS
 	??$?0V?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@Eigen@@@?$Matrix@M$03$03$0A@$03$03@Eigen@@QEAA@AEBU?$EigenBase@V?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@Eigen@@@1@@Z
 	??$?0V?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@Eigen@@@?$PlainObjectBase@V?$Matrix@M$03$03$0A@$03$03@Eigen@@@Eigen@@IEAA@AEBV?$DenseBase@V?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@Eigen@@@1@@Z
 	??$?0V?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@Eigen@@@?$Transform@M$02$01$0A@@Eigen@@QEAA@AEBU?$EigenBase@V?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@Eigen@@@1@@Z
+	??$?0V?$Matrix@M$01$00$0A@$01$00@Eigen@@@?$allocator@U_Container_proxy@std@@@std@@QEAA@AEBV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@1@@Z
 	??$?0V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$AngleAxis@M@Eigen@@QEAA@AEBMAEBV?$MatrixBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@1@@Z
+	??$?0V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$allocator@U_Container_proxy@std@@@std@@QEAA@AEBV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@1@@Z
+	??$?0V?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$allocator@U_Container_proxy@std@@@std@@QEAA@AEBV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@1@@Z
 	??$?0V?$MatrixBase@V?$Block@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@$02$00$0A@@Eigen@@@Eigen@@@?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAA@AEBV?$MatrixBase@V?$Block@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@$02$00$0A@@Eigen@@@1@@Z
 	??$?0V?$MatrixBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@@?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAA@AEBV?$MatrixBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@1@@Z
 	??$?0V?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V12@$0A@@Eigen@@@?$Matrix@M$02$02$0A@$02$02@Eigen@@QEAA@AEBV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V12@$0A@@1@@Z
@@ -138,14 +143,12 @@ EXPORTS
 	??$?0V?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@$0A@@Eigen@@@?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAA@AEBV?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@$0A@@1@@Z
 	??$?0V?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@$0A@@Eigen@@@?$Matrix@M$02$02$0A@$02$02@Eigen@@QEAA@AEBV?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@$0A@@1@@Z
 	??$?0V?$allocator@D@std@@$$V@?$_Compressed_pair@V?$allocator@D@std@@V?$_String_val@U?$_Simple_types@D@std@@@2@$00@std@@QEAA@U_One_then_variadic_args_t@1@$$QEAV?$allocator@D@1@@Z
-	??$?0V?$allocator@D@std@@X@?$_String_alloc@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEAA@$$QEAV?$allocator@D@1@@Z
 	??$?0V?$allocator@I@std@@$$V@?$_Compressed_pair@V?$allocator@I@std@@V?$_Vector_val@U?$_Simple_types@I@std@@@2@$00@std@@QEAA@U_One_then_variadic_args_t@1@$$QEAV?$allocator@I@1@@Z
-	??$?0V?$allocator@I@std@@X@?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEAA@$$QEAV?$allocator@I@1@@Z
 	??$?0V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@$$V@?$_Compressed_pair@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@V?$_Vector_val@U?$_Simple_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@2@$00@std@@QEAA@U_One_then_variadic_args_t@1@$$QEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@1@@Z
-	??$?0V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@X@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEAA@$$QEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@1@@Z
 	??$?0V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@$$V@?$_Compressed_pair@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@V?$_Vector_val@U?$_Simple_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@2@$00@std@@QEAA@U_One_then_variadic_args_t@1@$$QEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@1@@Z
-	??$?0V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@X@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEAA@$$QEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@1@@Z
+	??$?0VVertexAttribute@Tucano@@@?$allocator@U_Container_proxy@std@@@std@@QEAA@AEBV?$allocator@VVertexAttribute@Tucano@@@1@@Z
 	??$?0_J_J@?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAA@AEB_J0@Z
+	??$?4U?$default_delete@USceneImpl@tucanow@@@std@@$0A@@?$unique_ptr@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEAAAEAV01@$$QEAV01@@Z
 	??$?4V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@@?$MatrixBase@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@@Eigen@@QEAAAEAV?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@1@AEBV?$DenseBase@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@@1@@Z
 	??$?4V?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@Eigen@@@?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAAAEAV01@AEBV?$DenseBase@V?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@Eigen@@@1@@Z
 	??$?4V?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@3@@Eigen@@@?$Matrix@M$03$00$0A@$03$00@Eigen@@QEAAAEAV01@AEBV?$DenseBase@V?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@3@@Eigen@@@1@@Z
@@ -167,6 +170,7 @@ EXPORTS
 	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBD@Z
 	??$?6U?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@PEBE@Z
 	??$?8I@std@@YA_NAEBV?$shared_ptr@I@0@$$T@Z
+	??$?9I@std@@YA_NAEBV?$shared_ptr@I@0@$$T@Z
 	??$?9V?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@Eigen@@@?$MatrixBase@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@Eigen@@QEBA_NAEBV?$MatrixBase@V?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@Eigen@@@1@@Z
 	??$?9V?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@Eigen@@@?$MatrixBase@V?$Matrix@M$03$03$0A@$03$03@Eigen@@@Eigen@@QEBA_NAEBV?$MatrixBase@V?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@Eigen@@@1@@Z
 	??$?DI$0A@@?$shared_ptr@I@std@@QEBAAEAIXZ
@@ -212,12 +216,14 @@ EXPORTS
 	??$NullaryExpr@U?$scalar_constant_op@M@internal@Eigen@@@?$DenseBase@V?$Matrix@M$03$03$0A@$03$03@Eigen@@@Eigen@@SA?BV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@1@_J0AEBU?$scalar_constant_op@M@internal@1@@Z
 	??$NullaryExpr@U?$scalar_identity_op@M@internal@Eigen@@@?$DenseBase@V?$Matrix@M$02$02$0A@$02$02@Eigen@@@Eigen@@SA?BV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@1@_J0AEBU?$scalar_identity_op@M@internal@1@@Z
 	??$NullaryExpr@U?$scalar_identity_op@M@internal@Eigen@@@?$DenseBase@V?$Matrix@M$03$03$0A@$03$03@Eigen@@@Eigen@@SA?BV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@1@_J0AEBU?$scalar_identity_op@M@internal@1@@Z
-	??$_Adl_verify_range1@PEAVVertexAttribute@Tucano@@PEAV12@@std@@YAXAEBQEAVVertexAttribute@Tucano@@0U?$integral_constant@_N$0A@@0@@Z
 	??$_Adl_verify_range@PEAVVertexAttribute@Tucano@@PEAV12@@std@@YAXAEBQEAVVertexAttribute@Tucano@@0@Z
-	??$_Advance1@PEAVVertexAttribute@Tucano@@_J@std@@YAXAEAPEAVVertexAttribute@Tucano@@_JUrandom_access_iterator_tag@0@@Z
+	??$_Alloc_proxy@V?$allocator@U_Container_proxy@std@@@std@@@_Container_base12@std@@QEAAX$$QEAV?$allocator@U_Container_proxy@std@@@1@@Z
 	??$_Allocate@$0BA@U_Default_allocate_traits@std@@$0A@@std@@YAPEAX_K@Z
 	??$_Allocate_manually_vector_aligned@U_Default_allocate_traits@std@@@std@@YAPEAX_K@Z
 	??$_Assign_range@PEAVVertexAttribute@Tucano@@@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEAAXPEAVVertexAttribute@Tucano@@0Uforward_iterator_tag@1@@Z
+	??$_Construct_in_place@PEADAEBQEAD@std@@YAXAEAPEADAEBQEAD@Z
+	??$_Construct_in_place@U_Container_proxy@std@@PEAU_Container_base12@2@@std@@YAXAEAU_Container_proxy@0@$$QEAPEAU_Container_base12@0@@Z
+	??$_Construct_n_copies_of_ty@U_Value_init_tag@std@@@?$vector@MV?$allocator@M@std@@@std@@AEAAX_KAEBU_Value_init_tag@1@@Z
 	??$_Convert_size@_K@std@@YA_K_K@Z
 	??$_Copy_construct_from@I@?$_Ptr_base@I@std@@IEAAXAEBV?$shared_ptr@I@1@@Z
 	??$_Copy_memmove@PEAHPEAH@std@@YAPEAHPEAH00@Z
@@ -225,51 +231,43 @@ EXPORTS
 	??$_Copy_memmove@PEAMPEAM@std@@YAPEAMPEAM00@Z
 	??$_Copy_memmove@PEAPEAVElement@GUI@Tucano@@PEAPEAV123@@std@@YAPEAPEAVElement@GUI@Tucano@@PEAPEAV123@00@Z
 	??$_Copy_memmove@PEAPEAVShader@Tucano@@PEAPEAV12@@std@@YAPEAPEAVShader@Tucano@@PEAPEAV12@00@Z
-	??$_Copy_unchecked1@PEAVVertexAttribute@Tucano@@PEAV12@@std@@YAPEAVVertexAttribute@Tucano@@PEAV12@00U_General_ptr_iterator_tag@0@@Z
 	??$_Copy_unchecked@PEAVVertexAttribute@Tucano@@PEAV12@@std@@YAPEAVVertexAttribute@Tucano@@PEAV12@00@Z
 	??$_Deallocate@$07$0A@@std@@YAXPEAX_K@Z
 	??$_Deallocate@$0BA@$0A@@std@@YAXPEAX_K@Z
-	??$_Destroy_range1@V?$allocator@H@std@@@std@@YAXPEAH0AEAV?$allocator@H@0@U?$integral_constant@_N$00@0@@Z
-	??$_Destroy_range1@V?$allocator@I@std@@@std@@YAXPEAI0AEAV?$allocator@I@0@U?$integral_constant@_N$00@0@@Z
-	??$_Destroy_range1@V?$allocator@M@std@@@std@@YAXPEAM0AEAV?$allocator@M@0@U?$integral_constant@_N$00@0@@Z
-	??$_Destroy_range1@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@YAXPEAPEAVElement@GUI@Tucano@@0AEAV?$allocator@PEAVElement@GUI@Tucano@@@0@U?$integral_constant@_N$00@0@@Z
-	??$_Destroy_range1@V?$allocator@PEAVShader@Tucano@@@std@@@std@@YAXPEAPEAVShader@Tucano@@0AEAV?$allocator@PEAVShader@Tucano@@@0@U?$integral_constant@_N$00@0@@Z
-	??$_Destroy_range1@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@YAXPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@0AEAV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@0@U?$integral_constant@_N$00@0@@Z
-	??$_Destroy_range1@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@YAXPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@0AEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@0@U?$integral_constant@_N$00@0@@Z
-	??$_Destroy_range1@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@YAXPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@0AEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@0@U?$integral_constant@_N$00@0@@Z
-	??$_Destroy_range1@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@YAXPEAVVertexAttribute@Tucano@@0AEAV?$allocator@VVertexAttribute@Tucano@@@0@U?$integral_constant@_N$0A@@0@@Z
-	??$_Destroy_range@V?$allocator@H@std@@@std@@YAXPEAH0AEAV?$allocator@H@0@@Z
-	??$_Destroy_range@V?$allocator@I@std@@@std@@YAXPEAI0AEAV?$allocator@I@0@@Z
-	??$_Destroy_range@V?$allocator@M@std@@@std@@YAXPEAM0AEAV?$allocator@M@0@@Z
-	??$_Destroy_range@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@YAXPEAPEAVElement@GUI@Tucano@@0AEAV?$allocator@PEAVElement@GUI@Tucano@@@0@@Z
-	??$_Destroy_range@V?$allocator@PEAVShader@Tucano@@@std@@@std@@YAXPEAPEAVShader@Tucano@@0AEAV?$allocator@PEAVShader@Tucano@@@0@@Z
-	??$_Destroy_range@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@YAXPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@0AEAV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@0@@Z
-	??$_Destroy_range@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@YAXPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@0AEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@0@@Z
-	??$_Destroy_range@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@YAXPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@0AEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@0@@Z
-	??$_Destroy_range@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@YAXPEAVVertexAttribute@Tucano@@0AEAV?$allocator@VVertexAttribute@Tucano@@@0@@Z
-	??$_Distance1@PEAVVertexAttribute@Tucano@@@std@@YA_JPEAVVertexAttribute@Tucano@@0Urandom_access_iterator_tag@0@@Z
-	??$_Emplace_back@AEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$_Uninitialized_backout_al@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAAXAEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@@Z
-	??$_Emplace_back@AEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$_Uninitialized_backout_al@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAAXAEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@@Z
-	??$_Emplace_back@AEAVVertexAttribute@Tucano@@@?$_Uninitialized_backout_al@PEAVVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAAXAEAVVertexAttribute@Tucano@@@Z
-	??$_Emplace_back@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@?$_Uninitialized_backout_al@PEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAAX$$QEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@@Z
-	??$_Emplace_back@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$_Uninitialized_backout_al@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAAX$$QEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@@Z
-	??$_Emplace_back@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$_Uninitialized_backout_al@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAAX$$QEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@@Z
-	??$_Emplace_back@VVertexAttribute@Tucano@@@?$_Uninitialized_backout_al@PEAVVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAAX$$QEAVVertexAttribute@Tucano@@@Z
-	??$_Emplace_back_with_unused_capacity@AEBI@?$vector@IV?$allocator@I@std@@@std@@AEAAXAEBI@Z
-	??$_Emplace_back_with_unused_capacity@AEBM@?$vector@MV?$allocator@M@std@@@std@@AEAAXAEBM@Z
-	??$_Emplace_back_with_unused_capacity@AEBQEAVElement@GUI@Tucano@@@?$vector@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@AEAAXAEBQEAVElement@GUI@Tucano@@@Z
-	??$_Emplace_back_with_unused_capacity@AEBQEAVShader@Tucano@@@?$vector@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@AEAAXAEBQEAVShader@Tucano@@@Z
-	??$_Emplace_back_with_unused_capacity@AEBV?$Matrix@M$01$00$0A@$01$00@Eigen@@@?$vector@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@AEAAXAEBV?$Matrix@M$01$00$0A@$01$00@Eigen@@@Z
-	??$_Emplace_back_with_unused_capacity@AEBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@AEAAXAEBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@Z
-	??$_Emplace_back_with_unused_capacity@AEBV?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@AEAAXAEBV?$Matrix@M$03$00$0A@$03$00@Eigen@@@Z
-	??$_Emplace_back_with_unused_capacity@AEBVVertexAttribute@Tucano@@@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEAAXAEBVVertexAttribute@Tucano@@@Z
-	??$_Emplace_back_with_unused_capacity@H@?$vector@HV?$allocator@H@std@@@std@@AEAAX$$QEAH@Z
-	??$_Emplace_back_with_unused_capacity@I@?$vector@IV?$allocator@I@std@@@std@@AEAAX$$QEAI@Z
-	??$_Emplace_back_with_unused_capacity@M@?$vector@MV?$allocator@M@std@@@std@@AEAAX$$QEAM@Z
-	??$_Emplace_back_with_unused_capacity@PEAVShader@Tucano@@@?$vector@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@AEAAX$$QEAPEAVShader@Tucano@@@Z
-	??$_Emplace_back_with_unused_capacity@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@?$vector@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@AEAAX$$QEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@@Z
-	??$_Emplace_back_with_unused_capacity@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@AEAAX$$QEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@@Z
-	??$_Emplace_back_with_unused_capacity@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@AEAAX$$QEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@@Z
+	??$_Deallocate_plain@V?$allocator@U_Container_proxy@std@@@std@@@std@@YAXAEAV?$allocator@U_Container_proxy@std@@@0@QEAU_Container_proxy@0@@Z
+	??$_Delete_plain_internal@V?$allocator@U_Container_proxy@std@@@std@@@std@@YAXAEAV?$allocator@U_Container_proxy@std@@@0@QEAU_Container_proxy@0@@Z
+	??$_Destroy_in_place@PEAD@std@@YAXAEAPEAD@Z
+	??$_Destroy_range@V?$allocator@H@std@@@std@@YAXPEAHQEAHAEAV?$allocator@H@0@@Z
+	??$_Destroy_range@V?$allocator@I@std@@@std@@YAXPEAIQEAIAEAV?$allocator@I@0@@Z
+	??$_Destroy_range@V?$allocator@M@std@@@std@@YAXPEAMQEAMAEAV?$allocator@M@0@@Z
+	??$_Destroy_range@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@YAXPEAPEAVElement@GUI@Tucano@@QEAPEAV123@AEAV?$allocator@PEAVElement@GUI@Tucano@@@0@@Z
+	??$_Destroy_range@V?$allocator@PEAVShader@Tucano@@@std@@@std@@YAXPEAPEAVShader@Tucano@@QEAPEAV12@AEAV?$allocator@PEAVShader@Tucano@@@0@@Z
+	??$_Destroy_range@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@YAXPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@QEAV12@AEAV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@0@@Z
+	??$_Destroy_range@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@YAXPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAV12@AEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@0@@Z
+	??$_Destroy_range@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@YAXPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@QEAV12@AEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@0@@Z
+	??$_Destroy_range@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@YAXPEAVVertexAttribute@Tucano@@QEAV12@AEAV?$allocator@VVertexAttribute@Tucano@@@0@@Z
+	??$_Emplace_back@AEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAAXAEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@@Z
+	??$_Emplace_back@AEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAAXAEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@@Z
+	??$_Emplace_back@AEAVVertexAttribute@Tucano@@@?$_Uninitialized_backout_al@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAAXAEAVVertexAttribute@Tucano@@@Z
+	??$_Emplace_back@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAAX$$QEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@@Z
+	??$_Emplace_back@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAAX$$QEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@@Z
+	??$_Emplace_back@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAAX$$QEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@@Z
+	??$_Emplace_back@VVertexAttribute@Tucano@@@?$_Uninitialized_backout_al@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAAX$$QEAVVertexAttribute@Tucano@@@Z
+	??$_Emplace_back_with_unused_capacity@AEBI@?$vector@IV?$allocator@I@std@@@std@@AEAAAEAIAEBI@Z
+	??$_Emplace_back_with_unused_capacity@AEBM@?$vector@MV?$allocator@M@std@@@std@@AEAAAEAMAEBM@Z
+	??$_Emplace_back_with_unused_capacity@AEBQEAVElement@GUI@Tucano@@@?$vector@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@AEAAAEAPEAVElement@GUI@Tucano@@AEBQEAV234@@Z
+	??$_Emplace_back_with_unused_capacity@AEBQEAVShader@Tucano@@@?$vector@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@AEAAAEAPEAVShader@Tucano@@AEBQEAV23@@Z
+	??$_Emplace_back_with_unused_capacity@AEBV?$Matrix@M$01$00$0A@$01$00@Eigen@@@?$vector@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@AEAAAEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@AEBV23@@Z
+	??$_Emplace_back_with_unused_capacity@AEBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@AEAAAEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@AEBV23@@Z
+	??$_Emplace_back_with_unused_capacity@AEBV?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@AEAAAEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@AEBV23@@Z
+	??$_Emplace_back_with_unused_capacity@AEBVVertexAttribute@Tucano@@@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEAAAEAVVertexAttribute@Tucano@@AEBV23@@Z
+	??$_Emplace_back_with_unused_capacity@H@?$vector@HV?$allocator@H@std@@@std@@AEAAAEAH$$QEAH@Z
+	??$_Emplace_back_with_unused_capacity@I@?$vector@IV?$allocator@I@std@@@std@@AEAAAEAI$$QEAI@Z
+	??$_Emplace_back_with_unused_capacity@M@?$vector@MV?$allocator@M@std@@@std@@AEAAAEAM$$QEAM@Z
+	??$_Emplace_back_with_unused_capacity@PEAVShader@Tucano@@@?$vector@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@AEAAAEAPEAVShader@Tucano@@$$QEAPEAV23@@Z
+	??$_Emplace_back_with_unused_capacity@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@?$vector@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@AEAAAEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@$$QEAV23@@Z
+	??$_Emplace_back_with_unused_capacity@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@AEAAAEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@$$QEAV23@@Z
+	??$_Emplace_back_with_unused_capacity@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@AEAAAEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@$$QEAV23@@Z
 	??$_Emplace_reallocate@AEBI@?$vector@IV?$allocator@I@std@@@std@@QEAAPEAIQEAIAEBI@Z
 	??$_Emplace_reallocate@AEBM@?$vector@MV?$allocator@M@std@@@std@@QEAAPEAMQEAMAEBM@Z
 	??$_Emplace_reallocate@AEBQEAVElement@GUI@Tucano@@@?$vector@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@QEAAPEAPEAVElement@GUI@Tucano@@QEAPEAV234@AEBQEAV234@@Z
@@ -285,101 +283,44 @@ EXPORTS
 	??$_Emplace_reallocate@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@?$vector@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@QEAV23@$$QEAV23@@Z
 	??$_Emplace_reallocate@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAV23@$$QEAV23@@Z
 	??$_Emplace_reallocate@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@QEAV23@$$QEAV23@@Z
-	??$_Enable_shared_from_this1@II@std@@YAXAEBV?$shared_ptr@I@0@PEAIU?$integral_constant@_N$0A@@0@@Z
-	??$_Enable_shared_from_this@II@std@@YAXAEBV?$shared_ptr@I@0@PEAI@Z
 	??$_Fgetc@D@std@@YA_NAEADPEAU_iobuf@@@Z
 	??$_Fputc@D@std@@YA_NDPEAU_iobuf@@@Z
 	??$_Get_size_of_n@$00@std@@YA_K_K@Z
 	??$_Get_size_of_n@$03@std@@YA_K_K@Z
 	??$_Get_size_of_n@$07@std@@YA_K_K@Z
 	??$_Get_size_of_n@$0BA@@std@@YA_K_K@Z
-	??$_Get_size_of_n@$0EI@@std@@YA_K_K@Z
+	??$_Get_size_of_n@$0FA@@std@@YA_K_K@Z
 	??$_Get_size_of_n@$0M@@std@@YA_K_K@Z
-	??$_Get_unwrapped@H@std@@YAPEAHQEAH@Z
-	??$_Get_unwrapped@I@std@@YAPEAIQEAI@Z
-	??$_Get_unwrapped@M@std@@YAPEAMQEAM@Z
-	??$_Get_unwrapped@PEAVElement@GUI@Tucano@@@std@@YAPEAPEAVElement@GUI@Tucano@@QEAPEAV123@@Z
-	??$_Get_unwrapped@PEAVShader@Tucano@@@std@@YAPEAPEAVShader@Tucano@@QEAPEAV12@@Z
-	??$_Get_unwrapped@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@YAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@QEAV12@@Z
-	??$_Get_unwrapped@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@YAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAV12@@Z
-	??$_Get_unwrapped@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@YAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@QEAV12@@Z
-	??$_Get_unwrapped@VVertexAttribute@Tucano@@@std@@YAPEAVVertexAttribute@Tucano@@QEAV12@@Z
-	??$_Get_unwrapped_n@H_J$0A@@std@@YAPEAHQEAH_J@Z
-	??$_Get_unwrapped_n@I_J$0A@@std@@YAPEAIQEAI_J@Z
-	??$_Get_unwrapped_n@M_J$0A@@std@@YAPEAMQEAM_J@Z
-	??$_Get_unwrapped_n@PEAVElement@GUI@Tucano@@_J$0A@@std@@YAPEAPEAVElement@GUI@Tucano@@QEAPEAV123@_J@Z
-	??$_Get_unwrapped_n@PEAVShader@Tucano@@_J$0A@@std@@YAPEAPEAVShader@Tucano@@QEAPEAV12@_J@Z
-	??$_Get_unwrapped_n@V?$Matrix@M$01$00$0A@$01$00@Eigen@@_J$0A@@std@@YAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@QEAV12@_J@Z
-	??$_Get_unwrapped_n@V?$Matrix@M$02$00$0A@$02$00@Eigen@@_J$0A@@std@@YAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAV12@_J@Z
-	??$_Get_unwrapped_n@V?$Matrix@M$03$00$0A@$03$00@Eigen@@_J$0A@@std@@YAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@QEAV12@_J@Z
-	??$_Get_unwrapped_n@VVertexAttribute@Tucano@@_J$0A@@std@@YAPEAVVertexAttribute@Tucano@@QEAV12@_J@Z
-	??$_Idl_distance1@PEAHPEAH@std@@YA_JAEBQEAH0Urandom_access_iterator_tag@0@@Z
-	??$_Idl_distance1@PEAIPEAI@std@@YA_JAEBQEAI0Urandom_access_iterator_tag@0@@Z
-	??$_Idl_distance1@PEAMPEAM@std@@YA_JAEBQEAM0Urandom_access_iterator_tag@0@@Z
-	??$_Idl_distance1@PEAPEAVElement@GUI@Tucano@@PEAPEAV123@@std@@YA_JAEBQEAPEAVElement@GUI@Tucano@@0Urandom_access_iterator_tag@0@@Z
-	??$_Idl_distance1@PEAPEAVShader@Tucano@@PEAPEAV12@@std@@YA_JAEBQEAPEAVShader@Tucano@@0Urandom_access_iterator_tag@0@@Z
-	??$_Idl_distance1@PEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@PEAV12@@std@@YA_JAEBQEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@0Urandom_access_iterator_tag@0@@Z
-	??$_Idl_distance1@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@PEAV12@@std@@YA_JAEBQEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@0Urandom_access_iterator_tag@0@@Z
-	??$_Idl_distance1@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@PEAV12@@std@@YA_JAEBQEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@0Urandom_access_iterator_tag@0@@Z
-	??$_Idl_distance1@PEAVVertexAttribute@Tucano@@PEAV12@@std@@YA_JAEBQEAVVertexAttribute@Tucano@@0Urandom_access_iterator_tag@0@@Z
-	??$_Idl_distance@PEAHPEAH@std@@YA_JAEBQEAH0@Z
-	??$_Idl_distance@PEAIPEAI@std@@YA_JAEBQEAI0@Z
-	??$_Idl_distance@PEAMPEAM@std@@YA_JAEBQEAM0@Z
-	??$_Idl_distance@PEAPEAVElement@GUI@Tucano@@PEAPEAV123@@std@@YA_JAEBQEAPEAVElement@GUI@Tucano@@0@Z
-	??$_Idl_distance@PEAPEAVShader@Tucano@@PEAPEAV12@@std@@YA_JAEBQEAPEAVShader@Tucano@@0@Z
-	??$_Idl_distance@PEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@PEAV12@@std@@YA_JAEBQEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@0@Z
-	??$_Idl_distance@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@PEAV12@@std@@YA_JAEBQEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@0@Z
-	??$_Idl_distance@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@PEAV12@@std@@YA_JAEBQEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@0@Z
-	??$_Idl_distance@PEAVVertexAttribute@Tucano@@PEAV12@@std@@YA_JAEBQEAVVertexAttribute@Tucano@@0@Z
+	??$_Get_unwrapped@AEAPEAVVertexAttribute@Tucano@@@std@@YAPEAVVertexAttribute@Tucano@@AEAPEAV12@@Z
+	??$_Get_unwrapped@AEBQEAH@std@@YAPEAHAEBQEAH@Z
+	??$_Get_unwrapped@AEBQEAI@std@@YAPEAIAEBQEAI@Z
+	??$_Get_unwrapped@AEBQEAM@std@@YAPEAMAEBQEAM@Z
+	??$_Get_unwrapped@AEBQEAPEAVElement@GUI@Tucano@@@std@@YAPEAPEAVElement@GUI@Tucano@@AEBQEAPEAV123@@Z
+	??$_Get_unwrapped@AEBQEAPEAVShader@Tucano@@@std@@YAPEAPEAVShader@Tucano@@AEBQEAPEAV12@@Z
+	??$_Get_unwrapped@AEBQEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@YAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@AEBQEAV12@@Z
+	??$_Get_unwrapped@AEBQEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@YAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@AEBQEAV12@@Z
+	??$_Get_unwrapped@AEBQEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@YAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@AEBQEAV12@@Z
+	??$_Get_unwrapped@AEBQEAVVertexAttribute@Tucano@@@std@@YAPEAVVertexAttribute@Tucano@@AEBQEAV12@@Z
 	??$_Insert_string@DU?$char_traits@D@std@@_K@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@QEBD_K@Z
-	??$_Max_value@_K@std@@YAAEB_KAEB_K0@Z
-	??$_Min_value@_K@std@@YAAEB_KAEB_K0@Z
 	??$_Move_construct_from@I@?$_Ptr_base@I@std@@IEAAX$$QEAV01@@Z
 	??$_Pocca@V?$allocator@D@std@@@std@@YAXAEAV?$allocator@D@0@AEBV10@@Z
-	??$_Pocca@V?$allocator@D@std@@@std@@YAXAEAV?$allocator@D@0@AEBV10@U?$integral_constant@_N$0A@@0@@Z
 	??$_Pocca@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@YAXAEAV?$allocator@VVertexAttribute@Tucano@@@0@AEBV10@@Z
-	??$_Pocca@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@YAXAEAV?$allocator@VVertexAttribute@Tucano@@@0@AEBV10@U?$integral_constant@_N$0A@@0@@Z
 	??$_Pocma@V?$allocator@D@std@@@std@@YAXAEAV?$allocator@D@0@0@Z
-	??$_Pocma@V?$allocator@D@std@@@std@@YAXAEAV?$allocator@D@0@0U?$integral_constant@_N$00@0@@Z
-	??$_Ptr_copy_cat@II@std@@YA?AU_Really_trivial_ptr_iterator_tag@0@AEBQEAI0@Z
-	??$_Ptr_copy_cat@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V12@@std@@YA?AU_General_ptr_iterator_tag@0@AEBQEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@0@Z
-	??$_Ptr_copy_cat@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V12@@std@@YA?AU_General_ptr_iterator_tag@0@AEBQEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@0@Z
-	??$_Ptr_copy_cat@VVertexAttribute@Tucano@@V12@@std@@YA?AU_General_ptr_iterator_tag@0@AEBQEAVVertexAttribute@Tucano@@0@Z
-	??$_Ptr_move_cat@HH@std@@YA?AU_Really_trivial_ptr_iterator_tag@0@AEBQEAH0@Z
-	??$_Ptr_move_cat@II@std@@YA?AU_Really_trivial_ptr_iterator_tag@0@AEBQEAI0@Z
-	??$_Ptr_move_cat@MM@std@@YA?AU_Really_trivial_ptr_iterator_tag@0@AEBQEAM0@Z
-	??$_Ptr_move_cat@PEAVElement@GUI@Tucano@@PEAV123@@std@@YA?AU_Really_trivial_ptr_iterator_tag@0@AEBQEAPEAVElement@GUI@Tucano@@0@Z
-	??$_Ptr_move_cat@PEAVShader@Tucano@@PEAV12@@std@@YA?AU_Really_trivial_ptr_iterator_tag@0@AEBQEAPEAVShader@Tucano@@0@Z
-	??$_Ptr_move_cat@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V12@@std@@YA?AU_General_ptr_iterator_tag@0@AEBQEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@0@Z
-	??$_Ptr_move_cat@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V12@@std@@YA?AU_General_ptr_iterator_tag@0@AEBQEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@0@Z
-	??$_Ptr_move_cat@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V12@@std@@YA?AU_General_ptr_iterator_tag@0@AEBQEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@0@Z
-	??$_Ptr_move_cat@VVertexAttribute@Tucano@@V12@@std@@YA?AU_General_ptr_iterator_tag@0@AEBQEAVVertexAttribute@Tucano@@0@Z
-	??$_Reallocate_for@V<lambda_66f57f934f28d61049862f64df852ff0>@@PEBD@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV01@_KV<lambda_66f57f934f28d61049862f64df852ff0>@@PEBD@Z
-	??$_Reallocate_grow_by@V<lambda_319d5e083f45f90dcdce5dce53cbb275>@@D@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV01@_KV<lambda_319d5e083f45f90dcdce5dce53cbb275>@@D@Z
-	??$_Reallocate_grow_by@V<lambda_65e615be2a453ca0576c979606f46740>@@PEBD_K@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV01@_KV<lambda_65e615be2a453ca0576c979606f46740>@@PEBD_K@Z
-	??$_Reallocate_grow_by@V<lambda_9013ee9e23efe4882b67eff5b0ecf103>@@$$V@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV01@_KV<lambda_9013ee9e23efe4882b67eff5b0ecf103>@@@Z
-	??$_Refancy@PEAD$0A@@std@@YAPEADPEAD@Z
-	??$_Seek_wrapped@H@std@@YAXAEAPEAHQEAH@Z
-	??$_Seek_wrapped@I@std@@YAXAEAPEAIQEAI@Z
-	??$_Seek_wrapped@M@std@@YAXAEAPEAMQEAM@Z
-	??$_Seek_wrapped@PEAVElement@GUI@Tucano@@@std@@YAXAEAPEAPEAVElement@GUI@Tucano@@QEAPEAV123@@Z
-	??$_Seek_wrapped@PEAVShader@Tucano@@@std@@YAXAEAPEAPEAVShader@Tucano@@QEAPEAV12@@Z
-	??$_Seek_wrapped@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@YAXAEAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@QEAV12@@Z
-	??$_Seek_wrapped@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@YAXAEAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAV12@@Z
-	??$_Seek_wrapped@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@YAXAEAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@QEAV12@@Z
-	??$_Seek_wrapped@VVertexAttribute@Tucano@@@std@@YAXAEAPEAVVertexAttribute@Tucano@@QEAV12@@Z
-	??$_Set_ptr_rep_and_enable_shared@I@?$shared_ptr@I@std@@AEAAXPEAIPEAV_Ref_count_base@1@@Z
-	??$_Setpd@PEAIV<lambda_0eb331034ec64f284d3276d5eb9bc498>@@@?$shared_ptr@I@std@@AEAAXPEAIV<lambda_0eb331034ec64f284d3276d5eb9bc498>@@@Z
-	??$_Setpd@PEAIV<lambda_1d192c76f25f01443164c3008efd2f7a>@@@?$shared_ptr@I@std@@AEAAXPEAIV<lambda_1d192c76f25f01443164c3008efd2f7a>@@@Z
-	??$_Setpd@PEAIV<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@@?$shared_ptr@I@std@@AEAAXPEAIV<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@@Z
-	??$_Setpd@PEAIV<lambda_297a8ab7031fb168e0f42b0ceacfb411>@@@?$shared_ptr@I@std@@AEAAXPEAIV<lambda_297a8ab7031fb168e0f42b0ceacfb411>@@@Z
-	??$_Setpd@PEAIV<lambda_3a3d10b6c3efd1a8679460d8f1128bfe>@@@?$shared_ptr@I@std@@AEAAXPEAIV<lambda_3a3d10b6c3efd1a8679460d8f1128bfe>@@@Z
-	??$_Setpd@PEAIV<lambda_42565b2b1ff40c7ec619f6b0eefb855d>@@@?$shared_ptr@I@std@@AEAAXPEAIV<lambda_42565b2b1ff40c7ec619f6b0eefb855d>@@@Z
-	??$_Setpd@PEAIV<lambda_59114e1161731b809247c9c49615e8bc>@@@?$shared_ptr@I@std@@AEAAXPEAIV<lambda_59114e1161731b809247c9c49615e8bc>@@@Z
-	??$_Setpd@PEAIV<lambda_7817004a68f0dccb72be0e8c40851883>@@@?$shared_ptr@I@std@@AEAAXPEAIV<lambda_7817004a68f0dccb72be0e8c40851883>@@@Z
-	??$_Setpd@PEAIV<lambda_b660b692aa17cad6c64c8293c384ce89>@@@?$shared_ptr@I@std@@AEAAXPEAIV<lambda_b660b692aa17cad6c64c8293c384ce89>@@@Z
-	??$_Setpd@PEAIV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@@?$shared_ptr@I@std@@AEAAXPEAIV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@@Z
-	??$_Setpd@PEAIV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@@?$shared_ptr@I@std@@AEAAXPEAIV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@@Z
+	??$_Reallocate_for@V<lambda_66f57f934f28d61049862f64df852ff0>@@PEBD@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAAEAV01@_KV<lambda_66f57f934f28d61049862f64df852ff0>@@PEBD@Z
+	??$_Reallocate_grow_by@V<lambda_319d5e083f45f90dcdce5dce53cbb275>@@D@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAAEAV01@_KV<lambda_319d5e083f45f90dcdce5dce53cbb275>@@D@Z
+	??$_Reallocate_grow_by@V<lambda_65e615be2a453ca0576c979606f46740>@@PEBD_K@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAAEAV01@_KV<lambda_65e615be2a453ca0576c979606f46740>@@PEBD_K@Z
+	??$_Set_ptr_rep_and_enable_shared@I@?$shared_ptr@I@std@@AEAAXQEAIQEAV_Ref_count_base@1@@Z
+	??$_Setpd@PEAIV<lambda_0eb331034ec64f284d3276d5eb9bc498>@@@?$shared_ptr@I@std@@AEAAXQEAIV<lambda_0eb331034ec64f284d3276d5eb9bc498>@@@Z
+	??$_Setpd@PEAIV<lambda_1d192c76f25f01443164c3008efd2f7a>@@@?$shared_ptr@I@std@@AEAAXQEAIV<lambda_1d192c76f25f01443164c3008efd2f7a>@@@Z
+	??$_Setpd@PEAIV<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@@?$shared_ptr@I@std@@AEAAXQEAIV<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@@Z
+	??$_Setpd@PEAIV<lambda_297a8ab7031fb168e0f42b0ceacfb411>@@@?$shared_ptr@I@std@@AEAAXQEAIV<lambda_297a8ab7031fb168e0f42b0ceacfb411>@@@Z
+	??$_Setpd@PEAIV<lambda_3a3d10b6c3efd1a8679460d8f1128bfe>@@@?$shared_ptr@I@std@@AEAAXQEAIV<lambda_3a3d10b6c3efd1a8679460d8f1128bfe>@@@Z
+	??$_Setpd@PEAIV<lambda_42565b2b1ff40c7ec619f6b0eefb855d>@@@?$shared_ptr@I@std@@AEAAXQEAIV<lambda_42565b2b1ff40c7ec619f6b0eefb855d>@@@Z
+	??$_Setpd@PEAIV<lambda_59114e1161731b809247c9c49615e8bc>@@@?$shared_ptr@I@std@@AEAAXQEAIV<lambda_59114e1161731b809247c9c49615e8bc>@@@Z
+	??$_Setpd@PEAIV<lambda_7817004a68f0dccb72be0e8c40851883>@@@?$shared_ptr@I@std@@AEAAXQEAIV<lambda_7817004a68f0dccb72be0e8c40851883>@@@Z
+	??$_Setpd@PEAIV<lambda_b660b692aa17cad6c64c8293c384ce89>@@@?$shared_ptr@I@std@@AEAAXQEAIV<lambda_b660b692aa17cad6c64c8293c384ce89>@@@Z
+	??$_Setpd@PEAIV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@@?$shared_ptr@I@std@@AEAAXQEAIV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@@Z
+	??$_Setpd@PEAIV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@@?$shared_ptr@I@std@@AEAAXQEAIV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@@Z
 	??$_Traits_compare@U?$char_traits@D@std@@@std@@YAHQEBD_K01@Z
 	??$_Traits_find@U?$char_traits@D@std@@@std@@YA_KQEBD_K101@Z
 	??$_Traits_find_last_of@U?$char_traits@D@std@@@std@@YA_KQEBD_K101U?$integral_constant@_N$00@0@@Z
@@ -394,6 +335,7 @@ EXPORTS
 	??$_Unfancy@M@std@@YAPEAMPEAM@Z
 	??$_Unfancy@PEAVElement@GUI@Tucano@@@std@@YAPEAPEAVElement@GUI@Tucano@@PEAPEAV123@@Z
 	??$_Unfancy@PEAVShader@Tucano@@@std@@YAPEAPEAVShader@Tucano@@PEAPEAV12@@Z
+	??$_Unfancy@U_Container_proxy@std@@@std@@YAPEAU_Container_proxy@0@PEAU10@@Z
 	??$_Unfancy@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@YAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@PEAV12@@Z
 	??$_Unfancy@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@YAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@PEAV12@@Z
 	??$_Unfancy@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@YAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@PEAV12@@Z
@@ -401,34 +343,21 @@ EXPORTS
 	??$_Unfancy_maybe_null@I@std@@YAPEAIPEAI@Z
 	??$_Unfancy_maybe_null@M@std@@YAPEAMPEAM@Z
 	??$_Ungetc@D@std@@YA_NAEBDPEAU_iobuf@@@Z
-	??$_Uninitialized_copy@PEAIPEAIV?$allocator@I@std@@@std@@YAPEAIQEAI0PEAIAEAV?$allocator@I@0@@Z
-	??$_Uninitialized_copy@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@PEAV12@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAV12@0PEAV12@AEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@0@@Z
-	??$_Uninitialized_copy@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@PEAV12@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@QEAV12@0PEAV12@AEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@0@@Z
-	??$_Uninitialized_copy@PEAVVertexAttribute@Tucano@@PEAV12@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@YAPEAVVertexAttribute@Tucano@@QEAV12@0PEAV12@AEAV?$allocator@VVertexAttribute@Tucano@@@0@@Z
-	??$_Uninitialized_copy_al_unchecked@IIV?$allocator@I@std@@@std@@YAPEAIQEAI00AEAV?$allocator@I@0@U_Really_trivial_ptr_iterator_tag@0@U?$integral_constant@_N$00@0@@Z
-	??$_Uninitialized_copy_al_unchecked@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@PEAV12@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@PEAV12@QEAV12@1AEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@0@U_General_ptr_iterator_tag@0@U_Unused_parameter@0@@Z
-	??$_Uninitialized_copy_al_unchecked@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@PEAV12@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@PEAV12@QEAV12@1AEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@0@U_General_ptr_iterator_tag@0@U_Unused_parameter@0@@Z
-	??$_Uninitialized_copy_al_unchecked@PEAVVertexAttribute@Tucano@@PEAV12@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@YAPEAVVertexAttribute@Tucano@@PEAV12@QEAV12@1AEAV?$allocator@VVertexAttribute@Tucano@@@0@U_General_ptr_iterator_tag@0@U_Unused_parameter@0@@Z
-	??$_Uninitialized_move@PEAHPEAHV?$allocator@H@std@@@std@@YAPEAHQEAH0PEAHAEAV?$allocator@H@0@@Z
-	??$_Uninitialized_move@PEAIPEAIV?$allocator@I@std@@@std@@YAPEAIQEAI0PEAIAEAV?$allocator@I@0@@Z
-	??$_Uninitialized_move@PEAMPEAMV?$allocator@M@std@@@std@@YAPEAMQEAM0PEAMAEAV?$allocator@M@0@@Z
-	??$_Uninitialized_move@PEAPEAVElement@GUI@Tucano@@PEAPEAV123@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@YAPEAPEAVElement@GUI@Tucano@@QEAPEAV123@0PEAPEAV123@AEAV?$allocator@PEAVElement@GUI@Tucano@@@0@@Z
-	??$_Uninitialized_move@PEAPEAVShader@Tucano@@PEAPEAV12@V?$allocator@PEAVShader@Tucano@@@std@@@std@@YAPEAPEAVShader@Tucano@@QEAPEAV12@0PEAPEAV12@AEAV?$allocator@PEAVShader@Tucano@@@0@@Z
-	??$_Uninitialized_move@PEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@PEAV12@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@QEAV12@0PEAV12@AEAV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@0@@Z
-	??$_Uninitialized_move@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@PEAV12@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAV12@0PEAV12@AEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@0@@Z
-	??$_Uninitialized_move@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@PEAV12@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@QEAV12@0PEAV12@AEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@0@@Z
-	??$_Uninitialized_move@PEAVVertexAttribute@Tucano@@PEAV12@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@YAPEAVVertexAttribute@Tucano@@QEAV12@0PEAV12@AEAV?$allocator@VVertexAttribute@Tucano@@@0@@Z
-	??$_Uninitialized_move_al_unchecked@HHV?$allocator@H@std@@@std@@YAPEAHQEAH00AEAV?$allocator@H@0@U_Really_trivial_ptr_iterator_tag@0@U?$integral_constant@_N$00@0@@Z
-	??$_Uninitialized_move_al_unchecked@IIV?$allocator@I@std@@@std@@YAPEAIQEAI00AEAV?$allocator@I@0@U_Really_trivial_ptr_iterator_tag@0@U?$integral_constant@_N$00@0@@Z
-	??$_Uninitialized_move_al_unchecked@MMV?$allocator@M@std@@@std@@YAPEAMQEAM00AEAV?$allocator@M@0@U_Really_trivial_ptr_iterator_tag@0@U?$integral_constant@_N$00@0@@Z
-	??$_Uninitialized_move_al_unchecked@PEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@PEAV12@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@PEAV12@QEAV12@1AEAV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@0@U_General_ptr_iterator_tag@0@U_Unused_parameter@0@@Z
-	??$_Uninitialized_move_al_unchecked@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@PEAV12@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@PEAV12@QEAV12@1AEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@0@U_General_ptr_iterator_tag@0@U_Unused_parameter@0@@Z
-	??$_Uninitialized_move_al_unchecked@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@PEAV12@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@PEAV12@QEAV12@1AEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@0@U_General_ptr_iterator_tag@0@U_Unused_parameter@0@@Z
-	??$_Uninitialized_move_al_unchecked@PEAVElement@GUI@Tucano@@PEAV123@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@YAPEAPEAVElement@GUI@Tucano@@QEAPEAV123@00AEAV?$allocator@PEAVElement@GUI@Tucano@@@0@U_Really_trivial_ptr_iterator_tag@0@U?$integral_constant@_N$00@0@@Z
-	??$_Uninitialized_move_al_unchecked@PEAVShader@Tucano@@PEAV12@V?$allocator@PEAVShader@Tucano@@@std@@@std@@YAPEAPEAVShader@Tucano@@QEAPEAV12@00AEAV?$allocator@PEAVShader@Tucano@@@0@U_Really_trivial_ptr_iterator_tag@0@U?$integral_constant@_N$00@0@@Z
-	??$_Uninitialized_move_al_unchecked@PEAVVertexAttribute@Tucano@@PEAV12@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@YAPEAVVertexAttribute@Tucano@@PEAV12@QEAV12@1AEAV?$allocator@VVertexAttribute@Tucano@@@0@U_General_ptr_iterator_tag@0@U_Unused_parameter@0@@Z
-	??$_Uninitialized_value_construct_n1@PEAM_KV?$allocator@M@std@@@std@@YAPEAMPEAM_KAEAV?$allocator@M@0@U?$integral_constant@_N$00@0@@Z
-	??$_Uninitialized_value_construct_n@PEAM_KV?$allocator@M@std@@@std@@YAPEAMPEAM_KAEAV?$allocator@M@0@@Z
+	??$_Uninitialized_copy@PEAIV?$allocator@I@std@@@std@@YAPEAIQEAI0PEAIAEAV?$allocator@I@0@@Z
+	??$_Uninitialized_copy@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAV12@0PEAV12@AEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@0@@Z
+	??$_Uninitialized_copy@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@QEAV12@0PEAV12@AEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@0@@Z
+	??$_Uninitialized_copy@PEAVVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@YAPEAVVertexAttribute@Tucano@@QEAV12@0PEAV12@AEAV?$allocator@VVertexAttribute@Tucano@@@0@@Z
+	??$_Uninitialized_move@PEAHV?$allocator@H@std@@@std@@YAPEAHQEAH0PEAHAEAV?$allocator@H@0@@Z
+	??$_Uninitialized_move@PEAIV?$allocator@I@std@@@std@@YAPEAIQEAI0PEAIAEAV?$allocator@I@0@@Z
+	??$_Uninitialized_move@PEAMV?$allocator@M@std@@@std@@YAPEAMQEAM0PEAMAEAV?$allocator@M@0@@Z
+	??$_Uninitialized_move@PEAPEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@YAPEAPEAVElement@GUI@Tucano@@QEAPEAV123@0PEAPEAV123@AEAV?$allocator@PEAVElement@GUI@Tucano@@@0@@Z
+	??$_Uninitialized_move@PEAPEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@YAPEAPEAVShader@Tucano@@QEAPEAV12@0PEAPEAV12@AEAV?$allocator@PEAVShader@Tucano@@@0@@Z
+	??$_Uninitialized_move@PEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@QEAV12@0PEAV12@AEAV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@0@@Z
+	??$_Uninitialized_move@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@QEAV12@0PEAV12@AEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@0@@Z
+	??$_Uninitialized_move@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@YAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@QEAV12@0PEAV12@AEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@0@@Z
+	??$_Uninitialized_move@PEAVVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@YAPEAVVertexAttribute@Tucano@@QEAV12@0PEAV12@AEAV?$allocator@VVertexAttribute@Tucano@@@0@@Z
+	??$_Uninitialized_value_construct_n@V?$allocator@M@std@@@std@@YAPEAMPEAM_KAEAV?$allocator@M@0@@Z
+	??$_Verify_range@VVertexAttribute@Tucano@@@std@@YAXQEBVVertexAttribute@Tucano@@0@Z
 	??$_Zero_range@PEAM@std@@YAPEAMQEAM0@Z
 	??$_init1@V?$MatrixBase@V?$Block@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@$02$00$0A@@Eigen@@@Eigen@@V?$Block@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@$02$00$0A@@2@@?$PlainObjectBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@IEAAXAEBV?$DenseBase@V?$Block@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@$02$00$0A@@Eigen@@@1@@Z
 	??$_init1@V?$MatrixBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@@?$PlainObjectBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@IEAAXAEBV?$DenseBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@1@@Z
@@ -477,16 +406,20 @@ EXPORTS
 	??$addressof@$$CBV<lambda_b660b692aa17cad6c64c8293c384ce89>@@@std@@YAPEBV<lambda_b660b692aa17cad6c64c8293c384ce89>@@AEBV1@@Z
 	??$addressof@$$CBV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@@std@@YAPEBV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@AEBV1@@Z
 	??$addressof@$$CBV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@@std@@YAPEBV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@AEBV1@@Z
+	??$addressof@$$CBV?$_String_val@U?$_Simple_types@D@std@@@std@@@std@@YAPEBV?$_String_val@U?$_Simple_types@D@std@@@0@AEBV10@@Z
 	??$addressof@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YAPEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@AEBV10@@Z
 	??$addressof@$$CBV?$codecvt@DDU_Mbstatet@@@std@@@std@@YAPEBV?$codecvt@DDU_Mbstatet@@@0@AEBV10@@Z
 	??$addressof@$$CBV?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@YAPEBV?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@0@AEBV10@@Z
 	??$addressof@PEAD@std@@YAPEAPEADAEAPEAD@Z
+	??$addressof@U_Container_base12@std@@@std@@YAPEAU_Container_base12@0@AEAU10@@Z
+	??$addressof@U_Container_proxy@std@@@std@@YAPEAU_Container_proxy@0@AEAU10@@Z
 	??$addressof@V?$_String_val@U?$_Simple_types@D@std@@@std@@@std@@YAPEAV?$_String_val@U?$_Simple_types@D@std@@@0@AEAV10@@Z
+	??$addressof@V?$basic_filebuf@DU?$char_traits@D@std@@@std@@@std@@YAPEAV?$basic_filebuf@DU?$char_traits@D@std@@@0@AEAV10@@Z
 	??$addressof@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YAPEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@AEAV10@@Z
 	??$addressof@V?$unique_ptr@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@@std@@YAPEAV?$unique_ptr@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@0@AEAV10@@Z
 	??$advance@PEAVVertexAttribute@Tucano@@_J@std@@YAXAEAPEAVVertexAttribute@Tucano@@_J@Z
 	??$applyThisOnTheRight@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@?$EigenBase@V?$Matrix@M$02$02$0A@$02$02@Eigen@@@Eigen@@QEBAXAEAV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@1@@Z
-	??$assign@PEAVVertexAttribute@Tucano@@X@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAAXPEAVVertexAttribute@Tucano@@0@Z
+	??$assign@PEAVVertexAttribute@Tucano@@$0A@@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAAXPEAVVertexAttribute@Tucano@@0@Z
 	??$assignPacket@$0BA@$0BA@T__m128@@@?$generic_dense_assignment_kernel@U?$evaluator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@internal@Eigen@@U123@U?$assign_op@MM@23@$0A@@internal@Eigen@@QEAAX_J0@Z
 	??$assignPacket@$0BA@$0BA@T__m128@@@?$generic_dense_assignment_kernel@U?$evaluator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@internal@Eigen@@U123@U?$swap_assign_op@M@23@$0A@@internal@Eigen@@QEAAX_J0@Z
 	??$assignPacket@$0BA@$0BA@T__m128@@@?$generic_dense_assignment_kernel@U?$evaluator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@internal@Eigen@@U?$evaluator@V?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@3@@Eigen@@@23@U?$assign_op@MM@23@$0A@@internal@Eigen@@QEAAX_J0@Z
@@ -640,6 +573,37 @@ EXPORTS
 	??$checkSanity@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@@?$MapBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@IEBAXPEAX@Z
 	??$checkSanity@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$0A@@Eigen@@@?$MapBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$0A@@Eigen@@$0A@@Eigen@@IEBAXPEAX@Z
 	??$checkSanity@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@?$MapBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$0A@@Eigen@@IEBAXPEAX@Z
+	??$check_for_aliasing@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@@internal@Eigen@@YAXAEBV?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@1@AEBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@1@@Z
+	??$check_for_aliasing@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$00$02$00$00$02@3@@2@@internal@Eigen@@YAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@1@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$00$02$00$00$02@3@@1@@Z
+	??$check_for_aliasing@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@$0A@@3@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@3@@2@@internal@Eigen@@YAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@1@AEBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@$0A@@3@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@3@@1@@Z
+	??$check_for_aliasing@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$0A@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@@internal@Eigen@@YAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$0A@@1@AEBV?$Matrix@M$02$00$0A@$02$00@1@@Z
+	??$check_for_aliasing@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@2@@internal@Eigen@@YAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@1@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@1@@Z
+	??$check_for_aliasing@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@@internal@Eigen@@YAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@1@AEBV?$Matrix@M$02$02$0A@$02$02@1@@Z
+	??$check_for_aliasing@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$DiagonalWrapper@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@2@$00@2@@internal@Eigen@@YAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@1@AEBV?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$DiagonalWrapper@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@2@$00@1@@Z
+	??$check_for_aliasing@V?$Diagonal@V?$Matrix@M$02$02$0A@$02$02@Eigen@@$0A@@Eigen@@V?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$ArrayWrapper@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Array@M$02$00$0A@$02$00@3@@3@@2@@internal@Eigen@@YAXAEBV?$Diagonal@V?$Matrix@M$02$02$0A@$02$02@Eigen@@$0A@@1@AEBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$ArrayWrapper@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Array@M$02$00$0A@$02$00@3@@3@@1@@Z
+	??$check_for_aliasing@V?$Matrix@H$01$00$0A@$01$00@Eigen@@V12@@internal@Eigen@@YAXAEBV?$Matrix@H$01$00$0A@$01$00@1@0@Z
+	??$check_for_aliasing@V?$Matrix@H$01$00$0A@$01$00@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@H@internal@Eigen@@V?$Matrix@H$01$00$0A@$01$00@3@@2@@internal@Eigen@@YAXAEBV?$Matrix@H$01$00$0A@$01$00@1@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@H@internal@Eigen@@V?$Matrix@H$01$00$0A@$01$00@3@@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V12@@internal@Eigen@@YAXAEBV?$Matrix@M$01$00$0A@$01$00@1@0@Z
+	??$check_for_aliasing@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$01$00$0A@$01$00@3@$$CBV43@@2@@internal@Eigen@@YAXAEBV?$Matrix@M$01$00$0A@$01$00@1@AEBV?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$01$00$0A@$01$00@3@$$CBV43@@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V12@@internal@Eigen@@YAXAEBV?$Matrix@M$02$00$0A@$02$00@1@0@Z
+	??$check_for_aliasing@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$Block@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@$02$00$0A@@2@@internal@Eigen@@YAXAEBV?$Matrix@M$02$00$0A@$02$00@1@AEBV?$Block@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@$02$00$0A@@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@@internal@Eigen@@YAXAEBV?$Matrix@M$02$00$0A@$02$00@1@AEBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@2@@internal@Eigen@@YAXAEBV?$Matrix@M$02$00$0A@$02$00@1@AEBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@2@@internal@Eigen@@YAXAEBV?$Matrix@M$02$00$0A@$02$00@1@AEBV?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@@internal@Eigen@@YAXAEBV?$Matrix@M$02$00$0A@$02$00@1@AEBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@2@@internal@Eigen@@YAXAEBV?$Matrix@M$02$00$0A@$02$00@1@AEBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$00$0A@$02$00@3@@2@@internal@Eigen@@YAXAEBV?$Matrix@M$02$00$0A@$02$00@1@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$00$0A@$02$00@3@@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@$00@2@@internal@Eigen@@YAXAEBV?$Matrix@M$02$00$0A@$02$00@1@AEBV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@$00@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@$00@2@@internal@Eigen@@YAXAEBV?$Matrix@M$02$00$0A@$02$00@1@AEBV?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@$00@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@$00@2@@internal@Eigen@@YAXAEBV?$Matrix@M$02$00$0A@$02$00@1@AEBV?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@$00@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$02$02$0A@$02$02@Eigen@@V?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V12@$00@2@@internal@Eigen@@YAXAEBV?$Matrix@M$02$02$0A@$02$02@1@AEBV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V12@$00@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$02$02$0A@$02$02@Eigen@@V?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@$00@2@@internal@Eigen@@YAXAEBV?$Matrix@M$02$02$0A@$02$02@1@AEBV?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@$00@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V12@@internal@Eigen@@YAXAEBV?$Matrix@M$03$00$0A@$03$00@1@0@Z
+	??$check_for_aliasing@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@3@@2@@internal@Eigen@@YAXAEBV?$Matrix@M$03$00$0A@$03$00@1@AEBV?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@3@@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$00$0A@$03$00@3@@2@@internal@Eigen@@YAXAEBV?$Matrix@M$03$00$0A@$03$00@1@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$00$0A@$03$00@3@@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$03$03$0A@$03$03@Eigen@@V12@@internal@Eigen@@YAXAEBV?$Matrix@M$03$03$0A@$03$03@1@0@Z
+	??$check_for_aliasing@V?$Matrix@M$03$03$0A@$03$03@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@2@@internal@Eigen@@YAXAEBV?$Matrix@M$03$03$0A@$03$03@1@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@1@@Z
+	??$check_for_aliasing@V?$Matrix@M$03$03$0A@$03$03@Eigen@@V?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@2@@internal@Eigen@@YAXAEBV?$Matrix@M$03$03$0A@$03$03@1@AEBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@1@@Z
 	??$check_static_allocation_size@H$01@internal@Eigen@@YAXXZ
 	??$check_static_allocation_size@M$01@internal@Eigen@@YAXXZ
 	??$check_static_allocation_size@M$02@internal@Eigen@@YAXXZ
@@ -660,7 +624,6 @@ EXPORTS
 	??$construct@II@?$_Default_allocator_traits@V?$allocator@I@std@@@std@@SAXAEAV?$allocator@I@1@QEAI$$QEAI@Z
 	??$construct@MAEBM@?$_Default_allocator_traits@V?$allocator@M@std@@@std@@SAXAEAV?$allocator@M@1@QEAMAEBM@Z
 	??$construct@MM@?$_Default_allocator_traits@V?$allocator@M@std@@@std@@SAXAEAV?$allocator@M@1@QEAM$$QEAM@Z
-	??$construct@PEADAEBQEAD@?$_Default_allocator_traits@V?$allocator@D@std@@@std@@SAXAEAV?$allocator@D@1@QEAPEADAEBQEAD@Z
 	??$construct@PEAVElement@GUI@Tucano@@AEBQEAV123@@?$_Default_allocator_traits@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@SAXAEAV?$allocator@PEAVElement@GUI@Tucano@@@1@QEAPEAVElement@GUI@Tucano@@AEBQEAV345@@Z
 	??$construct@PEAVShader@Tucano@@AEBQEAV12@@?$_Default_allocator_traits@V?$allocator@PEAVShader@Tucano@@@std@@@std@@SAXAEAV?$allocator@PEAVShader@Tucano@@@1@QEAPEAVShader@Tucano@@AEBQEAV34@@Z
 	??$construct@PEAVShader@Tucano@@PEAV12@@?$_Default_allocator_traits@V?$allocator@PEAVShader@Tucano@@@std@@@std@@SAXAEAV?$allocator@PEAVShader@Tucano@@@1@QEAPEAVShader@Tucano@@$$QEAPEAV34@@Z
@@ -685,35 +648,37 @@ EXPORTS
 	??$cwiseProduct@V?$Block@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@$02$00$00@Eigen@@@?$MatrixBase@V?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@Eigen@@@Eigen@@QEBA?BV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@$02$00$00@3@@1@AEBV?$MatrixBase@V?$Block@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@$02$00$00@Eigen@@@1@@Z
 	??$cwiseProduct@V?$Block@$$CBV?$Matrix@M$02$02$0A@$02$02@Eigen@@$02$00$00@Eigen@@@?$MatrixBase@V?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@Eigen@@@Eigen@@QEBA?BV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Matrix@M$02$02$0A@$02$02@Eigen@@$02$00$00@3@@1@AEBV?$MatrixBase@V?$Block@$$CBV?$Matrix@M$02$02$0A@$02$02@Eigen@@$02$00$00@Eigen@@@1@@Z
 	??$cwiseProduct@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$MatrixBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@QEBA?BV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@1@AEBV01@@Z
-	??$destroy@PEAD@?$_Default_allocator_traits@V?$allocator@D@std@@@std@@SAXAEAV?$allocator@D@1@QEAPEAD@Z
 	??$destroy@VVertexAttribute@Tucano@@@?$_Default_allocator_traits@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@SAXAEAV?$allocator@VVertexAttribute@Tucano@@@1@QEAVVertexAttribute@Tucano@@@Z
 	??$distance@PEAVVertexAttribute@Tucano@@@std@@YA_JPEAVVertexAttribute@Tucano@@0@Z
 	??$dot@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$MatrixBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@QEBAMAEBV01@@Z
-	??$emplace_back@AEBI@?$vector@IV?$allocator@I@std@@@std@@QEAAXAEBI@Z
-	??$emplace_back@AEBM@?$vector@MV?$allocator@M@std@@@std@@QEAAXAEBM@Z
-	??$emplace_back@AEBQEAVElement@GUI@Tucano@@@?$vector@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@QEAAXAEBQEAVElement@GUI@Tucano@@@Z
-	??$emplace_back@AEBQEAVShader@Tucano@@@?$vector@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@QEAAXAEBQEAVShader@Tucano@@@Z
-	??$emplace_back@AEBV?$Matrix@M$01$00$0A@$01$00@Eigen@@@?$vector@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAAXAEBV?$Matrix@M$01$00$0A@$01$00@Eigen@@@Z
-	??$emplace_back@AEBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAAXAEBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@Z
-	??$emplace_back@AEBV?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAAXAEBV?$Matrix@M$03$00$0A@$03$00@Eigen@@@Z
-	??$emplace_back@AEBVVertexAttribute@Tucano@@@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAAXAEBVVertexAttribute@Tucano@@@Z
-	??$emplace_back@H@?$vector@HV?$allocator@H@std@@@std@@QEAAX$$QEAH@Z
-	??$emplace_back@I@?$vector@IV?$allocator@I@std@@@std@@QEAAX$$QEAI@Z
-	??$emplace_back@M@?$vector@MV?$allocator@M@std@@@std@@QEAAX$$QEAM@Z
-	??$emplace_back@PEAVShader@Tucano@@@?$vector@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@QEAAX$$QEAPEAVShader@Tucano@@@Z
-	??$emplace_back@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@?$vector@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAAX$$QEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@@Z
-	??$emplace_back@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAAX$$QEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@@Z
-	??$emplace_back@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAAX$$QEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@@Z
+	??$emplace_back@AEBI@?$vector@IV?$allocator@I@std@@@std@@QEAAAEAIAEBI@Z
+	??$emplace_back@AEBM@?$vector@MV?$allocator@M@std@@@std@@QEAAAEAMAEBM@Z
+	??$emplace_back@AEBQEAVElement@GUI@Tucano@@@?$vector@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@QEAAAEAPEAVElement@GUI@Tucano@@AEBQEAV234@@Z
+	??$emplace_back@AEBQEAVShader@Tucano@@@?$vector@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@QEAAAEAPEAVShader@Tucano@@AEBQEAV23@@Z
+	??$emplace_back@AEBV?$Matrix@M$01$00$0A@$01$00@Eigen@@@?$vector@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAAAEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@AEBV23@@Z
+	??$emplace_back@AEBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAAAEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@AEBV23@@Z
+	??$emplace_back@AEBV?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAAAEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@AEBV23@@Z
+	??$emplace_back@AEBVVertexAttribute@Tucano@@@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAAAEAVVertexAttribute@Tucano@@AEBV23@@Z
+	??$emplace_back@H@?$vector@HV?$allocator@H@std@@@std@@QEAAAEAH$$QEAH@Z
+	??$emplace_back@I@?$vector@IV?$allocator@I@std@@@std@@QEAAAEAI$$QEAI@Z
+	??$emplace_back@M@?$vector@MV?$allocator@M@std@@@std@@QEAAAEAM$$QEAM@Z
+	??$emplace_back@PEAVShader@Tucano@@@?$vector@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@QEAAAEAPEAVShader@Tucano@@$$QEAPEAV23@@Z
+	??$emplace_back@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@?$vector@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAAAEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@$$QEAV23@@Z
+	??$emplace_back@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAAAEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@$$QEAV23@@Z
+	??$emplace_back@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAAAEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@$$QEAV23@@Z
 	??$endl@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z
 	??$evalTo@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$generic_product_impl@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@UDenseShape@2@U42@$02@internal@Eigen@@SAXAEAV?$Matrix@M$02$00$0A@$02$00@2@AEBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@2@AEBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@@Z
 	??$evalTo@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$generic_product_impl@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@UDenseShape@2@U42@$02@internal@Eigen@@SAXAEAV?$Matrix@M$02$00$0A@$02$00@2@AEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@2@AEBV?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@@Z
 	??$evalTo@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$generic_product_impl@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@UDenseShape@2@U42@$02@internal@Eigen@@SAXAEAV?$Matrix@M$02$00$0A@$02$00@2@AEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@2@AEBV32@@Z
 	??$evalTo@V?$Matrix@M$02$02$0A@$02$02@Eigen@@@?$generic_product_impl@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V12@UDenseShape@2@U32@$02@internal@Eigen@@SAXAEAV?$Matrix@M$02$02$0A@$02$02@2@AEBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@2@1@Z
 	??$evalTo@V?$Matrix@M$02$02$0A@$02$02@Eigen@@@?$generic_product_impl@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@UDenseShape@2@U42@$02@internal@Eigen@@SAXAEAV?$Matrix@M$02$02$0A@$02$02@2@AEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@2@AEBV32@@Z
+	??$exchange@PEAUSceneImpl@tucanow@@AEAPEAU12@@std@@YAPEAUSceneImpl@tucanow@@AEAPEAU12@0@Z
+	??$exchange@PEAUSceneImpl@tucanow@@PEAU12@@std@@YAPEAUSceneImpl@tucanow@@AEAPEAU12@$$QEAPEAU12@@Z
+	??$exchange@PEAU_Container_proxy@std@@$$T@std@@YAPEAU_Container_proxy@0@AEAPEAU10@$$QEA$$T@Z
+	??$exchange@PEAV_Facet_base@std@@PEAV12@@std@@YAPEAV_Facet_base@0@AEAPEAV10@$$QEAPEAV10@@Z
 	??$flush@DU?$char_traits@D@std@@@std@@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@0@AEAV10@@Z
 	??$forward@AEAPEAI@std@@YAAEAPEAIAEAPEAI@Z
 	??$forward@AEAPEAUGuiImpl@tucanow@@@std@@YAAEAPEAUGuiImpl@tucanow@@AEAPEAU12@@Z
-	??$forward@AEAPEAUSceneImpl@tucanow@@@std@@YAAEAPEAUSceneImpl@tucanow@@AEAPEAU12@@Z
 	??$forward@AEAPEAV_Facet_base@std@@@std@@YAAEAPEAV_Facet_base@0@AEAPEAV10@@Z
 	??$forward@AEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@YAAEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@AEAV12@@Z
 	??$forward@AEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@YAAEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@AEAV12@@Z
@@ -732,6 +697,8 @@ EXPORTS
 	??$forward@H@std@@YA$$QEAHAEAH@Z
 	??$forward@I@std@@YA$$QEAIAEAI@Z
 	??$forward@M@std@@YA$$QEAMAEAM@Z
+	??$forward@PEAUSceneImpl@tucanow@@@std@@YA$$QEAPEAUSceneImpl@tucanow@@AEAPEAU12@@Z
+	??$forward@PEAU_Container_base12@std@@@std@@YA$$QEAPEAU_Container_base12@0@AEAPEAU10@@Z
 	??$forward@PEAVShader@Tucano@@@std@@YA$$QEAPEAVShader@Tucano@@AEAPEAV12@@Z
 	??$forward@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@YA$$QEAU?$default_delete@USceneImpl@tucanow@@@0@AEAU10@@Z
 	??$forward@V<lambda_0eb331034ec64f284d3276d5eb9bc498>@@@std@@YA$$QEAV<lambda_0eb331034ec64f284d3276d5eb9bc498>@@AEAV1@@Z
@@ -759,17 +726,6 @@ EXPORTS
 	??$head@$02@?$DenseBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@Eigen@@QEAA?AV?$VectorBlock@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02@1@_J@Z
 	??$head@$02@?$DenseBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@Eigen@@QEBA?BV?$VectorBlock@$$CBV?$Matrix@M$03$00$0A@$03$00@Eigen@@$02@1@_J@Z
 	??$head@H@?$DenseBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@QEAA?AV?$VectorBlock@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0@1@H@Z
-	??$ignore_unused_variable@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$0A@@Eigen@@@internal@Eigen@@YAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$0A@@1@@Z
-	??$ignore_unused_variable@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@internal@Eigen@@YAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@1@@Z
-	??$ignore_unused_variable@V?$CwiseBinaryOp@U?$scalar_conj_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@internal@Eigen@@YAXAEBV?$CwiseBinaryOp@U?$scalar_conj_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@1@@Z
-	??$ignore_unused_variable@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@@internal@Eigen@@YAXAEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$00$0A@$02$00@3@@1@@Z
-	??$ignore_unused_variable@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@@internal@Eigen@@YAXAEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@1@@Z
-	??$ignore_unused_variable@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$00$0A@$03$00@3@@Eigen@@@internal@Eigen@@YAXAEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$00$0A@$03$00@3@@1@@Z
-	??$ignore_unused_variable@V?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@3@@Eigen@@@internal@Eigen@@YAXAEBV?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@3@@1@@Z
-	??$ignore_unused_variable@V?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@@internal@Eigen@@YAXAEBV?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@1@@Z
-	??$ignore_unused_variable@V?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@Eigen@@@internal@Eigen@@YAXAEBV?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@1@@Z
-	??$ignore_unused_variable@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@internal@Eigen@@YAXAEBV?$Matrix@M$02$00$0A@$02$00@1@@Z
-	??$ignore_unused_variable@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@internal@Eigen@@YAXAEBV?$Matrix@M$03$00$0A@$03$00@1@@Z
 	??$ignore_unused_variable@_J@internal@Eigen@@YAXAEB_J@Z
 	??$lazyProduct@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@@?$MatrixBase@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@Eigen@@QEBA?BV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@$00@1@AEBV?$MatrixBase@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@@1@@Z
 	??$lazyProduct@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@?$MatrixBase@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@Eigen@@QEBA?BV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V12@$00@1@AEBV01@@Z
@@ -777,8 +733,10 @@ EXPORTS
 	??$lazyProduct@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$MatrixBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@Eigen@@QEBA?BV?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@$00@1@AEBV?$MatrixBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@1@@Z
 	??$lazyProduct@V?$Matrix@M$02$02$0A@$02$02@Eigen@@@?$MatrixBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@Eigen@@QEBA?BV?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@$00@1@AEBV?$MatrixBase@V?$Matrix@M$02$02$0A@$02$02@Eigen@@@1@@Z
 	??$max@M@std@@YAAEBMAEBM0@Z
+	??$max@_K@std@@YAAEB_KAEB_K0@Z
 	??$min@M@std@@YAAEBMAEBM0@Z
 	??$min@_J@std@@YAAEB_JAEB_J0@Z
+	??$min@_K@std@@YAAEB_KAEB_K0@Z
 	??$mini@_J@numext@Eigen@@YA_JAEB_J0@Z
 	??$move@AEAH@std@@YA$$QEAHAEAH@Z
 	??$move@AEAI@std@@YA$$QEAIAEAI@Z
@@ -925,9 +883,9 @@ EXPORTS
 	??$run@_J@?$check_rows_cols_for_overflow@$0BA@@internal@Eigen@@SAX_J0@Z
 	??$scale@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$Transform@M$02$01$0A@@Eigen@@QEAAAEAV01@AEBV?$MatrixBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@1@@Z
 	??$sqrt@M@numext@Eigen@@YAMAEBM@Z
-	??$swap@MX@std@@YAXAEAM0@Z
-	??$swap@PEAIX@std@@YAXAEAPEAI0@Z
-	??$swap@PEAV_Ref_count_base@std@@X@std@@YAXAEAPEAV_Ref_count_base@0@0@Z
+	??$swap@M$0A@@std@@YAXAEAM0@Z
+	??$swap@PEAI$0A@@std@@YAXAEAPEAI0@Z
+	??$swap@PEAV_Ref_count_base@std@@$0A@@std@@YAXAEAPEAV_Ref_count_base@0@0@Z
 	??$swap@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$DenseBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@QEAAXAEAV?$PlainObjectBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@1@@Z
 	??$swap@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@?$PlainObjectBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@QEAAXAEAV?$DenseBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@1@@Z
 	??$swap@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@?$DenseBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@Eigen@@QEAAXAEAV?$PlainObjectBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@1@@Z
@@ -1309,6 +1267,7 @@ EXPORTS
 	??0?$VectorBlock@$$CBV?$Matrix@M$03$00$0A@$03$00@Eigen@@$02@Eigen@@QEAA@AEBV?$Matrix@M$03$00$0A@$03$00@1@_J1@Z
 	??0?$VectorBlock@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0@Eigen@@QEAA@AEAV?$Matrix@M$02$00$0A@$02$00@1@_J1@Z
 	??0?$VectorBlock@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02@Eigen@@QEAA@AEAV?$Matrix@M$03$00$0A@$03$00@1@_J1@Z
+	??0?$_Container_proxy_ptr12@V?$allocator@U_Container_proxy@std@@@std@@@std@@QEAA@AEAV?$allocator@U_Container_proxy@std@@@1@AEAU_Container_base12@1@@Z
 	??0?$_Func_base@X$$V@std@@QEAA@XZ
 	??0?$_Func_base@XM@std@@QEAA@XZ
 	??0?$_Func_class@X$$V@std@@QEAA@XZ
@@ -1326,24 +1285,23 @@ EXPORTS
 	??0?$_Ref_count_resource@PEAIV<lambda_b660b692aa17cad6c64c8293c384ce89>@@@std@@QEAA@PEAIV<lambda_b660b692aa17cad6c64c8293c384ce89>@@@Z
 	??0?$_Ref_count_resource@PEAIV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@@std@@QEAA@PEAIV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@@Z
 	??0?$_Ref_count_resource@PEAIV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@@std@@QEAA@PEAIV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@@Z
-	??0?$_String_alloc@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEAA@XZ
 	??0?$_String_bitmap@D$00@std@@QEAA@XZ
-	??0?$_String_const_iterator@V?$_String_val@U?$_Simple_types@D@std@@@std@@@std@@QEAA@PEBDPEBU_Container_base0@1@@Z
-	??0?$_String_iterator@V?$_String_val@U?$_Simple_types@D@std@@@std@@@std@@QEAA@PEADPEBU_Container_base0@1@@Z
 	??0?$_String_val@U?$_Simple_types@D@std@@@std@@QEAA@XZ
-	??0?$_Uninitialized_backout_al@PEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAA@PEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@AEAV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@1@@Z
-	??0?$_Uninitialized_backout_al@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAA@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@AEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@1@@Z
-	??0?$_Uninitialized_backout_al@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAA@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@AEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@1@@Z
-	??0?$_Uninitialized_backout_al@PEAVVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAA@PEAVVertexAttribute@Tucano@@AEAV?$allocator@VVertexAttribute@Tucano@@@1@@Z
-	??0?$_Vector_alloc@U?$_Vec_base_types@HV?$allocator@H@std@@@std@@@std@@QEAA@XZ
-	??0?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEAA@XZ
-	??0?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEAA@XZ
-	??0?$_Vector_alloc@U?$_Vec_base_types@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@@std@@QEAA@XZ
-	??0?$_Vector_alloc@U?$_Vec_base_types@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@@std@@QEAA@XZ
-	??0?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@@std@@QEAA@XZ
-	??0?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEAA@XZ
-	??0?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEAA@XZ
-	??0?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEAA@XZ
+	??0?$_Temporary_owner_del@PEAIV<lambda_0eb331034ec64f284d3276d5eb9bc498>@@@std@@QEAA@QEAIAEAV<lambda_0eb331034ec64f284d3276d5eb9bc498>@@@Z
+	??0?$_Temporary_owner_del@PEAIV<lambda_1d192c76f25f01443164c3008efd2f7a>@@@std@@QEAA@QEAIAEAV<lambda_1d192c76f25f01443164c3008efd2f7a>@@@Z
+	??0?$_Temporary_owner_del@PEAIV<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@@std@@QEAA@QEAIAEAV<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@@Z
+	??0?$_Temporary_owner_del@PEAIV<lambda_297a8ab7031fb168e0f42b0ceacfb411>@@@std@@QEAA@QEAIAEAV<lambda_297a8ab7031fb168e0f42b0ceacfb411>@@@Z
+	??0?$_Temporary_owner_del@PEAIV<lambda_3a3d10b6c3efd1a8679460d8f1128bfe>@@@std@@QEAA@QEAIAEAV<lambda_3a3d10b6c3efd1a8679460d8f1128bfe>@@@Z
+	??0?$_Temporary_owner_del@PEAIV<lambda_42565b2b1ff40c7ec619f6b0eefb855d>@@@std@@QEAA@QEAIAEAV<lambda_42565b2b1ff40c7ec619f6b0eefb855d>@@@Z
+	??0?$_Temporary_owner_del@PEAIV<lambda_59114e1161731b809247c9c49615e8bc>@@@std@@QEAA@QEAIAEAV<lambda_59114e1161731b809247c9c49615e8bc>@@@Z
+	??0?$_Temporary_owner_del@PEAIV<lambda_7817004a68f0dccb72be0e8c40851883>@@@std@@QEAA@QEAIAEAV<lambda_7817004a68f0dccb72be0e8c40851883>@@@Z
+	??0?$_Temporary_owner_del@PEAIV<lambda_b660b692aa17cad6c64c8293c384ce89>@@@std@@QEAA@QEAIAEAV<lambda_b660b692aa17cad6c64c8293c384ce89>@@@Z
+	??0?$_Temporary_owner_del@PEAIV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@@std@@QEAA@QEAIAEAV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@@Z
+	??0?$_Temporary_owner_del@PEAIV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@@std@@QEAA@QEAIAEAV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@@Z
+	??0?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAA@PEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@AEAV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@1@@Z
+	??0?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAA@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@AEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@1@@Z
+	??0?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAA@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@AEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@1@@Z
+	??0?$_Uninitialized_backout_al@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAA@PEAVVertexAttribute@Tucano@@AEAV?$allocator@VVertexAttribute@Tucano@@@1@@Z
 	??0?$_Vector_val@U?$_Simple_types@H@std@@@std@@QEAA@XZ
 	??0?$_Vector_val@U?$_Simple_types@I@std@@@std@@QEAA@XZ
 	??0?$_Vector_val@U?$_Simple_types@M@std@@@std@@QEAA@XZ
@@ -1363,13 +1321,14 @@ EXPORTS
 	??0?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@QEAA@XZ
 	??0?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@QEAA@XZ
 	??0?$allocator@VVertexAttribute@Tucano@@@std@@QEAA@XZ
-	??0?$basic_filebuf@DU?$char_traits@D@std@@@std@@QEAA@PEAU_iobuf@@@Z
+	??0?$basic_filebuf@DU?$char_traits@D@std@@@std@@QEAA@XZ
 	??0?$basic_ifstream@DU?$char_traits@D@std@@@std@@QEAA@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@HH@Z
 	??0?$basic_ifstream@DU?$char_traits@D@std@@@std@@QEAA@PEBDHH@Z
 	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@$$QEAV01@@Z
 	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@AEBV01@@Z
 	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@AEBV01@_K1AEBV?$allocator@D@1@@Z
 	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@QEBD@Z
+	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@U_String_constructor_concat_tag@1@AEBV01@QEBD_K23@Z
 	??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ
 	??0?$binary_evaluator@V?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$01$00$0A@$01$00@Eigen@@$$CBV?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@4@@Eigen@@UIndexBased@internal@2@U342@MM@internal@Eigen@@QEAA@AEBV?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$01$00$0A@$01$00@Eigen@@$$CBV?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@4@@2@@Z
 	??0?$binary_evaluator@V?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@Eigen@@UIndexBased@internal@2@U342@MM@internal@Eigen@@QEAA@AEBV?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@2@@Z
@@ -1692,7 +1651,6 @@ EXPORTS
 	??0?$unary_evaluator@V?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@UIndexBased@internal@2@M@internal@Eigen@@QEAA@AEBV?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@@Z
 	??0?$unary_evaluator@V?$Transpose@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@Eigen@@UIndexBased@internal@2@M@internal@Eigen@@QEAA@AEBV?$Transpose@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@2@@Z
 	??0?$unary_evaluator@V?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@Eigen@@UIndexBased@internal@2@M@internal@Eigen@@QEAA@AEBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@2@@Z
-	??0?$unique_ptr@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEAA@$$QEAV01@@Z
 	??0?$variable_if_dynamic@_J$00@internal@Eigen@@QEAA@_J@Z
 	??0?$variable_if_dynamic@_J$01@internal@Eigen@@QEAA@_J@Z
 	??0?$variable_if_dynamic@_J$02@internal@Eigen@@QEAA@_J@Z
@@ -1772,10 +1730,16 @@ EXPORTS
 	??0VertexAttribute@Tucano@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HHII@Z
 	??0Wireframe@Effects@Tucano@@QEAA@XZ
 	??0_Bxty@?$_String_val@U?$_Simple_types@D@std@@@std@@QEAA@XZ
+	??0_Container_base12@std@@QEAA@XZ
+	??0_Container_proxy@std@@QEAA@PEAU_Container_base12@1@@Z
 	??0_Ref_count_base@std@@IEAA@XZ
 	??0_Sentry_base@?$basic_istream@DU?$char_traits@D@std@@@std@@QEAA@AEAV12@@Z
 	??0_Sentry_base@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAA@AEAV12@@Z
 	??0all_t@internal@Eigen@@QEAA@XZ
+	??0bad_alloc@std@@AEAA@QEBD@Z
+	??0bad_alloc@std@@QEAA@AEBV01@@Z
+	??0bad_array_new_length@std@@QEAA@AEBV01@@Z
+	??0bad_array_new_length@std@@QEAA@XZ
 	??0bad_cast@std@@QEAA@AEBV01@@Z
 	??0bad_cast@std@@QEAA@XZ
 	??0exception@std@@QEAA@AEBV01@@Z
@@ -1790,6 +1754,7 @@ EXPORTS
 	??1?$CommaInitializer@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@QEAA@XZ
 	??1?$CommaInitializer@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@Eigen@@QEAA@XZ
 	??1?$_Compressed_pair@V?$allocator@D@std@@V?$_String_val@U?$_Simple_types@D@std@@@2@$00@std@@QEAA@XZ
+	??1?$_Container_proxy_ptr12@V?$allocator@U_Container_proxy@std@@@std@@@std@@QEAA@XZ
 	??1?$_Func_class@X$$V@std@@QEAA@XZ
 	??1?$_Func_class@XH@std@@QEAA@XZ
 	??1?$_Func_class@XM@std@@QEAA@XZ
@@ -1804,12 +1769,26 @@ EXPORTS
 	??1?$_Ref_count_resource@PEAIV<lambda_b660b692aa17cad6c64c8293c384ce89>@@@std@@UEAA@XZ
 	??1?$_Ref_count_resource@PEAIV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@@std@@UEAA@XZ
 	??1?$_Ref_count_resource@PEAIV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@@std@@UEAA@XZ
-	??1?$_String_alloc@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEAA@XZ
 	??1?$_String_val@U?$_Simple_types@D@std@@@std@@QEAA@XZ
-	??1?$_Uninitialized_backout_al@PEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAA@XZ
-	??1?$_Uninitialized_backout_al@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAA@XZ
-	??1?$_Uninitialized_backout_al@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAA@XZ
-	??1?$_Uninitialized_backout_al@PEAVVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAA@XZ
+	??1?$_Temporary_owner_del@PEAIV<lambda_0eb331034ec64f284d3276d5eb9bc498>@@@std@@QEAA@XZ
+	??1?$_Temporary_owner_del@PEAIV<lambda_1d192c76f25f01443164c3008efd2f7a>@@@std@@QEAA@XZ
+	??1?$_Temporary_owner_del@PEAIV<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@@std@@QEAA@XZ
+	??1?$_Temporary_owner_del@PEAIV<lambda_297a8ab7031fb168e0f42b0ceacfb411>@@@std@@QEAA@XZ
+	??1?$_Temporary_owner_del@PEAIV<lambda_3a3d10b6c3efd1a8679460d8f1128bfe>@@@std@@QEAA@XZ
+	??1?$_Temporary_owner_del@PEAIV<lambda_42565b2b1ff40c7ec619f6b0eefb855d>@@@std@@QEAA@XZ
+	??1?$_Temporary_owner_del@PEAIV<lambda_59114e1161731b809247c9c49615e8bc>@@@std@@QEAA@XZ
+	??1?$_Temporary_owner_del@PEAIV<lambda_7817004a68f0dccb72be0e8c40851883>@@@std@@QEAA@XZ
+	??1?$_Temporary_owner_del@PEAIV<lambda_b660b692aa17cad6c64c8293c384ce89>@@@std@@QEAA@XZ
+	??1?$_Temporary_owner_del@PEAIV<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@@std@@QEAA@XZ
+	??1?$_Temporary_owner_del@PEAIV<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@@std@@QEAA@XZ
+	??1?$_Tidy_guard@V?$vector@IV?$allocator@I@std@@@std@@@std@@QEAA@XZ
+	??1?$_Tidy_guard@V?$vector@MV?$allocator@M@std@@@std@@@std@@QEAA@XZ
+	??1?$_Tidy_guard@V?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEAA@XZ
+	??1?$_Tidy_guard@V?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEAA@XZ
+	??1?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAA@XZ
+	??1?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAA@XZ
+	??1?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAA@XZ
+	??1?$_Uninitialized_backout_al@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAA@XZ
 	??1?$basic_filebuf@DU?$char_traits@D@std@@@std@@UEAA@XZ
 	??1?$basic_ifstream@DU?$char_traits@D@std@@@std@@UEAA@XZ
 	??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@XZ
@@ -2125,6 +2104,8 @@ EXPORTS
 	??1_Ref_count_base@std@@UEAA@XZ
 	??1_Sentry_base@?$basic_istream@DU?$char_traits@D@std@@@std@@QEAA@XZ
 	??1_Sentry_base@?$basic_ostream@DU?$char_traits@D@std@@@std@@QEAA@XZ
+	??1bad_alloc@std@@UEAA@XZ
+	??1bad_array_new_length@std@@UEAA@XZ
 	??1bad_cast@std@@UEAA@XZ
 	??1exception@std@@UEAA@XZ
 	??1locale@std@@QEAA@XZ
@@ -2152,7 +2133,6 @@ EXPORTS
 	??4?$function@$$A6AXXZ@std@@QEAAAEAV01@AEBV01@@Z
 	??4?$shared_ptr@I@std@@QEAAAEAV01@$$QEAV01@@Z
 	??4?$shared_ptr@I@std@@QEAAAEAV01@AEBV01@@Z
-	??4?$unique_ptr@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEAAAEAV01@$$QEAV01@@Z
 	??4?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAAAEAV01@AEBV01@@Z
 	??4Arrow@Shapes@Tucano@@QEAAAEAV012@$$QEAV012@@Z
 	??4Mesh@Tucano@@QEAAAEAV01@AEBV01@@Z
@@ -2193,8 +2173,6 @@ EXPORTS
 	??C?$unique_ptr@UGuiImpl@tucanow@@U?$default_delete@UGuiImpl@tucanow@@@std@@@std@@QEBAPEAUGuiImpl@tucanow@@XZ
 	??C?$unique_ptr@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEBAPEAUSceneImpl@tucanow@@XZ
 	??D?$Transform@M$02$01$0A@@Eigen@@QEBA?BV01@AEBV01@@Z
-	??D?$_String_const_iterator@V?$_String_val@U?$_Simple_types@D@std@@@std@@@std@@QEBAAEBDXZ
-	??D?$_String_iterator@V?$_String_val@U?$_Simple_types@D@std@@@std@@@std@@QEBAAEADXZ
 	??G?$DenseBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@QEBA?BV?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@1@XZ
 	??Q?$CommaInitializer@V?$Matrix@H$01$00$0A@$01$00@Eigen@@@Eigen@@QEAAAEAU01@AEBH@Z
 	??Q?$CommaInitializer@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@Eigen@@QEAAAEAU01@AEBM@Z
@@ -2211,7 +2189,6 @@ EXPORTS
 	??R<lambda_65e615be2a453ca0576c979606f46740>@@QEBAXQEADQEBD_K12@Z
 	??R<lambda_66f57f934f28d61049862f64df852ff0>@@QEBAXQEAD_KQEBD@Z
 	??R<lambda_7817004a68f0dccb72be0e8c40851883>@@QEBAXPEAI@Z
-	??R<lambda_9013ee9e23efe4882b67eff5b0ecf103>@@QEBAXQEADQEBD_K@Z
 	??R<lambda_b660b692aa17cad6c64c8293c384ce89>@@QEBAXPEAI@Z
 	??R<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@QEBAXPEAI@Z
 	??R<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@QEBAXPEAI@Z
@@ -2236,7 +2213,6 @@ EXPORTS
 	??X?$DenseBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@Eigen@@QEAAAEAV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@1@AEBM@Z
 	??Y?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV01@AEBV01@@Z
 	??Y?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV01@D@Z
-	??Y?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV01@QEBD@Z
 	??_0?$DenseBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@QEAAAEAV?$Matrix@M$02$00$0A@$02$00@1@AEBM@Z
 	??_0?$DenseBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@Eigen@@QEAAAEAV?$Matrix@M$03$00$0A@$03$00@1@AEBM@Z
 	??_D?$basic_ifstream@DU?$char_traits@D@std@@@std@@QEAAXXZ
@@ -2262,17 +2238,15 @@ EXPORTS
 	?Zero@?$DenseBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@Eigen@@SA?BV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$00$0A@$03$00@3@@2@XZ
 	?Zero@?$DenseBase@V?$Matrix@M$03$03$0A@$03$03@Eigen@@@Eigen@@SA?BV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@2@XZ
 	?_Adjust_manually_vector_aligned@std@@YAXAEAPEAXAEA_K@Z
-	?_Adopt@_Iterator_base0@std@@QEAAXPEBX@Z
 	?_Allocate@_Default_allocate_traits@std@@SAPEAX_K@Z
-	?_Assign_rv_contents@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAX$$QEAV12@U?$integral_constant@_N$00@2@@Z
-	?_Assign_rv_contents_with_alloc_always_equal@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAX$$QEAV12@U?$integral_constant@_N$00@2@@Z
-	?_Become_small@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAXXZ
-	?_Buy@?$vector@IV?$allocator@I@std@@@std@@AEAA_N_K@Z
-	?_Buy@?$vector@MV?$allocator@M@std@@@std@@AEAA_N_K@Z
-	?_Buy@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@AEAA_N_K@Z
-	?_Buy@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@AEAA_N_K@Z
-	?_Buy@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEAA_N_K@Z
-	?_Calculate_growth@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBA_K_K@Z
+	?_Buy_nonzero@?$vector@MV?$allocator@M@std@@@std@@AEAAX_K@Z
+	?_Buy_raw@?$vector@IV?$allocator@I@std@@@std@@AEAAX_K@Z
+	?_Buy_raw@?$vector@MV?$allocator@M@std@@@std@@AEAAX_K@Z
+	?_Buy_raw@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@AEAAX_K@Z
+	?_Buy_raw@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@AEAAX_K@Z
+	?_Buy_raw@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEAAX_K@Z
+	?_Calculate_growth@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBA_K_K@Z
+	?_Calculate_growth@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@CA_K_K00@Z
 	?_Calculate_growth@?$vector@HV?$allocator@H@std@@@std@@AEBA_K_K@Z
 	?_Calculate_growth@?$vector@IV?$allocator@I@std@@@std@@AEBA_K_K@Z
 	?_Calculate_growth@?$vector@MV?$allocator@M@std@@@std@@AEBA_K_K@Z
@@ -2293,9 +2267,10 @@ EXPORTS
 	?_Change_array@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEAAXQEAVVertexAttribute@Tucano@@_K1@Z
 	?_Check_offset@?$_String_val@U?$_Simple_types@D@std@@@std@@QEBAX_K@Z
 	?_Clamp_suffix_size@?$_String_val@U?$_Simple_types@D@std@@@std@@QEBA_K_K0@Z
-	?_Construct_lv_contents@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAXAEBV12@@Z
-	?_Copy_alloc@?$_String_alloc@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEAAXAEBV?$allocator@D@2@@Z
-	?_Copy_alloc@?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEAAXAEBV?$allocator@VVertexAttribute@Tucano@@@2@@Z
+	?_Clear_and_reserve_geometric@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEAAX_K@Z
+	?_Construct_lv_contents@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXAEBV12@@Z
+	?_Copy_assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXAEBV12@U?$integral_constant@_N$0A@@2@@Z
+	?_Copy_assign@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEAAXAEBV12@U?$integral_constant@_N$0A@@2@@Z
 	?_Decref@?$_Ptr_base@I@std@@IEAAXXZ
 	?_Decref@_Ref_count_base@std@@QEAAXXZ
 	?_Decwref@_Ref_count_base@std@@QEAAXXZ
@@ -2334,29 +2309,8 @@ EXPORTS
 	?_Empty@?$_Func_class@XH@std@@IEBA_NXZ
 	?_Empty@?$_Func_class@XM@std@@IEBA_NXZ
 	?_Endwrite@?$basic_filebuf@DU?$char_traits@D@std@@@std@@IEAA_NXZ
-	?_Eos@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAX_K@Z
-	?_Get_data@?$_String_alloc@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEAAAEAV?$_String_val@U?$_Simple_types@D@std@@@2@XZ
-	?_Get_data@?$_String_alloc@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEBAAEBV?$_String_val@U?$_Simple_types@D@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@HV?$allocator@H@std@@@std@@@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@H@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@HV?$allocator@H@std@@@std@@@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@H@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@I@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@I@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@M@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@M@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@PEAVElement@GUI@Tucano@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@PEAVElement@GUI@Tucano@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@PEAVSelectButton@GUI@Tucano@@V?$allocator@PEAVSelectButton@GUI@Tucano@@@std@@@std@@@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@PEAVSelectButton@GUI@Tucano@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@PEAVSelectButton@GUI@Tucano@@V?$allocator@PEAVSelectButton@GUI@Tucano@@@std@@@std@@@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@PEAVSelectButton@GUI@Tucano@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@PEAVShader@Tucano@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@PEAVShader@Tucano@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@VVertexAttribute@Tucano@@@std@@@2@XZ
-	?_Get_data@?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@VVertexAttribute@Tucano@@@std@@@2@XZ
+	?_Eos@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAX_K@Z
+	?_Erase_noexcept@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAAEAV12@_K_K@Z
 	?_Get_deleter@?$_Ref_count_resource@PEAIV<lambda_0eb331034ec64f284d3276d5eb9bc498>@@@std@@UEBAPEAXAEBVtype_info@@@Z
 	?_Get_deleter@?$_Ref_count_resource@PEAIV<lambda_1d192c76f25f01443164c3008efd2f7a>@@@std@@UEBAPEAXAEBVtype_info@@@Z
 	?_Get_deleter@?$_Ref_count_resource@PEAIV<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@@std@@UEBAPEAXAEBVtype_info@@@Z
@@ -2413,83 +2367,31 @@ EXPORTS
 	?_Get_first@?$_Compressed_pair@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@V?$_Vector_val@U?$_Simple_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@2@$00@std@@QEBAAEBV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@2@XZ
 	?_Get_first@?$_Compressed_pair@V?$allocator@VVertexAttribute@Tucano@@@std@@V?$_Vector_val@U?$_Simple_types@VVertexAttribute@Tucano@@@std@@@2@$00@std@@QEAAAEAV?$allocator@VVertexAttribute@Tucano@@@2@XZ
 	?_Get_first@?$_Compressed_pair@V?$allocator@VVertexAttribute@Tucano@@@std@@V?$_Vector_val@U?$_Simple_types@VVertexAttribute@Tucano@@@std@@@2@$00@std@@QEBAAEBV?$allocator@VVertexAttribute@Tucano@@@2@XZ
-	?_Get_second@?$_Compressed_pair@U?$default_delete@UGuiImpl@tucanow@@@std@@PEAUGuiImpl@tucanow@@$00@std@@QEBAAEBQEAUGuiImpl@tucanow@@XZ
-	?_Get_second@?$_Compressed_pair@U?$default_delete@USceneImpl@tucanow@@@std@@PEAUSceneImpl@tucanow@@$00@std@@QEAAAEAPEAUSceneImpl@tucanow@@XZ
-	?_Get_second@?$_Compressed_pair@U?$default_delete@USceneImpl@tucanow@@@std@@PEAUSceneImpl@tucanow@@$00@std@@QEBAAEBQEAUSceneImpl@tucanow@@XZ
-	?_Get_second@?$_Compressed_pair@U?$default_delete@V_Facet_base@std@@@std@@PEAV_Facet_base@2@$00@std@@QEAAAEAPEAV_Facet_base@2@XZ
-	?_Get_second@?$_Compressed_pair@U?$default_delete@V_Facet_base@std@@@std@@PEAV_Facet_base@2@$00@std@@QEBAAEBQEAV_Facet_base@2@XZ
-	?_Get_second@?$_Compressed_pair@V<lambda_0eb331034ec64f284d3276d5eb9bc498>@@PEAI$00@std@@QEAAAEAPEAIXZ
-	?_Get_second@?$_Compressed_pair@V<lambda_1d192c76f25f01443164c3008efd2f7a>@@PEAI$00@std@@QEAAAEAPEAIXZ
-	?_Get_second@?$_Compressed_pair@V<lambda_20810bc6c307e6c094ca4ad02a7e2c1b>@@PEAI$00@std@@QEAAAEAPEAIXZ
-	?_Get_second@?$_Compressed_pair@V<lambda_297a8ab7031fb168e0f42b0ceacfb411>@@PEAI$00@std@@QEAAAEAPEAIXZ
-	?_Get_second@?$_Compressed_pair@V<lambda_3a3d10b6c3efd1a8679460d8f1128bfe>@@PEAI$00@std@@QEAAAEAPEAIXZ
-	?_Get_second@?$_Compressed_pair@V<lambda_42565b2b1ff40c7ec619f6b0eefb855d>@@PEAI$00@std@@QEAAAEAPEAIXZ
-	?_Get_second@?$_Compressed_pair@V<lambda_59114e1161731b809247c9c49615e8bc>@@PEAI$00@std@@QEAAAEAPEAIXZ
-	?_Get_second@?$_Compressed_pair@V<lambda_7817004a68f0dccb72be0e8c40851883>@@PEAI$00@std@@QEAAAEAPEAIXZ
-	?_Get_second@?$_Compressed_pair@V<lambda_b660b692aa17cad6c64c8293c384ce89>@@PEAI$00@std@@QEAAAEAPEAIXZ
-	?_Get_second@?$_Compressed_pair@V<lambda_ce9ec88a1648543eec0dbc746d8a6173>@@PEAI$00@std@@QEAAAEAPEAIXZ
-	?_Get_second@?$_Compressed_pair@V<lambda_ef956bcedf99c3666c1c91f23b99b48b>@@PEAI$00@std@@QEAAAEAPEAIXZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@D@std@@V?$_String_val@U?$_Simple_types@D@std@@@2@$00@std@@QEAAAEAV?$_String_val@U?$_Simple_types@D@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@D@std@@V?$_String_val@U?$_Simple_types@D@std@@@2@$00@std@@QEBAAEBV?$_String_val@U?$_Simple_types@D@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@H@std@@V?$_Vector_val@U?$_Simple_types@H@std@@@2@$00@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@H@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@H@std@@V?$_Vector_val@U?$_Simple_types@H@std@@@2@$00@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@H@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@I@std@@V?$_Vector_val@U?$_Simple_types@I@std@@@2@$00@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@I@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@I@std@@V?$_Vector_val@U?$_Simple_types@I@std@@@2@$00@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@I@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@M@std@@V?$_Vector_val@U?$_Simple_types@M@std@@@2@$00@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@M@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@M@std@@V?$_Vector_val@U?$_Simple_types@M@std@@@2@$00@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@M@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@PEAVElement@GUI@Tucano@@@std@@V?$_Vector_val@U?$_Simple_types@PEAVElement@GUI@Tucano@@@std@@@2@$00@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@PEAVElement@GUI@Tucano@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@PEAVElement@GUI@Tucano@@@std@@V?$_Vector_val@U?$_Simple_types@PEAVElement@GUI@Tucano@@@std@@@2@$00@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@PEAVElement@GUI@Tucano@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@PEAVSelectButton@GUI@Tucano@@@std@@V?$_Vector_val@U?$_Simple_types@PEAVSelectButton@GUI@Tucano@@@std@@@2@$00@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@PEAVSelectButton@GUI@Tucano@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@PEAVSelectButton@GUI@Tucano@@@std@@V?$_Vector_val@U?$_Simple_types@PEAVSelectButton@GUI@Tucano@@@std@@@2@$00@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@PEAVSelectButton@GUI@Tucano@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@PEAVShader@Tucano@@@std@@V?$_Vector_val@U?$_Simple_types@PEAVShader@Tucano@@@std@@@2@$00@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@PEAVShader@Tucano@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@PEAVShader@Tucano@@@std@@V?$_Vector_val@U?$_Simple_types@PEAVShader@Tucano@@@std@@@2@$00@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@PEAVShader@Tucano@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@V?$_Vector_val@U?$_Simple_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@2@$00@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@V?$_Vector_val@U?$_Simple_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@2@$00@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@V?$_Vector_val@U?$_Simple_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@2@$00@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@V?$_Vector_val@U?$_Simple_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@2@$00@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@V?$_Vector_val@U?$_Simple_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@2@$00@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@V?$_Vector_val@U?$_Simple_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@2@$00@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@VVertexAttribute@Tucano@@@std@@V?$_Vector_val@U?$_Simple_types@VVertexAttribute@Tucano@@@std@@@2@$00@std@@QEAAAEAV?$_Vector_val@U?$_Simple_types@VVertexAttribute@Tucano@@@std@@@2@XZ
-	?_Get_second@?$_Compressed_pair@V?$allocator@VVertexAttribute@Tucano@@@std@@V?$_Vector_val@U?$_Simple_types@VVertexAttribute@Tucano@@@std@@@2@$00@std@@QEBAAEBV?$_Vector_val@U?$_Simple_types@VVertexAttribute@Tucano@@@std@@@2@XZ
-	?_Getal@?$_String_alloc@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEAAAEAV?$allocator@D@2@XZ
-	?_Getal@?$_String_alloc@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEBAAEBV?$allocator@D@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@HV?$allocator@H@std@@@std@@@std@@QEAAAEAV?$allocator@H@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@HV?$allocator@H@std@@@std@@@std@@QEBAAEBV?$allocator@H@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEAAAEAV?$allocator@I@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEBAAEBV?$allocator@I@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEAAAEAV?$allocator@M@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEBAAEBV?$allocator@M@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@@std@@QEAAAEAV?$allocator@PEAVElement@GUI@Tucano@@@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@@std@@QEBAAEBV?$allocator@PEAVElement@GUI@Tucano@@@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@@std@@QEAAAEAV?$allocator@PEAVShader@Tucano@@@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@@std@@QEBAAEBV?$allocator@PEAVShader@Tucano@@@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@@std@@QEAAAEAV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@@std@@QEBAAEBV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEAAAEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEBAAEBV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEAAAEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEBAAEBV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEAAAEAV?$allocator@VVertexAttribute@Tucano@@@2@XZ
-	?_Getal@?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEBAAEBV?$allocator@VVertexAttribute@Tucano@@@2@XZ
+	?_Getal@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAAEAV?$allocator@D@2@XZ
+	?_Getal@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBAAEBV?$allocator@D@2@XZ
+	?_Getal@?$vector@HV?$allocator@H@std@@@std@@AEAAAEAV?$allocator@H@2@XZ
+	?_Getal@?$vector@HV?$allocator@H@std@@@std@@AEBAAEBV?$allocator@H@2@XZ
+	?_Getal@?$vector@IV?$allocator@I@std@@@std@@AEAAAEAV?$allocator@I@2@XZ
+	?_Getal@?$vector@IV?$allocator@I@std@@@std@@AEBAAEBV?$allocator@I@2@XZ
+	?_Getal@?$vector@MV?$allocator@M@std@@@std@@AEAAAEAV?$allocator@M@2@XZ
+	?_Getal@?$vector@MV?$allocator@M@std@@@std@@AEBAAEBV?$allocator@M@2@XZ
+	?_Getal@?$vector@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@AEAAAEAV?$allocator@PEAVElement@GUI@Tucano@@@2@XZ
+	?_Getal@?$vector@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@AEBAAEBV?$allocator@PEAVElement@GUI@Tucano@@@2@XZ
+	?_Getal@?$vector@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@AEAAAEAV?$allocator@PEAVShader@Tucano@@@2@XZ
+	?_Getal@?$vector@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@AEBAAEBV?$allocator@PEAVShader@Tucano@@@2@XZ
+	?_Getal@?$vector@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@AEAAAEAV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@2@XZ
+	?_Getal@?$vector@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@AEBAAEBV?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@2@XZ
+	?_Getal@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@AEAAAEAV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@2@XZ
+	?_Getal@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@AEBAAEBV?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@2@XZ
+	?_Getal@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@AEAAAEAV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@2@XZ
+	?_Getal@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@AEBAAEBV?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@2@XZ
+	?_Getal@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEAAAEAV?$allocator@VVertexAttribute@Tucano@@@2@XZ
+	?_Getal@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEBAAEBV?$allocator@VVertexAttribute@Tucano@@@2@XZ
 	?_Getfacet@locale@std@@QEBAPEBVfacet@12@_K@Z
 	?_Getimpl@?$_Func_class@X$$V@std@@AEBAPEAV?$_Func_base@X$$V@2@XZ
 	?_Getimpl@?$_Func_class@XH@std@@AEBAPEAV?$_Func_base@XH@2@XZ
 	?_Getimpl@?$_Func_class@XM@std@@AEBAPEAV?$_Func_base@XM@2@XZ
-	?_Getspace@?$_Func_class@X$$V@std@@AEAAPEAXXZ
-	?_Getspace@?$_Func_class@X$$V@std@@AEBAPEBXXZ
-	?_Getspace@?$_Func_class@XH@std@@AEAAPEAXXZ
-	?_Getspace@?$_Func_class@XH@std@@AEBAPEBXXZ
-	?_Getspace@?$_Func_class@XM@std@@AEAAPEAXXZ
-	?_Getspace@?$_Func_class@XM@std@@AEBAPEBXXZ
-	?_Has_unused_capacity@?$vector@HV?$allocator@H@std@@@std@@AEBA_NXZ
-	?_Has_unused_capacity@?$vector@IV?$allocator@I@std@@@std@@AEBA_NXZ
-	?_Has_unused_capacity@?$vector@MV?$allocator@M@std@@@std@@AEBA_NXZ
-	?_Has_unused_capacity@?$vector@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@AEBA_NXZ
-	?_Has_unused_capacity@?$vector@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@AEBA_NXZ
-	?_Has_unused_capacity@?$vector@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@AEBA_NXZ
-	?_Has_unused_capacity@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@AEBA_NXZ
-	?_Has_unused_capacity@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@AEBA_NXZ
-	?_Has_unused_capacity@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEBA_NXZ
+	?_Incref@?$_Ptr_base@I@std@@IEBAXXZ
 	?_Incref@_Ref_count_base@std@@QEAAXXZ
 	?_Init@?$basic_filebuf@DU?$char_traits@D@std@@@std@@IEAAXPEAU_iobuf@@W4_Initfl@12@@Z
 	?_Initcvt@?$basic_filebuf@DU?$char_traits@D@std@@@std@@IEAAXAEBV?$codecvt@DDU_Mbstatet@@@2@@Z
@@ -2500,82 +2402,11 @@ EXPORTS
 	?_Lock@?$basic_filebuf@DU?$char_traits@D@std@@@std@@UEAAXXZ
 	?_Mark@?$_String_bitmap@D$00@std@@QEAA_NPEBDQEBD@Z
 	?_Match@?$_String_bitmap@D$00@std@@QEBA_ND@Z
-	?_Move_alloc@?$_String_alloc@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEAAXAEAV?$allocator@D@2@@Z
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@HV?$allocator@H@std@@@std@@@std@@QEAAAEAPEAHXZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@HV?$allocator@H@std@@@std@@@std@@QEBAAEBQEAHXZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEAAAEAPEAIXZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEBAAEBQEAIXZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEAAAEAPEAMXZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEBAAEBQEAMXZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@@std@@QEAAAEAPEAPEAVElement@GUI@Tucano@@XZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@@std@@QEBAAEBQEAPEAVElement@GUI@Tucano@@XZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@@std@@QEAAAEAPEAPEAVShader@Tucano@@XZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@@std@@QEBAAEBQEAPEAVShader@Tucano@@XZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@@std@@QEAAAEAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@XZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@@std@@QEBAAEBQEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@XZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEAAAEAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@XZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEBAAEBQEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@XZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEAAAEAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@XZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEBAAEBQEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@XZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEAAAEAPEAVVertexAttribute@Tucano@@XZ
-	?_Myend@?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEBAAEBQEAVVertexAttribute@Tucano@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@HV?$allocator@H@std@@@std@@@std@@QEAAAEAPEAHXZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@HV?$allocator@H@std@@@std@@@std@@QEBAAEBQEAHXZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEAAAEAPEAIXZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEBAAEBQEAIXZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEAAAEAPEAMXZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEBAAEBQEAMXZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@@std@@QEAAAEAPEAPEAVElement@GUI@Tucano@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@@std@@QEBAAEBQEAPEAVElement@GUI@Tucano@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@PEAVSelectButton@GUI@Tucano@@V?$allocator@PEAVSelectButton@GUI@Tucano@@@std@@@std@@@std@@QEAAAEAPEAPEAVSelectButton@GUI@Tucano@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@PEAVSelectButton@GUI@Tucano@@V?$allocator@PEAVSelectButton@GUI@Tucano@@@std@@@std@@@std@@QEBAAEBQEAPEAVSelectButton@GUI@Tucano@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@@std@@QEAAAEAPEAPEAVShader@Tucano@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@@std@@QEBAAEBQEAPEAVShader@Tucano@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@@std@@QEAAAEAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@@std@@QEBAAEBQEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEAAAEAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEBAAEBQEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEAAAEAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEBAAEBQEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEAAAEAPEAVVertexAttribute@Tucano@@XZ
-	?_Myfirst@?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEBAAEBQEAVVertexAttribute@Tucano@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@HV?$allocator@H@std@@@std@@@std@@QEAAAEAPEAHXZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@HV?$allocator@H@std@@@std@@@std@@QEBAAEBQEAHXZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEAAAEAPEAIXZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEBAAEBQEAIXZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEAAAEAPEAMXZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEBAAEBQEAMXZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@@std@@QEAAAEAPEAPEAVElement@GUI@Tucano@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@@std@@QEBAAEBQEAPEAVElement@GUI@Tucano@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@PEAVSelectButton@GUI@Tucano@@V?$allocator@PEAVSelectButton@GUI@Tucano@@@std@@@std@@@std@@QEBAAEBQEAPEAVSelectButton@GUI@Tucano@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@@std@@QEAAAEAPEAPEAVShader@Tucano@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@@std@@QEBAAEBQEAPEAVShader@Tucano@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@@std@@QEAAAEAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@@std@@QEBAAEBQEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEAAAEAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEBAAEBQEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEAAAEAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEBAAEBQEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEAAAEAPEAVVertexAttribute@Tucano@@XZ
-	?_Mylast@?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEBAAEBQEAVVertexAttribute@Tucano@@XZ
+	?_Memcpy_val_from@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXAEBV12@@Z
+	?_Move_assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXAEAV12@U_Equal_allocators@2@@Z
 	?_Myptr@?$_String_val@U?$_Simple_types@D@std@@@std@@QEAAPEADXZ
 	?_Myptr@?$_String_val@U?$_Simple_types@D@std@@@std@@QEBAPEBDXZ
-	?_Myptr@?$_Unique_ptr_base@UGuiImpl@tucanow@@U?$default_delete@UGuiImpl@tucanow@@@std@@@std@@QEBAAEBQEAUGuiImpl@tucanow@@XZ
-	?_Myptr@?$_Unique_ptr_base@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEAAAEAPEAUSceneImpl@tucanow@@XZ
-	?_Myptr@?$_Unique_ptr_base@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEBAAEBQEAUSceneImpl@tucanow@@XZ
-	?_Myptr@?$_Unique_ptr_base@V_Facet_base@std@@U?$default_delete@V_Facet_base@std@@@2@@std@@QEAAAEAPEAV_Facet_base@2@XZ
-	?_Myptr@?$_Unique_ptr_base@V_Facet_base@std@@U?$default_delete@V_Facet_base@std@@@2@@std@@QEBAAEBQEAV_Facet_base@2@XZ
-	?_Orphan_all@?$_String_alloc@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEAAXXZ
-	?_Orphan_all@?$_Vector_alloc@U?$_Vec_base_types@HV?$allocator@H@std@@@std@@@std@@QEAAXXZ
-	?_Orphan_all@?$_Vector_alloc@U?$_Vec_base_types@IV?$allocator@I@std@@@std@@@std@@QEAAXXZ
-	?_Orphan_all@?$_Vector_alloc@U?$_Vec_base_types@MV?$allocator@M@std@@@std@@@std@@QEAAXXZ
-	?_Orphan_all@?$_Vector_alloc@U?$_Vec_base_types@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@@std@@QEAAXXZ
-	?_Orphan_all@?$_Vector_alloc@U?$_Vec_base_types@PEAVShader@Tucano@@V?$allocator@PEAVShader@Tucano@@@std@@@std@@@std@@QEAAXXZ
-	?_Orphan_all@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@@std@@QEAAXXZ
-	?_Orphan_all@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@@std@@QEAAXXZ
-	?_Orphan_all@?$_Vector_alloc@U?$_Vec_base_types@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@@std@@QEAAXXZ
-	?_Orphan_all@?$_Vector_alloc@U?$_Vec_base_types@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@@std@@QEAAXXZ
-	?_Orphan_all@_Container_base0@std@@QEAAXXZ
+	?_Orphan_all@_Container_base12@std@@QEAAXXZ
 	?_Orphan_range@?$vector@HV?$allocator@H@std@@@std@@AEBAXPEAH0@Z
 	?_Orphan_range@?$vector@IV?$allocator@I@std@@@std@@AEBAXPEAI0@Z
 	?_Orphan_range@?$vector@MV?$allocator@M@std@@@std@@AEBAXPEAM0@Z
@@ -2585,10 +2416,11 @@ EXPORTS
 	?_Orphan_range@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@AEBAXPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@0@Z
 	?_Orphan_range@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@AEBAXPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@0@Z
 	?_Orphan_range@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEBAXPEAVVertexAttribute@Tucano@@0@Z
-	?_Release@?$_Uninitialized_backout_al@PEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@XZ
-	?_Release@?$_Uninitialized_backout_al@PEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@XZ
-	?_Release@?$_Uninitialized_backout_al@PEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@XZ
-	?_Release@?$_Uninitialized_backout_al@PEAVVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAAPEAVVertexAttribute@Tucano@@XZ
+	?_Release@?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@@std@@QEAAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@XZ
+	?_Release@?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEAAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@XZ
+	?_Release@?$_Uninitialized_backout_al@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEAAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@XZ
+	?_Release@?$_Uninitialized_backout_al@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEAAPEAVVertexAttribute@Tucano@@XZ
+	?_Release@_Basic_container_proxy_ptr12@std@@QEAAXXZ
 	?_Reset_back@?$basic_filebuf@DU?$char_traits@D@std@@@std@@AEAAXXZ
 	?_Reset_copy@?$_Func_class@X$$V@std@@IEAAXAEBV12@@Z
 	?_Reset_copy@?$_Func_class@XH@std@@IEAAXAEBV12@@Z
@@ -2600,11 +2432,15 @@ EXPORTS
 	?_Set@?$_Func_class@XH@std@@AEAAXPEAV?$_Func_base@XH@2@@Z
 	?_Set@?$_Func_class@XM@std@@AEAAXPEAV?$_Func_base@XM@2@@Z
 	?_Set_back@?$basic_filebuf@DU?$char_traits@D@std@@@std@@AEAAXXZ
-	?_Set_ptr_rep@?$_Ptr_base@I@std@@IEAAXPEAIPEAV_Ref_count_base@2@@Z
 	?_Swap@?$_Func_class@X$$V@std@@IEAAXAEAV12@@Z
 	?_Swap@?$_Func_class@XH@std@@IEAAXAEAV12@@Z
 	?_Swap@?$_Func_class@XM@std@@IEAAXAEAV12@@Z
 	?_Swap@?$_Ptr_base@I@std@@IEAAXAEAV12@@Z
+	?_Swap_proxy_and_iterators@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXAEAV12@@Z
+	?_Swap_proxy_and_iterators@_Container_base12@std@@QEAAXAEAU12@@Z
+	?_Take_contents@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXAEAV12@U?$integral_constant@_N$00@2@@Z
+	?_Throw_bad_array_new_length@std@@YAXXZ
+	?_Throw_bad_cast@std@@YAXXZ
 	?_Tidy@?$_Func_class@X$$V@std@@IEAAXXZ
 	?_Tidy@?$_Func_class@XH@std@@IEAAXXZ
 	?_Tidy@?$_Func_class@XM@std@@IEAAXXZ
@@ -2617,9 +2453,9 @@ EXPORTS
 	?_Tidy@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@AEAAXXZ
 	?_Tidy@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@AEAAXXZ
 	?_Tidy@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEAAXXZ
-	?_Tidy_deallocate@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAXXZ
-	?_Tidy_init@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAXXZ
-	?_Udefault@?$vector@MV?$allocator@M@std@@@std@@AEAAPEAMPEAM_K@Z
+	?_Tidy_deallocate@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXXZ
+	?_Tidy_init@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEAAXXZ
+	?_Ufill@?$vector@MV?$allocator@M@std@@@std@@AEAAPEAMPEAM_KU_Value_init_tag@2@@Z
 	?_Umove@?$vector@HV?$allocator@H@std@@@std@@AEAAPEAHPEAH00@Z
 	?_Umove@?$vector@IV?$allocator@I@std@@@std@@AEAAPEAIPEAI00@Z
 	?_Umove@?$vector@MV?$allocator@M@std@@@std@@AEAAPEAMPEAM00@Z
@@ -2648,7 +2484,7 @@ EXPORTS
 	?_Umove_if_noexcept@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@AEAAXPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@00@Z
 	?_Umove_if_noexcept@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@AEAAXPEAVVertexAttribute@Tucano@@00@Z
 	?_Unlock@?$basic_filebuf@DU?$char_traits@D@std@@@std@@UEAAXXZ
-	?_Xlen@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@SAXXZ
+	?_Xlen_string@std@@YAXXZ
 	?_Xlength@?$vector@HV?$allocator@H@std@@@std@@CAXXZ
 	?_Xlength@?$vector@IV?$allocator@I@std@@@std@@CAXXZ
 	?_Xlength@?$vector@MV?$allocator@M@std@@@std@@CAXXZ
@@ -2660,6 +2496,10 @@ EXPORTS
 	?_Xlength@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@CAXXZ
 	?_Xran@?$_String_val@U?$_Simple_types@D@std@@@std@@SAXXZ
 	?_Xrange@?$vector@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@CAXXZ
+	?__empty_global_delete@@YAXPEAX@Z
+	?__empty_global_delete@@YAXPEAXW4align_val_t@std@@@Z
+	?__empty_global_delete@@YAXPEAX_K@Z
+	?__empty_global_delete@@YAXPEAX_KW4align_val_t@std@@@Z
 	?_check_template_params@?$PlainObjectBase@V?$Matrix@H$01$00$0A@$01$00@Eigen@@@Eigen@@SAXXZ
 	?_check_template_params@?$PlainObjectBase@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@Eigen@@SAXXZ
 	?_check_template_params@?$PlainObjectBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@SAXXZ
@@ -2676,6 +2516,7 @@ EXPORTS
 	?allocate@?$allocator@M@std@@QEAAPEAM_K@Z
 	?allocate@?$allocator@PEAVElement@GUI@Tucano@@@std@@QEAAPEAPEAVElement@GUI@Tucano@@_K@Z
 	?allocate@?$allocator@PEAVShader@Tucano@@@std@@QEAAPEAPEAVShader@Tucano@@_K@Z
+	?allocate@?$allocator@U_Container_proxy@std@@@std@@QEAAPEAU_Container_proxy@2@_K@Z
 	?allocate@?$allocator@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@QEAAPEAV?$Matrix@M$01$00$0A@$01$00@Eigen@@_K@Z
 	?allocate@?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@QEAAPEAV?$Matrix@M$02$00$0A@$02$00@Eigen@@_K@Z
 	?allocate@?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@QEAAPEAV?$Matrix@M$03$00$0A@$03$00@Eigen@@_K@Z
@@ -2688,10 +2529,10 @@ EXPORTS
 	?append@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV12@QEBD_K@Z
 	?array@?$MatrixBase@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@Eigen@@QEBA?BV?$ArrayWrapper@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@2@XZ
 	?asDiagonal@?$MatrixBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@QEBA?BV?$DiagonalWrapper@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@2@XZ
+	?assign@?$_Narrow_char_traits@DH@std@@SAXAEADAEBD@Z
 	?assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV12@AEBV12@_K_K@Z
 	?assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV12@QEBD@Z
 	?assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV12@QEBD_K@Z
-	?assign@?$char_traits@D@std@@SAXAEADAEBD@Z
 	?assignCoeff@?$add_assign_op@MM@internal@Eigen@@QEBAXAEAMAEBM@Z
 	?assignCoeff@?$assign_op@HH@internal@Eigen@@QEBAXAEAHAEBH@Z
 	?assignCoeff@?$assign_op@MM@internal@Eigen@@QEBAXAEAMAEBM@Z
@@ -2757,7 +2598,6 @@ EXPORTS
 	?axis@?$AngleAxis@M@Eigen@@QEBAAEBV?$Matrix@M$02$00$0A@$02$00@2@XZ
 	?base@?$PlainObjectBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@QEAAAEAV?$MatrixBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@2@XZ
 	?base@?$PlainObjectBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@Eigen@@QEAAAEAV?$MatrixBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@2@XZ
-	?begin@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA?AV?$_String_iterator@V?$_String_val@U?$_Simple_types@D@std@@@std@@@2@XZ
 	?bind@Shader@Tucano@@QEAAXXZ
 	?bind@Texture@Tucano@@QEAAHXZ
 	?bind@VertexAttribute@Tucano@@QEAAXXZ
@@ -2942,12 +2782,20 @@ EXPORTS
 	?colStride@?$mapbase_evaluator@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@@internal@Eigen@@IEBA_JXZ
 	?cols@?$ArrayWrapper@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@Eigen@@QEBA_JXZ
 	?cols@?$BlockImpl_dense@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@$02$00$0A@$0A@@internal@Eigen@@QEBA_JXZ
+	?cols@?$BlockImpl_dense@$$CBV?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@$02$00$00$0A@@internal@Eigen@@QEBA_JXZ
 	?cols@?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$01$00$0A@$01$00@Eigen@@$$CBV?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@4@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@Eigen@@QEBA_JXZ
+	?cols@?$CwiseBinaryOp@U?$scalar_conj_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$01$00$0A@$01$00@3@$$CBV43@@Eigen@@QEBA_JXZ
+	?cols@?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@Eigen@@QEBA_JXZ
+	?cols@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@$02$00$00@3@@Eigen@@QEBA_JXZ
+	?cols@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$02$00$00@3@@Eigen@@QEBA_JXZ
+	?cols@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@$02$00$00@3@@Eigen@@QEBA_JXZ
+	?cols@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@$02$00$00@3@@Eigen@@QEBA_JXZ
+	?cols@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Matrix@M$02$02$0A@$02$02@Eigen@@$02$00$00@3@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@3@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$ArrayWrapper@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Array@M$02$00$0A@$02$00@3@@3@@Eigen@@QEBA_JXZ
@@ -2961,10 +2809,14 @@ EXPORTS
 	?cols@?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$00$02$00$00$02@3@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@QEBA_JXZ
+	?cols@?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$00$0A@$03$00@3@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@Eigen@@QEBA_JXZ
+	?cols@?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@3@@Eigen@@QEBA_JXZ
+	?cols@?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@QEBA_JXZ
+	?cols@?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@Eigen@@QEBA_JXZ
 	?cols@?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@QEBA_JXZ
 	?cols@?$DenseStorage@H$01$01$00$0A@@Eigen@@SA_JXZ
 	?cols@?$DenseStorage@M$01$01$00$0A@@Eigen@@SA_JXZ
@@ -2974,22 +2826,41 @@ EXPORTS
 	?cols@?$DenseStorage@M$0BA@$03$03$0A@@Eigen@@SA_JXZ
 	?cols@?$Diagonal@V?$Matrix@M$02$02$0A@$02$02@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?cols@?$DiagonalBase@V?$DiagonalWrapper@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$EigenBase@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@@Eigen@@QEBA_JXZ
 	?cols@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@@Eigen@@QEBA_JXZ
 	?cols@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@Eigen@@QEBA_JXZ
 	?cols@?$EigenBase@V?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$01$00$0A@$01$00@Eigen@@$$CBV?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@4@@Eigen@@@Eigen@@QEBA_JXZ
 	?cols@?$EigenBase@V?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$EigenBase@V?$CwiseBinaryOp@U?$scalar_conj_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$EigenBase@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@$02$00$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$EigenBase@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$02$00$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$EigenBase@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@$02$00$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$EigenBase@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@$02$00$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$EigenBase@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Matrix@M$02$02$0A@$02$02@Eigen@@$02$00$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$EigenBase@V?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$EigenBase@V?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$EigenBase@V?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$EigenBase@V?$Diagonal@V?$Matrix@M$02$02$0A@$02$02@Eigen@@$0A@@Eigen@@@Eigen@@QEBA_JXZ
 	?cols@?$EigenBase@V?$Matrix@H$01$00$0A@$01$00@Eigen@@@Eigen@@QEBA_JXZ
 	?cols@?$EigenBase@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@Eigen@@QEBA_JXZ
 	?cols@?$EigenBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@QEBA_JXZ
 	?cols@?$EigenBase@V?$Matrix@M$02$02$0A@$02$02@Eigen@@@Eigen@@QEBA_JXZ
 	?cols@?$EigenBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@Eigen@@QEBA_JXZ
 	?cols@?$EigenBase@V?$Matrix@M$03$03$0A@$03$03@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$MapBase@V?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?cols@?$MapBase@V?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?cols@?$MapBase@V?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?cols@?$MapBase@V?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?cols@?$MapBase@V?$Block@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?cols@?$MapBase@V?$Block@$$CBV?$Matrix@M$02$02$0A@$02$02@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?cols@?$MapBase@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?cols@?$MapBase@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?cols@?$MapBase@V?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?cols@?$MapBase@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?cols@?$MapBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?cols@?$MapBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?cols@?$MapBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?cols@?$MapBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?cols@?$PlainObjectBase@V?$Matrix@H$01$00$0A@$01$00@Eigen@@@Eigen@@QEBA_JXZ
 	?cols@?$PlainObjectBase@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@Eigen@@QEBA_JXZ
@@ -3008,9 +2879,11 @@ EXPORTS
 	?cols@?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@$0A@@Eigen@@QEBA_JXZ
 	?cols@?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@$00@Eigen@@QEBA_JXZ
 	?cols@?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@$0A@@Eigen@@QEBA_JXZ
+	?cols@?$Transpose@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@Eigen@@QEBA_JXZ
+	?cols@?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@Eigen@@QEBA_JXZ
+	?compare@?$_Narrow_char_traits@DH@std@@SAHQEBD0_K@Z
 	?compare@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBAHAEBV12@@Z
 	?compare@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBAHQEBD@Z
-	?compare@?$char_traits@D@std@@SAHQEBD0_K@Z
 	?computeRotationAngle@DirectionalTrackball@Tucano@@MEAA?AV?$Quaternion@M$0A@@Eigen@@M@Z
 	?computeRotationAngle@Trackball@Tucano@@UEAA?AV?$Quaternion@M$0A@@Eigen@@M@Z
 	?computeSpherePosition@Trackball@Tucano@@EEAA?AV?$Matrix@M$02$00$0A@$02$00@Eigen@@AEBV?$Matrix@M$01$00$0A@$01$00@4@@Z
@@ -3028,7 +2901,7 @@ EXPORTS
 	?const_cast_derived@?$EigenBase@V?$Matrix@M$02$02$0A@$02$02@Eigen@@@Eigen@@QEBAAEAV?$Matrix@M$02$02$0A@$02$02@2@XZ
 	?const_cast_derived@?$EigenBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@Eigen@@QEBAAEAV?$Matrix@M$03$00$0A@$03$00@2@XZ
 	?const_cast_derived@?$EigenBase@V?$Matrix@M$03$03$0A@$03$03@Eigen@@@Eigen@@QEBAAEAV?$Matrix@M$03$03$0A@$03$03@2@XZ
-	?copy@?$char_traits@D@std@@SAPEADQEADQEBD_K@Z
+	?copy@?$_Char_traits@DH@std@@SAPEADQEADQEBD_K@Z
 	?cos@@YAMM@Z
 	?create@Texture@Tucano@@QEAAIIIHHIIPEBXH@Z
 	?createAttribute2@Mesh@Tucano@@QEAAPEAVVertexAttribute@2@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBV?$vector@MV?$allocator@M@std@@@5@@Z
@@ -3086,9 +2959,11 @@ EXPORTS
 	?data@?$PlainObjectBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@Eigen@@QEBAPEBMXZ
 	?data@?$PlainObjectBase@V?$Matrix@M$03$03$0A@$03$03@Eigen@@@Eigen@@QEAAPEAMXZ
 	?data@?$PlainObjectBase@V?$Matrix@M$03$03$0A@$03$03@Eigen@@@Eigen@@QEBAPEBMXZ
+	?data@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAPEADXZ
 	?data@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBAPEBDXZ
 	?data@?$vector@IV?$allocator@I@std@@@std@@QEBAPEBIXZ
 	?data@?$vector@MV?$allocator@M@std@@@std@@QEBAPEBMXZ
+	?deallocate@?$_Default_allocator_traits@V?$allocator@U_Container_proxy@std@@@std@@@std@@SAXAEAV?$allocator@U_Container_proxy@std@@@2@QEAU_Container_proxy@2@_K@Z
 	?deallocate@?$allocator@D@std@@QEAAXQEAD_K@Z
 	?deallocate@?$allocator@H@std@@QEAAXQEAH_K@Z
 	?deallocate@?$allocator@I@std@@QEAAXQEAI_K@Z
@@ -3116,9 +2991,11 @@ EXPORTS
 	?derived@?$EigenBase@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@Eigen@@QEBAAEBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@2@XZ
 	?derived@?$EigenBase@V?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@Eigen@@@Eigen@@QEBAAEBV?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@2@XZ
 	?derived@?$EigenBase@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@@Eigen@@QEAAAEAV?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@2@XZ
+	?derived@?$EigenBase@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@@Eigen@@QEBAAEBV?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@2@XZ
 	?derived@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@Eigen@@@Eigen@@QEAAAEAV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@2@XZ
 	?derived@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@Eigen@@@Eigen@@QEBAAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@2@XZ
 	?derived@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@@Eigen@@QEAAAEAV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@XZ
+	?derived@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@@Eigen@@QEBAAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@XZ
 	?derived@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$0A@@Eigen@@@Eigen@@QEAAAEAV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$0A@@2@XZ
 	?derived@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@Eigen@@QEAAAEAV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@2@XZ
 	?derived@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@Eigen@@QEBAAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@2@XZ
@@ -3153,6 +3030,7 @@ EXPORTS
 	?derived@?$EigenBase@V?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@Eigen@@@Eigen@@QEBAAEBV?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@2@XZ
 	?derived@?$EigenBase@V?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@@Eigen@@QEBAAEBV?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@XZ
 	?derived@?$EigenBase@V?$Diagonal@V?$Matrix@M$02$02$0A@$02$02@Eigen@@$0A@@Eigen@@@Eigen@@QEAAAEAV?$Diagonal@V?$Matrix@M$02$02$0A@$02$02@Eigen@@$0A@@2@XZ
+	?derived@?$EigenBase@V?$Diagonal@V?$Matrix@M$02$02$0A@$02$02@Eigen@@$0A@@Eigen@@@Eigen@@QEBAAEBV?$Diagonal@V?$Matrix@M$02$02$0A@$02$02@Eigen@@$0A@@2@XZ
 	?derived@?$EigenBase@V?$Matrix@H$01$00$0A@$01$00@Eigen@@@Eigen@@QEAAAEAV?$Matrix@H$01$00$0A@$01$00@2@XZ
 	?derived@?$EigenBase@V?$Matrix@H$01$00$0A@$01$00@Eigen@@@Eigen@@QEBAAEBV?$Matrix@H$01$00$0A@$01$00@2@XZ
 	?derived@?$EigenBase@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@Eigen@@QEAAAEAV?$Matrix@M$01$00$0A@$01$00@2@XZ
@@ -3187,13 +3065,13 @@ EXPORTS
 	?enable@VertexAttribute@Tucano@@QEAAXXZ
 	?endRotation@Trackball@Tucano@@UEAAXXZ
 	?endTranslation@Trackball@Tucano@@QEAAXXZ
-	?eof@?$char_traits@D@std@@SAHXZ
-	?eq_int_type@?$char_traits@D@std@@SA_NAEBH0@Z
+	?eof@?$_Narrow_char_traits@DH@std@@SAHXZ
+	?eq_int_type@?$_Narrow_char_traits@DH@std@@SA_NAEBH0@Z
+	?erase@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV12@_K0@Z
 	?erase@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV12@_K@Z
-	?erase@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV12@_K_K@Z
 	?fabs@@YAMM@Z
+	?find@?$_Narrow_char_traits@DH@std@@SAPEBDQEBD_KAEBD@Z
 	?find@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBA_KAEBV12@_K@Z
-	?find@?$char_traits@D@std@@SAPEBDQEBD_KAEBD@Z
 	?find_last_of@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBA_KQEBD_K@Z
 	?finished@?$CommaInitializer@V?$Matrix@H$01$00$0A@$01$00@Eigen@@@Eigen@@QEAAAEAV?$Matrix@H$01$00$0A@$01$00@2@XZ
 	?finished@?$CommaInitializer@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@Eigen@@QEAAAEAV?$Matrix@M$01$00$0A@$01$00@2@XZ
@@ -3260,9 +3138,6 @@ EXPORTS
 	?functor@?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@Eigen@@QEBAAEBU?$scalar_abs2_op@M@internal@2@XZ
 	?functor@?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@QEBAAEBU?$scalar_opposite_op@M@internal@2@XZ
 	?get@?$_Ptr_base@I@std@@IEBAPEAIXZ
-	?get@?$unique_ptr@UGuiImpl@tucanow@@U?$default_delete@UGuiImpl@tucanow@@@std@@@std@@QEBAPEAUGuiImpl@tucanow@@XZ
-	?get@?$unique_ptr@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEBAPEAUSceneImpl@tucanow@@XZ
-	?get@?$unique_ptr@V_Facet_base@std@@U?$default_delete@V_Facet_base@std@@@2@@std@@QEBAPEAV_Facet_base@2@XZ
 	?getAmbientCoeff@Phong@Effects@Tucano@@QEAAMXZ
 	?getArrayType@VertexAttribute@Tucano@@QEBAIXZ
 	?getAttributeLocation@Shader@Tucano@@QEBAHPEBD@Z
@@ -3300,9 +3175,7 @@ EXPORTS
 	?getViewport@Camera@Tucano@@QEBA?AV?$Matrix@M$03$00$0A@$03$00@Eigen@@XZ
 	?getWidth@Texture@Tucano@@QEAAHXZ
 	?get_allocator@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBA?AV?$allocator@D@2@XZ
-	?get_deleter@?$_Unique_ptr_base@UGuiImpl@tucanow@@U?$default_delete@UGuiImpl@tucanow@@@std@@@std@@QEAAAEAU?$default_delete@UGuiImpl@tucanow@@@2@XZ
-	?get_deleter@?$_Unique_ptr_base@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEAAAEAU?$default_delete@USceneImpl@tucanow@@@2@XZ
-	?get_deleter@?$_Unique_ptr_base@V_Facet_base@std@@U?$default_delete@V_Facet_base@std@@@2@@std@@QEAAAEAU?$default_delete@V_Facet_base@std@@@2@XZ
+	?get_deleter@?$unique_ptr@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEAAAEAU?$default_delete@USceneImpl@tucanow@@@2@XZ
 	?hasAttribute@Mesh@Tucano@@QEBA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 	?imbue@?$basic_filebuf@DU?$char_traits@D@std@@@std@@MEAAXAEBVlocale@2@@Z
 	?increaseCameraZoom@Scene@tucanow@@QEAAXXZ
@@ -3369,8 +3242,8 @@ EXPORTS
 	?leftButtonPressed@Gui@tucanow@@UEAA_NMM@Z
 	?leftButtonReleased@Base@GUI@Tucano@@QEAA_NHH@Z
 	?leftButtonReleased@Gui@tucanow@@UEAA_NMM@Z
+	?length@?$_Narrow_char_traits@DH@std@@SA_KQEBD@Z
 	?length@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBA_KXZ
-	?length@?$char_traits@D@std@@SA_KQEBD@Z
 	?lhs@?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$01$00$0A@$01$00@Eigen@@$$CBV?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@4@@Eigen@@QEBAAEBV?$Matrix@M$01$00$0A@$01$00@2@XZ
 	?lhs@?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@Eigen@@QEBAAEBV?$Matrix@M$03$03$0A@$03$03@2@XZ
 	?lhs@?$CwiseBinaryOp@U?$scalar_conj_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@QEBAAEBV?$Matrix@M$02$00$0A@$02$00@2@XZ
@@ -3447,7 +3320,7 @@ EXPORTS
 	?max_size@?$vector@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$allocator@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@std@@@std@@QEBA_KXZ
 	?max_size@?$vector@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$allocator@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@std@@@std@@QEBA_KXZ
 	?max_size@?$vector@VVertexAttribute@Tucano@@V?$allocator@VVertexAttribute@Tucano@@@std@@@std@@QEBA_KXZ
-	?move@?$char_traits@D@std@@SAPEADQEADQEBD_K@Z
+	?move@?$_Char_traits@DH@std@@SAPEADQEADQEBD_K@Z
 	?moveSlider@Slider@GUI@Tucano@@QEAAXM@Z
 	?nestedExpression@?$ArrayWrapper@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@Eigen@@QEBAAEBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@2@XZ
 	?nestedExpression@?$BlockImpl_dense@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@$02$00$0A@$0A@@internal@Eigen@@QEBAAEBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@3@XZ
@@ -3467,7 +3340,7 @@ EXPORTS
 	?normalize@?$QuaternionBase@V?$Quaternion@M$0A@@Eigen@@@Eigen@@QEAAXXZ
 	?normalizeModelMatrix@Model@Tucano@@QEAAXXZ
 	?normalizePosition@Trackball@Tucano@@QEAA?AV?$Matrix@M$01$00$0A@$01$00@Eigen@@AEBV34@@Z
-	?not_eof@?$char_traits@D@std@@SAHAEBH@Z
+	?not_eof@?$_Narrow_char_traits@DH@std@@SAHAEBH@Z
 	?onClick@Button@GUI@Tucano@@QEAAXV?$function@$$A6AXXZ@std@@@Z
 	?onClick@SelectButton@GUI@Tucano@@QEAAXV?$function@$$A6AXXZ@std@@@Z
 	?onValueChanged@Slider@GUI@Tucano@@QEAAXV?$function@$$A6AXM@Z@std@@@Z
@@ -3561,7 +3434,6 @@ EXPORTS
 	?renderPatches@Mesh@Tucano@@UEAAXXZ
 	?renderPoints@Mesh@Tucano@@UEAAXXZ
 	?renderWireframe@Scene@tucanow@@QEAAX_N@Z
-	?reserve@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAX_K@Z
 	?reset@?$unique_ptr@USceneImpl@tucanow@@U?$default_delete@USceneImpl@tucanow@@@std@@@std@@QEAAXPEAUSceneImpl@tucanow@@@Z
 	?reset@Camera@Tucano@@QEAAXXZ
 	?reset@Mesh@Tucano@@QEAAXXZ
@@ -3674,12 +3546,20 @@ EXPORTS
 	?rowStride@?$mapbase_evaluator@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@@internal@Eigen@@IEBA_JXZ
 	?rows@?$ArrayWrapper@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@Eigen@@QEBA_JXZ
 	?rows@?$BlockImpl_dense@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@$02$00$0A@$0A@@internal@Eigen@@QEBA_JXZ
+	?rows@?$BlockImpl_dense@$$CBV?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@$02$00$00$0A@@internal@Eigen@@QEBA_JXZ
 	?rows@?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$01$00$0A@$01$00@Eigen@@$$CBV?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@4@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@Eigen@@QEBA_JXZ
+	?rows@?$CwiseBinaryOp@U?$scalar_conj_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$01$00$0A@$01$00@3@$$CBV43@@Eigen@@QEBA_JXZ
+	?rows@?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@Eigen@@QEBA_JXZ
+	?rows@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@$02$00$00@3@@Eigen@@QEBA_JXZ
+	?rows@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$02$00$00@3@@Eigen@@QEBA_JXZ
+	?rows@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@$02$00$00@3@@Eigen@@QEBA_JXZ
+	?rows@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@$02$00$00@3@@Eigen@@QEBA_JXZ
+	?rows@?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Matrix@M$02$02$0A@$02$02@Eigen@@$02$00$00@3@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@3@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$ArrayWrapper@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Array@M$02$00$0A@$02$00@3@@3@@Eigen@@QEBA_JXZ
@@ -3693,10 +3573,14 @@ EXPORTS
 	?rows@?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$00$02$00$00$02@3@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@QEBA_JXZ
+	?rows@?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$00$0A@$03$00@3@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@Eigen@@QEBA_JXZ
+	?rows@?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@3@@Eigen@@QEBA_JXZ
+	?rows@?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@QEBA_JXZ
+	?rows@?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@Eigen@@QEBA_JXZ
 	?rows@?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@QEBA_JXZ
 	?rows@?$DenseStorage@H$01$01$00$0A@@Eigen@@SA_JXZ
 	?rows@?$DenseStorage@M$01$01$00$0A@@Eigen@@SA_JXZ
@@ -3705,22 +3589,42 @@ EXPORTS
 	?rows@?$DenseStorage@M$08$02$02$0A@@Eigen@@SA_JXZ
 	?rows@?$DenseStorage@M$0BA@$03$03$0A@@Eigen@@SA_JXZ
 	?rows@?$Diagonal@V?$Matrix@M$02$02$0A@$02$02@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?rows@?$DiagonalBase@V?$DiagonalWrapper@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$EigenBase@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@@Eigen@@QEBA_JXZ
 	?rows@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@@Eigen@@QEBA_JXZ
 	?rows@?$EigenBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@@Eigen@@QEBA_JXZ
 	?rows@?$EigenBase@V?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$01$00$0A@$01$00@Eigen@@$$CBV?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@4@@Eigen@@@Eigen@@QEBA_JXZ
 	?rows@?$EigenBase@V?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$EigenBase@V?$CwiseBinaryOp@U?$scalar_conj_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$EigenBase@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@$02$00$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$EigenBase@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$02$00$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$EigenBase@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@$02$00$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$EigenBase@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@$02$00$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$EigenBase@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@3@$$CBV?$Block@$$CBV?$Matrix@M$02$02$0A@$02$02@Eigen@@$02$00$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$EigenBase@V?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$EigenBase@V?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$EigenBase@V?$CwiseUnaryOp@U?$scalar_abs2_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$EigenBase@V?$Diagonal@V?$Matrix@M$02$02$0A@$02$02@Eigen@@$0A@@Eigen@@@Eigen@@QEBA_JXZ
 	?rows@?$EigenBase@V?$Matrix@H$01$00$0A@$01$00@Eigen@@@Eigen@@QEBA_JXZ
 	?rows@?$EigenBase@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@Eigen@@QEBA_JXZ
 	?rows@?$EigenBase@V?$Matrix@M$02$00$0A@$02$00@Eigen@@@Eigen@@QEBA_JXZ
 	?rows@?$EigenBase@V?$Matrix@M$02$02$0A@$02$02@Eigen@@@Eigen@@QEBA_JXZ
 	?rows@?$EigenBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@Eigen@@QEBA_JXZ
 	?rows@?$EigenBase@V?$Matrix@M$03$03$0A@$03$03@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$MapBase@V?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?rows@?$MapBase@V?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?rows@?$MapBase@V?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?rows@?$MapBase@V?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?rows@?$MapBase@V?$Block@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?rows@?$MapBase@V?$Block@$$CBV?$Matrix@M$02$02$0A@$02$02@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?rows@?$MapBase@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?rows@?$MapBase@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?rows@?$MapBase@V?$Block@V?$Matrix@M$02$00$0A@$02$00@Eigen@@$0?0$00$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?rows@?$MapBase@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?rows@?$MapBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?rows@?$MapBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@$0A@@Eigen@@QEBA_JXZ
+	?rows@?$MapBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?rows@?$MapBase@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$0A@@Eigen@@QEBA_JXZ
 	?rows@?$PlainObjectBase@V?$Matrix@H$01$00$0A@$01$00@Eigen@@@Eigen@@QEBA_JXZ
 	?rows@?$PlainObjectBase@V?$Matrix@M$01$00$0A@$01$00@Eigen@@@Eigen@@QEBA_JXZ
@@ -3739,6 +3643,8 @@ EXPORTS
 	?rows@?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@$0A@@Eigen@@QEBA_JXZ
 	?rows@?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@$00@Eigen@@QEBA_JXZ
 	?rows@?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@$0A@@Eigen@@QEBA_JXZ
+	?rows@?$Transpose@$$CBV?$Block@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@Eigen@@QEBA_JXZ
+	?rows@?$Transpose@$$CBV?$Block@$$CBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@$00$02$0A@@Eigen@@@Eigen@@QEBA_JXZ
 	?run@?$Assignment@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@U?$assign_op@MM@internal@2@UDense2Dense@52@X@internal@Eigen@@SAXAEAV?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@3@AEBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@AEBU?$assign_op@MM@23@@Z
 	?run@?$Assignment@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$00$02$00$00$02@3@@2@U?$assign_op@MM@internal@2@UDense2Dense@52@X@internal@Eigen@@SAXAEAV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@3@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$00$02$00$00$02@3@@3@AEBU?$assign_op@MM@23@@Z
 	?run@?$Assignment@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@$0A@@3@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@3@@2@U?$assign_op@MM@internal@2@UDense2Dense@52@X@internal@Eigen@@SAXAEAV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@3@AEBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@$0A@@3@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@3@@3@AEBU?$assign_op@MM@23@@Z
@@ -3801,6 +3707,37 @@ EXPORTS
 	?run@?$any_unroller@U?$evaluator@V?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@Eigen@@@internal@Eigen@@$0N@$03@internal@Eigen@@SA_NAEBU?$evaluator@V?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@Eigen@@@23@@Z
 	?run@?$any_unroller@U?$evaluator@V?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@Eigen@@@internal@Eigen@@$0O@$03@internal@Eigen@@SA_NAEBU?$evaluator@V?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@Eigen@@@23@@Z
 	?run@?$any_unroller@U?$evaluator@V?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@Eigen@@@internal@Eigen@@$0P@$03@internal@Eigen@@SA_NAEBU?$evaluator@V?$CwiseBinaryOp@U?$not_equal_to@M@std@@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@4@@Eigen@@@23@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@3@AEBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$00$02$00$00$02@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$00$02$0A@@3@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$00$02$00$00$02@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@$0A@@3@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@3@AEBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@$0A@@3@$$CBV?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$0A@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@$0A@@internal@Eigen@@SAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$0A@@3@AEBV?$Matrix@M$02$00$0A@$02$00@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@3@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@$0A@@internal@Eigen@@SAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@3@AEBV?$Matrix@M$02$02$0A@$02$02@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$DiagonalWrapper@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@2@$00@2@$0A@@internal@Eigen@@SAXAEBV?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@3@AEBV?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$DiagonalWrapper@$$CBV?$Matrix@M$02$00$0A@$02$00@Eigen@@@2@$00@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Diagonal@V?$Matrix@M$02$02$0A@$02$02@Eigen@@$0A@@Eigen@@V?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$ArrayWrapper@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Array@M$02$00$0A@$02$00@3@@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Diagonal@V?$Matrix@M$02$02$0A@$02$02@Eigen@@$0A@@3@AEBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$ArrayWrapper@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@Eigen@@@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Array@M$02$00$0A@$02$00@3@@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@H$01$00$0A@$01$00@Eigen@@V12@$0A@@internal@Eigen@@SAXAEBV?$Matrix@H$01$00$0A@$01$00@3@0@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@H$01$00$0A@$01$00@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@H@internal@Eigen@@V?$Matrix@H$01$00$0A@$01$00@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@H$01$00$0A@$01$00@3@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@H@internal@Eigen@@V?$Matrix@H$01$00$0A@$01$00@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V12@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$01$00$0A@$01$00@3@0@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$01$00$0A@$01$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$01$00$0A@$01$00@3@$$CBV43@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$01$00$0A@$01$00@3@AEBV?$CwiseBinaryOp@U?$scalar_difference_op@MM@internal@Eigen@@$$CBV?$Matrix@M$01$00$0A@$01$00@3@$$CBV43@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V12@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$00$0A@$02$00@3@0@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$Block@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@$02$00$0A@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$00$0A@$02$00@3@AEBV?$Block@$$CBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$02$02$0A@$02$02@3@@Eigen@@$02$00$0A@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$00$0A@$02$00@3@AEBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$00$0A@$02$00@3@AEBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$00$0A@$02$00@3@AEBV?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$00$0A@$02$00@3@AEBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$00$0A@$02$00@3@AEBV?$CwiseBinaryOp@U?$scalar_sum_op@MM@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@$$CBV43@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$00$0A@$02$00@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$00$0A@$02$00@3@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$02$00$0A@$02$00@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@$00@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$00$0A@$02$00@3@AEBV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$00$00@2@$00@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@$00@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$00$0A@$02$00@3@AEBV?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$CwiseUnaryOp@U?$scalar_opposite_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@2@$00@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$00$0A@$02$00@Eigen@@V?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@$00@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$00$0A@$02$00@3@AEBV?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$00$0A@$02$00@2@$00@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$02$0A@$02$02@Eigen@@V?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V12@$00@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$02$0A@$02$02@3@AEBV?$Product@V?$Block@$$CBV?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V12@$00@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$02$02$0A@$02$02@Eigen@@V?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@$00@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$02$02$0A@$02$02@3@AEBV?$Product@V?$Block@V?$Matrix@M$03$03$0A@$03$03@Eigen@@$02$02$0A@@Eigen@@V?$Matrix@M$02$02$0A@$02$02@2@$00@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V12@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$03$00$0A@$03$00@3@0@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$03$00$0A@$03$00@3@AEBV?$CwiseBinaryOp@U?$scalar_quotient_op@MM@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$03$00$0A@$03$00@3@@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$03$00$0A@$03$00@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$00$0A@$03$00@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$03$00$0A@$03$00@3@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$00$0A@$03$00@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$03$03$0A@$03$03@Eigen@@V12@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$03$03$0A@$03$03@3@0@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$03$03$0A@$03$03@Eigen@@V?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$03$03$0A@$03$03@3@AEBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@3@@Z
+	?run@?$checkTransposeAliasing_impl@V?$Matrix@M$03$03$0A@$03$03@Eigen@@V?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@2@$0A@@internal@Eigen@@SAXAEBV?$Matrix@M$03$03$0A@$03$03@3@AEBV?$CwiseNullaryOp@U?$scalar_identity_op@M@internal@Eigen@@V?$Matrix@M$03$03$0A@$03$03@3@@3@@Z
 	?run@?$conj_default_impl@M$0A@@internal@Eigen@@SAMAEBM@Z
 	?run@?$copy_using_evaluator_DefaultTraversal_CompleteUnrolling@V?$generic_dense_assignment_kernel@U?$evaluator@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@@internal@Eigen@@U?$evaluator@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@@23@U?$assign_op@MM@23@$0A@@internal@Eigen@@$00$02@internal@Eigen@@SAXAEAV?$generic_dense_assignment_kernel@U?$evaluator@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@@internal@Eigen@@U?$evaluator@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@@23@U?$assign_op@MM@23@$0A@@23@@Z
 	?run@?$copy_using_evaluator_DefaultTraversal_CompleteUnrolling@V?$generic_dense_assignment_kernel@U?$evaluator@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@@internal@Eigen@@U?$evaluator@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@@23@U?$assign_op@MM@23@$0A@@internal@Eigen@@$01$02@internal@Eigen@@SAXAEAV?$generic_dense_assignment_kernel@U?$evaluator@V?$Block@V?$Matrix@M$03$00$0A@$03$00@Eigen@@$02$00$0A@@Eigen@@@internal@Eigen@@U?$evaluator@V?$CwiseBinaryOp@U?$scalar_product_op@MM@internal@Eigen@@$$CBV?$CwiseNullaryOp@U?$scalar_constant_op@M@internal@Eigen@@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@3@$$CBV?$Matrix@M$02$00$0A@$02$00@3@@Eigen@@@23@U?$assign_op@MM@23@$0A@@23@@Z
@@ -4179,7 +4116,6 @@ EXPORTS
 	?size@?$EigenBase@V?$Matrix@M$03$00$0A@$03$00@Eigen@@@Eigen@@QEBA_JXZ
 	?size@?$EigenBase@V?$Matrix@M$03$03$0A@$03$03@Eigen@@@Eigen@@QEBA_JXZ
 	?size@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEBA_KXZ
-	?size@?$vector@HV?$allocator@H@std@@@std@@QEBA_KXZ
 	?size@?$vector@IV?$allocator@I@std@@@std@@QEBA_KXZ
 	?size@?$vector@MV?$allocator@M@std@@@std@@QEBA_KXZ
 	?size@?$vector@PEAVElement@GUI@Tucano@@V?$allocator@PEAVElement@GUI@Tucano@@@std@@@std@@QEBA_KXZ
@@ -4222,8 +4158,8 @@ EXPORTS
 	?toRotationMatrix@?$QuaternionBase@V?$Quaternion@M$0A@@Eigen@@@Eigen@@QEBA?AV?$Matrix@M$02$02$0A@$02$02@2@XZ
 	?toRotationMatrix@?$RotationBase@V?$AngleAxis@M@Eigen@@$02@Eigen@@QEBA?AV?$Matrix@M$02$02$0A@$02$02@2@XZ
 	?toRotationMatrix@?$RotationBase@V?$Quaternion@M$0A@@Eigen@@$02@Eigen@@QEBA?AV?$Matrix@M$02$02$0A@$02$02@2@XZ
-	?to_char_type@?$char_traits@D@std@@SADAEBH@Z
-	?to_int_type@?$char_traits@D@std@@SAHAEBD@Z
+	?to_char_type@?$_Narrow_char_traits@DH@std@@SADAEBH@Z
+	?to_int_type@?$_Narrow_char_traits@DH@std@@SAHAEBD@Z
 	?toggleDisplay@Element@GUI@Tucano@@QEAAXXZ
 	?toggleHeadlight@Scene@tucanow@@QEAAXXZ
 	?toggleRenderWireframe@Scene@tucanow@@QEAAXXZ

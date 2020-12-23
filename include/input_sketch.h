@@ -156,6 +156,8 @@ public:
     QList<QString> getLayerList();
     void setDepths(int row, QString depth);
 
+
+
 public slots:
 
 protected:
@@ -329,6 +331,7 @@ private:
 
     void updateSelectedPath(const int &contourNumber, const QPainterPath &path, const QString &name, const int &lineLevel);
 
+    void resizeMesh(QVector<QVector3D> &totalPoints);
 
     void RotationalBlendingSurface (const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr);
 
@@ -337,6 +340,10 @@ private:
     QVector <QVector3D> normalsFor3Ddisks;
 
     void DataForHRBF (const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr);
+
+    void DataForPoisson(const int shapeNumber, QPainterPath &contour, QVector<QVector3D> &ql, QVector<QVector3D> &qr);
+
+    void DataForClosedFormulas(const int shapeNumber, QPainterPath &contour, QVector<QVector3D> &ql, QVector<QVector3D> &qr);
 
 //    QVector <QVector3D> totalPoints;
 //    QVector <QVector3D> totalNormals;

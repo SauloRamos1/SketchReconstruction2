@@ -1,4 +1,4 @@
-CMakeFiles/tucanow.dir/tucanow_autogen/mocs_compilation.cpp.obj
-CMakeFiles/tucanow.dir/src/scene.cpp.obj
-CMakeFiles/tucanow.dir/src/gui.cpp.obj
-CMakeFiles/tucanow.dir/src/misc.cpp.obj
+libs\tucanow\CMakeFiles\tucanow.dir\tucanow_autogen\mocs_compilation.cpp.obj
+libs\tucanow\CMakeFiles\tucanow.dir\src\scene.cpp.obj
+libs\tucanow\CMakeFiles\tucanow.dir\src\gui.cpp.obj
+libs\tucanow\CMakeFiles\tucanow.dir\src\misc.cpp.obj

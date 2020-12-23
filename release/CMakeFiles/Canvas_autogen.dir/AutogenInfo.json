@@ -16,15 +16,7 @@
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "C:/Users/srdcp/Documents/sketchreconstruction2/release/Canvas_autogen/include",
 	"MOC_COMPILATION_FILE" : "C:/Users/srdcp/Documents/sketchreconstruction2/release/Canvas_autogen/mocs_compilation.cpp",
-	"MOC_DEFINITIONS" : 
-	[
-		"QT_CORE_LIB",
-		"QT_GUI_LIB",
-		"QT_NO_DEBUG",
-		"QT_SVG_LIB",
-		"QT_WIDGETS_LIB",
-		"WIN32"
-	],
+	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_GUI_LIB", "QT_SVG_LIB", "QT_WIDGETS_LIB", "WIN32" ],
 	"MOC_DEPEND_FILTERS" : 
 	[
 		[

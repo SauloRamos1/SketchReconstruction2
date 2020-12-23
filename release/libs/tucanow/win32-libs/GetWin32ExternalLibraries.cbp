@@ -11,10 +11,10 @@
 				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/release/libs/tucanow/win32-libs"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\win32-libs\Makefile VERBOSE=1 all"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\win32-libs\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\win32-libs\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\win32-libs\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v all"/>
+					<CompileFile command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
+					<DistClean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>

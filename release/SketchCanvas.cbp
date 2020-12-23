@@ -11,10 +11,10 @@
 				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/release"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 all"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v all"/>
+					<CompileFile command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
+					<DistClean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Canvas">
@@ -25,7 +25,6 @@
 				<Option compiler="msvc8"/>
 				<Compiler>
 					<Add option="-DQT_CORE_LIB"/>
-					<Add option="-DQT_NO_DEBUG"/>
 					<Add option="-DQT_GUI_LIB"/>
 					<Add option="-DQT_WIDGETS_LIB"/>
 					<Add option="-DQT_SVG_LIB"/>
@@ -43,19 +42,19 @@
 					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtANGLE"/>
 					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtWidgets"/>
 					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtSvg"/>
-					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include"/>
-					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\VC\Tools\MSVC\14.28.29515\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\VC\Tools\MSVC\14.28.29515\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 Canvas"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v Canvas"/>
+					<CompileFile command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
+					<DistClean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Canvas/fast">
@@ -66,7 +65,6 @@
 				<Option compiler="msvc8"/>
 				<Compiler>
 					<Add option="-DQT_CORE_LIB"/>
-					<Add option="-DQT_NO_DEBUG"/>
 					<Add option="-DQT_GUI_LIB"/>
 					<Add option="-DQT_WIDGETS_LIB"/>
 					<Add option="-DQT_SVG_LIB"/>
@@ -84,49 +82,49 @@
 					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtANGLE"/>
 					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtWidgets"/>
 					<Add directory="C:/Qt/5.12.5/msvc2017_64/include/QtSvg"/>
-					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include"/>
-					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\VC\Tools\MSVC\14.28.29515\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\VC\Tools\MSVC\14.28.29515\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 Canvas/fast"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v Canvas/fast"/>
+					<CompileFile command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
+					<DistClean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
 				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/release"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 edit_cache"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v edit_cache"/>
+					<CompileFile command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
+					<DistClean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
 				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/release"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
+					<DistClean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Canvas_autogen">
 				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/release"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 Canvas_autogen"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v Canvas_autogen"/>
+					<CompileFile command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
+					<DistClean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="tucanow">
@@ -144,19 +142,19 @@
 					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/eigen3"/>
 					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/glew-2.1.0/include"/>
 					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/src/tucano"/>
-					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include"/>
-					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\VC\Tools\MSVC\14.28.29515\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\VC\Tools\MSVC\14.28.29515\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\Makefile VERBOSE=1 tucanow"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v tucanow"/>
+					<CompileFile command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
+					<DistClean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="tucanow/fast">
@@ -174,29 +172,29 @@
 					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/eigen3"/>
 					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/win32-libs/glew-2.1.0/include"/>
 					<Add directory="C:/Users/srdcp/Documents/sketchreconstruction2/libs/tucanow/src/tucano"/>
-					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include"/>
-					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"/>
-					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\VC\Tools\MSVC\14.28.29515\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\VC\Tools\MSVC\14.28.29515\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\Makefile VERBOSE=1 tucanow/fast"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v tucanow/fast"/>
+					<CompileFile command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
+					<DistClean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="tucanow_autogen">
 				<Option working_dir="C:/Users/srdcp/Documents/sketchreconstruction2/release/libs/tucanow"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\Makefile VERBOSE=1 tucanow_autogen"/>
-					<CompileFile command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\Makefile VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\Makefile VERBOSE=1 clean"/>
-					<DistClean command="nmake /NOLOGO /f C:\Users\srdcp\Documents\sketchreconstruction2\release\libs\tucanow\Makefile VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v tucanow_autogen"/>
+					<CompileFile command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
+					<DistClean command="C:/PROGRA~2/MICROS~1/2019/Preview/Common7/IDE/COMMON~1/MICROS~1/CMake/Ninja/ninja.exe -v clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
