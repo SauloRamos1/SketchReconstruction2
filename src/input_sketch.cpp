@@ -547,7 +547,7 @@ void InputSketch::estimateShapes(){
         }
 
         while (reconstType < 1 || reconstType > 4){
-            reconstType = QInputDialog::getInt(nullptr, "Select Reconstruction Type for " + allShapesSampledPoints[i].name, "Select Reconstruction Type for: " + allShapesSampledPoints[i].name + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function \n 3 - Poisson Reconstruction \n 4 - Hermitian Radial Basis Function");
+            reconstType = QInputDialog::getInt(nullptr, "Select Reconstruction Type for " + allShapesSampledPoints[i].name, "Select Reconstruction Type for: " + allShapesSampledPoints[i].name + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function \n 3 - Poisson Reconstruction \n 4 - Closed Formulas Reconstruction");
         }
         if (reconstType == 1) {
             RotationalBlendingSurface(i, allShapesSampledPoints[i].contour, allShapesSampledPoints[i].ql,allShapesSampledPoints[i].qr);
