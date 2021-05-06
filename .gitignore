@@ -118,5 +118,7 @@ compile_commands.json
 
 # End of https://www.gitignore.io/api/qt,c++,qtcreator
 
-
 /build
+/release
+/backup_050621
+/output
