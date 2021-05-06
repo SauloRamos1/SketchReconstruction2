@@ -1,5 +1,5 @@
 ###############################################
-# Preamble  
+# Preamble
 ###############################################
 
 cmake_minimum_required(VERSION 3.10)
@@ -28,7 +28,7 @@ endif()
 
 
 ###############################################
-# Project options 
+# Project options
 ###############################################
 
 option(TUCANOW_BUILD_SHARED_LIBRARY "Build tucanow as a shared library"  ON)
@@ -94,7 +94,7 @@ target_include_directories(tucanow SYSTEM
     ${CMAKE_CURRENT_SOURCE_DIR}/src/tucano
     )
 
-target_link_libraries(tucanow 
+target_link_libraries(tucanow
     PUBLIC
     OpenGL::GL Eigen3::Eigen
     PRIVATE
@@ -106,10 +106,10 @@ target_compile_features(tucanow PUBLIC cxx_std_11)
 # MSVC (as recently as version 19.15.26729) throws hundreds of warnings from
 # it's own implementation of the STL -- CMake's SYSTEM directive seems
 # ineffective to prevent this behaviour.  Thus, using -Wall in MSVC is,
-# unfortunately, not possible.  
+# unfortunately, not possible.
 
-if(NOT MSVC) 
-    target_compile_options(tucanow PRIVATE -Wall) 
+if(NOT MSVC)
+    target_compile_options(tucanow PRIVATE -Wall)
 endif()
 
 # Constant M_PI is predefined on posix systems (which Windows allegedly is compatible with)
@@ -125,13 +125,13 @@ endif()
 # Copy shaders and assets to binary dir when done
 ###############################################
 
-add_custom_command(TARGET tucanow POST_BUILD 
+add_custom_command(TARGET tucanow POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/tucano/tucano/effects/shaders 
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/tucano/tucano/effects/shaders
     ${CMAKE_BINARY_DIR}/shaders
     )
 
-add_custom_command(TARGET tucanow POST_BUILD 
+add_custom_command(TARGET tucanow POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     ${CMAKE_CURRENT_SOURCE_DIR}/src/tucano/samples/assets
     ${CMAKE_BINARY_DIR}/samples/assets
