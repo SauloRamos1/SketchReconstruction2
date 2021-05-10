@@ -200,14 +200,23 @@ void OpenGLCanvas::mouseReleaseEvent(QMouseEvent *event){
 
 void OpenGLCanvas::wheelEvent(QWheelEvent *event){
 
-    if (event->delta() > 0){
+//    if (event->delta() > 0){ event->
 
-        tscene->increaseCameraZoom();
+//        tscene->increaseCameraZoom();
 
-    } else if ( event->delta() < 0 ){
+//    } else if ( event->delta() < 0 ){
 
-        tscene->decreaseCameraZoom();
-    }
+//        tscene->decreaseCameraZoom();
+//    }
+
+        if (event->angleDelta().y() > 0){
+
+            tscene->increaseCameraZoom();
+
+        } else if ( event->angleDelta().y() < 0 ){
+
+            tscene->decreaseCameraZoom();
+        }
 
     update();
 

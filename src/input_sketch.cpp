@@ -306,8 +306,9 @@ QPainterPath InputSketch::closePath (QPainterPath &pathToBeClosed){
         // S2 = Q0 + (Q0 - Q1)
         // S3 = Q0
 
-        ControlPointP1 = pathToBeClosed.elementAt(npoints - 1) + (( pathToBeClosed.elementAt(npoints - 1) - pathToBeClosed.elementAt(npoints - 2) ));
-        ControlPointP2 = pathToBeClosed.elementAt(0) + (( pathToBeClosed.elementAt(0) - pathToBeClosed.elementAt(1) ));
+        ControlPointP1 =(QPointF)pathToBeClosed.elementAt(npoints - 1) + (((QPointF) pathToBeClosed.elementAt(npoints - 1) -(QPointF) pathToBeClosed.elementAt(npoints - 2) ));
+
+        ControlPointP2 = (QPointF) pathToBeClosed.elementAt(0) + (((QPointF)pathToBeClosed.elementAt(0) -(QPointF) pathToBeClosed.elementAt(1) ));
 
         pathThatClosesContour.cubicTo(ControlPointP1,ControlPointP2,pathToBeClosed.elementAt(0));
 
@@ -352,8 +353,8 @@ QPainterPath InputSketch::closeSVGSegments(const QVector<QPainterPath>& pathsToC
         // S2 = Q0 + (Q0 - Q1)
         // S3 = Q0
 
-        ControlPointP1 = pathsSegmentsList[i].elementAt( npoints - 1 ) + (( pathsSegmentsList[i].elementAt( npoints -1 ) - pathsSegmentsList[i].elementAt( npoints - 2 ) ));
-        ControlPointP2 = pathsSegmentsList[i+1].elementAt( 0 ) + (( pathsSegmentsList[i+1].elementAt( 0 ) - pathsSegmentsList[ i+1 ].elementAt( 1 ) ));
+        ControlPointP1 = (QPointF) pathsSegmentsList[i].elementAt( npoints - 1 ) + (( (QPointF) pathsSegmentsList[i].elementAt( npoints -1 ) - (QPointF) pathsSegmentsList[i].elementAt( npoints - 2 ) ));
+        ControlPointP2 =(QPointF)  pathsSegmentsList[i+1].elementAt( 0 ) + (((QPointF)  pathsSegmentsList[i+1].elementAt( 0 ) - (QPointF) pathsSegmentsList[ i+1 ].elementAt( 1 ) ));
 
         closedPath.cubicTo(ControlPointP1,ControlPointP2,pathsSegmentsList[i+1].elementAt(0));
 
@@ -373,8 +374,8 @@ QPainterPath InputSketch::closeSVGSegments(const QVector<QPainterPath>& pathsToC
     // S2 = Q0 + (Q0 - Q1)
     // S3 = Q0
 
-    ControlPointP1 = pathsSegmentsList[pathsSegmentsList.size()-1].elementAt( npoints - 1 ) + (( pathsSegmentsList[pathsSegmentsList.size()-1].elementAt( npoints -1 ) - pathsSegmentsList[pathsSegmentsList.size()-1].elementAt( npoints - 2 ) ));
-    ControlPointP2 = pathsSegmentsList[0].elementAt( 0 ) + (( pathsSegmentsList[0].elementAt( 0 ) - pathsSegmentsList[ 0 ].elementAt( 1 ) ));
+    ControlPointP1 =(QPointF)  pathsSegmentsList[pathsSegmentsList.size()-1].elementAt( npoints - 1 ) + (( (QPointF) pathsSegmentsList[pathsSegmentsList.size()-1].elementAt( npoints -1 ) - (QPointF) pathsSegmentsList[pathsSegmentsList.size()-1].elementAt( npoints - 2 ) ));
+    ControlPointP2 = (QPointF)pathsSegmentsList[0].elementAt( 0 ) + (((QPointF) pathsSegmentsList[0].elementAt( 0 ) - (QPointF) pathsSegmentsList[ 0 ].elementAt( 1 ) ));
 
     closedPath.cubicTo(ControlPointP1,ControlPointP2,pathsSegmentsList[0].elementAt(0));
 

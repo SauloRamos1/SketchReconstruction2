@@ -14,7 +14,7 @@
 #include <QPoint>
 #include <QPainterPath>
 
-using namespace std;
+//using namespace std;
 
 // ----------------- Structs --------------------
 struct HalfEdge;
@@ -66,7 +66,7 @@ public:
 
     QVector<Vertex*> vertexList;
 
-    vector<HalfEdge*> halfedgeslist;
+    std::vector<HalfEdge*> halfedgeslist;
     QVector<QVector<float>> pathsList;
 
     QVector <HalfEdge*> cyclesList;

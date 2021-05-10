@@ -13,8 +13,8 @@ option(SKETCH_CANVAS_DEPLOY_QT
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Copied from https://doc-snapshots.qt.io/qt6-dev/cmake-get-started.html
-#set(CMAKE_CXX_STANDARD 17)
-#set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 #ICONS-
@@ -25,10 +25,13 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 #set (CMAKE_PREFIX_PATH "C:\\Qt\\5.12.5\\msvc2017_64")
 #set(Qt6_DIR "C:\\Qt\\5.12.5\\mingw73_64\\lib\\cmake\\Qt6" CACHE PATH "Initial cache" FORCE)
 
+set (CMAKE_PREFIX_PATH "C:\\Qt\\6.1.0\\msvc2019_64")
+set (Qt6_DIR "C:\\Qt\\6.1.0\\msvc2019_64\\libs" CACHE PATH "Initial cache" FORCE)
+
 #set (Qt5_DIR "C:\\Qt\\5.12.5\\msvc2017_64\\lib\\cmake\\Qt5")
 #set (QTDIR "C:\\Qt\\5.12.5\\msvc2017_64\\lib\\cmake\\Qt5")
 
-find_package(Qt5 COMPONENTS Core Gui Widgets Svg CONFIG REQUIRED)
+find_package(Qt6 COMPONENTS Core Gui Widgets Svg OpenGLWidgets CONFIG REQUIRED)
 
 # Instruct CMake to run moc automatically when needed
 set(CMAKE_AUTOMOC ON)
@@ -105,7 +108,7 @@ target_include_directories(Canvas PUBLIC ${HEADERS_DIR})
 target_include_directories(Canvas SYSTEM PRIVATE ${EXTERNAL_LIBS_DIR})
 
 # Use Core, Gui and Widgets modules from Qt6
-target_link_libraries(Canvas Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Svg)
+target_link_libraries(Canvas Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Svg Qt6::OpenGLWidgets)
 
 # Use tucanow wrapper
 target_link_libraries(Canvas tucanow)
@@ -129,7 +132,7 @@ add_custom_command(TARGET Canvas POST_BUILD
 if(WIN32 AND SKETCH_CANVAS_DEPLOY_QT)
 
     # Find windeployqt.exe
-    get_target_property(_qmake_executable Qt5::qmake IMPORTED_LOCATION)
+    get_target_property(_qmake_executable Qt6::qmake IMPORTED_LOCATION)
     get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
     find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${_qt_bin_dir}")
 

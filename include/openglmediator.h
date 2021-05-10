@@ -6,7 +6,7 @@
 
 #include <QVector>
 #include <QPainterPath>
-
+#include <QVector3D>
 
 class Canvas;
 class OpenGLCanvas;

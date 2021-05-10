@@ -166,7 +166,7 @@ void Scene::loadSVG(const std::string& str)
 
     sketch.drawPaths(svgPaths);
 
-    cout << "# of Paths: " << svgPaths.size() << endl;
+    std::cout << "# of Paths: " << svgPaths.size() << std::endl;
 
     update();
 
@@ -450,15 +450,21 @@ void Scene::wheelEvent ( QGraphicsSceneWheelEvent *event )
 
         if (event->delta() > 0 ){
 
-            QMatrix m = imageItem->matrix();
-            m.scale (1.01,1.01);
-            imageItem->setMatrix( m );
+            imageItem->setTransformationMode(Qt::SmoothTransformation);
+
+            imageItem->setScale(imageItem.get()->scale()*1.01);
+
+//            QMatrix m = imageItem->matrix();
+//            m.scale (1.01,1.01);
+//            imageItem->setMatrix( m );
 
         } else if (event->delta() < 0 ){
 
-            QMatrix m = imageItem->matrix();
-            m.scale (0.99,0.99);
-            imageItem->setMatrix( m );
+            imageItem->setTransformationMode(Qt::SmoothTransformation);
+            imageItem->setScale(imageItem.get()->scale()*0.99);
+//            QMatrix m = imageItem->matrix();
+//            m.scale (0.99,0.99);
+//            imageItem->setMatrix( m );
 
         }
     }  else if (status == Interaction::STRIPES) {

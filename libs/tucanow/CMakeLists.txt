@@ -2,7 +2,7 @@
 # Preamble
 ###############################################
 
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.10.0)
 
 project(TucanoWrapper)
 
@@ -11,7 +11,6 @@ set(VERSION_MINOR 1 CACHE STRING "Tucanow minor version number.")
 
 # For vim's YouCompleteMe plugin
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 
 ###############################################
 # Set build type (debug, release, etc.)

@@ -31,7 +31,7 @@ void HalfEdgeGraph::svgPathsTohalfedgestructure(QVector<QVector<float>> pathsLis
     }
 
     // ---------------------- Limpa itens duplicados da Lista de Vértices-----------------------------
-    cout << "# de vertices: " << vertexList.size() << endl;
+    std::cout << "# de vertices: " << vertexList.size() << std::endl;
 
     //int numberofDuplicatedItems;
 
@@ -52,7 +52,7 @@ void HalfEdgeGraph::svgPathsTohalfedgestructure(QVector<QVector<float>> pathsLis
         }
     }
 
-    cout << "# de vertices apos limpeza: " << vertexList.size() << endl;
+    std::cout << "# de vertices apos limpeza: " << vertexList.size() << std::endl;
 
     // ---------------------- Limpa itens duplicados da Lista de Vértices-----------------------------
     ///2. For each input segment, create two half-edges, and assign their tail vertices and twins.
@@ -115,7 +115,7 @@ void HalfEdgeGraph::svgPathsTohalfedgestructure(QVector<QVector<float>> pathsLis
 
     ///3. For each endpoint, sort the half-edges whose tail vertex is that endpoint in clockwise order.
 
-    vector<HalfEdge *> clockwisehalfedgeslist; //Lista de half-edges whose tail vertex is that endpoint in clockwise order.
+    std::vector<HalfEdge *> clockwisehalfedgeslist; //Lista de half-edges whose tail vertex is that endpoint in clockwise order.
 
 
     int tjunctions = 0;
@@ -175,7 +175,7 @@ void HalfEdgeGraph::svgPathsTohalfedgestructure(QVector<QVector<float>> pathsLis
 
             ordenado = desordenado;
 
-            qSort(ordenado);
+            std::sort(ordenado.begin(),ordenado.end());
 
             // qDebug () << ordenado;
             // qDebug () << desordenado;
