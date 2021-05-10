@@ -25,8 +25,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #set (CMAKE_PREFIX_PATH "C:\\Qt\\5.12.5\\msvc2017_64")
 #set(Qt6_DIR "C:\\Qt\\5.12.5\\mingw73_64\\lib\\cmake\\Qt6" CACHE PATH "Initial cache" FORCE)
 
-set (CMAKE_PREFIX_PATH "C:\\Qt\\6.1.0\\msvc2019_64")
-set (Qt6_DIR "C:\\Qt\\6.1.0\\msvc2019_64\\libs" CACHE PATH "Initial cache" FORCE)
+#set (CMAKE_PREFIX_PATH "C:\\Qt\\6.1.0\\msvc2019_64")
+#set (Qt6_DIR "C:\\Qt\\6.1.0\\msvc2019_64\\libs" CACHE PATH "Initial cache" FORCE)
 
 #set (Qt5_DIR "C:\\Qt\\5.12.5\\msvc2017_64\\lib\\cmake\\Qt5")
 #set (QTDIR "C:\\Qt\\5.12.5\\msvc2017_64\\lib\\cmake\\Qt5")
