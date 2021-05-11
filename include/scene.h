@@ -110,6 +110,8 @@ public:
     QList<QString> getLayerList();
     void setDepths (int row, QString depth);
 
+    QList<QString> getRbfDataFiles();
+
 public slots:
 
 private:

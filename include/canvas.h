@@ -11,6 +11,7 @@
 #include <QGraphicsView>
 #include <QColorDialog>
 #include <QProcess>
+#include <QDebug>
 
 #include "scene.h"
 

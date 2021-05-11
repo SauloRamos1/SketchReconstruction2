@@ -301,6 +301,8 @@ void Canvas::exportMesh(){
     if (!scene->isClosedContoursEmpty()){
 
         //glmediator->exportClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
+        //glmediator->exportRBFMesh(scene->getRbfDataFiles());
+        qDebug() << scene->getRbfDataFiles() ;
 
     }
 

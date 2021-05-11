@@ -158,6 +158,8 @@ public:
 
 
 
+    QList<QString> getRbfDataFiles();
+
 public slots:
 
 protected:
@@ -340,6 +342,8 @@ private:
     QVector <QVector3D> normalsFor3Ddisks;
 
     void DataForHRBF (const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr);
+
+    QList<QString> rbfDataFiles; // FilesList for RBF Reconstruction
 
     void DataForPoisson(const int shapeNumber, QPainterPath &contour, QVector<QVector3D> &ql, QVector<QVector3D> &qr);
 

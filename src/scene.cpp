@@ -618,6 +618,10 @@ void Scene::estimateShapes()
     sketch.estimateShapes();
 }
 
+//************************************************************************************************
+/// ..................................... GETTERS ..........................................
+//************************************************************************************************
+
 QList<QVector<QVector3D>> Scene::getOpenContoursPoints()
 {
     return sketch.getOpenContoursPoints();
@@ -642,6 +646,8 @@ QPainterPath Scene::getClosedContour()
 {
     return sketch.getClosedContour();
 }
+
+
 
 int Scene::getClosedContourLevel()
 {
@@ -793,6 +799,11 @@ QList<QString> Scene::getLayerList() {
 
 void Scene::setDepths (int row, QString depth){
     sketch.setDepths(row,depth);
+}
+
+QList<QString> Scene::getRbfDataFiles()
+{
+    return sketch.getRbfDataFiles();
 }
 
 

@@ -539,6 +539,7 @@ void InputSketch::estimateShapes(){
 
     pointsFor3Ddisks.clear();
     normalsFor3Ddisks.clear();
+    rbfDataFiles.clear();
 
     for (int i = 0; i < allShapesSampledPoints.size(); ++i) {
 
@@ -547,8 +548,9 @@ void InputSketch::estimateShapes(){
 
         }
 
-        while (reconstType < 1 || reconstType > 4){
-            reconstType = QInputDialog::getInt(nullptr, "Select Reconstruction Type for " + allShapesSampledPoints[i].name, "Select Reconstruction Type for: " + allShapesSampledPoints[i].name + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function \n 3 - Poisson Reconstruction \n 4 - Closed Formulas Reconstruction");
+        while (reconstType < 1 || reconstType > 2){ // > 4
+            //reconstType = QInputDialog::getInt(nullptr, "Select Reconstruction Type for " + allShapesSampledPoints[i].name, "Select Reconstruction Type for: " + allShapesSampledPoints[i].name + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function \n 3 - Poisson Reconstruction \n 4 - Closed Formulas Reconstruction");
+            reconstType = QInputDialog::getInt(nullptr, "Select Reconstruction Type for " + allShapesSampledPoints[i].name, "Select Reconstruction Type for: " + allShapesSampledPoints[i].name + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function");
         }
         if (reconstType == 1) {
             RotationalBlendingSurface(i, allShapesSampledPoints[i].contour, allShapesSampledPoints[i].ql,allShapesSampledPoints[i].qr);
@@ -569,6 +571,7 @@ void InputSketch::estimateShapes(){
 
 void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr){
 
+    /*
     if (closedContourList[shapeNumber].attachClosedContour != -1){
         int attachedContour = closedContourList[shapeNumber].attachClosedContour;
         qDebug () << "Contour: " <<  shapeNumber <<  "Attached Contour: " << attachedContour;
@@ -584,6 +587,7 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
             qr[i].setZ(depthLevelList[closedContourList[shapeNumber].level-1]);
         }
     }
+    */
 
 
 
@@ -931,6 +935,9 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
     std::string outFile = "exportData";
     outFile.append(std::to_string(shapeNumber));
     outFile.append(".data");
+
+    rbfDataFiles.append(QString::fromStdString(outFile));
+
     fOut.open(outFile.c_str());
     fOut << "3" <<std::endl;
     fOut << knownPoints.size() <<std::endl;
@@ -967,25 +974,24 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
     fOut.close();
 
 
-    std::ofstream fOut2;
+//    std::ofstream fOut2;
 
-    std::string outFile2 = "exportDataVIPSS";
-    outFile2.append(std::to_string(shapeNumber));
-    outFile2.append(".xyz");
-    fOut2.open(outFile2.c_str());
+//    std::string outFile2 = "exportDataVIPSS";
+//    outFile2.append(std::to_string(shapeNumber));
+//    outFile2.append(".xyz");
+//    fOut2.open(outFile2.c_str());
 
-    foreach (QVector3D p, totalPoints) {
+//    foreach (QVector3D p, totalPoints) {
 
-        fOut2 << p.x() <<" " << p.y()<< " " << p.z()<< std::endl;
-    }
+//        fOut2 << p.x() <<" " << p.y()<< " " << p.z()<< std::endl;
+//    }
 
-    fOut2.close();
+//    fOut2.close();
 
     totalPoints.clear();
     totalNormals.clear();
 
 }
-
 
 void InputSketch::DataForPoisson(const int shapeNumber, QPainterPath &contour, QVector<QVector3D>& ql, QVector<QVector3D>& qr){
 
@@ -3524,6 +3530,11 @@ QList<QString> InputSketch::getLayerList(){
     }
 
     return a;
+}
+
+QList<QString> InputSketch::getRbfDataFiles()
+{
+    return rbfDataFiles;
 }
 
 
