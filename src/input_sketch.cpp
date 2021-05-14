@@ -934,7 +934,7 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
 
     std::string outFile = "exportData";
     outFile.append(std::to_string(shapeNumber));
-    outFile.append(".data");
+    //outFile.append(".data");
 
     rbfDataFiles.append(QString::fromStdString(outFile));
 

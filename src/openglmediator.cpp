@@ -1641,10 +1641,17 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
 
         std::string rString = "";//string(rchar);
 
-        std::string coeffName = "../coeffs/"+baseName + rString+".bin";
-        std::string offName = "../off/"+baseName + rString +".off";
-        std::string dataName = "../data/" + baseName+".data";
-        std::string vtkName = "../vtk/"+baseName+".vtk";
+//        std::string coeffName = "../coeffs/"+baseName + rString+".bin";
+//        std::string offName = "../off/"+baseName + rString +".off";
+//        std::string dataName = "../data/" + baseName+".data";
+//        std::string vtkName = "../vtk/"+baseName+".vtk";
+
+
+        std::string coeffName = baseName + rString+".bin";
+        std::string offName = baseName + rString +".off";
+        std::string dataName = baseName+".data";
+        std::string vtkName = baseName+".vtk";
+
         // HERE
         MeshData m(dataName.c_str());
 
