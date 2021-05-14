@@ -56,6 +56,10 @@ set_target_properties(tucanow PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
 )
 
+#Include RBF
+#add_subdirectory(${CMAKE_SOURCE_DIR}/libs/hrbf)
+
+
 # Populate a cmake variable with the project's sources
 set(SOURCES
     src/main.cpp
@@ -74,6 +78,26 @@ set(SOURCES
     src/sketch_library.cpp
     src/openglmediator.cpp
 
+    xCubeEigen/Gaussian.cpp
+    xCubeEigen/GeneralInverseMultiquadrics.cpp
+    xCubeEigen/HBRBF.cpp
+    xCubeEigen/HBRBFEval.cpp
+ #   xCubeEigen/hbrbfvtk.cpp
+    xCubeEigen/InverseMultiquadrics.cpp
+#    xCubeEigen/main.cpp
+    xCubeEigen/MeshData.cpp
+    xCubeEigen/Multiquadrics.cpp
+    xCubeEigen/Solver.cpp
+    xCubeEigen/vecmath.cpp
+    xCubeEigen/VTKExport.cpp
+    xCubeEigen/XCube.cpp
+
+    xCubeEigen/polyg/SurfacePolygonizer.cpp
+#    xCubeEigen/polyg/hbrbf.cpp
+#    xCubeEigen/polyg/Polygonizer.cpp
+
+
+
     )
 
 # Populate a cmake variable with the project's headers
@@ -91,6 +115,23 @@ set(HEADERS
     include/layers.h
     include/sketch_library.h
     include/openglmediator.h
+
+    xCubeEigen/Gaussian.h
+    xCubeEigen/GeneralInverseMultiquadrics.h
+    xCubeEigen/HBRBF.h
+    xCubeEigen/HBRBFEval.h
+    xCubeEigen/InverseMultiquadrics.h
+    xCubeEigen/MeshData.h
+    xCubeEigen/Multiquadrics.h
+    xCubeEigen/RBF.h
+    xCubeEigen/Solver.h
+    xCubeEigen/vecmath.h
+    xCubeEigen/VTKExport.h
+    xCubeEigen/XCube.h
+
+#    xCubeEigen/polyg/point3d.h
+#    xCubeEigen/polyg/MC.h
+    xCubeEigen/polyg/SurfacePolygonizer.h
 
 )
 

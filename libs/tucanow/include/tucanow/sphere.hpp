@@ -61,7 +61,7 @@ class Sphere {
                     vert.push_back(p4);
                     vert.push_back(p5);
 
-                    unsigned int ind = vert.size()-3;
+                    unsigned int ind = (unsigned int) vert.size()-3;
                     // new faces are: (p0, p3, p4), (p4, p5, p2), (p3, p5, p4), (p3, p1, p5)
                     unsigned int b[12] = {
                         (unsigned int)faces[i+0], ind, ind+1, 

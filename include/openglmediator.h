@@ -1,12 +1,33 @@
 #ifndef OPENGLMEDIATOR_H
 #define OPENGLMEDIATOR_H
 
+
+#define XCUBE 0
+#define INV_MULT 1
+#define GAUSSIAN 2
+#define MULTIQUADRIC 3
+#define GEN_INV_MULT 4
+
 #include <memory>
 #include <vector>
 
 #include <QVector>
 #include <QPainterPath>
 #include <QVector3D>
+
+// RBF Exporter
+#include "xCubeEigen/RBF.h"
+#include "xCubeEigen/XCube.h"
+#include "xCubeEigen/InverseMultiquadrics.h"
+#include "xCubeEigen/Multiquadrics.h"
+#include "xCubeEigen/GeneralInverseMultiquadrics.h"
+#include "xCubeEigen/Gaussian.h"
+#include "xCubeEigen/HBRBF.h"
+#include "xCubeEigen/HBRBFEval.h"
+#include "xCubeEigen/VTKExport.h"
+#include "xCubeEigen/polyg/SurfacePolygonizer.h"
+
+// -----------
 
 class Canvas;
 class OpenGLCanvas;
@@ -45,6 +66,8 @@ public:
     void exportOpenContours3D(const QList<QVector<QVector3D>> points3D);
     void exportClosedContours3D(const QVector<QVector3D> points3D,  const QVector<QVector3D> normals3D);
     void exportStripes3D(const QList<QVector<QVector3D>> points3D);
+
+    void exportHRBFMesh( const QList<QString> dataFilesList);
 
 public slots:
 

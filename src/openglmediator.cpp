@@ -115,12 +115,12 @@ QVector<QVector3D> OpenGLMediator::createCylinder(int steps, QVector3D base, QVe
 
     QVector<QVector3D> diskVertex;
 
-    int    i, j;
+    //int    i, j;
     float  phi, dphi = 2.*M_PI / (float)(steps);
 
-    float R1 = 4.0f, R2 = 1.0f;
-    float angle;
-    int H = 1;
+    float R1 = 4.0f;//, R2 = 1.0f;
+    //float angle;
+    //int H = 1;
 
     float vx = top.x()-base.x();
     float vy = top.y()-base.y();
@@ -161,7 +161,7 @@ QVector<QVector3D> OpenGLMediator::createCylinder(int steps, QVector3D base, QVe
             m1.rotate(ax, rx, ry, 0.0); // Rotate about rotation vector
         }
 
-        b = m1 * b;
+        b = m1.map(b);
 
 
         diskVertex.push_back(b);
@@ -179,12 +179,12 @@ QVector<QVector3D> OpenGLMediator::createDisk(int steps, QVector3D base, QVector
 
     QVector<QVector3D> diskVertex;
 
-    int    i, j;
+    //int    i, j;
     float  phi, dphi = 2.*M_PI / (float)(steps);
 
-    float R1 = 1.0f, R2 = 1.0f;
-    float angle;
-    int H = 1;
+    float R1 = 1.0f; //, R2 = 1.0f;
+    //float angle;
+    //int H = 1;
 
     float vx = top.x()-base.x();
     float vy = top.y()-base.y();
@@ -225,7 +225,7 @@ QVector<QVector3D> OpenGLMediator::createDisk(int steps, QVector3D base, QVector
             m1.rotate(ax, rx, ry, 0.0); // Rotate about rotation vector
         }
 
-        b = m1 * b;
+        b = m1.map(b);
 
 
         diskVertex.push_back(b);
@@ -361,7 +361,7 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
 
 
         }
-        nvertices = vertices.size()/3;
+        nvertices = (unsigned int) vertices.size()/3;
 
     }
 
@@ -455,7 +455,7 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
     }
 
 
-    nvertices = vertices.size()/3;
+    nvertices = (unsigned int) vertices.size()/3;
 
 
     //setShape(points3D);
@@ -616,7 +616,7 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
         }
 
 
-        nvertices = vertices.size()/3;
+        nvertices = (unsigned int) vertices.size()/3;
 
         //    setShape(points3D);
 
@@ -1275,7 +1275,7 @@ bool OpenGLMediator::getMeshPath(std::vector<float> &vertex_coordinates, std::ve
         size_t num_vertices = vertex_coordinates.size()/3;
 
         for (auto &e : faces){
-            e += num_vertices;
+            e += (int) num_vertices;
         }
 
         std::copy(vertices.begin(), vertices.end(), std::back_inserter (vertex_coordinates));
@@ -1329,7 +1329,7 @@ bool OpenGLMediator::getMesh(std::vector<float> &vertex_coordinates, std::vector
         size_t num_vertices = vertex_coordinates.size()/3;
 
         for (auto &e : faces){
-            e += num_vertices;
+            e += (unsigned int) num_vertices;
         }
 
         std::copy(vertices.begin(), vertices.end(), std::back_inserter (vertex_coordinates));
@@ -1537,6 +1537,163 @@ bool OpenGLMediator::resizeMesh(QVector<QVector3D> &totalPoints){
     return true;
 }
 
+
+
+//************************************************************************************************
+/// ........................................ RBF MESH ..........................................
+//************************************************************************************************
+
+
+void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
+
+
+    int RBF_USED = XCUBE;
+    //ofstream time("tempo");
+    // std::cout << std::endl << std::endl << "*********************************************" << std::endl;
+    RBF *rbf;
+    bool usePoly;
+    switch(RBF_USED)
+    {
+    case XCUBE:
+    {
+        rbf =new XCube();
+        //std::cout << "xcube" << std::endl;
+        usePoly = true;
+        break;
+    }
+    case INV_MULT:
+    {
+        //std::cout << "Using Inverse Multiquadrics" << std::endl;
+        rbf = new InverseMultiquadrics();
+        usePoly = true;
+        break;
+    }
+    case GAUSSIAN:
+    {
+        //std::cout << "Using Inverse Multiquadrics" << std::endl;
+        rbf = new Gaussian();
+        usePoly = false;
+        break;
+    }
+    case MULTIQUADRIC:
+    {
+        //std::cout << "Using Inverse Multiquadrics" << std::endl;
+        rbf = new Multiquadrics();
+        usePoly = false;
+        break;
+    }
+    case GEN_INV_MULT:
+    {
+        //std::cout << "Using Inverse Multiquadrics" << std::endl;
+        rbf = new GeneralInverseMultiquadrics();
+        usePoly = false;
+        break;
+    }
+    default:
+    {
+        //std::cout << "Invalid RBF Kernel"    << std::endl;
+        exit(0);
+    }
+    }
+
+    //string names[] = {"cube_050.1","cube_050.2","cube_050.3","cube_050.4","cube_050.5", "cube_050.6","cube_050.7"};
+   // std::string names[] = {
+
+      //  "exportData0"
+
+    //};
+
+
+
+
+    // double radius[] = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1};
+    // string names[] = {"rbf_ID2_Ciclo3"};
+
+
+    // string names[] = {""};
+
+    //std::string outFile = "tempos.txt";
+    //std::ofstream fOut;
+    //fOut.open(outFile.c_str());
+
+    //QTime t;
+    //t.start();
+
+
+    for(int i = 0; i < dataFilesList.size() ; i++)
+    {
+
+        //t.restart();
+
+
+        //std::cout << "Nome do arquivo DATA de entrada (sem extensao): ";
+
+        std::string baseName;// =  string(argv[1]);
+        //baseName = std::string(names[i]);
+        baseName = dataFilesList[i].toStdString();
+        // cin >> baseName;
+        std::cout << "*************************************" << std::endl;
+        std::cout << "Mesh: " << baseName << std::endl;
+
+
+        //  char rchar[20];
+        // sprintf(rchar,"%f",radius[i]);
+
+        std::string rString = "";//string(rchar);
+
+        std::string coeffName = "../coeffs/"+baseName + rString+".bin";
+        std::string offName = "../off/"+baseName + rString +".off";
+        std::string dataName = "../data/" + baseName+".data";
+        std::string vtkName = "../vtk/"+baseName+".vtk";
+        // HERE
+        MeshData m(dataName.c_str());
+
+        std::cout << "npoints " << m.numPoints << std::endl;
+        std::cout << "nnormals " << m.numNormals << std::endl;
+        std::cout << "ntans: " << m.numTangents << std::endl;
+
+        //radius in 0... 1
+        rbf->radius = 1;//radius[i] ;//radius[pos];
+
+        std::cout << "radius: " << rbf->radius << std::endl;
+        HBRBF hb(rbf,&m, usePoly);
+        hb.run(coeffName.c_str());
+
+        //TO HERE
+
+        HBRBFEval e(rbf,coeffName.c_str());
+
+        SurfacePolygonizer sp(&e);
+        sp.polygonize(offName.c_str(),3);
+
+        //fOut << baseName << " "<< m.numPoints << " " << m.numNormals << " " << pow(m.numPoints + (m.numNormals*3) + 4, 2)  << " " <<  t.elapsed() <<  std::std::endl;
+
+
+        std::cout << "npoints " << m.numPoints << std::endl;
+        std::cout << "nnormals " << m.numNormals << std::endl;
+        std::cout << pow(m.numPoints + (m.numNormals*3) + 4, 2) << std::endl;
+
+        //qDebug ("Tempo de Execucao: %d milissegundos", t.elapsed());
+
+
+        //         exit(2);
+        //         //exit(2);
+        //         //Export to vtk
+        //        VTKExport vtk(&e,128);
+        //        vtk.toVTK(vtkName.c_str());
+        //         exit(9);
+
+
+
+
+    }
+
+    //fOut.close();
+}
+
+
+
+//#include "moc_openglmediator.cpp"
 
 
 
