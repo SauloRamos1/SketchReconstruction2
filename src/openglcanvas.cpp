@@ -17,6 +17,8 @@ void OpenGLCanvas::setOpenGLMediator (OpenGLMediator* glmed){
 
     glmediator = glmed;
 
+
+
 }
 
 void OpenGLCanvas::initializeGL(){
@@ -42,7 +44,6 @@ void OpenGLCanvas::initializeGL(){
     //    bf_vertices = std::make_shared< QOpenGLBuffer >();
     //    bf_vertices->create();
     timerId = startTimer(25);
-
 }
 
 void OpenGLCanvas::initializeShaders(){

@@ -302,7 +302,16 @@ void Canvas::exportMesh(){
 
         //glmediator->exportClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
         //glmediator->exportRBFMesh(scene->getRbfDataFiles());
-        glmediator->exportHRBFMesh(scene->getRbfDataFiles()) ;
+        QProgressDialog* dialog = new QProgressDialog(this);
+
+//        dialog->setMinimum(0);
+//        dialog->setMaximum(scene->getRbfDataFiles().size());
+//        dialog->show();
+
+        glmediator->exportHRBFMesh(scene->getRbfDataFiles(), dialog) ;
+
+        //dialog->close();
+
 
     }
 

@@ -10,9 +10,6 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
 
 
 
-    //TODO ->  FIX ALL CODE FOR STRIPES-rendering
-
-
     //************************************************************************************************
     /// ........................................ STYLESHEET ..........................................
     //************************************************************************************************
@@ -33,6 +30,19 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
         f.open(QFile::ReadOnly | QFile::Text);
         QTextStream ts(&f);
         qApp->setStyleSheet(ts.readAll());
+    }
+
+    // check if directory is created or not
+    if (QDir("output").exists())
+        std::cout << "Output directory already created!\n" << std::endl;
+    else {
+        QDir().mkdir("output");
+        std::cout << "Creating output directory...\n" << std::endl;
+        if (!QDir("output").exists()){
+           std::cout << "Unable to create output directory...\n"<< std::endl;
+            exit(1);
+        }
+
     }
 
     setWindowIcon(QIcon(":/icons/windowicon.png"));
@@ -303,6 +313,7 @@ void MainWindow::createCanvas1Toolbar () {
     layerDepthList->setGeometry(QRect(490, 615, 100, 70));
     QListWidgetItem *item = new QListWidgetItem ( "Layer 1 : 0", layerDepthList );
     item->setFlags( item->flags() | Qt::ItemIsEditable );
+
 
 
 }

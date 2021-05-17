@@ -1,5 +1,6 @@
 #ifndef MESHDATA_H
 #define MESHDATA_H
+#include <QString>
 #include <fstream>
 #include <iostream>
 #include "vecmath.h"
@@ -7,7 +8,7 @@
 class MeshData
 {
 public:
-    MeshData(const char *file);
+    MeshData(const QString &file);
     MeshData();
     int numPoints;
     int numNormals;

@@ -703,9 +703,9 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
     }
 
+    std::string outFile2 = "output/";
+    outFile2.append("Closed");
 
-
-    std::string outFile2 = ("Closed");
     outFile2.append(std::to_string(i));
     outFile2.append(".off");
     std::ofstream fOut;
@@ -932,9 +932,9 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
 
     std::ofstream fOut;
 
-    std::string outFile = "exportData";
+    std::string outFile = "output/exportData";
     outFile.append(std::to_string(shapeNumber));
-    //outFile.append(".data");
+    outFile.append(".data");
 
     rbfDataFiles.append(QString::fromStdString(outFile));
 
@@ -1132,7 +1132,7 @@ void InputSketch::DataForPoisson(const int shapeNumber, QPainterPath &contour, Q
 
     std::ofstream fOut;
 
-    std::string outFile = "exportDataPoisson";
+    std::string outFile = "output/exportDataPoisson";
     outFile.append(std::to_string(shapeNumber));
     outFile.append(".npts");
     fOut.open(outFile.c_str());
@@ -1329,7 +1329,7 @@ void InputSketch::DataForClosedFormulas(const int shapeNumber, QPainterPath &con
 
     std::ofstream fOut;
 
-    std::string outFile = "exportData";
+    std::string outFile = "output/exportData";
     outFile.append(std::to_string(shapeNumber));
     outFile.append(".data");
     fOut.open(outFile.c_str());

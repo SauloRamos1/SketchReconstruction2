@@ -900,6 +900,7 @@ void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > point
 {
 
 
+
     if( points3D.isEmpty() ) {
         QMessageBox msgBox;
         msgBox.setText("No OPEN contours to reconstruct");
@@ -994,7 +995,8 @@ void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > point
         //EXPORT OPENCONTOURS
 
         //Export OFF
-        std::string outFile = "Open";
+        std::string outFile = "output/";
+        outFile.append("Open");
         outFile.append(std::to_string(h));
         outFile.append(".off");
         std::ofstream fOut;
@@ -1019,8 +1021,8 @@ void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > point
         qDebug () << "Exported OFF Mesh";
 
         //Export PLY
-
-        std::string outFile3 = "Open";
+        std::string outFile3 = "output/";
+        outFile3.append("Open");
         outFile3.append(std::to_string(h));
         outFile3.append(".ply");
         std::ofstream fOut1;
@@ -1189,7 +1191,7 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
         //EXPORT STRIPE
 
         //Export OFF
-        std::string outFile = "Stripe";
+        std::string outFile = "output/Stripe";
         outFile.append(std::to_string(h));
         outFile.append(".off");
         std::ofstream fOut;
@@ -1544,7 +1546,7 @@ bool OpenGLMediator::resizeMesh(QVector<QVector3D> &totalPoints){
 //************************************************************************************************
 
 
-void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
+void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList, QProgressDialog *dialog){
 
 
     int RBF_USED = XCUBE;
@@ -1597,9 +1599,9 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
     }
 
     //string names[] = {"cube_050.1","cube_050.2","cube_050.3","cube_050.4","cube_050.5", "cube_050.6","cube_050.7"};
-   // std::string names[] = {
+    // std::string names[] = {
 
-      //  "exportData0"
+    //  "exportData0"
 
     //};
 
@@ -1620,17 +1622,27 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
     //t.start();
 
 
+
     for(int i = 0; i < dataFilesList.size() ; i++)
     {
 
+
+        dialog->setValue(dialog->value()+1);
         //t.restart();
+        // progressDialog.setValue(i);
+
 
 
         //std::cout << "Nome do arquivo DATA de entrada (sem extensao): ";
 
-        std::string baseName;// =  string(argv[1]);
         //baseName = std::string(names[i]);
-        baseName = dataFilesList[i].toStdString();
+
+
+        std::string fileName = dataFilesList[i].toStdString();
+
+        std::string baseName =  fileName.substr(0, fileName.find_last_of("."));
+
+        //const char *c_str2 = str.toLocal8Bit().data();
         // cin >> baseName;
         std::cout << "*************************************" << std::endl;
         std::cout << "Mesh: " << baseName << std::endl;
@@ -1641,10 +1653,10 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
 
         std::string rString = "";//string(rchar);
 
-//        std::string coeffName = "../coeffs/"+baseName + rString+".bin";
-//        std::string offName = "../off/"+baseName + rString +".off";
-//        std::string dataName = "../data/" + baseName+".data";
-//        std::string vtkName = "../vtk/"+baseName+".vtk";
+        //        std::string coeffName = "../coeffs/"+baseName + rString+".bin";
+        //        std::string offName = "../off/"+baseName + rString +".off";
+        //        std::string dataName = "../data/" + baseName+".data";
+        //        std::string vtkName = "../vtk/"+baseName+".vtk";
 
 
         std::string coeffName = baseName + rString+".bin";
@@ -1653,7 +1665,8 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
         std::string vtkName = baseName+".vtk";
 
         // HERE
-        MeshData m(dataName.c_str());
+        //MeshData m(dataName.c_str());
+        MeshData m(dataFilesList[i]);
 
         std::cout << "npoints " << m.numPoints << std::endl;
         std::cout << "nnormals " << m.numNormals << std::endl;
@@ -1676,9 +1689,9 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
         //fOut << baseName << " "<< m.numPoints << " " << m.numNormals << " " << pow(m.numPoints + (m.numNormals*3) + 4, 2)  << " " <<  t.elapsed() <<  std::std::endl;
 
 
-        std::cout << "npoints " << m.numPoints << std::endl;
-        std::cout << "nnormals " << m.numNormals << std::endl;
-        std::cout << pow(m.numPoints + (m.numNormals*3) + 4, 2) << std::endl;
+        //std::cout << "npoints " << m.numPoints << std::endl;
+        //std::cout << "nnormals " << m.numNormals << std::endl;
+        //std::cout << pow(m.numPoints + (m.numNormals*3) + 4, 2) << std::endl;
 
         //qDebug ("Tempo de Execucao: %d milissegundos", t.elapsed());
 
@@ -1689,7 +1702,6 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
         //        VTKExport vtk(&e,128);
         //        vtk.toVTK(vtkName.c_str());
         //         exit(9);
-
 
 
 

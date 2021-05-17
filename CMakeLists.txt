@@ -97,7 +97,6 @@ set(SOURCES
 #    xCubeEigen/polyg/Polygonizer.cpp
 
 
-
     )
 
 # Populate a cmake variable with the project's headers

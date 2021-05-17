@@ -13,9 +13,15 @@ MeshData::MeshData()
 
 }
 
-MeshData::MeshData(const char *file)
+MeshData::MeshData(QString const &file)
 {
-    std::ifstream in(file);
+    //std::ifstream in(file);
+    std:: ifstream in;
+    in.open (file.toUtf8(),std::ifstream::in);
+    if (!in.is_open()) {
+        qWarning ("Cannot open file.");
+        return;
+    }
 
     if(in)
     {
