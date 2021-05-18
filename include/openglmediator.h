@@ -68,7 +68,7 @@ public:
     void exportClosedContours3D(const QVector<QVector3D> points3D,  const QVector<QVector3D> normals3D);
     void exportStripes3D(const QList<QVector<QVector3D>> points3D);
 
-    void exportHRBFMesh(const QList<QString> dataFilesList, QProgressDialog *dialog);
+    void exportHRBFMesh(const QList<QString> dataFilesList);
 
 public slots:
 

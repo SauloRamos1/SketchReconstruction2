@@ -120,11 +120,11 @@ void Canvas::moveZoomInteraction(){
 }
 
 void Canvas::setOpenContourInteraction(){
-//    if (scene->getInteraction() == 1){
-//        scene->chooseDefaultInteraction();
+    //    if (scene->getInteraction() == 1){
+    //        scene->chooseDefaultInteraction();
 
-//        return;
-//    }
+    //        return;
+    //    }
 
     scene->chooseOpenContour_Interaction();
     update();
@@ -266,19 +266,19 @@ void Canvas::viewOverlapping3D(){
 
     }
 
-//    if (scene->getInteraction() == 1){
-//        glmediator->viewOpenContours3D(scene->getOpenContoursPoints());
+    //    if (scene->getInteraction() == 1){
+    //        glmediator->viewOpenContours3D(scene->getOpenContoursPoints());
 
-//    } else if (scene->getInteraction() == 2){
+    //    } else if (scene->getInteraction() == 2){
 
-//        scene->estimateShapes();
-//        glmediator->viewClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
-//        //glmediator->render();
+    //        scene->estimateShapes();
+    //        glmediator->viewClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
+    //        //glmediator->render();
 
-//    } else if (scene->getInteraction() == 3){
-//        glmediator->viewStripes3D(scene->getStripes());
-//        //glmediator->render();
-//    }
+    //    } else if (scene->getInteraction() == 3){
+    //        glmediator->viewStripes3D(scene->getStripes());
+    //        //glmediator->render();
+    //    }
     glmediator->render();
 }
 
@@ -302,16 +302,18 @@ void Canvas::exportMesh(){
 
         //glmediator->exportClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
         //glmediator->exportRBFMesh(scene->getRbfDataFiles());
-        QProgressDialog* dialog = new QProgressDialog(this);
 
-//        dialog->setMinimum(0);
-//        dialog->setMaximum(scene->getRbfDataFiles().size());
-//        dialog->show();
+        glmediator->exportHRBFMesh(scene->getRbfDataFiles()) ;
 
-        glmediator->exportHRBFMesh(scene->getRbfDataFiles(), dialog) ;
 
-        //dialog->close();
+        //        dialog->setMinimum(0);
+        //        dialog->setMaximum(scene->getRbfDataFiles().size());
+        //        dialog->setAutoClose(true);
+        //        dialog->show();
 
+
+
+        //        dialog->setValue(dialog->maximum());
 
     }
 

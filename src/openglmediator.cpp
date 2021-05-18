@@ -1546,7 +1546,7 @@ bool OpenGLMediator::resizeMesh(QVector<QVector3D> &totalPoints){
 //************************************************************************************************
 
 
-void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList, QProgressDialog *dialog){
+void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
 
 
     int RBF_USED = XCUBE;
@@ -1622,12 +1622,29 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList, QProgressDial
     //t.start();
 
 
+   // QCoreApplication::processEvents();
+    QProgressDialog dialog("Creating RBF Models...", "Abort Operation",0, dataFilesList.size()*10 );
+    dialog.setWindowModality(Qt::WindowModal);
+
+    dialog.show();
 
     for(int i = 0; i < dataFilesList.size() ; i++)
     {
+        int progressValue;
+        if (i == 0) {
+            progressValue = 0;
+        } else {
+            progressValue = i * 10;
+        }
 
 
-        dialog->setValue(dialog->value()+1);
+        dialog.setValue(progressValue);
+
+        if (dialog.wasCanceled())
+            break;
+
+        QCoreApplication::processEvents();
+
         //t.restart();
         // progressDialog.setValue(i);
 
@@ -1667,24 +1684,35 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList, QProgressDial
         // HERE
         //MeshData m(dataName.c_str());
         MeshData m(dataFilesList[i]);
+        dialog.setValue(progressValue+0.1);
 
+        QCoreApplication::processEvents();
         std::cout << "npoints " << m.numPoints << std::endl;
         std::cout << "nnormals " << m.numNormals << std::endl;
         std::cout << "ntans: " << m.numTangents << std::endl;
 
         //radius in 0... 1
         rbf->radius = 1;//radius[i] ;//radius[pos];
-
+        dialog.setValue(dialog.value()+1);
+        QCoreApplication::processEvents();
         std::cout << "radius: " << rbf->radius << std::endl;
         HBRBF hb(rbf,&m, usePoly);
+        dialog.setValue(dialog.value()+1);
+        QCoreApplication::processEvents();
         hb.run(coeffName.c_str());
-
+        dialog.setValue(dialog.value()+2);
+        QCoreApplication::processEvents();
         //TO HERE
 
         HBRBFEval e(rbf,coeffName.c_str());
-
+        dialog.setValue(dialog.value()+1);
+        QCoreApplication::processEvents();
         SurfacePolygonizer sp(&e);
+        dialog.setValue(dialog.value()+1);
+        QCoreApplication::processEvents();
         sp.polygonize(offName.c_str(),3);
+        dialog.setValue(dialog.value()+2);
+        QCoreApplication::processEvents();
 
         //fOut << baseName << " "<< m.numPoints << " " << m.numNormals << " " << pow(m.numPoints + (m.numNormals*3) + 4, 2)  << " " <<  t.elapsed() <<  std::std::endl;
 
@@ -1706,6 +1734,9 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList, QProgressDial
 
 
     }
+    dialog.setValue(dialog.maximum());
+
+    //dialog.close();
 
     //fOut.close();
 }
