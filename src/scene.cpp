@@ -115,6 +115,12 @@ void Scene::newFile()
 
 }
 
+bool Scene::almostEqual(float a, float b)
+{
+    //return fabs(a - b) <= FLT_EPSILON;
+    return fabs(a - b) <= 0.1;
+}
+
 void Scene::loadSVG(const std::string& str)
 {
 
@@ -146,10 +152,26 @@ void Scene::loadSVG(const std::string& str)
 
 
 
-                if (!((curva[0] == curva [6]) && (curva[1] == curva[7]) && curva[2] == curva [4])){
-                    bezierCurvePointsList.push_back(curva);
-                    //qDebug () << curva;
+//                if (!((curva[0] == curva [6]) && (curva[1] == curva[7]) && curva[2] == curva [4])){
+//                    bezierCurvePointsList.push_back(curva);
+//                    //qDebug () << curva;
 
+
+//                    ncurvas += 1;
+//                }
+
+                QPointF p0 (curva[0], curva[1]);
+                QPointF p1 (curva[2], curva[3]);
+                QPointF p2 (curva[4], curva[5]);
+                QPointF p3 (curva[6], curva[7]);
+
+
+                // P0 can be equal to P3 but P0 != P1 and P2 != P3
+                // P1 != P2
+                if (almostEqual(p1.x(),p2.x()) && almostEqual(p1.y(),p2.y())){
+
+                } else {
+                    bezierCurvePointsList.push_back(curva);
 
                     ncurvas += 1;
                 }

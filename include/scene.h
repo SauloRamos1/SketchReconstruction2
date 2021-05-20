@@ -112,6 +112,8 @@ public:
 
     QList<QString> getRbfDataFiles();
 
+    bool almostEqual(float a, float b);
+
 public slots:
 
 private:

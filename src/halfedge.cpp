@@ -28,6 +28,11 @@ void HalfEdgeGraph::svgPathsTohalfedgestructure(QVector<QVector<float>> pathsLis
 
         vertexList.push_back(vertex1);
         vertexList.push_back(vertex2);
+
+
+    }
+    foreach (QList list, pathsList){
+        qDebug () << list;
     }
 
     // ---------------------- Limpa itens duplicados da Lista de Vértices-----------------------------
@@ -213,7 +218,7 @@ void HalfEdgeGraph::svgPathsTohalfedgestructure(QVector<QVector<float>> pathsLis
         if (clockwisehalfedgeslist.size() == 4) {
             qDebug () << "Erro, T-junction com 4 linhas" ;
 
-            qDebug () << clockwisehalfedgeslist[0]->p0;
+            qDebug () << clockwisehalfedgeslist[0]->p0 << "Inkscape:" << clockwisehalfedgeslist[0]->p0.x()<< ","<< 500 -clockwisehalfedgeslist[0]->p0.y() ;
         }
 
         clockwisehalfedgeslist.clear();
