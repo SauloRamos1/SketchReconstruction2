@@ -45,6 +45,7 @@ MainWindow::MainWindow( QWidget* parent ): QMainWindow( parent )
 
     }
 
+
     setWindowIcon(QIcon(":/icons/windowicon.png"));
 
     setAcceptDrops (true);

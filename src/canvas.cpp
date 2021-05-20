@@ -305,22 +305,22 @@ void Canvas::exportMesh(){
 
         glmediator->exportHRBFMesh(scene->getRbfDataFiles()) ;
 
-
-        //        dialog->setMinimum(0);
-        //        dialog->setMaximum(scene->getRbfDataFiles().size());
-        //        dialog->setAutoClose(true);
-        //        dialog->show();
-
-
-
-        //        dialog->setValue(dialog->maximum());
-
     }
 
     if (!scene->isStripeContoursEmpty()){
 
         glmediator->exportStripes3D(scene->getStripes());
 
+    }
+
+
+    QDir dir("output/", {"*.bin"});
+    for(const QString & filename: dir.entryList()){
+        dir.remove(filename);
+    }
+    dir = QDir("output/", {"*.data"});
+    for(const QString & filename: dir.entryList()){
+        dir.remove(filename);
     }
 
 
