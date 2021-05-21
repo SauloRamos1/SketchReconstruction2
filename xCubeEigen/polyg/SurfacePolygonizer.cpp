@@ -28,6 +28,42 @@ void SurfacePolygonizer::polygonize(const char *fileName, double spacing)
                                << std::endl;
     }
     std::cout << "Polygonizing done." << std::endl;
+
+    //Export PLY
+
+    std::string outFile3 = fileName;
+    outFile3.append(".ply");
+    std::ofstream fOut1;
+
+    fOut1.open(outFile3.c_str());
+
+
+    fOut1 << "ply" <<std::endl;
+    fOut1 << "format ascii 1.0" << std::endl;
+    fOut1 << "element vertex " << vertices.size()/3 <<  std::endl;
+
+    fOut1 << "property float x" << std::endl;
+    fOut1 << "property float y" << std::endl;
+    fOut1 << "property float z" << std::endl;
+
+    //fOut1 << "element face " << faces.size()/3 << std::endl;
+
+    fOut1 << "property list uint8 int32 vertex_indices" << std::endl;
+
+    fOut1 << "end_header" << std::endl;
+
+    for (int i = 0 ; i < vertices.size()/3; i++){
+        fOut1<<
+                (vertices[i])[0] << " "
+             << (vertices[i])[1] << " "
+             << (vertices[i])[2] << " " << std::endl;
+    }
+
+//    for (int m = 0; m < Sfaces.size()/3; m++) {
+//        fOut1 << 3 << " "<< Sfaces[3*m+0] <<" "<< Sfaces[3*m+1]  <<" "<< Sfaces[3*m+2]  << std::endl;
+//    }
+
+    fOut1.close();
 }
 
 void SurfacePolygonizer::ComputeBB()

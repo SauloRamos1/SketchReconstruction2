@@ -29,6 +29,12 @@ void OpenGLCanvas::initializeGL(){
 
     initializeShaders();
 
+    //QString mesh = "output/Open0.ply";
+    //loadGeneratedMesh(mesh);
+
+    //mesh = "output/Open1.ply";
+    //loadGeneratedMesh(mesh);
+
     //glEnable(GL_CULL_FACE);
 
     //glCullFace(GL_FRONT);
@@ -88,10 +94,13 @@ void OpenGLCanvas::createTube(std::vector<float> &vertex_coordinates, std::vecto
 
 void OpenGLCanvas::loadGeneratedMesh (const QString meshName){
 
+
+
     tscene->loadMeshFromPLY(meshName.toStdString());
 
     tscene->setMeshColor(0xF1, 0xA3, 0x40);
 
+    toggleHeadlight();
 }
 
 void OpenGLCanvas::renderCylinder (QVector<QVector3D> points3D){
@@ -138,6 +147,9 @@ void OpenGLCanvas::toggleWireframe()
 
 void OpenGLCanvas::keyPressEvent(QKeyEvent *event){
 
+    if (event->key() == Qt::Key_R){
+        tscene->resetCamera();
+    }
     if (event->key() == Qt::Key_H){
         toggleHeadlight();
     }
@@ -166,6 +178,9 @@ void OpenGLCanvas::mousePressEvent(QMouseEvent *event){
         tscene->rotateCamera( p.x(), p.y() );
 
     }
+    if (event->buttons() == Qt::MiddleButton){
+        tscene->translateCamera( p.x(), p.y() );
+    }
 
     update();
 
@@ -181,6 +196,11 @@ void OpenGLCanvas::mouseMoveEvent( QMouseEvent* event )
         tscene->rotateCamera( p.x(), p.y() );
     }
 
+
+    if (event->buttons() == Qt::MiddleButton){
+        tscene->translateCamera( p.x(), p.y() );
+    }
+
     update();
 
     QOpenGLWidget::mouseMoveEvent( event );
@@ -190,6 +210,7 @@ void OpenGLCanvas::mouseMoveEvent( QMouseEvent* event )
 void OpenGLCanvas::mouseReleaseEvent(QMouseEvent *event){
 
     tscene->stopRotateCamera();
+    tscene->stopTranslateCamera();
 
     mouseIsClicked = false;
     update();
