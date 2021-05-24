@@ -994,32 +994,33 @@ void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > point
 
         //EXPORT OPENCONTOURS
 
-        //Export OFF
-        std::string outFile = "output/";
-        outFile.append("Open");
-        outFile.append(std::to_string(h));
-        outFile.append(".off");
-        std::ofstream fOut;
-        fOut.open(outFile.c_str());
+//        //Export OFF
+//        std::string outFile = "output/";
+//        outFile.append("Open");
+//        outFile.append(std::to_string(h));
+//        outFile.append(".off");
+//        std::ofstream fOut;
+//        fOut.open(outFile.c_str());
 
 
-        fOut << "OFF" <<std::endl;
+//        fOut << "OFF" <<std::endl;
 
-        //Vertices, Faces, Edges
+//        //Vertices, Faces, Edges
 
-        fOut << OCvertices.size()/3  <<" " << OCfaces.size()/3 <<" " << "0" <<std::endl;
-        for (int i = 0 ; i < OCvertices.size()/3; i++){
-            fOut << OCvertices[3*i+0] << " " << OCvertices[3*i + 1] << " " << OCvertices[3*i+2] << std::endl;
+//        fOut << OCvertices.size()/3  <<" " << OCfaces.size()/3 <<" " << "0" <<std::endl;
+//        for (int i = 0 ; i < OCvertices.size()/3; i++){
+//            fOut << OCvertices[3*i+0] << " " << OCvertices[3*i + 1] << " " << OCvertices[3*i+2] << std::endl;
 
-        }
+//        }
 
-        for (int m = 0; m < OCfaces.size()/3; m++) {
-            fOut << 3 << " "<< OCfaces[3*m+0] <<" "<< OCfaces[3*m+1]  <<" "<< OCfaces[3*m+2]  << std::endl;
-        }
-        fOut.close();
+//        for (int m = 0; m < OCfaces.size()/3; m++) {
+//            fOut << 3 << " "<< OCfaces[3*m+0] <<" "<< OCfaces[3*m+1]  <<" "<< OCfaces[3*m+2]  << std::endl;
+//        }
+//        fOut.close();
 
-        qDebug () << "Exported OFF Mesh";
+//        qDebug () << "Exported OFF Mesh";
 
+        std::cout << "Exporting PLY Open Contour File." << std::endl;
         //Export PLY
         std::string outFile3 = "output/";
         outFile3.append("Open");
@@ -1190,34 +1191,36 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
 
         //EXPORT STRIPE
 
-        //Export OFF
-        std::string outFile = "output/Stripe";
-        outFile.append(std::to_string(h));
-        outFile.append(".off");
-        std::ofstream fOut;
-        fOut.open(outFile.c_str());
+//        //Export OFF
+//        std::string outFile = "output/Stripe";
+//        outFile.append(std::to_string(h));
+//        outFile.append(".off");
+//        std::ofstream fOut;
+//        fOut.open(outFile.c_str());
 
 
-        fOut << "OFF" <<std::endl;
+//        fOut << "OFF" <<std::endl;
 
-        //Vertices, Faces, Edges
+//        //Vertices, Faces, Edges
 
-        fOut << Svertices.size()/3  <<" " << Sfaces.size()/3 <<" " << "0" <<std::endl;
-        for (int i = 0 ; i < Svertices.size()/3; i++){
-            fOut << Svertices[3*i+0] << " " << Svertices[3*i + 1] << " " << Svertices[3*i+2] << std::endl;
+//        fOut << Svertices.size()/3  <<" " << Sfaces.size()/3 <<" " << "0" <<std::endl;
+//        for (int i = 0 ; i < Svertices.size()/3; i++){
+//            fOut << Svertices[3*i+0] << " " << Svertices[3*i + 1] << " " << Svertices[3*i+2] << std::endl;
 
-        }
+//        }
 
-        for (int m = 0; m < Sfaces.size()/3; m++) {
-            fOut << 3 << " "<< Sfaces[3*m+0] <<" "<< Sfaces[3*m+1]  <<" "<< Sfaces[3*m+2]  << std::endl;
-        }
-        fOut.close();
+//        for (int m = 0; m < Sfaces.size()/3; m++) {
+//            fOut << 3 << " "<< Sfaces[3*m+0] <<" "<< Sfaces[3*m+1]  <<" "<< Sfaces[3*m+2]  << std::endl;
+//        }
+//        fOut.close();
 
-        qDebug () << "Exported OFF Mesh";
+//        qDebug () << "Exported OFF Mesh";
 
         //Export PLY
 
-        std::string outFile3 = "Stripe";
+        std::cout << "Exporting PLY Stripe Contour File." << std::endl;
+
+        std::string outFile3 = "output/Stripe";
         outFile3.append(std::to_string(h));
         outFile3.append(".ply");
         std::ofstream fOut1;

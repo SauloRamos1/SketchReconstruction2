@@ -703,71 +703,71 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
     }
 
-    std::string outFile2 = "output/";
-    outFile2.append("Closed");
+//    std::string outFile2 = "output/";
+//    outFile2.append("Closed");
 
-    outFile2.append(std::to_string(i));
-    outFile2.append(".off");
-    std::ofstream fOut;
-    fOut.open(outFile2.c_str());
+//    outFile2.append(std::to_string(i));
+//    outFile2.append(".off");
+//    std::ofstream fOut;
+//    fOut.open(outFile2.c_str());
 
 
-    fOut << "OFF" <<std::endl;
+//    fOut << "OFF" <<std::endl;
 
-    //Vertices, Faces, Edges
+//    //Vertices, Faces, Edges
 
-    fOut << npoints  <<" " << topology.size()  <<" " << "0" <<std::endl;
+//    fOut << npoints  <<" " << topology.size()  <<" " << "0" <<std::endl;
+//    for (int l = 0; l < allShapesSampledPoints[i].shapePoints.size(); ++l) {
+//        for (int m = 0; m < allShapesSampledPoints[i].shapePoints[l].size(); ++m) {
+
+//            fOut << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
+
+//        }
+//    }
+
+//    for (int m = 0; m < topology.size(); ++m) {
+//        fOut << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
+//    }
+//    fOut.close();
+
+    // Export PLY
+    std::string outFile3 = "output/";
+    outFile3.append("Closed");
+    outFile3.append(std::to_string(i));
+    outFile3.append(".ply");
+    std::ofstream fOut1;
+
+    fOut1.open(outFile3.c_str());
+
+
+    fOut1 << "ply" <<std::endl;
+    fOut1 << "format ascii 1.0" << std::endl;
+    fOut1 << "element vertex " << npoints <<  std::endl;
+
+    fOut1 << "property float x" << std::endl;
+    fOut1 << "property float y" << std::endl;
+    fOut1 << "property float z" << std::endl;
+
+    fOut1 << "element face " << topology.size() << std::endl;
+
+    fOut1 << "property list uint8 int32 vertex_indices" << std::endl;
+
+    fOut1 << "end_header" << std::endl;
+
     for (int l = 0; l < allShapesSampledPoints[i].shapePoints.size(); ++l) {
         for (int m = 0; m < allShapesSampledPoints[i].shapePoints[l].size(); ++m) {
 
-            fOut << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
+            fOut1 << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
 
         }
     }
 
-    for (int m = 0; m < topology.size(); ++m) {
-        fOut << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
+
+    for (int m = 0; m < topology.size(); m++) {
+        fOut1 << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
     }
-    fOut.close();
 
-    //Export PLY
-
-    //    std::string outFile3 = "Closed";
-    //    outFile3.append(std::to_string(i));
-    //    outFile3.append(".ply");
-    //    std::ofstream fOut1;
-
-    //    fOut1.open(outFile3.c_str());
-
-
-    //    fOut1 << "ply" <<std::endl;
-    //    fOut1 << "format ascii 1.0" << std::endl;
-    //    fOut1 << "element vertex " << npoints <<  std::endl;
-
-    //    fOut1 << "property float x" << std::endl;
-    //    fOut1 << "property float y" << std::endl;
-    //    fOut1 << "property float z" << std::endl;
-
-    //    fOut1 << "element face " << topology.size() << std::endl;
-
-    //    fOut1 << "property list uchar uint vertex" << std::endl;
-
-    //    fOut1 << "end_header" << std::endl;
-
-    //    for (int l = 0; l < allShapesSampledPoints[i].shapePoints.size(); ++l) {
-    //        for (int m = 0; m < allShapesSampledPoints[i].shapePoints[l].size(); ++m) {
-
-    //            fOut << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
-
-    //        }
-    //    }
-
-
-    //    for (int m = 0; m < topology.size(); m++) {
-    //        fOut1 << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
-    //    }
-
-    //    fOut1.close();
+    fOut1.close();
 
 
 
@@ -974,19 +974,19 @@ void InputSketch::DataForHRBF(const int shapeNumber, QPainterPath &contour, QVec
     fOut.close();
 
 
-//    std::ofstream fOut2;
+    //    std::ofstream fOut2;
 
-//    std::string outFile2 = "exportDataVIPSS";
-//    outFile2.append(std::to_string(shapeNumber));
-//    outFile2.append(".xyz");
-//    fOut2.open(outFile2.c_str());
+    //    std::string outFile2 = "exportDataVIPSS";
+    //    outFile2.append(std::to_string(shapeNumber));
+    //    outFile2.append(".xyz");
+    //    fOut2.open(outFile2.c_str());
 
-//    foreach (QVector3D p, totalPoints) {
+    //    foreach (QVector3D p, totalPoints) {
 
-//        fOut2 << p.x() <<" " << p.y()<< " " << p.z()<< std::endl;
-//    }
+    //        fOut2 << p.x() <<" " << p.y()<< " " << p.z()<< std::endl;
+    //    }
 
-//    fOut2.close();
+    //    fOut2.close();
 
     totalPoints.clear();
     totalNormals.clear();
@@ -1512,8 +1512,8 @@ void InputSketch::finishBand (){//Finish
         pointsFor3D.append(pointsfor3Dleft);
         pointsFor3D.append(pointsfor3Dright);
 
-//        float h = twistingThickness/2; //Hipotenusa
-//        float hquad = pow(h,2);
+        //        float h = twistingThickness/2; //Hipotenusa
+        //        float hquad = pow(h,2);
 
         for (int i = 0 ; i < pointsfor3Dleft.size()-1; i++) {
 
@@ -1524,19 +1524,19 @@ void InputSketch::finishBand (){//Finish
 
             //Pares P - R e Q - S
 
-//            float c = p.distanceToPoint(r) / 2;
+            //            float c = p.distanceToPoint(r) / 2;
 
-//            float z = h * sqrt(1-(pow(c,2) / hquad));
+            //            float z = h * sqrt(1-(pow(c,2) / hquad));
 
-//            p.setZ(p.z() + z);
-//            r.setZ(r.z() - z);
+            //            p.setZ(p.z() + z);
+            //            r.setZ(r.z() - z);
 
-//            c = q.distanceToPoint(s) / 2;
+            //            c = q.distanceToPoint(s) / 2;
 
-//            z = h * sqrt(1-(pow(c,2) / hquad));
+            //            z = h * sqrt(1-(pow(c,2) / hquad));
 
-//            q.setZ(q.z() + z);
-//            s.setZ(s.z() - z);
+            //            q.setZ(q.z() + z);
+            //            s.setZ(s.z() - z);
 
 
 
@@ -1920,12 +1920,12 @@ void InputSketch::updateColorMap(){
 
     shapeColorMap.clear();
 
-//    startRedVal = 0;
-//    endRedValue = 255;
-//    startGreenVal = 0;
-//    endGreenValue = 255;
-//    startBlueVal = 255;
-//    endBlueValue = 0;
+    //    startRedVal = 0;
+    //    endRedValue = 255;
+    //    startGreenVal = 0;
+    //    endGreenValue = 255;
+    //    startBlueVal = 255;
+    //    endBlueValue = 0;
 
     startRedVal = 255;
     endRedValue = 0;
@@ -3200,24 +3200,24 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
 
                     if (stripeContourList[i][j].level == h) {
 
-//                        painter->setOpacity(0.5);
-//                        painter->setPen(QPen(QColor(Qt::white),stripeContourList[i][j].level+6,penStyle, Qt::FlatCap, Qt::RoundJoin));
-//                        painter->drawPath(stripeContourList[i][j].leftLine);
-//                        painter->setOpacity(1);
-//                        painter->setPen(QPen(QColor(Qt::white),stripeContourList[i][j].level+5,penStyle, Qt::FlatCap, Qt::RoundJoin));
-//                        painter->drawPath(stripeContourList[i][j].leftLine);
-//                        painter->setOpacity(0.5);
-//                        painter->setPen(QPen(QColor(Qt::white),stripeContourList[i][j].level+6,penStyle, Qt::FlatCap, Qt::RoundJoin));
-//                        painter->drawPath(stripeContourList[i][j].rightLine);
-//                        painter->setOpacity(1);
-//                        painter->setPen(QPen(QColor(Qt::white),stripeContourList[i][j].level+5,penStyle, Qt::FlatCap, Qt::RoundJoin));
-//                        painter->drawPath(stripeContourList[i][j].rightLine);
+                        //                        painter->setOpacity(0.5);
+                        //                        painter->setPen(QPen(QColor(Qt::white),stripeContourList[i][j].level+6,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        //                        painter->drawPath(stripeContourList[i][j].leftLine);
+                        //                        painter->setOpacity(1);
+                        //                        painter->setPen(QPen(QColor(Qt::white),stripeContourList[i][j].level+5,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        //                        painter->drawPath(stripeContourList[i][j].leftLine);
+                        //                        painter->setOpacity(0.5);
+                        //                        painter->setPen(QPen(QColor(Qt::white),stripeContourList[i][j].level+6,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        //                        painter->drawPath(stripeContourList[i][j].rightLine);
+                        //                        painter->setOpacity(1);
+                        //                        painter->setPen(QPen(QColor(Qt::white),stripeContourList[i][j].level+5,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        //                        painter->drawPath(stripeContourList[i][j].rightLine);
 
-//                        painter->setPen(QPen(QColor(Qt::blue),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
-//                        painter->drawPath(stripeContourList[i][j].leftLine);
-//                        painter->setPen(QPen(QColor(Qt::red),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
-//                        painter->drawPath(stripeContourList[i][j].rightLine);
-//                        painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                        //                        painter->setPen(QPen(QColor(Qt::blue),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                        //                        painter->drawPath(stripeContourList[i][j].leftLine);
+                        //                        painter->setPen(QPen(QColor(Qt::red),stripeContourList[i][j].level+1,penStyle, Qt::RoundCap, Qt::RoundJoin));
+                        //                        painter->drawPath(stripeContourList[i][j].rightLine);
+                        //                        painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::RoundCap, Qt::RoundJoin));
 
 
 

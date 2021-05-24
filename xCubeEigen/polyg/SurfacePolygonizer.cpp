@@ -9,29 +9,31 @@ void SurfacePolygonizer::polygonize(const char *fileName, double spacing)
     ComputeBB();
     Triangles trs;
     marchingCubes(bbp1, bbp2, spacing, &trs);
-    std::ofstream ofnamefile(fileName,std::ios::out);
+//    std::ofstream ofnamefile(fileName,std::ios::out);
 
-    ofnamefile << "OFF\n " << vertices.size() << " " << trs.size() << " 0 " << std::endl;
+//    ofnamefile << "OFF\n " << vertices.size() << " " << trs.size() << " 0 " << std::endl;
 
-    for(int i = 0; i < vertices.size(); i++)
-    {
-            ofnamefile << std::setprecision(15) <<
-                          (vertices[i])[0] << " "
-                       << (vertices[i])[1] << " "
-                       << (vertices[i])[2] << " " << std::endl;
-    }
-    for(int i = 0; i < trs.size(); i++)
-    {
-            ofnamefile << "3 " << trs[i].i1 << " "
-                               << trs[i].i2 << " "
-                               << trs[i].i3 << " "
-                               << std::endl;
-    }
+//    for(int i = 0; i < vertices.size(); i++)
+//    {
+//            ofnamefile << std::setprecision(15) <<
+//                          (vertices[i])[0] << " "
+//                       << (vertices[i])[1] << " "
+//                       << (vertices[i])[2] << " " << std::endl;
+//    }
+//    for(int i = 0; i < trs.size(); i++)
+//    {
+//            ofnamefile << "3 " << trs[i].i1 << " "
+//                               << trs[i].i2 << " "
+//                               << trs[i].i3 << " "
+//                               << std::endl;
+//    }
     std::cout << "Polygonizing done." << std::endl;
+    std::cout << "Exporting PLY Closed Contour File." << std::endl;
 
     //Export PLY
 
     std::string outFile3 = fileName;
+    outFile3 = outFile3.substr(0, outFile3.find_last_of("."));
     outFile3.append(".ply");
     std::ofstream fOut1;
 
@@ -40,28 +42,31 @@ void SurfacePolygonizer::polygonize(const char *fileName, double spacing)
 
     fOut1 << "ply" <<std::endl;
     fOut1 << "format ascii 1.0" << std::endl;
-    fOut1 << "element vertex " << vertices.size()/3 <<  std::endl;
+    fOut1 << "element vertex " << vertices.size() <<  std::endl;
 
     fOut1 << "property float x" << std::endl;
     fOut1 << "property float y" << std::endl;
     fOut1 << "property float z" << std::endl;
 
-    //fOut1 << "element face " << faces.size()/3 << std::endl;
+    fOut1 << "element face " << trs.size() << std::endl;
 
     fOut1 << "property list uint8 int32 vertex_indices" << std::endl;
 
     fOut1 << "end_header" << std::endl;
 
-    for (int i = 0 ; i < vertices.size()/3; i++){
+    for (int i = 0 ; i < vertices.size(); i++){
         fOut1<<
                 (vertices[i])[0] << " "
              << (vertices[i])[1] << " "
              << (vertices[i])[2] << " " << std::endl;
     }
 
-//    for (int m = 0; m < Sfaces.size()/3; m++) {
-//        fOut1 << 3 << " "<< Sfaces[3*m+0] <<" "<< Sfaces[3*m+1]  <<" "<< Sfaces[3*m+2]  << std::endl;
-//    }
+    for (int i = 0; i < trs.size(); i++) {
+        fOut1 <<  3 << " " << trs[i].i1 << " "
+                               << trs[i].i2 << " "
+                               << trs[i].i3 << " "
+                               << std::endl;
+    }
 
     fOut1.close();
 }
