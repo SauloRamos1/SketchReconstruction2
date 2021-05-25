@@ -1333,6 +1333,58 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
 
 }
 
+void OpenGLMediator::exportFinalPlyModel (const QString fileName){
+
+
+
+    if( vertices.size() == 0 ) {
+        QMessageBox msgBox;
+        msgBox.setText("No 3D Model to export");
+        msgBox.setInformativeText("Please create 3D models");
+        msgBox.exec();
+
+        return;
+    }
+
+    std::cout << "Exporting Full Ply File." << std::endl;
+
+    std::string outFile3 = "output/";
+    outFile3.append(fileName.toStdString());
+    outFile3.append(".ply");
+    std::ofstream fOut1;
+
+    fOut1.open(outFile3.c_str());
+
+
+    fOut1 << "ply" <<std::endl;
+    fOut1 << "format ascii 1.0" << std::endl;
+    fOut1 << "element vertex " << vertices.size()/3 <<  std::endl;
+
+    fOut1 << "property float x" << std::endl;
+    fOut1 << "property float y" << std::endl;
+    fOut1 << "property float z" << std::endl;
+
+    fOut1 << "element face " << faces.size()/3 << std::endl;
+
+    fOut1 << "property list uint8 int32 vertex_indices" << std::endl;
+
+    fOut1 << "end_header" << std::endl;
+
+    for (int i = 0 ; i < vertices.size()/3; i++){
+        fOut1 << vertices[3*i+0] << " " << vertices[3*i + 1] << " " << vertices[3*i+2] << std::endl;
+    }
+
+    for (int m = 0; m < faces.size()/3; m++) {
+        fOut1 << 3 << " "<< faces[3*m+0] <<" "<< faces[3*m+1]  <<" "<< faces[3*m+2]  << std::endl;
+    }
+
+    fOut1.close();
+
+    std::cout << "Exported Full Ply File." << std::endl;
+}
+
+
+
 bool OpenGLMediator::getMeshPath(std::vector<float> &vertex_coordinates, std::vector<unsigned int> &triangle_list, std::vector<float> &normal_list){
 
 

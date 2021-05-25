@@ -70,6 +70,7 @@ public:
 
     void exportHRBFMesh(const QList<QString> dataFilesList);
 
+    void exportFinalPlyModel(const QString fileName);
 public slots:
 
 protected:

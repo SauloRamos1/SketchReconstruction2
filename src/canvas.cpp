@@ -282,6 +282,8 @@ void Canvas::viewOverlapping3D(){
 
     bool finalRender = false;
     glmediator->render(finalRender);
+
+
 }
 
 void Canvas::exportView(){
@@ -329,7 +331,11 @@ void Canvas::exportMesh(){
     bool finalRender = true;
     glmediator->render(finalRender);
 
-
+    bool ok;
+    QString fileName = QInputDialog::getText(this, ("Save Final 3D Model"),
+                                           ("File name:"), QLineEdit::Normal,
+                                           QDir::home().dirName(), &ok);
+    glmediator->exportFinalPlyModel(fileName);
 
 
 }
