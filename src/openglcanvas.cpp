@@ -65,13 +65,18 @@ void OpenGLCanvas::initializeShaders(){
 
 }
 
-void OpenGLCanvas::createTube(std::vector<float> &vertex_coordinates, std::vector<unsigned int> &triangle_list, std::vector<float> &normal_list){
+void OpenGLCanvas::createTube(std::vector<float> &vertex_coordinates, std::vector<unsigned int> &triangle_list, std::vector<float> &normal_list, bool finalRender){
 
 
     tscene->setMesh(vertex_coordinates, triangle_list, normal_list);
     //tscene->setMeshColor(0xF1, 0xA3, 0x40);
+    if (finalRender){
 
-    tscene->setMeshColor(0x00, 0x99, 0x33);
+        tscene->setMeshColor(0x00, 0xcc, 0xff);
+    } else {
+
+        tscene->setMeshColor(0x00, 0x99, 0x33);
+    }
 
     tscene->resetCamera();
     tscene->rotateCamera(viewportWidth/2 , 720 );

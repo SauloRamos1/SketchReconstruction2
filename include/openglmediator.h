@@ -62,7 +62,7 @@ public:
 
     int nvertices = 0;
     void clearTriangles();
-    void render();
+    void render(bool finalRender);
 
     void exportOpenContours3D(const QList<QVector<QVector3D>> points3D);
     void exportClosedContours3D(const QVector<QVector3D> points3D,  const QVector<QVector3D> normals3D);

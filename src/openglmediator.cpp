@@ -891,10 +891,11 @@ QPainterPath OpenGLMediator::resizePath(QPainterPath &path){
     return path;
 }
 
-void OpenGLMediator::render()
+void OpenGLMediator::render(bool finalRender)
 {
-    glcanvas->createTube(vertices, faces, normals);
+    glcanvas->createTube(vertices, faces, normals, finalRender);
 }
+
 
 void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > points3D)
 {
@@ -938,6 +939,14 @@ void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > point
                 OCvertices.push_back(diskVertices[j].y());
                 OCvertices.push_back(diskVertices[j].z());
 
+                normals.push_back(normal.x());
+                normals.push_back(normal.y());
+                normals.push_back(normal.z());
+
+                vertices.push_back(diskVertices[j].x());
+                vertices.push_back(diskVertices[j].y());
+                vertices.push_back(diskVertices[j].z());
+
             }
         }
 
@@ -965,6 +974,14 @@ void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > point
                 lastQuad[0] =  (vertexMatrix[i].size() * i) + j + 1;
                 lastQuad[3] = (vertexMatrix[i].size() * (i + 1)) + j + 1;
 
+                faces.push_back(quadTopology[0]+nvertices);
+                faces.push_back(quadTopology[1]+nvertices);
+                faces.push_back(quadTopology[2]+nvertices);
+                faces.push_back(quadTopology[0]+nvertices);
+                faces.push_back(quadTopology[2]+nvertices);
+                faces.push_back(quadTopology[3]+nvertices);
+
+
                 OCfaces.push_back(quadTopology[0]);
                 OCfaces.push_back(quadTopology[1]);
                 OCfaces.push_back(quadTopology[2]);
@@ -973,6 +990,13 @@ void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > point
                 OCfaces.push_back(quadTopology[3]);
 
             }
+
+            faces.push_back(lastQuad[0]+nvertices);
+            faces.push_back(lastQuad[1]+nvertices);
+            faces.push_back(lastQuad[2]+nvertices);
+            faces.push_back(lastQuad[0]+nvertices);
+            faces.push_back(lastQuad[2]+nvertices);
+            faces.push_back(lastQuad[3]+nvertices);
 
             //        quadTopology[0] = vertexMatrix[i].last().vertexNumber;
             //        quadTopology[1] = vertexMatrix[i].first().vertexNumber;
@@ -990,6 +1014,7 @@ void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > point
 
 
         }
+         nvertices = (unsigned int) vertices.size()/3;
 
 
         //EXPORT OPENCONTOURS
@@ -1054,6 +1079,7 @@ void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > point
         }
 
         fOut1.close();
+
 
 
 
@@ -1187,7 +1213,56 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
             Sfaces.push_back(quadTopology[2]);
             Sfaces.push_back(quadTopology[3]);
 
+            vertices.push_back(p.x());
+            vertices.push_back(p.y());
+            vertices.push_back(p.z());
+
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
+
+            vertices.push_back(q.x());
+            vertices.push_back(q.y());
+            vertices.push_back(q.z());
+
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
+
+            vertices.push_back(r.x());
+            vertices.push_back(r.y());
+            vertices.push_back(r.z());
+
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
+
+            vertices.push_back(s.x());
+            vertices.push_back(s.y());
+            vertices.push_back(s.z());
+
+            normals.push_back(normal.x());
+            normals.push_back(normal.y());
+            normals.push_back(normal.z());
+
+            //facesNumber += 4;
+
+            //quadTopology[0] = facesNumber - 4;
+            //quadTopology[1] = facesNumber - 3;
+            //quadTopology[2] = facesNumber - 2;
+            //quadTopology[3] = facesNumber - 1;
+
+            faces.push_back(quadTopology[0]+nvertices);
+            faces.push_back(quadTopology[1]+nvertices);
+            faces.push_back(quadTopology[2]+nvertices);
+            faces.push_back(quadTopology[0]+nvertices);
+            faces.push_back(quadTopology[2]+nvertices);
+            faces.push_back(quadTopology[3]+nvertices);
+
+
         }
+        nvertices = (unsigned int) vertices.size()/3;
+
 
         //EXPORT STRIPE
 

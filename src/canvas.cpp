@@ -279,7 +279,9 @@ void Canvas::viewOverlapping3D(){
     //        glmediator->viewStripes3D(scene->getStripes());
     //        //glmediator->render();
     //    }
-    glmediator->render();
+
+    bool finalRender = false;
+    glmediator->render(finalRender);
 }
 
 void Canvas::exportView(){
@@ -291,6 +293,8 @@ void Canvas::exportView(){
 void Canvas::exportMesh(){
 
     if (glmediator == nullptr) return;
+
+    glmediator->clearTriangles();
 
     if (!scene->isOpenContoursEmpty()){
 
@@ -313,7 +317,6 @@ void Canvas::exportMesh(){
 
     }
 
-
     QDir dir("output/", {"*.bin"});
     for(const QString & filename: dir.entryList()){
         dir.remove(filename);
@@ -322,6 +325,9 @@ void Canvas::exportMesh(){
     for(const QString & filename: dir.entryList()){
         dir.remove(filename);
     }
+
+    bool finalRender = true;
+    glmediator->render(finalRender);
 
 
 

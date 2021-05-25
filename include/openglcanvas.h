@@ -26,7 +26,7 @@ public:
 
     void setOpenGLMediator (OpenGLMediator* glmed);
 
-    void createTube (std::vector<float> &vertex_coordinates, std::vector<unsigned int> &triangle_list, std::vector<float> &normal_list );
+    void createTube (std::vector<float> &vertex_coordinates, std::vector<unsigned int> &triangle_list, std::vector<float> &normal_list, bool finalRender );
 
     void loadGeneratedMesh(const QString meshName);
     void renderCylinder(QVector<QVector3D> points3D);
