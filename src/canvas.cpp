@@ -254,9 +254,34 @@ void Canvas::viewOverlapping3D(){
 
     if (!scene->isClosedContoursEmpty()){
 
+        // Estimate Shapes
+        for (int i = 0; i < scene->getClosedContourListSize(); ++i) {
 
-        scene->estimateShapes();
-        glmediator->viewClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
+            int reconstType = 0;
+
+            while (reconstType < 1 || reconstType > 2){ // > 4
+                //reconstType = QInputDialog::getInt(nullptr, "Select Reconstruction Type for " + allShapesSampledPoints[i].name, "Select Reconstruction Type for: " + allShapesSampledPoints[i].name + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function \n 3 - Poisson Reconstruction \n 4 - Closed Formulas Reconstruction");
+                reconstType = QInputDialog::getInt(nullptr, "Select Reconstruction Type for " + scene->getNameByIndex(i), "Select Reconstruction Type for: " + scene->getNameByIndex(i) + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function");
+            }
+
+            if (reconstType == 1) {
+                glmediator->viewRBS3D(i,scene->getClosedContourByIndex(i),scene->getQlByIndex(i), scene->getQrByIndex(i),scene->getClosedContourDepthbyIndex(i));
+            } else if (reconstType == 2) {
+                glmediator->viewHRBFData (i,scene->getClosedContourByIndex(i), scene->getClosedContourDepthbyIndex(i));
+                //DataForHRBF (i, allShapesSampledPoints[i].contour, allShapesSampledPoints[i].ql,allShapesSampledPoints[i].qr);
+            } else if (reconstType == 3){
+                //DataForPoisson (i, allShapesSampledPoints[i].contour, allShapesSampledPoints[i].ql,allShapesSampledPoints[i].qr);
+            } else if (reconstType == 4){
+                //DataForClosedFormulas (i, allShapesSampledPoints[i].contour, allShapesSampledPoints[i].ql,allShapesSampledPoints[i].qr);
+            }
+
+
+        }
+
+
+
+        //scene->estimateShapes();
+        //glmediator->viewClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
 
     }
 
@@ -265,20 +290,6 @@ void Canvas::viewOverlapping3D(){
         glmediator->viewStripes3D(scene->getStripes());
 
     }
-
-    //    if (scene->getInteraction() == 1){
-    //        glmediator->viewOpenContours3D(scene->getOpenContoursPoints());
-
-    //    } else if (scene->getInteraction() == 2){
-
-    //        scene->estimateShapes();
-    //        glmediator->viewClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
-    //        //glmediator->render();
-
-    //    } else if (scene->getInteraction() == 3){
-    //        glmediator->viewStripes3D(scene->getStripes());
-    //        //glmediator->render();
-    //    }
 
     bool finalRender = false;
     glmediator->render(finalRender);

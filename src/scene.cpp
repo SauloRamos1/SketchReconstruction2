@@ -649,15 +649,15 @@ QList<QVector<QVector3D>> Scene::getOpenContoursPoints()
     return sketch.getOpenContoursPoints();
 }
 
-QVector<QVector3D> Scene::getClosedContoursPoints()
-{
-    return sketch.getClosedContoursPoints();
-}
+//QVector<QVector3D> Scene::getClosedContoursPoints()
+//{
+//    return sketch.getClosedContoursPoints();
+//}
 
-QVector<QVector3D> Scene::getClosedContoursNormals()
-{
-    return sketch.getClosedContoursNormals();
-}
+//QVector<QVector3D> Scene::getClosedContoursNormals()
+//{
+//    return sketch.getClosedContoursNormals();
+//}
 
 QList<QVector<QVector3D>> Scene::getStripes()
 {
@@ -669,11 +669,33 @@ QPainterPath Scene::getClosedContour()
     return sketch.getClosedContour();
 }
 
+QString Scene::getNameByIndex(const int i){
+    return sketch.getNameByIndex(i);
+}
 
+QPainterPath Scene::getClosedContourByIndex(const int i){
+    return sketch.getClosedContourByIndex(i);
+}
+
+QVector<QVector3D> Scene::getQlByIndex(const int i){
+    return sketch.getQlByIndex(i);
+}
+
+QVector<QVector3D> Scene::getQrByIndex(const int i){
+    return sketch.getQrByIndex(i);
+}
+
+int Scene::getClosedContourListSize() {
+    return sketch.getClosedContourListSize();
+}
 
 int Scene::getClosedContourLevel()
 {
     return sketch.getClosedContourLevel();
+}
+double Scene::getClosedContourDepthbyIndex(const int i){
+
+    return sketch.getClosedContourDepthbyIndex(i);
 }
 
 int Scene::getInteraction(){

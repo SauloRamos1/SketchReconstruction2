@@ -160,6 +160,12 @@ public:
 
     QList<QString> getRbfDataFiles();
 
+    int getClosedContourListSize();
+    QPainterPath getClosedContourByIndex(const int i);
+    QVector<QVector3D> getQlByIndex(const int i);
+    QVector<QVector3D> getQrByIndex(const int i);
+    QString getNameByIndex(const int i);
+    double getClosedContourDepthbyIndex(const int i);
 public slots:
 
 protected:
@@ -345,9 +351,9 @@ private:
 
     QList<QString> rbfDataFiles; // FilesList for RBF Reconstruction
 
-    void DataForPoisson(const int shapeNumber, QPainterPath &contour, QVector<QVector3D> &ql, QVector<QVector3D> &qr);
+    //void DataForPoisson(const int shapeNumber, QPainterPath &contour, QVector<QVector3D> &ql, QVector<QVector3D> &qr);
 
-    void DataForClosedFormulas(const int shapeNumber, QPainterPath &contour, QVector<QVector3D> &ql, QVector<QVector3D> &qr);
+    //void DataForClosedFormulas(const int shapeNumber, QPainterPath &contour, QVector<QVector3D> &ql, QVector<QVector3D> &qr);
 
 //    QVector <QVector3D> totalPoints;
 //    QVector <QVector3D> totalNormals;

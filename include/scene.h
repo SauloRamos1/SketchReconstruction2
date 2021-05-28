@@ -114,6 +114,12 @@ public:
 
     bool almostEqual(float a, float b);
 
+    int getClosedContourListSize();
+    QPainterPath getClosedContourByIndex(const int i);
+    QVector<QVector3D> getQlByIndex(const int i);
+    QVector<QVector3D> getQrByIndex(const int i);
+    QString getNameByIndex(const int i);
+    double getClosedContourDepthbyIndex(const int i);
 public slots:
 
 private:

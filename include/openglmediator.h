@@ -71,6 +71,10 @@ public:
     void exportHRBFMesh(const QList<QString> dataFilesList);
 
     void exportFinalPlyModel(const QString fileName);
+
+    void viewRBS3D(const int shapeNumber, QPainterPath contour, QVector<QVector3D> ql, QVector<QVector3D> qr, double contourDepth);
+    void viewHRBFData(const int shapeNumber, QPainterPath contour, double contourDepth);
+
 public slots:
 
 protected:
@@ -134,7 +138,12 @@ private:
 
     QVector3D CalculateSurfaceNormal(QVector3D p0, QVector3D p1, QVector3D p2);
 
+    struct Vertex{
+        QVector3D point3D;
+        int vertexNumber;
+    };
 
+    float getPathArea(QPainterPath p, float step);
 };
 
 //template<typename VertexList, typename EdgeList>
