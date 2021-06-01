@@ -2251,8 +2251,11 @@ void OpenGLMediator::exportHRBFMesh (){
 
 void OpenGLMediator::exportRBSMesh()
 {
+    // nvertices = (unsigned int) vertices.size()/3;
 
     for(int i = 0 ; i < rbsMeshesList.size() ; i++){
+
+        int npoints = 0;
         // ****  Export PLY
         std::string outFile3 = "output/";
         outFile3.append("Closed");
@@ -2263,9 +2266,12 @@ void OpenGLMediator::exportRBSMesh()
         fOut1.open(outFile3.c_str());
 
 
+
+        npoints = rbsMeshesList[i].meshData.size() * rbsMeshesList[i].meshData[0].size();
+
         fOut1 << "ply" <<std::endl;
         fOut1 << "format ascii 1.0" << std::endl;
-        fOut1 << "element vertex " << rbsMeshesList[i].meshSize <<  std::endl;
+        fOut1 << "element vertex " << npoints <<  std::endl;
 
         fOut1 << "property float x" << std::endl;
         fOut1 << "property float y" << std::endl;
@@ -2281,14 +2287,26 @@ void OpenGLMediator::exportRBSMesh()
             for (int m = 0; m < rbsMeshesList[i].meshData[l].size(); ++m) {
 
                 fOut1 << rbsMeshesList[i].meshData[l][m].point3D.x() <<" " << rbsMeshesList[i].meshData[l][m].point3D.y() << " " << rbsMeshesList[i].meshData[l][m].point3D.z() << std::endl;
-
+                vertices.push_back(rbsMeshesList[i].meshData[l][m].point3D.x());
+                vertices.push_back(rbsMeshesList[i].meshData[l][m].point3D.y());
+                vertices.push_back(rbsMeshesList[i].meshData[l][m].point3D.z());
             }
         }
 
 
         for (int m = 0; m < rbsMeshesList[i].meshTopology.size(); m++) {
             fOut1 << 4 << " "<< rbsMeshesList[i].meshTopology[m][0] <<" "<< rbsMeshesList[i].meshTopology[m][1] <<" "<< rbsMeshesList[i].meshTopology[m][2] <<" "<< rbsMeshesList[i].meshTopology[m][3] << std::endl;
+            faces.push_back(rbsMeshesList[i].meshTopology[m][0]+nvertices);
+            faces.push_back(rbsMeshesList[i].meshTopology[m][1]+nvertices);
+            faces.push_back(rbsMeshesList[i].meshTopology[m][2]+nvertices);
+            faces.push_back(rbsMeshesList[i].meshTopology[m][0]+nvertices);
+            faces.push_back(rbsMeshesList[i].meshTopology[m][2]+nvertices);
+            faces.push_back(rbsMeshesList[i].meshTopology[m][3]+nvertices);
+
         }
+        nvertices = (unsigned int) vertices.size()/3;
+
+
 
         fOut1.close();
     }
