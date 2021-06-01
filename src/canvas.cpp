@@ -255,6 +255,8 @@ void Canvas::viewOverlapping3D(){
     if (!scene->isClosedContoursEmpty()){
 
         // Estimate Shapes
+
+        glmediator->clearRBSMeshes();
         for (int i = 0; i < scene->getClosedContourListSize(); ++i) {
 
             int reconstType = 0;
@@ -265,9 +267,9 @@ void Canvas::viewOverlapping3D(){
             }
 
             if (reconstType == 1) {
-                glmediator->viewRBS3D(i,scene->getClosedContourByIndex(i),scene->getQlByIndex(i), scene->getQrByIndex(i),scene->getClosedContourDepthbyIndex(i));
+                glmediator->createRBSData(i,scene->getClosedContourByIndex(i),scene->getQlByIndex(i), scene->getQrByIndex(i),scene->getClosedContourDepthbyIndex(i));
             } else if (reconstType == 2) {
-                glmediator->viewHRBFData (i,scene->getClosedContourByIndex(i), scene->getClosedContourDepthbyIndex(i));
+                glmediator->createHRBFData (i,scene->getClosedContourByIndex(i), scene->getClosedContourDepthbyIndex(i));
                 //DataForHRBF (i, allShapesSampledPoints[i].contour, allShapesSampledPoints[i].ql,allShapesSampledPoints[i].qr);
             } else if (reconstType == 3){
                 //DataForPoisson (i, allShapesSampledPoints[i].contour, allShapesSampledPoints[i].ql,allShapesSampledPoints[i].qr);
@@ -317,10 +319,8 @@ void Canvas::exportMesh(){
 
     if (!scene->isClosedContoursEmpty()){
 
-        //glmediator->exportClosedContours3D(scene->getClosedContoursPoints(), scene->getClosedContoursNormals());
-        //glmediator->exportRBFMesh(scene->getRbfDataFiles());
-
-        glmediator->exportHRBFMesh(scene->getRbfDataFiles()) ;
+        glmediator->exportRBSMesh();
+        glmediator->exportHRBFMesh();
 
     }
 

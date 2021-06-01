@@ -65,15 +65,18 @@ public:
     void render(bool finalRender);
 
     void exportOpenContours3D(const QList<QVector<QVector3D>> points3D);
-    void exportClosedContours3D(const QVector<QVector3D> points3D,  const QVector<QVector3D> normals3D);
+
     void exportStripes3D(const QList<QVector<QVector3D>> points3D);
 
-    void exportHRBFMesh(const QList<QString> dataFilesList);
+    void exportHRBFMesh();
+    void exportRBSMesh();
 
     void exportFinalPlyModel(const QString fileName);
 
-    void viewRBS3D(const int shapeNumber, QPainterPath contour, QVector<QVector3D> ql, QVector<QVector3D> qr, double contourDepth);
-    void viewHRBFData(const int shapeNumber, QPainterPath contour, double contourDepth);
+    void createRBSData(const int shapeNumber, QPainterPath contour, QVector<QVector3D> ql, QVector<QVector3D> qr, double contourDepth);
+    void createHRBFData(const int shapeNumber, QPainterPath contour, double contourDepth);
+
+    void clearRBSMeshes();
 
 public slots:
 
@@ -144,6 +147,16 @@ private:
     };
 
     float getPathArea(QPainterPath p, float step);
+    QList<QString> rbfDataFiles;
+
+    struct RBSMesh {
+        QList<QList<Vertex>> meshData;
+        QVector<QVector<int>> meshTopology;
+        int meshSize;
+    };
+
+    QList<RBSMesh> rbsMeshesList;
+
 };
 
 //template<typename VertexList, typename EdgeList>

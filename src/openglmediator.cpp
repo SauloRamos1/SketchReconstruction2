@@ -375,12 +375,7 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
     //   render () ;
 }
 
-
-
-
-
-void OpenGLMediator::viewRBS3D(const int shapeNumber, QPainterPath contour, QVector<QVector3D> ql, QVector<QVector3D> qr, double contourDepth){
-
+void OpenGLMediator::createRBSData(const int shapeNumber, QPainterPath contour, QVector<QVector3D> ql, QVector<QVector3D> qr, double contourDepth) {
 
 
     for (int i = 0; i < ql.size(); ++i) {
@@ -406,14 +401,18 @@ void OpenGLMediator::viewRBS3D(const int shapeNumber, QPainterPath contour, QVec
 
     QVector3D center = (ql[ql.size()/2] + qr[qr.size()/2]) / 2;
 
-    QVector<QVector3D> shapePoints;
-    QVector<int> vertexNumbers;
+
+
+    QList<QList<Vertex>> quadMeshPoints;
+    //QVector<int> vertexNumbers;
 
     while (u < ql.size()) {
 
+        QList<Vertex> meshLinePoints;
+
         int v = 0, v_step = 5;
 
-        QVector<Vertex> vPoints;
+        //QVector<Vertex> vPoints;
 
         while (v < 360) {
 
@@ -448,48 +447,63 @@ void OpenGLMediator::viewRBS3D(const int shapeNumber, QPainterPath contour, QVec
             points3D.push_back(p);
             normals3D.push_back(((p - center).normalized()));
 
+            Vertex vertex;
+            vertex.point3D = p;
+            vertex.vertexNumber = nvertex;
+            meshLinePoints.push_back(vertex);
+
             v += v_step;
             nvertex+=1;
 
+
         }
+        quadMeshPoints.append(meshLinePoints);
 
         u += u_step;
 
     }
 
+
     viewClosedContours3D(points3D, normals3D);
 
-    //   // int i = shapeNumber;
-    //   int npoints = 0;
+    // int i = shapeNumber;
+    //int npoints = 0;
 
-    //    QVector<int> quadTopology (4);
-    //    QVector<QVector<int>> topology;
+    QVector<int> quadTopology (4);
+    QVector<QVector<int>> topology;
 
 
-    //    for (int j = 0; j < shapePoints.size()-1 ; ++j) {
+    for (int j = 0; j < quadMeshPoints.size()-1 ; ++j) {
 
-    //        //allShapesSampledPoints[i].shapePoints[j].push_back(allShapesSampledPoints[i].shapePoints[j].at(0));
+        //allShapesSampledPoints[i].shapePoints[j].push_back(allShapesSampledPoints[i].shapePoints[j].at(0));
 
-    //        npoints = shapePoints.size() * shapePoints.size();
+        //npoints = shapePoints.size() * shapePoints.size();
 
-    //        for (int k = 0; k < allShapesSampledPoints[i].shapePoints[j].size() -1 ; ++k) {
+        for (int k = 0; k < quadMeshPoints[j].size()-1 ; ++k) {
 
-    //            quadTopology[0] = (allShapesSampledPoints[i].shapePoints[j].size() * j) + k;
-    //            quadTopology[1] = (allShapesSampledPoints[i].shapePoints[j].size() * j) + k + 1;
-    //            quadTopology[2] = (allShapesSampledPoints[i].shapePoints[j].size() * (j + 1)) + k + 1;
-    //            quadTopology[3] = (allShapesSampledPoints[i].shapePoints[j].size() * (j + 1)) + k;
+            quadTopology[0] = (quadMeshPoints[j].size() * j) + k;
+            quadTopology[1] = (quadMeshPoints[j].size() * j) + k + 1;
+            quadTopology[2] = (quadMeshPoints[j].size() * (j + 1)) + k + 1;
+            quadTopology[3] = (quadMeshPoints[j].size() * (j + 1)) + k;
 
-    //            topology.push_back(quadTopology);
+            topology.push_back(quadTopology);
 
-    //        }
+        }
 
-    //        quadTopology[0] = allShapesSampledPoints[i].shapePoints[j].last().vertexNumber;
-    //        quadTopology[1] = allShapesSampledPoints[i].shapePoints[j].first().vertexNumber;
-    //        quadTopology[2] = allShapesSampledPoints[i].shapePoints[j+1].first().vertexNumber;
-    //        quadTopology[3] = allShapesSampledPoints[i].shapePoints[j+1].last().vertexNumber;
-    //        topology.push_back(quadTopology);
+        quadTopology[0] = quadMeshPoints[j].last().vertexNumber;
+        quadTopology[1] = quadMeshPoints[j].first().vertexNumber;
+        quadTopology[2] = quadMeshPoints[j+1].first().vertexNumber;
+        quadTopology[3] = quadMeshPoints[j+1].last().vertexNumber;
 
-    //    }
+        topology.push_back(quadTopology);
+
+    }
+
+    RBSMesh rbsMesh;
+    rbsMesh.meshData = quadMeshPoints;
+    rbsMesh.meshTopology = topology;
+    rbsMesh.meshSize = nvertex;
+    rbsMeshesList.append(rbsMesh);
 
     //    std::string outFile2 = "output/";
     //    outFile2.append("Closed");
@@ -518,44 +532,6 @@ void OpenGLMediator::viewRBS3D(const int shapeNumber, QPainterPath contour, QVec
     //    }
     //    fOut.close();
 
-    // Export PLY
-    //    std::string outFile3 = "output/";
-    //    outFile3.append("Closed");
-    //    outFile3.append(std::to_string(i));
-    //    outFile3.append(".ply");
-    //    std::ofstream fOut1;
-
-    //    fOut1.open(outFile3.c_str());
-
-
-    //    fOut1 << "ply" <<std::endl;
-    //    fOut1 << "format ascii 1.0" << std::endl;
-    //    fOut1 << "element vertex " << npoints <<  std::endl;
-
-    //    fOut1 << "property float x" << std::endl;
-    //    fOut1 << "property float y" << std::endl;
-    //    fOut1 << "property float z" << std::endl;
-
-    //    fOut1 << "element face " << topology.size() << std::endl;
-
-    //    fOut1 << "property list uint8 int32 vertex_indices" << std::endl;
-
-    //    fOut1 << "end_header" << std::endl;
-
-    //    for (int l = 0; l < allShapesSampledPoints[i].shapePoints.size(); ++l) {
-    //        for (int m = 0; m < allShapesSampledPoints[i].shapePoints[l].size(); ++m) {
-
-    //            fOut1 << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
-
-    //        }
-    //    }
-
-
-    //    for (int m = 0; m < topology.size(); m++) {
-    //        fOut1 << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
-    //    }
-
-    //    fOut1.close();
 
 
 
@@ -580,7 +556,7 @@ void OpenGLMediator::viewRBS3D(const int shapeNumber, QPainterPath contour, QVec
 
 }
 
-void OpenGLMediator::viewHRBFData(const int shapeNumber, QPainterPath contour, double contourDepth){
+void OpenGLMediator::createHRBFData(const int shapeNumber, QPainterPath contour, double contourDepth){
 
     QVector <QVector3D> knownPoints;
     QVector <QVector3D> knownNormals;
@@ -724,7 +700,7 @@ void OpenGLMediator::viewHRBFData(const int shapeNumber, QPainterPath contour, d
     outFile.append(std::to_string(shapeNumber));
     outFile.append(".data");
 
-    //rbfDataFiles.append(QString::fromStdString(outFile));
+    rbfDataFiles.append(QString::fromStdString(outFile));
 
     fOut.open(outFile.c_str());
     fOut << "3" <<std::endl;
@@ -1039,77 +1015,75 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
 
 }
 
+/*void OpenGLMediator::viewSketch3D(const QVector<QVector3D> points3D, const QVector<QString> pathNames){
+
+    if( points3D.isEmpty() ) {
+        QMessageBox msgBox;
+        msgBox.setText("No contours to reconstruct");
+        msgBox.setInformativeText("Please load contours before the reconstruction");
+        msgBox.exec();
+
+        return;
+    }
 
 
-//void OpenGLMediator::viewSketch3D(const QVector<QVector3D> points3D, const QVector<QString> pathNames){
+    std::vector< float > vertices, normals;
+    std::vector< unsigned int > faces;
 
-//    if( points3D.isEmpty() ) {
-//        QMessageBox msgBox;
-//        msgBox.setText("No contours to reconstruct");
-//        msgBox.setInformativeText("Please load contours before the reconstruction");
-//        msgBox.exec();
+    setShape(points3D);
 
-//        return;
-//    }
+    getMeshPath (vertices, faces, normals);
 
+    glcanvas->createTube(vertices, faces, normals);
 
-//    std::vector< float > vertices, normals;
-//    std::vector< unsigned int > faces;
+    vertices.clear();
+    faces.clear();
+    normals.clear();
 
-//    setShape(points3D);
+    qDebug () << "Finished 2D View";
 
-//    getMeshPath (vertices, faces, normals);
+    qDebug () << "Finished 3D View";
 
-//    glcanvas->createTube(vertices, faces, normals);
+} */
 
-//    vertices.clear();
-//    faces.clear();
-//    normals.clear();
+/*void OpenGLMediator::viewOverlapping3D (const QVector<QVector3D> points3D){
 
-//    qDebug () << "Finished 2D View";
+    if( points3D.isEmpty() ) {
+        QMessageBox msgBox;
+        msgBox.setText("No contours to reconstruct");
+        msgBox.setInformativeText("Please load contours before the reconstruction");
+        msgBox.exec();
 
-//    qDebug () << "Finished 3D View";
+        return;
+    }
+    std::vector< float > vertices, normals;
+    std::vector< unsigned int > faces;
 
-//}
+    exportPovrayPipe(points3D);
 
-//void OpenGLMediator::viewOverlapping3D (const QVector<QVector3D> points3D){
+    setShape(points3D);
 
-//    if( points3D.isEmpty() ) {
-//        QMessageBox msgBox;
-//        msgBox.setText("No contours to reconstruct");
-//        msgBox.setInformativeText("Please load contours before the reconstruction");
-//        msgBox.exec();
+    getMeshPath (vertices, faces, normals);
 
-//        return;
-//    }
-//    std::vector< float > vertices, normals;
-//    std::vector< unsigned int > faces;
+    glcanvas->createTube(vertices, faces, normals);
 
-//    exportPovrayPipe(points3D);
+    vertices.clear();
+    faces.clear();
+    normals.clear();
 
-//    setShape(points3D);
+    qDebug () << "Finished 2D View";
 
-//    getMeshPath (vertices, faces, normals);
+    qDebug () << "Finished 3D View";
 
-//    glcanvas->createTube(vertices, faces, normals);
+    //glcanvas->renderCylinder(points3D);
+}*/
 
-//    vertices.clear();
-//    faces.clear();
-//    normals.clear();
-
-//    qDebug () << "Finished 2D View";
-
-//    qDebug () << "Finished 3D View";
-
-//    //glcanvas->renderCylinder(points3D);
-//}
-
-//void OpenGLMediator::viewStripe (){
+/*void OpenGLMediator::viewStripe (){
 
 
-//    glcanvas->loadGeneratedMesh("stripe_mesh.ply");
+    glcanvas->loadGeneratedMesh("stripe_mesh.ply");
 
-//}
+}*/
 
 bool OpenGLMediator::setShape(const QVector<QVector3D> &totalPoints){
 
@@ -1128,8 +1102,6 @@ bool OpenGLMediator::setShape(const QVector<QVector3D> &totalPoints){
 
     return true;
 }
-
-
 
 bool OpenGLMediator::estimatePolygonNormals(const QPainterPath &path, QVector <QVector3D> &totalPoints, QVector <QVector3D> &totalNormals){
 
@@ -1298,7 +1270,6 @@ void OpenGLMediator::render(bool finalRender)
 {
     glcanvas->createTube(vertices, faces, normals, finalRender);
 }
-
 
 void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > points3D)
 {
@@ -1487,11 +1458,6 @@ void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > point
 
 
     }
-
-}
-
-void OpenGLMediator::exportClosedContours3D(const QVector<QVector3D> points3D, const QVector<QVector3D> normals3D)
-{
 
 }
 
@@ -1739,8 +1705,7 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
 void OpenGLMediator::exportFinalPlyModel (const QString fileName){
 
 
-
-    if( vertices.size() == 0 ) {
+    if( vertices.size() < 1 ) {
         QMessageBox msgBox;
         msgBox.setText("No 3D Model to export");
         msgBox.setInformativeText("Please create 3D models");
@@ -1785,8 +1750,6 @@ void OpenGLMediator::exportFinalPlyModel (const QString fileName){
 
     std::cout << "Exported Full Ply File." << std::endl;
 }
-
-
 
 bool OpenGLMediator::getMeshPath(std::vector<float> &vertex_coordinates, std::vector<unsigned int> &triangle_list, std::vector<float> &normal_list){
 
@@ -2031,8 +1994,6 @@ void OpenGLMediator::exportPovrayPipe( QVector<QVector3D> points3D) {
 
 }
 
-
-
 bool OpenGLMediator::resizeMesh(QVector<QVector3D> &totalPoints){
 
     QVector4D *vertices;
@@ -2087,11 +2048,10 @@ float OpenGLMediator::getPathArea(QPainterPath p, float step)
 }
 
 //************************************************************************************************
-/// ........................................ RBF MESH ..........................................
+/// ........................................ Export Closed Contour Meshes ..........................................
 //************************************************************************************************
 
-
-void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
+void OpenGLMediator::exportHRBFMesh (){
 
 
     int RBF_USED = XCUBE;
@@ -2152,7 +2112,6 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
 
 
 
-
     // double radius[] = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1};
     // string names[] = {"rbf_ID2_Ciclo3"};
 
@@ -2167,13 +2126,15 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
     //t.start();
 
 
+
+
     // QCoreApplication::processEvents();
-    QProgressDialog dialog("Creating RBF Models...", "Abort Operation",0, dataFilesList.size()*10 );
+    QProgressDialog dialog("Creating RBF Models...", "Abort Operation",0, rbfDataFiles.size()*10 );
     dialog.setWindowModality(Qt::WindowModal);
 
     dialog.show();
 
-    for(int i = 0; i < dataFilesList.size() ; i++)
+    for(int i = 0; i < rbfDataFiles.size() ; i++)
     {
         int progressValue;
         if (i == 0) {
@@ -2200,7 +2161,7 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
         //baseName = std::string(names[i]);
 
 
-        std::string fileName = dataFilesList[i].toStdString();
+        std::string fileName = rbfDataFiles[i].toStdString();
 
         std::string baseName =  fileName.substr(0, fileName.find_last_of("."));
 
@@ -2228,7 +2189,7 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
 
         // HERE
         //MeshData m(dataName.c_str());
-        MeshData m(dataFilesList[i]);
+        MeshData m(rbfDataFiles[i]);
         dialog.setValue(progressValue+0.1);
 
         QCoreApplication::processEvents();
@@ -2279,6 +2240,7 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
 
 
     }
+    rbfDataFiles = QList<QString>();
     dialog.setValue(dialog.maximum());
 
     //dialog.close();
@@ -2286,6 +2248,57 @@ void OpenGLMediator::exportHRBFMesh (QList<QString> dataFilesList){
     //fOut.close();
 }
 
+
+void OpenGLMediator::exportRBSMesh()
+{
+
+    for(int i = 0 ; i < rbsMeshesList.size() ; i++){
+        // ****  Export PLY
+        std::string outFile3 = "output/";
+        outFile3.append("Closed");
+        outFile3.append(std::to_string(i));
+        outFile3.append(".ply");
+        std::ofstream fOut1;
+
+        fOut1.open(outFile3.c_str());
+
+
+        fOut1 << "ply" <<std::endl;
+        fOut1 << "format ascii 1.0" << std::endl;
+        fOut1 << "element vertex " << rbsMeshesList[i].meshSize <<  std::endl;
+
+        fOut1 << "property float x" << std::endl;
+        fOut1 << "property float y" << std::endl;
+        fOut1 << "property float z" << std::endl;
+
+        fOut1 << "element face " << rbsMeshesList[i].meshTopology.size() << std::endl;
+
+        fOut1 << "property list uint8 int32 vertex_indices" << std::endl;
+
+        fOut1 << "end_header" << std::endl;
+
+        for (int l = 0; l < rbsMeshesList[i].meshData.size(); ++l) {
+            for (int m = 0; m < rbsMeshesList[i].meshData[l].size(); ++m) {
+
+                fOut1 << rbsMeshesList[i].meshData[l][m].point3D.x() <<" " << rbsMeshesList[i].meshData[l][m].point3D.y() << " " << rbsMeshesList[i].meshData[l][m].point3D.z() << std::endl;
+
+            }
+        }
+
+
+        for (int m = 0; m < rbsMeshesList[i].meshTopology.size(); m++) {
+            fOut1 << 4 << " "<< rbsMeshesList[i].meshTopology[m][0] <<" "<< rbsMeshesList[i].meshTopology[m][1] <<" "<< rbsMeshesList[i].meshTopology[m][2] <<" "<< rbsMeshesList[i].meshTopology[m][3] << std::endl;
+        }
+
+        fOut1.close();
+    }
+
+}
+
+void OpenGLMediator::clearRBSMeshes(){
+
+    rbsMeshesList.clear();
+}
 
 
 //#include "moc_openglmediator.cpp"
