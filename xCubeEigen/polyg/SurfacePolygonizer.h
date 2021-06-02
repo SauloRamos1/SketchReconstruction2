@@ -12,6 +12,8 @@
 #include "../HBRBFEval.h"
 #include "../MeshData.h"
 
+#include <QVector3D>
+
 #define DIM 3
 
 
@@ -36,9 +38,10 @@ class SurfacePolygonizer
 	bool marchingCubes (Point3D x0, Point3D x1, double size, Triangles *triangles);
         Vertices vertices;             	/* surface vertices */
 
-        void polygonize(const char *fileName, double spacing);
+     //   void polygonize(const char *fileName, double spacing);
 
-  private:
+        void polygonize(const char *fileName, double spacing, std::vector<float> *glVertices, std::vector<float> *glNormals, std::vector<unsigned int> *glFaces, QVector3D center);
+private:
   
         HBRBFEval *f;				/* surface we are poligonizing */
   	double cubeSize;				/* cube size for marching cubes */

@@ -157,7 +157,7 @@ private:
     };
 
     QList<RBSMesh> rbsMeshesList;
-
+    QVector <QVector3D> hrbfCentersForNormals;
 };
 
 //template<typename VertexList, typename EdgeList>

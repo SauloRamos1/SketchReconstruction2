@@ -3,7 +3,7 @@
 #include <fstream>
 #include <algorithm>
 
-void SurfacePolygonizer::polygonize(const char *fileName, double spacing)
+void SurfacePolygonizer::polygonize(const char *fileName, double spacing, std::vector<float> *glVertices, std::vector<float> *glNormals, std::vector<unsigned int> *glFaces, QVector3D center)
 {
     std::cout << "Polygonizing." << std::endl;
     ComputeBB();
@@ -59,6 +59,17 @@ void SurfacePolygonizer::polygonize(const char *fileName, double spacing)
                 (vertices[i])[0] << " "
              << (vertices[i])[1] << " "
              << (vertices[i])[2] << " " << std::endl;
+
+        glVertices->push_back(vertices[i][0]);
+        glVertices->push_back(vertices[i][1]);
+        glVertices->push_back(vertices[i][2]);
+
+        QVector3D p(vertices[i][0], vertices[i][1], vertices[i][2]);
+        QVector3D normal(((p - center).normalized()));
+        glNormals->push_back(normal.x());
+        glNormals->push_back(normal.y());
+        glNormals->push_back(normal.z());
+
     }
 
     for (int i = 0; i < trs.size(); i++) {
@@ -66,6 +77,10 @@ void SurfacePolygonizer::polygonize(const char *fileName, double spacing)
                                << trs[i].i2 << " "
                                << trs[i].i3 << " "
                                << std::endl;
+
+        glFaces->push_back(trs[i].i1);
+        glFaces->push_back(trs[i].i2);
+        glFaces->push_back(trs[i].i3);
     }
 
     fOut1.close();
@@ -73,7 +88,8 @@ void SurfacePolygonizer::polygonize(const char *fileName, double spacing)
 
 void SurfacePolygonizer::ComputeBB()
 {
-    this->bboxoffset = 1;
+    //this->bboxoffset = 1;
+    this->bboxoffset = 1.1;
         double min[] = {HUGE_VAL,HUGE_VAL,HUGE_VAL} ,max[] = {-HUGE_VAL,-HUGE_VAL,-HUGE_VAL} ;
         for(int i =0; i < mesh->numPoints; i++)
         {

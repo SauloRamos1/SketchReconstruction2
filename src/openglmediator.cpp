@@ -528,7 +528,7 @@ void OpenGLMediator::createRBSData(const int shapeNumber, QPainterPath contour, 
     QVector<QVector<int>> topology;
 
 
-    QVector<QVector3D> normals;
+  //  QVector<QVector3D> normals;
     for (int j = 0; j < quadMeshPoints.size()-1 ; ++j) {
 
         //allShapesSampledPoints[i].shapePoints[j].push_back(allShapesSampledPoints[i].shapePoints[j].at(0));
@@ -767,6 +767,12 @@ void OpenGLMediator::createHRBFData(const int shapeNumber, QPainterPath contour,
         fOut << p.x() <<" " << p.y()<< " " << p.z()<< std::endl;
         points3D.append(p);
     }
+    QVector3D center;
+    for (int i= 0; i< points3D.size() ; i++){
+        center += points3D[i];
+    }
+    center /= points3D.size();
+    hrbfCentersForNormals.push_back(center);
 
     for(QVector3D n:knownNormals){
         normals3D.append(n);
@@ -2271,7 +2277,7 @@ void OpenGLMediator::exportHRBFMesh (){
         SurfacePolygonizer sp(&e);
         dialog.setValue(dialog.value()+1);
         QCoreApplication::processEvents();
-        sp.polygonize(offName.c_str(),3);
+        sp.polygonize(offName.c_str(),3,&vertices,&normals,&faces,hrbfCentersForNormals[i]);
         dialog.setValue(dialog.value()+2);
         QCoreApplication::processEvents();
 
@@ -2382,6 +2388,7 @@ void OpenGLMediator::exportRBSMesh()
 void OpenGLMediator::clearRBSMeshes(){
 
     rbsMeshesList.clear();
+    hrbfCentersForNormals.clear();
 }
 
 
