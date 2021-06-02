@@ -153,6 +153,7 @@ private:
         QList<QList<Vertex>> meshData;
         QVector<QVector<int>> meshTopology;
         int meshSize;
+        QVector<QVector3D> meshNormals;
     };
 
     QList<RBSMesh> rbsMeshesList;

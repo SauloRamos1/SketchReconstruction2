@@ -400,12 +400,18 @@ void InputSketch::receiveSelectedPath (const QPainterPath &path, const QString &
     //float contourSamplingStep = 0.5f;
 
 
-    for (qreal j = 0; j < path.length(); j = j + contourSamplingStep) {
+    for (float j = 0; j < path.length(); j = j + contourSamplingStep) {
 
         sampledPointsOnCurve.push_back(path.pointAtPercent(path.percentAtLength(j)));
         angleAtSampledPoint.push_back(path.angleAtPercent(path.percentAtLength(j)));
 
     }
+
+ //   sampledPointsOnCurve.push_back(path.pointAtPercent(path.percentAtLength(1)));
+ //   angleAtSampledPoint.push_back(path.angleAtPercent(path.percentAtLength(1)));
+
+
+
 
 
     for (int j = 0; j < sampledPointsOnCurve.size()/2 ; j++) {
@@ -626,7 +632,7 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
             m1.rotate(v, QVector3D::crossProduct( s1 - s0, ql[u] - s0));
             m1.translate(-s0);
 
-            pl = m1 * ql[u];
+            pl = m1.map( ql[u] );
 
             QMatrix4x4 m2;
 
@@ -635,7 +641,7 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
             m2.rotate(-v, QVector3D::crossProduct( s1 - s0, qr[u] - s0));
             m2.translate(-s0);
 
-            pr = m2 * qr[u];
+            pr = m2.map( qr[u] );
 
             float t = v/360;
 
@@ -2585,16 +2591,26 @@ void InputSketch::smooth() {
 QPainterPath InputSketch::smoothPath(QPainterPath &path){
 
 
-    auto polygon_list = path.toSubpathPolygons();
+    QList<QPolygonF> polygon_list = path.toSubpathPolygons();
+
     path = QPainterPath();
 
-    for( int i = 0; i < polygon_list.size(); ++i )
-    {
-        // polygon_curve is a QPolygonF
-        auto polygon_curve = SketchLibrary::smooth( polygon_list.at(i) );
-        path.addPolygon(polygon_curve);
+    QPolygonF pathPolygon;
+
+    foreach (QPolygonF poly, polygon_list){
+
+        pathPolygon.append(poly);
     }
 
+    QPolygonF polygon_curve = SketchLibrary::smooth( pathPolygon );
+
+//    for( int i = 0; i < polygon_list.size(); i++ )
+//    {
+//        // polygon_curve is a QPolygonF
+//        auto polygon_curve = SketchLibrary::smooth( polygon_list.at(i) );
+//        path.addPolygon(polygon_curve);
+//    }
+    path.addPolygon(polygon_curve);
     return path;
 }
 

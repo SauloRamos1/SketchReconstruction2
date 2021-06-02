@@ -72,7 +72,7 @@ void OpenGLCanvas::createTube(std::vector<float> &vertex_coordinates, std::vecto
     //tscene->setMeshColor(0xF1, 0xA3, 0x40);
     if (finalRender){
 
-        tscene->setMeshColor(0x00, 0xcc, 0xff);
+        tscene->setMeshColor(0x3c, 0x99, 0xe6);
     } else {
 
         tscene->setMeshColor(0x00, 0x99, 0x33);
