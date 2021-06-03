@@ -2390,6 +2390,15 @@ void OpenGLMediator::clearRBSMeshes(){
     rbsMeshesList.clear();
     hrbfCentersForNormals.clear();
     rbfDataFiles.clear();
+
+    QDir dir("output/", {"*.bin"});
+    for(const QString & filename: dir.entryList()){
+        dir.remove(filename);
+    }
+    dir = QDir("output/", {"*.data"});
+    for(const QString & filename: dir.entryList()){
+        dir.remove(filename);
+    }
 }
 
 
