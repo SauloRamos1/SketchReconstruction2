@@ -40,7 +40,7 @@ class SurfacePolygonizer
 
      //   void polygonize(const char *fileName, double spacing);
 
-        void polygonize(const char *fileName, double spacing, std::vector<float> *glVertices, std::vector<float> *glNormals, std::vector<unsigned int> *glFaces, QVector3D center);
+        void polygonize(const char *fileName, double spacing, std::vector<float> *glVertices, std::vector<float> *glNormals, std::vector<unsigned int> *glFaces, QVector3D center, unsigned int nvertices);
 private:
   
         HBRBFEval *f;				/* surface we are poligonizing */

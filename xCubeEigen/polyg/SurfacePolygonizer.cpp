@@ -3,7 +3,7 @@
 #include <fstream>
 #include <algorithm>
 
-void SurfacePolygonizer::polygonize(const char *fileName, double spacing, std::vector<float> *glVertices, std::vector<float> *glNormals, std::vector<unsigned int> *glFaces, QVector3D center)
+void SurfacePolygonizer::polygonize(const char *fileName, double spacing, std::vector<float> *glVertices, std::vector<float> *glNormals, std::vector<unsigned int> *glFaces, QVector3D center, unsigned int nvertices)
 {
     std::cout << "Polygonizing." << std::endl;
     ComputeBB();
@@ -54,6 +54,8 @@ void SurfacePolygonizer::polygonize(const char *fileName, double spacing, std::v
 
     fOut1 << "end_header" << std::endl;
 
+
+
     for (int i = 0 ; i < vertices.size(); i++){
         fOut1<<
                 (vertices[i])[0] << " "
@@ -78,10 +80,11 @@ void SurfacePolygonizer::polygonize(const char *fileName, double spacing, std::v
                                << trs[i].i3 << " "
                                << std::endl;
 
-        glFaces->push_back(trs[i].i1);
-        glFaces->push_back(trs[i].i2);
-        glFaces->push_back(trs[i].i3);
+        glFaces->push_back(trs[i].i1 + nvertices);
+        glFaces->push_back(trs[i].i2 + nvertices);
+        glFaces->push_back(trs[i].i3 + nvertices);
     }
+
 
     fOut1.close();
 }

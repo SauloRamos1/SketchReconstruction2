@@ -2277,7 +2277,7 @@ void OpenGLMediator::exportHRBFMesh (){
         SurfacePolygonizer sp(&e);
         dialog.setValue(dialog.value()+1);
         QCoreApplication::processEvents();
-        sp.polygonize(offName.c_str(),3,&vertices,&normals,&faces,hrbfCentersForNormals[i]);
+        sp.polygonize(offName.c_str(),3,&vertices,&normals,&faces,hrbfCentersForNormals[i],nvertices);
         dialog.setValue(dialog.value()+2);
         QCoreApplication::processEvents();
 
@@ -2298,10 +2298,10 @@ void OpenGLMediator::exportHRBFMesh (){
         //        vtk.toVTK(vtkName.c_str());
         //         exit(9);
 
-
+        nvertices = (unsigned int) vertices.size()/3;
 
     }
-    rbfDataFiles = QList<QString>();
+    rbfDataFiles.clear();
     dialog.setValue(dialog.maximum());
 
     //dialog.close();
@@ -2389,6 +2389,7 @@ void OpenGLMediator::clearRBSMeshes(){
 
     rbsMeshesList.clear();
     hrbfCentersForNormals.clear();
+    rbfDataFiles.clear();
 }
 
 
