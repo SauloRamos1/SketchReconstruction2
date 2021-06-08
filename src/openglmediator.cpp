@@ -272,7 +272,7 @@ void OpenGLMediator::clearTriangles(){
 }
 
 //CREATE TRIANGLES, FACES AND NORMALS FOR RENDERING
-void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points3D){
+void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points3D,const QList<QString> openContourListNames){
 
 
     qDebug () << points3D.size();
@@ -286,11 +286,16 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
         return;
     }
 
+    openContourMeshesList.clear();
+
 
     int steps = 8;
 
 
     for (int h = 0 ; h < points3D.size(); h++){
+
+        std::vector< float > OCvertices, OCnormals;
+        std::vector< unsigned int > OCfaces;
 
         QVector<QVector<QVector3D> > vertexMatrix;
 
@@ -303,6 +308,15 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
 
                 QVector3D normal = diskVertices[j] - points3D[h][i];
                 normal.normalize();
+
+                OCnormals.push_back(normal.x());
+                OCnormals.push_back(normal.y());
+                OCnormals.push_back(normal.z());
+
+                OCvertices.push_back(diskVertices[j].x());
+                OCvertices.push_back(diskVertices[j].y());
+                OCvertices.push_back(diskVertices[j].z());
+
                 normals.push_back(normal.x());
                 normals.push_back(normal.y());
                 normals.push_back(normal.z());
@@ -345,6 +359,13 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
                 faces.push_back(quadTopology[2]+nvertices);
                 faces.push_back(quadTopology[3]+nvertices);
 
+                OCfaces.push_back(quadTopology[0]);
+                OCfaces.push_back(quadTopology[1]);
+                OCfaces.push_back(quadTopology[2]);
+                OCfaces.push_back(quadTopology[0]);
+                OCfaces.push_back(quadTopology[2]);
+                OCfaces.push_back(quadTopology[3]);
+
             }
 
             //        quadTopology[0] = vertexMatrix[i].last().vertexNumber;
@@ -360,10 +381,23 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
             faces.push_back(lastQuad[3]+nvertices);
 
 
-
+            OCfaces.push_back(lastQuad[0]);
+            OCfaces.push_back(lastQuad[1]);
+            OCfaces.push_back(lastQuad[2]);
+            OCfaces.push_back(lastQuad[0]);
+            OCfaces.push_back(lastQuad[2]);
+            OCfaces.push_back(lastQuad[3]);
 
         }
         nvertices = (unsigned int) vertices.size()/3;
+
+        OpenContourMesh openContour3D;
+        openContour3D.OCfaces = OCfaces;
+        openContour3D.OCvertices = OCvertices;
+        openContour3D.OCnormals = OCnormals;
+        openContour3D.name = openContourListNames[h];
+
+        openContourMeshesList.append(openContour3D);
 
     }
 
@@ -377,7 +411,7 @@ void OpenGLMediator::viewOpenContours3D (const QList<QVector<QVector3D> > points
     //   render () ;
 }
 
-void OpenGLMediator::createRBSData(const int shapeNumber, QPainterPath contour, QVector<QVector3D> ql, QVector<QVector3D> qr, double contourDepth) {
+void OpenGLMediator::createRBSData(QString name, const int shapeNumber, QPainterPath contour, QVector<QVector3D> ql, QVector<QVector3D> qr, double contourDepth) {
 
 
     for (int i = 0; i < ql.size(); ++i) {
@@ -528,7 +562,7 @@ void OpenGLMediator::createRBSData(const int shapeNumber, QPainterPath contour, 
     QVector<QVector<int>> topology;
 
 
-  //  QVector<QVector3D> normals;
+    //  QVector<QVector3D> normals;
     for (int j = 0; j < quadMeshPoints.size()-1 ; ++j) {
 
         //allShapesSampledPoints[i].shapePoints[j].push_back(allShapesSampledPoints[i].shapePoints[j].at(0));
@@ -558,6 +592,7 @@ void OpenGLMediator::createRBSData(const int shapeNumber, QPainterPath contour, 
     rbsMesh.meshData = quadMeshPoints;
     rbsMesh.meshTopology = topology;
     rbsMesh.meshSize = nvertex;
+    rbsMesh.name = name;
     rbsMeshesList.append(rbsMesh);
 
     //    std::string outFile2 = "output/";
@@ -611,7 +646,7 @@ void OpenGLMediator::createRBSData(const int shapeNumber, QPainterPath contour, 
 
 }
 
-void OpenGLMediator::createHRBFData(const int shapeNumber, QPainterPath contour, double contourDepth){
+void OpenGLMediator::createHRBFData(QString name, const int shapeNumber, QPainterPath contour, double contourDepth){
 
     QVector <QVector3D> knownPoints;
     QVector <QVector3D> knownNormals;
@@ -636,7 +671,7 @@ void OpenGLMediator::createHRBFData(const int shapeNumber, QPainterPath contour,
     QVector3D normalVector;
     normalVector.setZ(0);
 
-    double lambdaPartBB = QInputDialog::getDouble(nullptr, QString::number(shapeNumber), "Default: 0.1 - Lambda", 0.1,-1000,1000,3);
+    double lambdaPartBB = QInputDialog::getDouble(nullptr, name, "Default: 0.1 - Lambda", 0.1,-1000,1000,3);
     ///TODO FIND POINTS ON PATH TO RETRIVE ANGLE
 
 
@@ -751,8 +786,8 @@ void OpenGLMediator::createHRBFData(const int shapeNumber, QPainterPath contour,
     }
     std::ofstream fOut;
 
-    std::string outFile = "output/Closed";
-    outFile.append(std::to_string(shapeNumber));
+    std::string outFile = "output/";
+    outFile.append(name.toStdString());
     outFile.append(".data");
 
     rbfDataFiles.append(QString::fromStdString(outFile));
@@ -1332,159 +1367,13 @@ void OpenGLMediator::render(bool finalRender)
     glcanvas->createTube(vertices, faces, normals, finalRender);
 }
 
-void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > points3D)
+void OpenGLMediator::exportOpenContours3D()
 {
 
+    for (int i = 0; i < openContourMeshesList.size(); i++){
 
-
-    if( points3D.isEmpty() ) {
-        QMessageBox msgBox;
-        msgBox.setText("No OPEN contours to reconstruct");
-        msgBox.setInformativeText("Please load contours before the reconstruction");
-        msgBox.exec();
-
-        return;
-    }
-
-
-    int steps = 8;
-
-
-    for (int h = 0 ; h < points3D.size(); h++){
-
-        std::vector< float > OCvertices, OCnormals;
-        std::vector< unsigned int > OCfaces;
-
-        QVector<QVector<QVector3D> > vertexMatrix;
-
-        for (int i = 0; i < points3D[h].size()-1; i++){
-
-            QVector<QVector3D> diskVertices = createCylinder(steps, points3D[h][i], points3D[h][i+1]);
-
-            vertexMatrix.append(diskVertices);
-            for (int j = 0; j < diskVertices.size(); j++) {
-
-                QVector3D normal = diskVertices[j] - points3D[h][i];
-                normal.normalize();
-                OCnormals.push_back(normal.x());
-                OCnormals.push_back(normal.y());
-                OCnormals.push_back(normal.z());
-
-                OCvertices.push_back(diskVertices[j].x());
-                OCvertices.push_back(diskVertices[j].y());
-                OCvertices.push_back(diskVertices[j].z());
-
-                normals.push_back(normal.x());
-                normals.push_back(normal.y());
-                normals.push_back(normal.z());
-
-                vertices.push_back(diskVertices[j].x());
-                vertices.push_back(diskVertices[j].y());
-                vertices.push_back(diskVertices[j].z());
-
-            }
-        }
-
-
-        QVector<QVector<int> > topology;
-
-        QVector<int> quadTopology (4);
-
-        QVector<int> lastQuad (4);
-
-        //int nfaces = faces.size();
-
-        for (int i = 0; i < vertexMatrix.size() - 1; ++i) {
-
-            lastQuad[1] = vertexMatrix[i].size() * i;
-            lastQuad[2] = vertexMatrix[i].size() * ( i+1 );
-
-            for (int j = 0; j < vertexMatrix[i].size() - 1; ++j){
-
-                quadTopology[0] = (vertexMatrix[i].size() * i) + j;
-                quadTopology[1] = (vertexMatrix[i].size() * i) + j + 1;
-                quadTopology[2] = (vertexMatrix[i].size() * (i + 1)) + j + 1;
-                quadTopology[3] = (vertexMatrix[i].size() * (i + 1)) + j;
-
-                lastQuad[0] =  (vertexMatrix[i].size() * i) + j + 1;
-                lastQuad[3] = (vertexMatrix[i].size() * (i + 1)) + j + 1;
-
-                faces.push_back(quadTopology[0]+nvertices);
-                faces.push_back(quadTopology[1]+nvertices);
-                faces.push_back(quadTopology[2]+nvertices);
-                faces.push_back(quadTopology[0]+nvertices);
-                faces.push_back(quadTopology[2]+nvertices);
-                faces.push_back(quadTopology[3]+nvertices);
-
-
-                OCfaces.push_back(quadTopology[0]);
-                OCfaces.push_back(quadTopology[1]);
-                OCfaces.push_back(quadTopology[2]);
-                OCfaces.push_back(quadTopology[0]);
-                OCfaces.push_back(quadTopology[2]);
-                OCfaces.push_back(quadTopology[3]);
-
-            }
-
-            faces.push_back(lastQuad[0]+nvertices);
-            faces.push_back(lastQuad[1]+nvertices);
-            faces.push_back(lastQuad[2]+nvertices);
-            faces.push_back(lastQuad[0]+nvertices);
-            faces.push_back(lastQuad[2]+nvertices);
-            faces.push_back(lastQuad[3]+nvertices);
-
-            //        quadTopology[0] = vertexMatrix[i].last().vertexNumber;
-            //        quadTopology[1] = vertexMatrix[i].first().vertexNumber;
-            //        quadTopology[2] = vertexMatrix[i+1].first().vertexNumber;
-            //        quadTopology[3] = vertexMatrix[i+1].last().vertexNumber;
-
-            OCfaces.push_back(lastQuad[0]);
-            OCfaces.push_back(lastQuad[1]);
-            OCfaces.push_back(lastQuad[2]);
-            OCfaces.push_back(lastQuad[0]);
-            OCfaces.push_back(lastQuad[2]);
-            OCfaces.push_back(lastQuad[3]);
-
-
-
-
-        }
-        nvertices = (unsigned int) vertices.size()/3;
-
-
-        //EXPORT OPENCONTOURS
-
-        //        //Export OFF
-        //        std::string outFile = "output/";
-        //        outFile.append("Open");
-        //        outFile.append(std::to_string(h));
-        //        outFile.append(".off");
-        //        std::ofstream fOut;
-        //        fOut.open(outFile.c_str());
-
-
-        //        fOut << "OFF" <<std::endl;
-
-        //        //Vertices, Faces, Edges
-
-        //        fOut << OCvertices.size()/3  <<" " << OCfaces.size()/3 <<" " << "0" <<std::endl;
-        //        for (int i = 0 ; i < OCvertices.size()/3; i++){
-        //            fOut << OCvertices[3*i+0] << " " << OCvertices[3*i + 1] << " " << OCvertices[3*i+2] << std::endl;
-
-        //        }
-
-        //        for (int m = 0; m < OCfaces.size()/3; m++) {
-        //            fOut << 3 << " "<< OCfaces[3*m+0] <<" "<< OCfaces[3*m+1]  <<" "<< OCfaces[3*m+2]  << std::endl;
-        //        }
-        //        fOut.close();
-
-        //        qDebug () << "Exported OFF Mesh";
-
-        std::cout << "Exporting PLY Open Contour File." << std::endl;
-        //Export PLY
         std::string outFile3 = "output/";
-        outFile3.append("Open");
-        outFile3.append(std::to_string(h));
+        outFile3.append(openContourMeshesList[i].name.toStdString());
         outFile3.append(".ply");
         std::ofstream fOut1;
 
@@ -1493,34 +1382,46 @@ void OpenGLMediator::exportOpenContours3D(const QList<QVector<QVector3D> > point
 
         fOut1 << "ply" <<std::endl;
         fOut1 << "format ascii 1.0" << std::endl;
-        fOut1 << "element vertex " << OCvertices.size()/3 <<  std::endl;
+
+        fOut1 << "element vertex " << openContourMeshesList[i].OCvertices.size()/3 <<  std::endl;
 
         fOut1 << "property float x" << std::endl;
         fOut1 << "property float y" << std::endl;
         fOut1 << "property float z" << std::endl;
 
-        fOut1 << "element face " << OCfaces.size()/3 << std::endl;
+        fOut1 << "element face " << openContourMeshesList[i].OCfaces.size()/3 << std::endl;
 
         fOut1 << "property list uint8 int32 vertex_indices" << std::endl;
 
         fOut1 << "end_header" << std::endl;
 
-        for (int i = 0 ; i < OCvertices.size()/3; i++){
-            fOut1 << OCvertices[3*i+0] << " " << OCvertices[3*i + 1] << " " << OCvertices[3*i+2] << std::endl;
+        for (int j = 0 ; j < openContourMeshesList[i].OCvertices.size()/3; j++){
+            fOut1 << openContourMeshesList[i].OCvertices[3*j+0] << " " << openContourMeshesList[i].OCvertices[3*j+1] << " " << openContourMeshesList[i].OCvertices[3*j+2] << std::endl;
         }
 
-        for (int m = 0; m < OCfaces.size()/3; m++) {
-            fOut1 << 3 << " "<< OCfaces[3*m+0] <<" "<< OCfaces[3*m+1]  <<" "<< OCfaces[3*m+2]  << std::endl;
+        for (int m = 0; m < openContourMeshesList[i].OCfaces.size()/3; m++) {
+            fOut1 << 3 << " "<< openContourMeshesList[i].OCfaces[3*m+0] <<" "<< openContourMeshesList[i].OCfaces[3*m+1]  <<" "<< openContourMeshesList[i].OCfaces[3*m+2]  << std::endl;
         }
 
         fOut1.close();
+        foreach (float vertice, openContourMeshesList[i].OCvertices){
+            vertices.push_back(vertice);
+        }
 
+        foreach (float normal, openContourMeshesList[i].OCnormals){
+            normals.push_back(normal);
+        }
 
+        foreach (unsigned int indice, openContourMeshesList[i].OCfaces){
+            faces.push_back(indice+nvertices);
+        }
 
-
+        nvertices = (unsigned int) vertices.size()/3;;
     }
 
+
 }
+
 
 void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
 {
@@ -2319,8 +2220,7 @@ void OpenGLMediator::exportRBSMesh()
         int npoints = 0;
         // ****  Export PLY
         std::string outFile3 = "output/";
-        outFile3.append("Closed");
-        outFile3.append(std::to_string(i));
+        outFile3.append(rbsMeshesList[i].name.toStdString());
         outFile3.append(".ply");
         std::ofstream fOut1;
 

@@ -30,6 +30,50 @@
         <file>icons/file_white.png</file>
         <file>icons/export.png</file>
         <file>icons/Export.ico</file>
+        <file>shaders/fragment.frag</file>
+        <file>shaders/vertex.vert</file>
+        <file>shaders/beziercurve.frag</file>
+        <file>shaders/beziercurve.geom</file>
+        <file>shaders/beziercurve.vert</file>
+        <file>shaders/cameracoords.frag</file>
+        <file>shaders/cameracoords.vert</file>
+        <file>shaders/directcolor.frag</file>
+        <file>shaders/directcolor.vert</file>
+        <file>shaders/gaussianblurfilter.frag</file>
+        <file>shaders/gaussianblurfilter.vert</file>
+        <file>shaders/gradientfilter.frag</file>
+        <file>shaders/gradientfilter.vert</file>
+        <file>shaders/meanfilter.frag</file>
+        <file>shaders/meanfilter.vert</file>
+        <file>shaders/normalmap.frag</file>
+        <file>shaders/normalmap.vert</file>
+        <file>shaders/orennayar.frag</file>
+        <file>shaders/orennayar.vert</file>
+        <file>shaders/phongshader.frag</file>
+        <file>shaders/phongshader.vert</file>
+        <file>shaders/phongshadow.frag</file>
+        <file>shaders/phongshadow.vert</file>
+        <file>shaders/renderbuffer.frag</file>
+        <file>shaders/renderbuffer.vert</file>
+        <file>shaders/rendershadowmap.frag</file>
+        <file>shaders/rendershadowmap.vert</file>
+        <file>shaders/rendertexture.frag</file>
+        <file>shaders/rendertexture.vert</file>
+        <file>shaders/shadowbuffer.frag</file>
+        <file>shaders/shadowbuffer.vert</file>
+        <file>shaders/ssao.frag</file>
+        <file>shaders/ssao.vert</file>
+        <file>shaders/ssaofinal.frag</file>
+        <file>shaders/ssaofinal.vert</file>
+        <file>shaders/toonshader.frag</file>
+        <file>shaders/toonshader.vert</file>
+        <file>shaders/viewspacebuffer.frag</file>
+        <file>shaders/viewspacebuffer.vert</file>
+        <file>shaders/wireframe.frag</file>
+        <file>shaders/wireframe.geom</file>
+        <file>shaders/wireframe.vert</file>
+        <file>shaders/worldcoords.frag</file>
+        <file>shaders/worldcoords.vert</file>
     </qresource>
     <qresource prefix="/qss"/>
     <qresource prefix="/../qss"/>

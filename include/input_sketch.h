@@ -166,6 +166,7 @@ public:
     QVector<QVector3D> getQrByIndex(const int i);
     QString getNameByIndex(const int i);
     double getClosedContourDepthbyIndex(const int i);
+    QList<QString> getOpenContoursNames();
 public slots:
 
 protected:

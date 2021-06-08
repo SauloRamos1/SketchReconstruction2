@@ -649,6 +649,12 @@ QList<QVector<QVector3D>> Scene::getOpenContoursPoints()
     return sketch.getOpenContoursPoints();
 }
 
+
+QList<QString> Scene::getOpenContoursNames()
+{
+    return sketch.getOpenContoursNames();
+}
+
 //QVector<QVector3D> Scene::getClosedContoursPoints()
 //{
 //    return sketch.getClosedContoursPoints();

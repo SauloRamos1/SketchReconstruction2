@@ -407,8 +407,8 @@ void InputSketch::receiveSelectedPath (const QPainterPath &path, const QString &
 
     }
 
- //   sampledPointsOnCurve.push_back(path.pointAtPercent(path.percentAtLength(1)));
- //   angleAtSampledPoint.push_back(path.angleAtPercent(path.percentAtLength(1)));
+    //   sampledPointsOnCurve.push_back(path.pointAtPercent(path.percentAtLength(1)));
+    //   angleAtSampledPoint.push_back(path.angleAtPercent(path.percentAtLength(1)));
 
 
 
@@ -706,32 +706,32 @@ void InputSketch::RotationalBlendingSurface(const int shapeNumber, QPainterPath 
 
     }
 
-//    std::string outFile2 = "output/";
-//    outFile2.append("Closed");
+    //    std::string outFile2 = "output/";
+    //    outFile2.append("Closed");
 
-//    outFile2.append(std::to_string(i));
-//    outFile2.append(".off");
-//    std::ofstream fOut;
-//    fOut.open(outFile2.c_str());
+    //    outFile2.append(std::to_string(i));
+    //    outFile2.append(".off");
+    //    std::ofstream fOut;
+    //    fOut.open(outFile2.c_str());
 
 
-//    fOut << "OFF" <<std::endl;
+    //    fOut << "OFF" <<std::endl;
 
-//    //Vertices, Faces, Edges
+    //    //Vertices, Faces, Edges
 
-//    fOut << npoints  <<" " << topology.size()  <<" " << "0" <<std::endl;
-//    for (int l = 0; l < allShapesSampledPoints[i].shapePoints.size(); ++l) {
-//        for (int m = 0; m < allShapesSampledPoints[i].shapePoints[l].size(); ++m) {
+    //    fOut << npoints  <<" " << topology.size()  <<" " << "0" <<std::endl;
+    //    for (int l = 0; l < allShapesSampledPoints[i].shapePoints.size(); ++l) {
+    //        for (int m = 0; m < allShapesSampledPoints[i].shapePoints[l].size(); ++m) {
 
-//            fOut << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
+    //            fOut << allShapesSampledPoints[i].shapePoints[l][m].point3D.x() <<" " << allShapesSampledPoints[i].shapePoints[l][m].point3D.y() << " " << allShapesSampledPoints[i].shapePoints[l][m].point3D.z() << std::endl;
 
-//        }
-//    }
+    //        }
+    //    }
 
-//    for (int m = 0; m < topology.size(); ++m) {
-//        fOut << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
-//    }
-//    fOut.close();
+    //    for (int m = 0; m < topology.size(); ++m) {
+    //        fOut << 4 << " "<< topology[m][0] <<" "<< topology[m][1] <<" "<< topology[m][2] <<" "<< topology[m][3] << std::endl;
+    //    }
+    //    fOut.close();
 
     // Export PLY
     std::string outFile3 = "output/";
@@ -2604,12 +2604,12 @@ QPainterPath InputSketch::smoothPath(QPainterPath &path){
 
     QPolygonF polygon_curve = SketchLibrary::smooth( pathPolygon );
 
-//    for( int i = 0; i < polygon_list.size(); i++ )
-//    {
-//        // polygon_curve is a QPolygonF
-//        auto polygon_curve = SketchLibrary::smooth( polygon_list.at(i) );
-//        path.addPolygon(polygon_curve);
-//    }
+    //    for( int i = 0; i < polygon_list.size(); i++ )
+    //    {
+    //        // polygon_curve is a QPolygonF
+    //        auto polygon_curve = SketchLibrary::smooth( polygon_list.at(i) );
+    //        path.addPolygon(polygon_curve);
+    //    }
     path.addPolygon(polygon_curve);
     return path;
 }
@@ -2688,6 +2688,20 @@ QList<QVector<QVector3D> > InputSketch::getOpenContoursPoints() {
 
     return pointsFor3D;
 
+}
+
+QList<QString> InputSketch::getOpenContoursNames() {
+
+    QList<QString> openContourNames;
+
+    for (int i = 0; i <  openContourList.size() ; i++ ) {
+        for (int j = 0; j <  openContourList[i].size() ; j++ ) {
+
+            openContourNames.append(openContourList[i][j].name);
+
+        }
+    }
+    return openContourNames;
 }
 
 
@@ -3515,11 +3529,11 @@ QString InputSketch::getNameByIndex(const int i){
     return allShapesSampledPoints[i].name;
 }
 QPainterPath InputSketch::getClosedContourByIndex(const int i){
-     return allShapesSampledPoints[i].contour;
+    return allShapesSampledPoints[i].contour;
 }
 
 QVector<QVector3D> InputSketch::getQlByIndex(const int i){
-   return allShapesSampledPoints[i].ql;
+    return allShapesSampledPoints[i].ql;
 }
 
 QVector<QVector3D> InputSketch::getQrByIndex(const int i){
@@ -3635,6 +3649,16 @@ void InputSketch::renameClosedContour(int itemNumber, QString name){
 
         }
     }
+
+    for (int i = 0 ; i < allShapesSampledPoints.size(); i++) {
+
+        if (itemNumber == i){
+            allShapesSampledPoints[i].name.clear();
+            allShapesSampledPoints[i].name = name;
+
+        }
+    }
+
 
     update();
 }

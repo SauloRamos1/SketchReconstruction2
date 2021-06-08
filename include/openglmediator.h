@@ -44,15 +44,15 @@ public:
     ~OpenGLMediator() = default;
 
     void setCanvas( const std::shared_ptr< Canvas >& cv );
-//    void setCanvas2( const std::shared_ptr< Canvas2 >& cv2 );
+    //    void setCanvas2( const std::shared_ptr< Canvas2 >& cv2 );
     void setGlCanvas( const std::shared_ptr< OpenGLCanvas >& glcanvas);
 
-//    void viewSketch3D(const QVector<QVector3D> points3D, const QVector<QString> pathNames);
-//    void viewOverlapping3D (const QVector<QVector3D> points3D);
+    //    void viewSketch3D(const QVector<QVector3D> points3D, const QVector<QString> pathNames);
+    //    void viewOverlapping3D (const QVector<QVector3D> points3D);
 
 
-   // void viewStripe();
-    void viewOpenContours3D(const QList<QVector<QVector3D>> points3D);
+    // void viewStripe();
+    void viewOpenContours3D(const QList<QVector<QVector3D>> points3D,  const QList<QString> openContourListNames);
     void viewClosedContours3D(const QVector<QVector3D> points3D,  const QVector<QVector3D> normals3D);
     void viewStripes3D(const QList<QVector<QVector3D>> points3D);
 
@@ -64,7 +64,7 @@ public:
     void clearTriangles();
     void render(bool finalRender);
 
-    void exportOpenContours3D(const QList<QVector<QVector3D>> points3D);
+    void exportOpenContours3D();
 
     void exportStripes3D(const QList<QVector<QVector3D>> points3D);
 
@@ -73,10 +73,12 @@ public:
 
     void exportFinalPlyModel(const QString fileName);
 
-    void createRBSData(const int shapeNumber, QPainterPath contour, QVector<QVector3D> ql, QVector<QVector3D> qr, double contourDepth);
-    void createHRBFData(const int shapeNumber, QPainterPath contour, double contourDepth);
+    void createRBSData(QString name, const int shapeNumber, QPainterPath contour, QVector<QVector3D> ql, QVector<QVector3D> qr, double contourDepth);
+
+    void createHRBFData(QString name, const int shapeNumber, QPainterPath contour, double contourDepth);
 
     void clearRBSMeshes();
+
 
 public slots:
 
@@ -110,12 +112,12 @@ private:
 
 
     bool getMesh(std::vector<float> &vertex_coordinates,
-            std::vector<unsigned int> &triangle_list,
-            std::vector<float> &normal_list);
+                 std::vector<unsigned int> &triangle_list,
+                 std::vector<float> &normal_list);
 
     bool getMeshPath(std::vector<float> &vertex_coordinates,
-            std::vector<unsigned int> &triangle_list,
-            std::vector<float> &normal_list);
+                     std::vector<unsigned int> &triangle_list,
+                     std::vector<float> &normal_list);
 
 
     std::vector<float> curve_coordinates;
@@ -154,10 +156,21 @@ private:
         QVector<QVector<int>> meshTopology;
         int meshSize;
         QVector<QVector3D> meshNormals;
+        QString name;
     };
+
 
     QList<RBSMesh> rbsMeshesList;
     QVector <QVector3D> hrbfCentersForNormals;
+
+    struct OpenContourMesh{
+        std::vector< float > OCvertices, OCnormals;
+        std::vector< unsigned int > OCfaces;
+        QString name;
+    };
+
+    QList<OpenContourMesh> openContourMeshesList;
+
 };
 
 //template<typename VertexList, typename EdgeList>

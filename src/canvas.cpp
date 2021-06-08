@@ -248,7 +248,7 @@ void Canvas::viewOverlapping3D(){
 
     if (!scene->isOpenContoursEmpty()){
 
-        glmediator->viewOpenContours3D(scene->getOpenContoursPoints());
+        glmediator->viewOpenContours3D(scene->getOpenContoursPoints(),  scene->getOpenContoursNames());
 
     }
 
@@ -262,14 +262,18 @@ void Canvas::viewOverlapping3D(){
             int reconstType = 0;
 
             while (reconstType < 1 || reconstType > 2){ // > 4
+
+                QInputDialog *Dialog = new QInputDialog;
+                Dialog->resize(500,500);
+                reconstType = Dialog->getInt(nullptr, "Select Reconstruction Type for " + scene->getNameByIndex(i), "Select Reconstruction Type for: " + scene->getNameByIndex(i) + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function");
                 //reconstType = QInputDialog::getInt(nullptr, "Select Reconstruction Type for " + allShapesSampledPoints[i].name, "Select Reconstruction Type for: " + allShapesSampledPoints[i].name + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function \n 3 - Poisson Reconstruction \n 4 - Closed Formulas Reconstruction");
-                reconstType = QInputDialog::getInt(nullptr, "Select Reconstruction Type for " + scene->getNameByIndex(i), "Select Reconstruction Type for: " + scene->getNameByIndex(i) + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function");
+                //reconstType = QInputDialog::getInt(nullptr, "Select Reconstruction Type for " + scene->getNameByIndex(i), "Select Reconstruction Type for: " + scene->getNameByIndex(i) + " \n 1 - Rotational Blending Surface \n 2 - Hermitian Radial Basis Function");
             }
 
             if (reconstType == 1) {
-                glmediator->createRBSData(i,scene->getClosedContourByIndex(i),scene->getQlByIndex(i), scene->getQrByIndex(i),scene->getClosedContourDepthbyIndex(i));
+                glmediator->createRBSData(scene->getNameByIndex(i), i,scene->getClosedContourByIndex(i),scene->getQlByIndex(i), scene->getQrByIndex(i),scene->getClosedContourDepthbyIndex(i));
             } else if (reconstType == 2) {
-                glmediator->createHRBFData (i,scene->getClosedContourByIndex(i), scene->getClosedContourDepthbyIndex(i));
+                glmediator->createHRBFData (scene->getNameByIndex(i), i,scene->getClosedContourByIndex(i), scene->getClosedContourDepthbyIndex(i));
                 //DataForHRBF (i, allShapesSampledPoints[i].contour, allShapesSampledPoints[i].ql,allShapesSampledPoints[i].qr);
             } else if (reconstType == 3){
                 //DataForPoisson (i, allShapesSampledPoints[i].contour, allShapesSampledPoints[i].ql,allShapesSampledPoints[i].qr);
@@ -297,6 +301,8 @@ void Canvas::viewOverlapping3D(){
     glmediator->render(finalRender);
 
 
+
+
 }
 
 void Canvas::exportView(){
@@ -317,7 +323,7 @@ void Canvas::exportMesh(){
 
     if (!scene->isOpenContoursEmpty()){
 
-        glmediator->exportOpenContours3D(scene->getOpenContoursPoints());
+        glmediator->exportOpenContours3D();
 
     }
 
@@ -348,6 +354,17 @@ void Canvas::exportMesh(){
 
 
     glmediator->exportFinalPlyModel(fileName);
+
+
+    QString path = "output/";
+
+    QStringList args;
+
+    args << QDir::toNativeSeparators(path);
+
+    QProcess *process = new QProcess(this);
+    process->start("explorer.exe", args);
+
 
 
 }

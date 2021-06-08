@@ -49,6 +49,7 @@ public:
      * @param shadersDir The directory containing the shader files.
      */
     Effect (string shadersDir = "shaders/") : shaders_dir(shadersDir)
+    //Effect (string shadersDir = ":/shaders") : shaders_dir(shadersDir)
     {
         #ifdef TUCANOSHADERDIR
         setShadersDir(stringify(TUCANOSHADERDIR));
