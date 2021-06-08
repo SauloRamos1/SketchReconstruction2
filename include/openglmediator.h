@@ -54,7 +54,7 @@ public:
     // void viewStripe();
     void viewOpenContours3D(const QList<QVector<QVector3D>> points3D,  const QList<QString> openContourListNames);
     void viewClosedContours3D(const QVector<QVector3D> points3D,  const QVector<QVector3D> normals3D);
-    void viewStripes3D(const QList<QVector<QVector3D>> points3D);
+    void viewStripes3D(const QList<QVector<QVector3D>> points3D, QList<QString> name);
 
     QVector<QVector3D> createCylinder(int steps, QVector3D base, QVector3D top);
     QVector<QVector3D> createDisk(int steps, QVector3D base, QVector3D top);
@@ -66,7 +66,7 @@ public:
 
     void exportOpenContours3D();
 
-    void exportStripes3D(const QList<QVector<QVector3D>> points3D);
+    void exportStripes3D();
 
     void exportHRBFMesh();
     void exportRBSMesh();
@@ -171,6 +171,15 @@ private:
 
     QList<OpenContourMesh> openContourMeshesList;
 
+    struct StripeContourMesh{
+
+        std::vector< float > Svertices, Snormals;
+        std::vector< unsigned int > Sfaces;
+        QString name;
+
+    };
+
+    QList<StripeContourMesh> stripeMeshesList;
 };
 
 //template<typename VertexList, typename EdgeList>

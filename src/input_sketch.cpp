@@ -2772,6 +2772,18 @@ QList<QVector<QVector3D>> InputSketch::getStripesPoints () {
     return stripesPointsFor3D;
 }
 
+QList<QString> InputSketch::getStripesNames () {
+
+    QList<QString> stripesNames;
+
+    for (int i = 0 ; i < stripeContourList.size() ; i++){
+        for (int j = 0; j < stripeContourList[i].size() ; j++) {
+                stripesNames.append(stripeContourList[i][j].name);
+        }
+    }
+
+    return stripesNames;
+}
 
 
 bool InputSketch::chaikinOnZ(QVector<QVector3D> &pointsFor3D){

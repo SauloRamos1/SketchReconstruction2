@@ -121,6 +121,7 @@ public:
     QString getNameByIndex(const int i);
     double getClosedContourDepthbyIndex(const int i);
     QList<QString> getOpenContoursNames();
+    QList<QString> getStripesNames();
 public slots:
 
 private:

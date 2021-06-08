@@ -951,7 +951,7 @@ void OpenGLMediator::viewClosedContours3D (const QVector<QVector3D> points3D, co
     //glcanvas->renderCylinder(points3D);
 }
 
-void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
+void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D, QList<QString>stripeNameList){
 
     if( points3D.isEmpty() ) {
         QMessageBox msgBox;
@@ -961,9 +961,10 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
 
         return;
     }
-    //    std::vector< float > vertices, normals;
-    //    std::vector< unsigned int > faces;
+    std::vector< float > Svertices, Snormals;
+    std::vector< unsigned int > Sfaces;
 
+    stripeMeshesList.clear();
     //    Svertices.clear();
     //    Snormals.clear();
     //    Sfaces.clear();
@@ -972,6 +973,8 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
     double hquad = hip*hip;
 
     for (int h = 0; h < points3D.size(); h++){
+
+
 
         QPolygonF quad;
         QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
@@ -1074,6 +1077,39 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
             normals.push_back(normal.y());
             normals.push_back(normal.z());
 
+            //
+            Svertices.push_back(p.x());
+            Svertices.push_back(p.y());
+            Svertices.push_back(p.z());
+
+            Snormals.push_back(normal.x());
+            Snormals.push_back(normal.y());
+            Snormals.push_back(normal.z());
+
+            Svertices.push_back(q.x());
+            Svertices.push_back(q.y());
+            Svertices.push_back(q.z());
+
+            Snormals.push_back(normal.x());
+            Snormals.push_back(normal.y());
+            Snormals.push_back(normal.z());
+
+            Svertices.push_back(r.x());
+            Svertices.push_back(r.y());
+            Svertices.push_back(r.z());
+
+            Snormals.push_back(normal.x());
+            Snormals.push_back(normal.y());
+            Snormals.push_back(normal.z());
+
+            Svertices.push_back(s.x());
+            Svertices.push_back(s.y());
+            Svertices.push_back(s.z());
+
+            Snormals.push_back(normal.x());
+            Snormals.push_back(normal.y());
+            Snormals.push_back(normal.z());
+            //
             facesNumber += 4;
 
             quadTopology[0] = facesNumber - 4;
@@ -1087,6 +1123,13 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
             faces.push_back(quadTopology[0]+nvertices);
             faces.push_back(quadTopology[2]+nvertices);
             faces.push_back(quadTopology[3]+nvertices);
+
+            Sfaces.push_back(quadTopology[0]);
+            Sfaces.push_back(quadTopology[1]);
+            Sfaces.push_back(quadTopology[2]);
+            Sfaces.push_back(quadTopology[0]);
+            Sfaces.push_back(quadTopology[2]);
+            Sfaces.push_back(quadTopology[3]);
 
         }
 
@@ -1105,6 +1148,14 @@ void OpenGLMediator::viewStripes3D (const QList<QVector<QVector3D>> points3D){
         //    normals.clear();
 
         //glcanvas->renderCylinder(points3D);
+
+        StripeContourMesh stripe3D;
+        stripe3D.Svertices = Svertices;
+        stripe3D.Snormals = Snormals;
+        stripe3D.Sfaces = Sfaces;
+        stripe3D.name = stripeNameList[h];
+
+        stripeMeshesList.push_back(stripe3D);
 
     }
 
@@ -1423,211 +1474,13 @@ void OpenGLMediator::exportOpenContours3D()
 }
 
 
-void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
+void OpenGLMediator::exportStripes3D()
 {
 
+    for (int i = 0; i < stripeMeshesList.size(); i++){
 
-
-    float hip = 10; //Hipotenusa
-    float hquad = hip*hip;
-
-    for (int h = 0; h < points3D.size(); h++){
-        std::vector< float > Svertices, Snormals;
-        std::vector< unsigned int > Sfaces;
-
-        QPolygonF quad;
-        QVector<QVector3D> pointsfor3Dleft, pointsfor3Dright;
-
-        for (int i = 0 ; i < points3D[h].size()/2; i++) {
-            pointsfor3Dleft.push_back(points3D[h][i]);
-        }
-
-        for (int i = points3D[h].size()/2 ; i < points3D[h].size(); i++) {
-            pointsfor3Dright.push_back(points3D[h][i]);
-        }
-
-        QVector<QVector3D> quadMesh;
-        int facesNumber = 0;
-        QVector<int> quadTopology (4);
-
-        for (int i = 0 ; i < pointsfor3Dleft.size()-1; i++) {
-
-            QVector3D p(pointsfor3Dleft[i].x(),pointsfor3Dleft[i].y(), pointsfor3Dleft[i].z());
-            QVector3D q(pointsfor3Dleft[i+1].x(),pointsfor3Dleft[i+1].y(), pointsfor3Dleft[i+1].z());
-            QVector3D r(pointsfor3Dright[i+1].x(),pointsfor3Dright[i+1].y(), pointsfor3Dright[i+1].z());
-            QVector3D s(pointsfor3Dright[i].x(),pointsfor3Dright[i].y(), pointsfor3Dright[i].z());
-
-            //https://stackoverflow.com/questions/9806630/calculating-the-vertex-normals-of-a-quad
-            //https://stackoverflow.com/questions/9806630/calculating-the-vertex-normals-of-a-quad
-            QPointF _p = p.toPointF();
-            QPointF _q = q.toPointF();
-            QPointF _r = r.toPointF();
-            QPointF _s = s.toPointF();
-
-            //Pares P - S e Q - R
-
-            QLineF dist;
-            dist.setP1(_p);
-            dist.setP2(_s);
-
-            float c = dist.length() / 2 ;
-
-            double z = hip * sqrt(1 - (c*c / hquad));
-
-            if (!std::isnan (z)){
-
-                p.setZ(p.z() + z);
-                s.setZ(s.z() - z);
-            }
-
-            dist.setP1(_q);
-            dist.setP2(_r);
-
-            c = dist.length() / 2 ;
-
-            z = hip * sqrt(1 - (c*c / hquad));
-
-            if (!std::isnan (z)){
-
-                q.setZ(q.z() + z);
-                r.setZ(r.z() - z);
-
-            }
-
-
-            QVector3D normal = CalculateSurfaceNormal(p,q,r); //Normal for 1st triangle
-            QVector3D normal1 = CalculateSurfaceNormal(r,p,s);//Normal for 2nd triangle
-
-            Svertices.push_back(p.x());
-            Svertices.push_back(p.y());
-            Svertices.push_back(p.z());
-
-            Snormals.push_back(normal.x());
-            Snormals.push_back(normal.y());
-            Snormals.push_back(normal.z());
-
-            Svertices.push_back(q.x());
-            Svertices.push_back(q.y());
-            Svertices.push_back(q.z());
-
-            Snormals.push_back(normal.x());
-            Snormals.push_back(normal.y());
-            Snormals.push_back(normal.z());
-
-            Svertices.push_back(r.x());
-            Svertices.push_back(r.y());
-            Svertices.push_back(r.z());
-
-            Snormals.push_back(normal.x());
-            Snormals.push_back(normal.y());
-            Snormals.push_back(normal.z());
-
-            Svertices.push_back(s.x());
-            Svertices.push_back(s.y());
-            Svertices.push_back(s.z());
-
-            Snormals.push_back(normal.x());
-            Snormals.push_back(normal.y());
-            Snormals.push_back(normal.z());
-
-            facesNumber += 4;
-
-            quadTopology[0] = facesNumber - 4;
-            quadTopology[1] = facesNumber - 3;
-            quadTopology[2] = facesNumber - 2;
-            quadTopology[3] = facesNumber - 1;
-
-            Sfaces.push_back(quadTopology[0]);
-            Sfaces.push_back(quadTopology[1]);
-            Sfaces.push_back(quadTopology[2]);
-            Sfaces.push_back(quadTopology[0]);
-            Sfaces.push_back(quadTopology[2]);
-            Sfaces.push_back(quadTopology[3]);
-
-            vertices.push_back(p.x());
-            vertices.push_back(p.y());
-            vertices.push_back(p.z());
-
-            normals.push_back(normal.x());
-            normals.push_back(normal.y());
-            normals.push_back(normal.z());
-
-            vertices.push_back(q.x());
-            vertices.push_back(q.y());
-            vertices.push_back(q.z());
-
-            normals.push_back(normal.x());
-            normals.push_back(normal.y());
-            normals.push_back(normal.z());
-
-            vertices.push_back(r.x());
-            vertices.push_back(r.y());
-            vertices.push_back(r.z());
-
-            normals.push_back(normal.x());
-            normals.push_back(normal.y());
-            normals.push_back(normal.z());
-
-            vertices.push_back(s.x());
-            vertices.push_back(s.y());
-            vertices.push_back(s.z());
-
-            normals.push_back(normal.x());
-            normals.push_back(normal.y());
-            normals.push_back(normal.z());
-
-            //facesNumber += 4;
-
-            //quadTopology[0] = facesNumber - 4;
-            //quadTopology[1] = facesNumber - 3;
-            //quadTopology[2] = facesNumber - 2;
-            //quadTopology[3] = facesNumber - 1;
-
-            faces.push_back(quadTopology[0]+nvertices);
-            faces.push_back(quadTopology[1]+nvertices);
-            faces.push_back(quadTopology[2]+nvertices);
-            faces.push_back(quadTopology[0]+nvertices);
-            faces.push_back(quadTopology[2]+nvertices);
-            faces.push_back(quadTopology[3]+nvertices);
-
-
-        }
-        nvertices = (unsigned int) vertices.size()/3;
-
-
-        //EXPORT STRIPE
-
-        //        //Export OFF
-        //        std::string outFile = "output/Stripe";
-        //        outFile.append(std::to_string(h));
-        //        outFile.append(".off");
-        //        std::ofstream fOut;
-        //        fOut.open(outFile.c_str());
-
-
-        //        fOut << "OFF" <<std::endl;
-
-        //        //Vertices, Faces, Edges
-
-        //        fOut << Svertices.size()/3  <<" " << Sfaces.size()/3 <<" " << "0" <<std::endl;
-        //        for (int i = 0 ; i < Svertices.size()/3; i++){
-        //            fOut << Svertices[3*i+0] << " " << Svertices[3*i + 1] << " " << Svertices[3*i+2] << std::endl;
-
-        //        }
-
-        //        for (int m = 0; m < Sfaces.size()/3; m++) {
-        //            fOut << 3 << " "<< Sfaces[3*m+0] <<" "<< Sfaces[3*m+1]  <<" "<< Sfaces[3*m+2]  << std::endl;
-        //        }
-        //        fOut.close();
-
-        //        qDebug () << "Exported OFF Mesh";
-
-        //Export PLY
-
-        std::cout << "Exporting PLY Stripe Contour File." << std::endl;
-
-        std::string outFile3 = "output/Stripe";
-        outFile3.append(std::to_string(h));
+        std::string outFile3 = "output/";
+        outFile3.append(stripeMeshesList[i].name.toStdString());
         outFile3.append(".ply");
         std::ofstream fOut1;
 
@@ -1636,30 +1489,44 @@ void OpenGLMediator::exportStripes3D(const QList<QVector<QVector3D>> points3D)
 
         fOut1 << "ply" <<std::endl;
         fOut1 << "format ascii 1.0" << std::endl;
-        fOut1 << "element vertex " << Svertices.size()/3 <<  std::endl;
+
+        fOut1 << "element vertex " << stripeMeshesList[i].Svertices.size()/3 <<  std::endl;
 
         fOut1 << "property float x" << std::endl;
         fOut1 << "property float y" << std::endl;
         fOut1 << "property float z" << std::endl;
 
-        fOut1 << "element face " << Sfaces.size()/3 << std::endl;
+        fOut1 << "element face " << stripeMeshesList[i].Sfaces.size()/3 << std::endl;
 
         fOut1 << "property list uint8 int32 vertex_indices" << std::endl;
 
         fOut1 << "end_header" << std::endl;
 
-        for (int i = 0 ; i < Svertices.size()/3; i++){
-            fOut1 << Svertices[3*i+0] << " " << Svertices[3*i + 1] << " " << Svertices[3*i+2] << std::endl;
+        for (int j = 0 ; j < stripeMeshesList[i].Svertices.size()/3; j++){
+            fOut1 << stripeMeshesList[i].Svertices[3*j+0] << " " << stripeMeshesList[i].Svertices[3*j+1] << " " << stripeMeshesList[i].Svertices[3*j+2] << std::endl;
         }
 
-        for (int m = 0; m < Sfaces.size()/3; m++) {
-            fOut1 << 3 << " "<< Sfaces[3*m+0] <<" "<< Sfaces[3*m+1]  <<" "<< Sfaces[3*m+2]  << std::endl;
+        for (int m = 0; m < stripeMeshesList[i].Sfaces.size()/3; m++) {
+            fOut1 << 3 << " "<< stripeMeshesList[i].Sfaces[3*m+0] <<" "<< stripeMeshesList[i].Sfaces[3*m+1]  <<" "<< stripeMeshesList[i].Sfaces[3*m+2]  << std::endl;
         }
 
         fOut1.close();
+        foreach (float vertice, stripeMeshesList[i].Svertices){
+            vertices.push_back(vertice);
+        }
 
-        qDebug () << "Exported PLY Mesh";
+        foreach (float normal, stripeMeshesList[i].Snormals){
+            normals.push_back(normal);
+        }
+
+        foreach (unsigned int indice, stripeMeshesList[i].Sfaces){
+            faces.push_back(indice+nvertices);
+        }
+
+        nvertices = (unsigned int) vertices.size()/3;;
     }
+
+
 
 
 }

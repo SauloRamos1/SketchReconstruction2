@@ -293,7 +293,7 @@ void Canvas::viewOverlapping3D(){
 
     if (!scene->isStripeContoursEmpty()){
 
-        glmediator->viewStripes3D(scene->getStripes());
+        glmediator->viewStripes3D(scene->getStripes(), scene->getStripesNames());
 
     }
 
@@ -336,7 +336,7 @@ void Canvas::exportMesh(){
 
     if (!scene->isStripeContoursEmpty()){
 
-        glmediator->exportStripes3D(scene->getStripes());
+        glmediator->exportStripes3D();
 
     }
 

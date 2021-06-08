@@ -670,6 +670,11 @@ QList<QVector<QVector3D>> Scene::getStripes()
     return sketch.getStripesPoints();
 }
 
+QList<QString> Scene::getStripesNames()
+{
+    return sketch.getStripesNames();
+}
+
 QPainterPath Scene::getClosedContour()
 {
     return sketch.getClosedContour();
