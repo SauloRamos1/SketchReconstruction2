@@ -349,6 +349,16 @@ void Canvas::exportMesh(){
         dir.remove(filename);
     }
 
+    dir = QDir("", {"*.txt"});
+    for(const QString & filename: dir.entryList()){
+        dir.remove(filename);
+    }
+    dir = QDir("", {"*.xls"});
+    for(const QString & filename: dir.entryList()){
+        dir.remove(filename);
+    }
+
+
     bool finalRender = true;
     glmediator->render(finalRender);
 

@@ -2778,7 +2778,7 @@ QList<QString> InputSketch::getStripesNames () {
 
     for (int i = 0 ; i < stripeContourList.size() ; i++){
         for (int j = 0; j < stripeContourList[i].size() ; j++) {
-                stripesNames.append(stripeContourList[i][j].name);
+            stripesNames.append(stripeContourList[i][j].name);
         }
     }
 
@@ -2845,7 +2845,7 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
     Qt::PenStyle penStyle = Qt::SolidLine;
 
     if (saveSVGFlag){ //SALVAR SVG
-
+        // OPEN CONTOURS SVG SAVE
         for (int i = 0; i < openContourList.size(); ++i) {
             for (int j = 0; j < openContourList[i].size(); ++j) {
 
@@ -2873,47 +2873,51 @@ void InputSketch::paint( QPainter *painter, const QStyleOptionGraphicsItem *opti
         }
 
         painter->setBrush( Qt::NoBrush );
+        // CLOSED CONTOURS SVG SAVE
+        for (int h = numberOfLayers; h > 0; --h) {
 
-        for (int i = 0 ; i < closedContourList.size(); i++) {
+            for (int i = 0 ; i < closedContourList.size(); i++) {
+                if (closedContourList[i].level == h){
+
+                    if (color){
+
+                        //painter->setOpacity( 1 /static_cast<qreal>(closedContourList.size()));
+                        painter->setOpacity(0.5);
+                        painter->fillPath(closedContourList[i].contour, QColor(shapeColorMap[closedContourList[i].level-1].x(), shapeColorMap[closedContourList[i].level-1].y(), shapeColorMap[closedContourList[i].level-1].z()));
+                    }
+
+                    if (hatching){
+                        painter->setOpacity( 1 );
+                        painter->fillPath(closedContourList[i].contour, hatchingMap[closedContourList[i].level-1]);
+
+                    }
+                    if (halo){
+                        painter->setOpacity(0.5);
+                        painter->setPen(QPen(QColor(Qt::white),closedContourList[i].level+16,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(closedContourList[i].contour);
+                        painter->setOpacity(1);
+                        painter->setPen(QPen(QColor(Qt::white),closedContourList[i].level+9,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(closedContourList[i].contour);
+                    }
+
+                    if (contour){
+                        painter->setPen(QPen(QColor(Qt::black),closedContourList[i].level+1.5,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(closedContourList[i].contour);
 
 
-            if (color){
+                        painter->setPen(QPen(QColor(lineColorMap[closedContourList[i].level-1].x(), lineColorMap[closedContourList[i].level-1].y(), lineColorMap[closedContourList[i].level-1].z()), closedContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
 
-                //painter->setOpacity( 1 /static_cast<qreal>(closedContourList.size()));
-                painter->setOpacity(0.5);
-                painter->fillPath(closedContourList[i].contour, QColor(shapeColorMap[closedContourList[i].level-1].x(), shapeColorMap[closedContourList[i].level-1].y(), shapeColorMap[closedContourList[i].level-1].z()));
+                        //painter->setPen(QPen(QColor(Qt::red), closedContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        painter->drawPath(closedContourList[i].contour);
+                        painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::FlatCap, Qt::RoundJoin));
+                        if (showLabels) painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
+                    }
+                }
+
+                painter->setPen(QPen(Qt::darkRed, 2,Qt::SolidLine));
+                //painter->drawPath(allShapesSampledPoints[i].midPointsPath);
+
             }
-
-            if (hatching){
-                painter->setOpacity( 1 );
-                painter->fillPath(closedContourList[i].contour, hatchingMap[closedContourList[i].level-1]);
-
-            }
-            if (halo){
-                painter->setOpacity(0.5);
-                painter->setPen(QPen(QColor(Qt::white),closedContourList[i].level+16,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                painter->drawPath(closedContourList[i].contour);
-                painter->setOpacity(1);
-                painter->setPen(QPen(QColor(Qt::white),closedContourList[i].level+9,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                painter->drawPath(closedContourList[i].contour);
-            }
-
-            if (contour){
-                painter->setPen(QPen(QColor(Qt::black),closedContourList[i].level+1.5,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                painter->drawPath(closedContourList[i].contour);
-
-
-                painter->setPen(QPen(QColor(lineColorMap[closedContourList[i].level-1].x(), lineColorMap[closedContourList[i].level-1].y(), lineColorMap[closedContourList[i].level-1].z()), closedContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
-
-                //painter->setPen(QPen(QColor(Qt::red), closedContourList[i].level+1,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                painter->drawPath(closedContourList[i].contour);
-                painter->setPen(QPen(QColor(Qt::black),1,penStyle, Qt::FlatCap, Qt::RoundJoin));
-                if (showLabels) painter->drawText(closedContourList[i].contour.elementAt(0).x + 10, closedContourList[i].contour.elementAt(0).y, closedContourList[i].name);
-            }
-
-            painter->setPen(QPen(Qt::darkRed, 2,Qt::SolidLine));
-            //painter->drawPath(allShapesSampledPoints[i].midPointsPath);
-
         }
 
         painter->setPen(QPen(QColor(Qt::blue),2,penStyle, Qt::RoundCap, Qt::RoundJoin));
