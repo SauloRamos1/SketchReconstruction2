@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Sketch Canvas</Name>
+    <Version>0.1</Version>
+    <Title>Sketch Canvas Installer</Title>
+    <Publisher>Your vendor</Publisher>
+    <StartMenuDir>Sketch Canvas</StartMenuDir>
+    <TargetDir>@HomeDir@/SketchCanvas</TargetDir>
+</Installer>
