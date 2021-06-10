@@ -64,6 +64,7 @@ void Scene::chooseClosedContour_Interaction(){
     status = Interaction::CLOSEDCONTOUR;
     sketch.interactionString = "Closed Contour Sketching";
     sketch.chooseClosedContour_Interaction();
+    sketch.selectClosedContour(-1);
     update();
 }
 

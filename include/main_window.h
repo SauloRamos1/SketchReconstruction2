@@ -82,6 +82,8 @@ public slots:
         std::shared_ptr< QAction > ac_loadSVG;
         std::shared_ptr< QAction > ac_loadIMG;
         std::shared_ptr< QAction > ac_saveSVG;
+        std::shared_ptr< QAction > ac_about;
+
         std::shared_ptr< QAction > ac_exit;
 
         QPushButton *movezoom_button;

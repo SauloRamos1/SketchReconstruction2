@@ -32,6 +32,7 @@ public:
 
         void setOpenGlMediator(OpenGLMediator *glmed);
 
+
 protected:
 
         void createActions();
@@ -43,6 +44,7 @@ protected:
         void loadSVG();
         void loadIMG();
         void saveSVG();
+        void openAbout();
 
         void moveZoomInteraction();
 

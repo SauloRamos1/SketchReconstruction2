@@ -30,6 +30,7 @@
         <file>icons/file_white.png</file>
         <file>icons/export.png</file>
         <file>icons/Export.ico</file>
+		<file>icons/info.png</file>
         <file>shaders/fragment.frag</file>
         <file>shaders/vertex.vert</file>
         <file>shaders/beziercurve.frag</file>

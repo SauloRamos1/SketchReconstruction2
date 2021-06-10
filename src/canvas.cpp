@@ -84,6 +84,15 @@ void Canvas::saveSVG(){
 }
 
 
+void Canvas::openAbout(){
+
+    QMessageBox msgBox;
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.setText("We are thankful for the contributions of the following libraries used in our application:\n\nTucano - Available at: https://www.lcg.ufrj.br/tucano/ \nNanoSVG - Available at: https://github.com/memononen/nanosvg");
+    msgBox.exec();
+}
+
+
 
 void Canvas::setOverlapEffect1(bool checked)
 {

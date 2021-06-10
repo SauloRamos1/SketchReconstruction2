@@ -160,7 +160,7 @@ target_link_libraries(Canvas tucanow)
 add_custom_command(TARGET Canvas POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     ${CMAKE_SOURCE_DIR}/shaders
-        ${CMAKE_CURRENT_BINARY_DIR}/shaders
+        ${CMAKE_CURRENT_BINARY_DIR}/libs/shaders
   )
 
 ###############################################

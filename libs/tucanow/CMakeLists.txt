@@ -124,18 +124,19 @@ endif()
 # Copy shaders and assets to binary dir when done
 ###############################################
 
-add_custom_command(TARGET tucanow POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/tucano/tucano/effects/shaders
-    ${CMAKE_BINARY_DIR}/shaders
-    )
+#add_custom_command(TARGET tucanow POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E copy_directory
+#    ${CMAKE_CURRENT_SOURCE_DIR}/src/tucano/tucano/effects/shaders
+#    ${CMAKE_BINARY_DIR}/samples/shaders
+#    )
 
-add_custom_command(TARGET tucanow POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/tucano/samples/assets
-    ${CMAKE_BINARY_DIR}/samples/assets
-    )
+#add_custom_command(TARGET tucanow POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E copy_directory
+#    ${CMAKE_CURRENT_SOURCE_DIR}/src/tucano/samples/assets
+#    ${CMAKE_BINARY_DIR}/samples/assets
+#    )
 
+#add_library(library ${RCC_SOURCES} ${RESOURCES})
 
 ###############################################
 # Set install and export CMake targets
