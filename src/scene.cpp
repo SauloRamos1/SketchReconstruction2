@@ -57,6 +57,7 @@ void Scene::chooseMoveZoom_Interaction(){
 void Scene::chooseOpenContour_Interaction(){
     status = Interaction::OPENCONTOUR;
     sketch.interactionString = "Open Contour Sketching";
+    sketch.selectOpenContour(-1);
     sketch.chooseOpenContour_Interaction();
     update();
 }
@@ -71,6 +72,7 @@ void Scene::chooseClosedContour_Interaction(){
 void Scene::chooseStripes_Interaction(){
     status = Interaction::STRIPES;
     sketch.interactionString = "Stripe Sketching";
+    sketch.selectStripeContour(-1);
     sketch.chooseStripes_Interaction();
     update();
 }
