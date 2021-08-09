@@ -2669,7 +2669,7 @@ QList<QVector<QVector3D> > InputSketch::getOpenContoursPoints() {
                 }
             }
             QString openContourNumberLabel = openContourList[i][0].name;
-            int smoothing = QInputDialog::getInt(nullptr, "Number of Smoothing Operations in OpenContour starting with", openContourNumberLabel );
+            int smoothing = QInputDialog::getInt(nullptr, "Number of Smoothing Operations in OpenContour starting with", openContourNumberLabel, 100 );
 
             for (int l = 0; l < smoothing; l++){ // i < 200
                 chaikinOnZ (openContour3DPoints);
@@ -2753,11 +2753,15 @@ QList<QVector<QVector3D>> InputSketch::getStripesPoints () {
                 }
             }
 
-            for (int i = 0; i < 100; i++){ // i < 200
+            QString openContourNumberLabel = stripeContourList[i][0].name;
+            int smoothing = QInputDialog::getInt(nullptr, "Number of Smoothing Operations in Stripe starting with", openContourNumberLabel, 100 );
+
+
+            for (int i = 0; i < smoothing; i++){ // i < 200
                 chaikinOnZ (pointsfor3Dleft);
             }
 
-            for (int i = 0; i < 100; i++){ // i < 200
+            for (int i = 0; i < smoothing; i++){ // i < 200
                 chaikinOnZ (pointsfor3Dright);
             }
             pointsFor3D.append(pointsfor3Dleft);
